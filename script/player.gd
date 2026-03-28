@@ -5,23 +5,24 @@ const SPEED = 300.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
-	# Получаем направление ввода (WASD или стрелки)
-	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	# Используем ваши кастомные имена действий
+	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
-	if direction:
-		velocity = direction * SPEED
-		
-		# Поворачиваем спрайт в зависимости от направления движения по оси X
-		if direction.x < 0:
-			animated_sprite.flip_h = true
-		elif direction.x > 0:
+	velocity = input_direction * SPEED
+
+	if velocity.length_squared() > 0:
+		# Поворот спрайта
+		if velocity.x > 0:
 			animated_sprite.flip_h = false
+		elif velocity.x < 0:
+			animated_sprite.flip_h = true
 		
-		# Включаем анимацию ходьбы
-		animated_sprite.animation = "walk"
+		# Анимация ходьбы
+		if animated_sprite.animation != "walk":
+			animated_sprite.play("walk")
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
-		# Включаем анимацию покоя
-		animated_sprite.animation = "idle"
-	
+		# Анимация покоя
+		if animated_sprite.animation != "idle":
+			animated_sprite.play("idle")
+
 	move_and_slide()
