@@ -2,28 +2,29 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 
+# Сохраняем ссылку на игрока при запуске
+var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-func _ready():
+func _ready() -> void:
+	# Ищем игрока один раз при старте
+	_player = get_tree().get_first_node_in_group("player")
+	if _player == null:
+		print("Предупреждение: Игрок не найден в группе 'player'. Враг не будет двигаться.")
+	
 	# Убедимся, что анимация играет
 	if animated_sprite:
 		animated_sprite.play("idle")
 
 func _physics_process(delta: float) -> void:
-	# Находим игрока по тегу или имени
-	var player = get_tree().get_first_node_in_group("player")
-	
-	# Отладочный вывод
-	print("Enemy pos: ", global_position, " Player found: ", player != null)
-	
-	if not player:
-		# Если игрок не найден, останавливаемся
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+	if _player == null:
+		# Если игрок не был найден или был удален, не обновляем позицию
+		velocity = Vector2.ZERO
 		move_and_slide()
 		return
-	
+
 	# Вычисляем направление к игроку
-	var direction = (player.global_position - global_position).normalized()
+	var direction: Vector2 = (_player.global_position - global_position).normalized()
 	
 	# Двигаемся к игроку всегда, если он существует
 	velocity = direction * SPEED
