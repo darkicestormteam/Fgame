@@ -4,9 +4,17 @@ const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _ready():
+	# Убедимся, что анимация играет
+	if animated_sprite:
+		animated_sprite.play("idle")
+
 func _physics_process(delta: float) -> void:
 	# Находим игрока по тегу или имени
 	var player = get_tree().get_first_node_in_group("player")
+	
+	# Отладочный вывод
+	print("Enemy pos: ", global_position, " Player found: ", player != null)
 	
 	if not player:
 		# Если игрок не найден, останавливаемся
