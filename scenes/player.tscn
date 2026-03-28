@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb4e8xp5dj8gh"]
+[gd_scene load_steps=11 format=3 uid="uid://bb4e8xp5dj8gh"]
 
 [ext_resource type="Texture2D" uid="uid://byjjpclstmt6y" path="res://assets/Warrior_Red.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cupqlhlddwom4" path="res://script/player.gd" id="1_g2els"]
@@ -53,6 +53,10 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 15.0
+height = 54.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 metadata/_edit_group_ = true
@@ -61,3 +65,6 @@ metadata/_edit_group_ = true
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_g2els")

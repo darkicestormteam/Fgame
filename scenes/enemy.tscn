@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbdy1btuh6yux"]
+[gd_scene load_steps=12 format=3 uid="uid://cbdy1btuh6yux"]
 
 [ext_resource type="Texture2D" uid="uid://crg8p3tcml3nm" path="res://assets/Torch_Blue.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://c36ydl8rhu8b0" path="res://script/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
 atlas = ExtResource("1_7p1mj")
@@ -59,10 +60,19 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7p1mj"]
+radius = 15.0
+height = 36.0
+
 [node name="Enemy" type="CharacterBody2D"]
+position = Vector2(-2, 1)
+script = ExtResource("1_md0e3")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7p1mj")
