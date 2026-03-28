@@ -17,15 +17,13 @@ func _physics_process(delta: float) -> void:
 	# Вычисляем направление к игроку
 	var direction = (player.global_position - global_position).normalized()
 	
-	if direction.length() > 0.01:
-		velocity = direction * SPEED
-		
-		# Поворачиваем спрайт в сторону игрока через flip_h
-		if direction.x < 0:
-			animated_sprite.flip_h = true
-		else:
-			animated_sprite.flip_h = false
+	# Двигаемся к игроку всегда, если он существует
+	velocity = direction * SPEED
+	
+	# Поворачиваем спрайт в сторону игрока через flip_h
+	if direction.x < 0:
+		animated_sprite.flip_h = true
 	else:
-		velocity = Vector2.ZERO
+		animated_sprite.flip_h = false
 	
 	move_and_slide()
