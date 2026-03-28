@@ -51,6 +51,29 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqjtg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnu2h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbhrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iywne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p57ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5sy4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]

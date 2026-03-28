@@ -16,7 +16,12 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.flip_h = true
 		elif direction.x > 0:
 			animated_sprite.flip_h = false
+		
+		# Включаем анимацию ходьбы
+		animated_sprite.animation = "walk"
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		# Включаем анимацию покоя
+		animated_sprite.animation = "idle"
 	
 	move_and_slide()

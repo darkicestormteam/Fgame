@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	if _player == null:
 		# Если игрок не был найден или был удален, не обновляем позицию
 		velocity = Vector2.ZERO
+		animated_sprite.animation = "idle"
 		move_and_slide()
 		return
 
@@ -34,5 +35,8 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 	else:
 		animated_sprite.flip_h = false
+	
+	# Включаем анимацию ходьбы
+	animated_sprite.animation = "walk"
 	
 	move_and_slide()
