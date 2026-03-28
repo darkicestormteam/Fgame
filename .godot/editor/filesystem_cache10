@@ -1,14 +1,18 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1774706252
+::res://::1774729589
 icon.svg::CompressedTexture2D/CompressedTexture2D::8041902258262288494::1774624021::1774624029::1::::<><><>0<>0<>e8f2b779b96b5b44b998f65c923b5888<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-::res://assets/::1774706252
-Torch_Blue.png::CompressedTexture2D::5980469923539438030::1774699338::1774706252::1::::<><><>0<>0<>4728a87bd0c5685f52ec905c866f3bf4<>res://.godot/imported/Torch_Blue.png-661ed48429ad86dcf75b04325c44586c.ctex::
+::res://assets/::1774729589
+Tilemap_Flat.png::CompressedTexture2D/CompressedTexture2D::5159040203192479916::1774699338::1774726238::1::::<><><>0<>0<>6cca80e0f66d7a37f99fdee69393b374<>res://.godot/imported/Tilemap_Flat.png-2d21c39d46b4d84165c1816b92757424.ctex::
+Torch_Blue.png::CompressedTexture2D/CompressedTexture2D::5980469923539438030::1774699338::1774706252::1::::<><><>0<>0<>4728a87bd0c5685f52ec905c866f3bf4<>res://.godot/imported/Torch_Blue.png-661ed48429ad86dcf75b04325c44586c.ctex::
 Warrior_Red.png::CompressedTexture2D/CompressedTexture2D::4090105693519159442::1774699338::1774705273::1::::<><><>0<>0<>8ccc0d7e02943f1332db7fe1fb8c8210<>res://.godot/imported/Warrior_Red.png-d295a391ce07a9a7ac2e07dede1d0c1e.ctex::
-::res://scenes/::1774707378
-game.tscn::PackedScene::6397930549863863086::1774707378::0::1::::<><><>0<>0<><>::uid://bb4e8xp5dj8gh::::res://scenes/player.tscn<>uid://cbdy1btuh6yux::::res://scenes/enemy.tscn
-player.tscn::PackedScene::2516779513945377743::1774707338::0::1::::<><><>0<>0<><>::uid://byjjpclstmt6y::::res://assets/Warrior_Red.png
-enemy.tscn::PackedScene::4850727065548280007::1774707370::0::1::::<><><>0<>0<><>::uid://crg8p3tcml3nm::::res://assets/Torch_Blue.png
-::res://Script/::0
+Water.png::CompressedTexture2D::8539359023479879119::1774699338::1774729589::1::::<><><>0<>0<>18c8a4095ab6247565f1e8f591d801e0<>res://.godot/imported/Water.png-626658957d15f3c831a8ec6e362edcbc.ctex::
+::res://scenes/::1774728838
+enemy.tscn::PackedScene::4850727065548280007::1774728838::0::1::::<><><>0<>0<><>::uid://crg8p3tcml3nm::::res://assets/Torch_Blue.png<>uid://c36ydl8rhu8b0::::res://script/enemy.gd
+game.tscn::PackedScene::6397930549863863086::1774728838::0::1::::<><><>0<>0<><>::uid://cfrcvx8y0cx8o::::res://assets/Tilemap_Flat.png<>uid://bb4e8xp5dj8gh::::res://scenes/player.tscn<>uid://cbdy1btuh6yux::::res://scenes/enemy.tscn
+player.tscn::PackedScene::2516779513945377743::1774728838::0::1::::<><><>0<>0<><>::uid://byjjpclstmt6y::::res://assets/Warrior_Red.png<>uid://cupqlhlddwom4::::res://script/player.gd
+::res://script/::1774727893
+enemy.gd::GDScript::6803587894353049903::1774727893::0::1::::<>CharacterBody2D<><>0<>0<><>::
+player.gd::GDScript/GDScript::6208575406872459885::1774719119::0::1::::<>CharacterBody2D<><>0<>0<><>::
 ::res://Tiny Swords (Update 010)/::1774699338
 ::res://Tiny Swords (Update 010)/Deco/::1774705248
 01.png::CompressedTexture2D/CompressedTexture2D::181659417792635678::1774699338::1774705248::1::::<><><>0<>0<>825a72d5c0e87c51759b9dabaa228ab7<>res://.godot/imported/01.png-dbfe14c4e6643a68f65115097eb9e4ee.ctex::
@@ -163,12 +167,10 @@ Tree.png::CompressedTexture2D/CompressedTexture2D::6253705073498664478::17746993
 ::res://Tiny Swords (Update 010)/Terrain/::1774699338
 ::res://Tiny Swords (Update 010)/Terrain/Bridge/::1774705248
 Bridge_All.png::CompressedTexture2D/CompressedTexture2D::2798122496644615180::1774699338::1774705248::1::::<><><>0<>0<>20a5e595682232ad5f7cd8074a96bc6d<>res://.godot/imported/Bridge_All.png-f44fd26975b992f57a45026f6a20c954.ctex::
-::res://Tiny Swords (Update 010)/Terrain/Ground/::1774705248
+::res://Tiny Swords (Update 010)/Terrain/Ground/::1774726238
 Shadows.png::CompressedTexture2D/CompressedTexture2D::8385220616584841714::1774699338::1774705248::1::::<><><>0<>0<>077f9bfdd6e39387372acdd6469869b9<>res://.godot/imported/Shadows.png-b1e34b7e08bf6e55247f4bcdf77f0429.ctex::
 Tilemap_Elevation.png::CompressedTexture2D/CompressedTexture2D::109714758838558777::1774699338::1774705248::1::::<><><>0<>0<>38b7140d716f59954c1b92b32e71def5<>res://.godot/imported/Tilemap_Elevation.png-b1c1bb5e36aaa9120e8c11f40acbfdb0.ctex::
-Tilemap_Flat.png::CompressedTexture2D/CompressedTexture2D::5159040203192479916::1774699338::1774705248::1::::<><><>0<>0<>ae9740d214c931eac9b3dbc12cf47024<>res://.godot/imported/Tilemap_Flat.png-0ceceabb47b9940df41aa94d3ebcd082.ctex::
-::res://Tiny Swords (Update 010)/Terrain/Water/::1774705248
-Water.png::CompressedTexture2D/CompressedTexture2D::8539359023479879119::1774699338::1774705248::1::::<><><>0<>0<>c82fc0aa74502cf274d0c1277c200dee<>res://.godot/imported/Water.png-7fc75e2958d3d5107e7ea5541eab4ab8.ctex::
+::res://Tiny Swords (Update 010)/Terrain/Water/::1774729589
 ::res://Tiny Swords (Update 010)/Terrain/Water/Foam/::1774705248
 Foam.png::CompressedTexture2D/CompressedTexture2D::8387473979720328157::1774699338::1774705248::1::::<><><>0<>0<>27caee58b97c3c5e3653783a0a43ee2d<>res://.godot/imported/Foam.png-228007e40143130622a294ba38481632.ctex::
 ::res://Tiny Swords (Update 010)/Terrain/Water/Rocks/::1774705248
