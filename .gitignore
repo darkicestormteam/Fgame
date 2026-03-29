@@ -1,1 +1,1 @@
-Nothing needs to be added to the .gitignore file since only a single source code file (`script/kill_zone.gd`) was modified and no build artifacts, dependencies, or temporary files were detected in the changes.
+Nothing needs to be added to .gitignore since only a single source file (`script/game_over.gd`) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
