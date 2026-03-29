@@ -1,1 +1,1 @@
-Nothing should be ignored since only a source file (.tscn) was modified and no build artifacts, dependencies, or temp files were present in the changes.
+Nothing needs to be added to the .gitignore file since only a single source code file (`script/kill_zone.gd`) was modified and no build artifacts, dependencies, or temporary files were detected in the changes.
