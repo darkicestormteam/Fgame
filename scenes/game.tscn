@@ -265,9 +265,6 @@ tile_set = SubResource("TileSet_u5sy4")
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
 position = Vector2(957, 1663)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.5, 1.5)
-
 [node name="Enemy" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(472, 1519)
 
