@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://y0rtrumf0r6l" path="res://script/game_over.gd" id="1_xeevv"]
 
 [node name="GameOver" type="CanvasLayer"]
-visible = false
+process_mode = 3
 script = ExtResource("1_xeevv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
