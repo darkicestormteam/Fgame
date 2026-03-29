@@ -131,7 +131,6 @@ position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_7p1mj")
 
 [node name="KillZone" parent="." instance=ExtResource("3_4ra3w")]
-modulate = Color(1, 0.231373, 1, 1)
 
 [node name="CollisionShape2D" parent="KillZone" index="0"]
 position = Vector2(0, 7)

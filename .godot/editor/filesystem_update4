@@ -1,11 +1,7 @@
-res://node_2d.tscn
 res://scenes/game.tscn
 res://scenes/player.tscn
 res://scenes/enemy.tscn
-res://script/player.gd
-res://script/enemy.gd
 res://scenes/tree.tscn
 res://scenes/kill_zone.tscn
-res://script/kill_zone.gd
 res://scenes/game_over.tscn
-res://script/game_over.gd
+res://script/kill_zone.gd
