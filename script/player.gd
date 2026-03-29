@@ -8,13 +8,11 @@ const SPEED = 300.0
 var is_attacking: bool = false
 
 func _ready() -> void:
-	# Создаем таймер для атаки (не автозапуск)
-	attack_timer = Timer.new()
+	# Настраиваем существующий таймер (не автозапуск, один выстрел)
 	attack_timer.wait_time = 2.0
 	attack_timer.autostart = false
 	attack_timer.one_shot = true
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
-	add_child(attack_timer)
 	
 	# Подключаемся к окончанию анимации
 	animated_sprite.animation_finished.connect(_on_animation_finished)

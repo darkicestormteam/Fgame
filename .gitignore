@@ -1,1 +1,24 @@
-Nothing should be ignored based on the provided file changes. The only modified file is 'script/player.gd', which appears to be a Godot script file and should not be ignored.
+```
+# Build artifacts
+*.import
+*.remap
+.rid_cache/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+node_modules/
+*.tmp
+```
