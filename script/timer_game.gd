@@ -19,7 +19,6 @@ func _on_timer_timeout() -> void:
 	update_label()
 
 func update_label() -> void:
-	# Форматируем время в минуты:секунды
-	var minutes = int(time_elapsed / 60)
-	var seconds = int(time_elapsed) % 60
-	timer_label.text = "Время жизни: %02d:%02d" % [minutes, seconds]
+	# Показываем только секунды
+	var seconds = int(time_elapsed)
+	timer_label.text = "Время жизни: %02d" % seconds
