@@ -1,11 +1,11 @@
+CollisionShape2D
+Area2D
 Timer
 Label
 CanvasLayer
 ColorRect
 Button
 Control
-CollisionShape2D
-Area2D
 TileMapLayer
 StaticBody2D
 AnimatedSprite2D

@@ -6,6 +6,8 @@
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource("1_ks1gq")
 enemy_scene = ExtResource("2_lnu2h")
+spawn_interval = 1.0
+min_distance_from_camera = 50.0
 
 [node name="TimerSpawner" type="Timer" parent="."]
 
