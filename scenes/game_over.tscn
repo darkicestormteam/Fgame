@@ -4,6 +4,7 @@
 
 [node name="GameOver" type="CanvasLayer"]
 process_mode = 3
+visible = false
 script = ExtResource("1_xeevv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
