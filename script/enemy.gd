@@ -6,6 +6,7 @@ var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
+	add_to_group("enemy")
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")

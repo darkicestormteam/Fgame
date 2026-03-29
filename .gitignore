@@ -1,1 +1,42 @@
-Nothing needs to be added to the .gitignore file based on the provided changes. The only modified file (`script/timer_game.gd`) is a source code file that should not be ignored.
+```
+# Godot-specific ignores
+*.import
+*.remap
+export_presets.cfg
+godot_vcs_settings.cfg
+
+# Build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+
+# Temp files
+*.tmp
+*.temp
+*.log
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.egg-info/
+dist/
+build/
+target/
+.gradle/
+.mypy_cache/
+.pytest_cache/
+```
