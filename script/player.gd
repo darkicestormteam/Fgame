@@ -5,6 +5,8 @@ const SPEED = 300.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 
+var is_attacking: bool = false
+
 func _ready() -> void:
 	# Создаем таймер для атаки
 	attack_timer = Timer.new()
@@ -12,10 +14,20 @@ func _ready() -> void:
 	attack_timer.autostart = true
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	add_child(attack_timer)
+	
+	# Подключаемся к окончанию анимации
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _on_attack_timer_timeout() -> void:
-	# Проигрываем анимацию атаки
-	animated_sprite.play("attack")
+	# Проигрываем анимацию атаки только если не атакуем сейчас
+	if not is_attacking:
+		is_attacking = true
+		animated_sprite.play("attack")
+
+func _on_animation_finished() -> void:
+	# Сбрасываем флаг атаки когда анимация закончилась
+	if animated_sprite.animation == "attack":
+		is_attacking = false
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
@@ -31,11 +43,11 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.flip_h = true
 		
 		# Анимация ходьбы (не прерываем атаку)
-		if animated_sprite.animation != "walk" and animated_sprite.animation != "attack":
+		if not is_attacking and animated_sprite.animation != "walk":
 			animated_sprite.play("walk")
 	else:
 		# Анимация покоя (не прерываем атаку)
-		if animated_sprite.animation != "idle" and animated_sprite.animation != "attack":
+		if not is_attacking and animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
 
 	move_and_slide()

@@ -11,3 +11,4 @@ res://script/timer_game.gd
 res://scenes/enemy_spawner.tscn
 res://script/enemy.gd
 res://script/enemy_spawner.gd
+res://script/player.gd
