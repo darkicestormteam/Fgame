@@ -112,8 +112,9 @@ script = ExtResource("1_g2els")
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"walk"
 autoplay = "idle"
-frame = 2
-frame_progress = 0.613141
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 16)
