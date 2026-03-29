@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=13 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://pausemenu123456" path="res://scenes/ui_pause.tscn" id="6_ui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("1_lbhrr")
@@ -272,3 +273,5 @@ position = Vector2(472, 1519)
 
 [node name="Tree" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(821, 1610)
+
+[node name="UI_Pause" parent="." instance=ExtResource("6_ui")]
