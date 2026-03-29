@@ -5,3 +5,5 @@ res://scenes/enemy.tscn
 res://script/player.gd
 res://script/enemy.gd
 res://scenes/tree.tscn
+res://scenes/kill_zone.tscn
+res://script/kill_zone.gd

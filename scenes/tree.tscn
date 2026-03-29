@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://diqqm4uvkc6to"]
+[gd_scene load_steps=8 format=3 uid="uid://diqqm4uvkc6to"]
 
 [ext_resource type="Texture2D" uid="uid://cvdlux4r8e4p3" path="res://assets/Tree.png" id="1_avsvi"]
 
@@ -38,7 +38,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Tree" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_avsvi"]
+
+[node name="Tree" type="StaticBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_18mvg")
@@ -46,4 +48,8 @@ animation = &"idle"
 autoplay = "idle"
 frame = 3
 frame_progress = 0.294718
-offset = Vector2(0, 30)
+offset = Vector2(0, -50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("CircleShape2D_avsvi")

@@ -101,10 +101,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 15.0
-height = 54.0
+radius = 14.0
+height = 28.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -115,4 +116,5 @@ frame = 2
 frame_progress = 0.613141
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 16)
 shape = SubResource("CapsuleShape2D_g2els")

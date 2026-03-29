@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbdy1btuh6yux"]
+[gd_scene load_steps=20 format=3 uid="uid://cbdy1btuh6yux"]
 
 [ext_resource type="Texture2D" uid="uid://crg8p3tcml3nm" path="res://assets/Torch_Blue.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://c36ydl8rhu8b0" path="res://script/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://bolvaplv0yrfw" path="res://scenes/kill_zone.tscn" id="3_4ra3w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gee14"]
 atlas = ExtResource("1_7p1mj")
@@ -109,7 +110,10 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7p1mj"]
 radius = 15.0
-height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
+radius = 15.0
+height = 48.0
 
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(-2, 1)
@@ -123,5 +127,14 @@ frame = 5
 frame_progress = 0.77643
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
+position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_7p1mj")
+
+[node name="KillZone" parent="." instance=ExtResource("3_4ra3w")]
+modulate = Color(1, 0.231373, 1, 1)
+
+[node name="CollisionShape2D" parent="KillZone" index="0"]
+position = Vector2(0, 7)
+shape = SubResource("CapsuleShape2D_5uy6h")
+
+[editable path="KillZone"]
