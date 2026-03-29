@@ -1,6 +1,57 @@
 ```
 # Godot-specific ignores
 *.import
-*.remap
-export_presets.cfg
+.export.cfg
+*.godot
+.project
+.scn
+.res
+.gd
+
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.so
+*.dll
+*.exe
+*.class
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+.env
+.env.local
+.env.*
+
+# Build directories
+build/
+dist/
+target/
+.gradle/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Editors
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# Python cache
+.mypy_cache/
+.pytest_cache/
 ```
