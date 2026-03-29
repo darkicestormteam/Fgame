@@ -7,3 +7,4 @@ res://scenes/game_over.tscn
 res://script/kill_zone.gd
 res://script/game_over.gd
 res://scenes/TimerGame.tscn
+res://script/timer_game.gd

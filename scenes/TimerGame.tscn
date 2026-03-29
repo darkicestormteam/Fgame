@@ -1,7 +1,9 @@
-[gd_scene format=3 uid="uid://d15dwj5s4a5gl"]
+[gd_scene load_steps=2 format=3 uid="uid://d15dwj5s4a5gl"]
+
+[ext_resource type="Script" uid="uid://d32m1g2dcmh6v" path="res://script/timer_game.gd" id="1_j78np"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource("res://script/timer_game.gd")
+script = ExtResource("1_j78np")
 
 [node name="TimerGame" type="Label" parent="."]
 offset_right = 40.0
@@ -11,3 +13,6 @@ pivot_offset = Vector2(-15, -15)
 text = "Время жизни: 0"
 
 [node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
