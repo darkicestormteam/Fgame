@@ -51,3 +51,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("idle")
 
 	move_and_slide()
+
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

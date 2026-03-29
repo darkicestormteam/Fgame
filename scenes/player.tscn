@@ -180,3 +180,5 @@ position = Vector2(20, 1)
 rotation = -1.56083
 shape = SubResource("CapsuleShape2D_f1ej7")
 debug_color = Color(0.944949, 0.189268, 0.362157, 0.42)
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

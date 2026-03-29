@@ -132,7 +132,7 @@ shape = SubResource("CapsuleShape2D_7p1mj")
 
 [node name="KillZone" parent="." instance=ExtResource("3_4ra3w")]
 
-[node name="CollisionShape2D" parent="KillZone" index="0"]
+[node name="CollisionShape2D" parent="KillZone" index="0" groups=["Enemy"]]
 position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_5uy6h")
 
