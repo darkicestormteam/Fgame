@@ -1,8 +1,1 @@
-```
-# Godot-specific ignores
-*.import
-*.uid
-.project
-.verified
-export_presets.cfg
-```
+Nothing should be ignored based on the provided file changes. The only modified file is 'script/kill_zone.gd', which appears to be a Godot engine script file and should not be ignored. No build artifacts, dependencies, or temporary files are present in the changes.

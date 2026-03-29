@@ -12,4 +12,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	 pass # Replace with function body.
+	# Проверяем, что вошел игрок (по имени узла или группе)
+	if body.is_in_group("player") or body.name.to_lower().contains("player"):
+		# Ставим игру на паузу
+		get_tree().paused = true
