@@ -13,4 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_reset_game_pressed() -> void:
 	get_tree().paused = false # Сначала снимаем паузу
-	get_tree().reload_current_scene() # Затем перезагружаем сцену
+	# Получаем путь к основной игровой сцене и загружаем её
+	var main_scene_path = "res://scenes/game.tscn"
+	get_tree().change_scene_to_file(main_scene_path)
