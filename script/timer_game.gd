@@ -9,7 +9,7 @@ func _ready() -> void:
 	# Запускаем таймер (1 секунда интервал)
 	timer.wait_time = 1.0
 	timer.autostart = true
-	timer.timeout.connect(_on_timer_timeout)
+	
 	
 	# Обновляем метку сразу
 	update_label()

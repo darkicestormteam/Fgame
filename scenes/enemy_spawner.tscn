@@ -8,3 +8,5 @@ script = ExtResource("1_ks1gq")
 enemy_scene = ExtResource("2_lnu2h")
 
 [node name="TimerSpawner" type="Timer" parent="."]
+
+[connection signal="timeout" from="TimerSpawner" to="." method="_on_timer_spawner_timeout"]
