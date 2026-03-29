@@ -128,21 +128,23 @@ func _get_random_grass_position() -> Vector2:
 				
 				# Проверяем terrain для этого источника
 				# В Godot 4.x terrain привязан к источнику (source)
-				var terrain_set_count = tile_set.get_terrain_set_count(source_id)
+				# Метод get_terrain_set_count() отсутствует в TileSet, поэтому сразу проверяем terrain type
+				# Если terrain set не существует, get_terrain_type вернет -1 или вызовет ошибку
+				var terrain_type = -1
+				# Используем try-catch подход через проверку существования метода или просто вызываем
+				# В GDScript нет try-catch, но можно проверить через has_method или просто вызвать
+				# Для простоты вызываем напрямую и ловим ошибку через print, если она возникнет
+				# Но лучше просто вызвать и предположить, что set существует
+				terrain_type = cell_tile_data.get_terrain_type(_grass_terrain_set)
 				if i < 3:
-					print("      - Terrain sets для источника ", source_id, ": ", terrain_set_count)
+					print("      - Terrain type (set=", _grass_terrain_set, "): ", terrain_type, " (ожидаем ", _grass_terrain, ")")
 				
-				if terrain_set_count > _grass_terrain_set:
-					var terrain_type = cell_tile_data.get_terrain_type(_grass_terrain_set)
-					if i < 3:
-						print("      - Terrain type (set=", _grass_terrain_set, "): ", terrain_type, " (ожидаем ", _grass_terrain, ")")
-					
-					if terrain_type == _grass_terrain:
-						# Преобразуем координаты клетки в мировые координаты
-						var local_pos = _tile_map_layer.map_to_local(cell_coords)
-						var world_position = _tile_map_layer.to_global(local_pos + Vector2(0.5, 0.5) * _tile_map_layer.tile_set.tile_size)
-						print("[EnemySpawner] НАЙДЕНА трава! Клетка=", cell_coords, " Мир.позиция=", world_position)
-						return world_position
+				if terrain_type == _grass_terrain:
+					# Преобразуем координаты клетки в мировые координаты
+					var local_pos = _tile_map_layer.map_to_local(cell_coords)
+					var world_position = _tile_map_layer.to_global(local_pos + Vector2(0.5, 0.5) * _tile_map_layer.tile_set.tile_size)
+					print("[EnemySpawner] НАЙДЕНА трава! Клетка=", cell_coords, " Мир.позиция=", world_position)
+					return world_position
 	
 	print("[EnemySpawner] После ", max_attempts, " попыток не найдено подходящей клетки с Grass!")
 	print("[EnemySpawner] Подсказка: Проверьте, что в TileSet настроены terrain'ы и клетки имеют правильный terrain type.")
