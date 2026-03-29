@@ -34,11 +34,20 @@ func _ready() -> void:
 				print("[EnemySpawner] ОШИБКА: TileSet в слое Grass не назначен!")
 			else:
 				print("[EnemySpawner] TileSet найден. Проверяем terrain...")
-				var terrain_count = _tile_map_layer.tile_set.get_terrain_count(_grass_terrain_set)
-				print("[EnemySpawner] Количество terrain в наборе ", _grass_terrain_set, ": ", terrain_count)
-				for i in range(terrain_count):
-					var terrain_name = _tile_map_layer.tile_set.get_terrain_name(_grass_terrain_set, i)
-					print("  - Terrain ", i, ": ", terrain_name)
+				# Сначала проверяем сколько всего terrain sets
+				var terrain_set_count = _tile_map_layer.tile_set.get_terrain_set_count()
+				print("[EnemySpawner] Количество terrain sets: ", terrain_set_count)
+				
+				if terrain_set_count == 0:
+					print("[EnemySpawner] ОШИБКА: В TileSet нет ни одного terrain set! Возможно, terrain не настроен.")
+				else:
+					# Используем первый доступный terrain set
+					_grass_terrain_set = 0
+					var terrain_count = _tile_map_layer.tile_set.get_terrain_count(_grass_terrain_set)
+					print("[EnemySpawner] Количество terrain в наборе ", _grass_terrain_set, ": ", terrain_count)
+					for i in range(terrain_count):
+						var terrain_name = _tile_map_layer.tile_set.get_terrain_name(_grass_terrain_set, i)
+						print("  - Terrain ", i, ": '", terrain_name, "'")
 	
 	if _tile_map_layer == null:
 		push_warning("[EnemySpawner] Критическая ошибка: Слой Grass не найден! Враги будут появляться в случайных местах.")
