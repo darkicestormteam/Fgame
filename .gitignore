@@ -1,1 +1,21 @@
-Nothing needs to be added to the .gitignore file since only a single source code file (`script/kill_zone.gd`) was modified and no build artifacts, dependencies, or temporary files were detected in the changes.
+```
+# Build artifacts
+*.import
+*.remap
+export_presets.cfg
+
+# Editor
+.editor/
+.vscode/
+.idea/
+
+# Temp files
+*.tmp
+*.temp
+*.log
+
+# Dependencies
+addons/*/node_modules/
+addons/*/.venv/
+addons/*/venv/
+```

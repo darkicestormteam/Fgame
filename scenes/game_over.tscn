@@ -32,5 +32,6 @@ offset_right = 1096.0
 offset_bottom = 735.0
 theme_override_font_sizes/font_size = 80
 text = "Reset"
+pause_mode = 5
 
 [connection signal="pressed" from="ResetGame" to="." method="_on_reset_game_pressed"]
