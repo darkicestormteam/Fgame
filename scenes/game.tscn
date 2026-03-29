@@ -274,4 +274,5 @@ position = Vector2(821, 1610)
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
 
-[node name="EnemySpawner" parent="." instance=ExtResource("7_u5sy4")]
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
+grass_layer = NodePath("../TileMap/Grass")
