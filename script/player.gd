@@ -8,15 +8,19 @@ const SPEED = 300.0
 var is_attacking: bool = false
 
 func _ready() -> void:
-	# Создаем таймер для атаки
+	# Создаем таймер для атаки (не автозапуск)
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 2.0
-	attack_timer.autostart = true
+	attack_timer.autostart = false
+	attack_timer.one_shot = true
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	add_child(attack_timer)
 	
 	# Подключаемся к окончанию анимации
 	animated_sprite.animation_finished.connect(_on_animation_finished)
+	
+	# Запускаем первую атаку через 2 секунды
+	attack_timer.start(2.0)
 
 func _on_attack_timer_timeout() -> void:
 	# Проигрываем анимацию атаки только если не атакуем сейчас
@@ -28,6 +32,8 @@ func _on_animation_finished() -> void:
 	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
 		is_attacking = false
+		# Перезапускаем таймер для следующей атаки через 2 секунды
+		attack_timer.start(2.0)
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
