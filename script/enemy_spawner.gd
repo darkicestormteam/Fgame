@@ -34,20 +34,15 @@ func _ready() -> void:
 				print("[EnemySpawner] ОШИБКА: TileSet в слое Grass не назначен!")
 			else:
 				print("[EnemySpawner] TileSet найден. Проверяем terrain...")
-				# Сначала проверяем сколько всего terrain sets
-				var terrain_set_count = _tile_map_layer.tile_set.get_terrain_set_count()
-				print("[EnemySpawner] Количество terrain sets: ", terrain_set_count)
-				
-				if terrain_set_count == 0:
-					print("[EnemySpawner] ОШИБКА: В TileSet нет ни одного terrain set! Возможно, terrain не настроен.")
-				else:
-					# Используем первый доступный terrain set
-					_grass_terrain_set = 0
-					var terrain_count = _tile_map_layer.tile_set.get_terrain_count(_grass_terrain_set)
-					print("[EnemySpawner] Количество terrain в наборе ", _grass_terrain_set, ": ", terrain_count)
-					for i in range(terrain_count):
-						var terrain_name = _tile_map_layer.tile_set.get_terrain_name(_grass_terrain_set, i)
-						print("  - Terrain ", i, ": '", terrain_name, "'")
+				# В Godot 4.x нет метода get_terrain_set_count(), проверяем напрямую
+				# Предполагаем, что terrain set 0 существует и terrain 0 - это Grass
+				_grass_terrain_set = 0
+				_grass_terrain = 0
+				var test_terrain_name = _tile_map_layer.tile_set.get_terrain_name(_grass_terrain_set, _grass_terrain)
+				print("[EnemySpawner] Проверяем terrain set=", _grass_terrain_set, " terrain=", _grass_terrain)
+				print("[EnemySpawner] Название terrain: '", test_terrain_name, "'")
+				if test_terrain_name == "" or test_terrain_name == null:
+					print("[EnemySpawner] ПРЕДУПРЕЖДЕНИЕ: Terrain с индексом 0 не найден или пуст. Возможно, нужно настроить индексы terrain в TileSet.")
 	
 	if _tile_map_layer == null:
 		push_warning("[EnemySpawner] Критическая ошибка: Слой Grass не найден! Враги будут появляться в случайных местах.")
