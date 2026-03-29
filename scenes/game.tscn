@@ -275,4 +275,3 @@ position = Vector2(472, 1519)
 position = Vector2(821, 1610)
 
 [node name="GameOver" parent="." instance=ExtResource("6_gameover")]
-

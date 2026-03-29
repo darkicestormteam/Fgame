@@ -15,10 +15,6 @@ run/main_scene="uid://cxfg8mrhm5oxy"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-GameOver="*res://scenes/game_over.tscn"
-
 [display]
 
 window/size/viewport_width=1920
