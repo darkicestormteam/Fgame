@@ -12,11 +12,5 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	# Проверяем, что вошел игрок (по имени узла или группе)
-	if body.is_in_group("player") or body.name.to_lower().contains("player"):
-		# Ставим игру на паузу
-		get_tree().paused = true
-		# Получаем узел GameOver из текущей сцены и показываем его
-		var game_over = get_node_or_null("../GameOver")
-		if game_over:
-			game_over.visible = true
+	body.queue_free()
+	GameOver.show()
