@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=13 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://d15dwj5s4a5gl" path="res://scenes/TimerGame.tscn" id="6_p57ef"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
 texture = ExtResource("1_lbhrr")
@@ -270,13 +271,4 @@ position = Vector2(472, 1519)
 [node name="Tree" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(821, 1610)
 
-[node name="HUD" type="CanvasLayer" parent="."]
-
-[node name="TimerGame" type="Label" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(2, 2)
-pivot_offset = Vector2(-15, -15)
-text = "Время жизни: 0"
-
-[node name="Timer" type="Timer" parent="HUD"]
+[node name="HUD" parent="." instance=ExtResource("6_p57ef")]
