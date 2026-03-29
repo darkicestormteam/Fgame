@@ -84,45 +84,68 @@ func _on_timer_timeout() -> void:
 
 func _get_random_grass_position() -> Vector2:
 	if _tile_map_layer == null:
-		print("[EnemySpawner] _get_random_grass_position: Слой Grass не найден! Возвращаем случайную позицию.")
-		return Vector2(randf_range(-1000, 1000), randf_range(-1000, 1000))
+		print("[EnemySpawner] _get_random_grass_position: ОШИБКА - Слой Grass не найден! Возвращаем ZERO.")
+		return Vector2.ZERO
 	
 	var tile_set = _tile_map_layer.tile_set
 	if tile_set == null:
-		print("[EnemySpawner] _get_random_grass_position: TileSet не назначен!")
+		print("[EnemySpawner] _get_random_grass_position: ОШИБКА - TileSet не назначен!")
 		return Vector2.ZERO
 	
 	# Получаем все используемые клетки на слое Grass
 	var used_rect = _tile_map_layer.get_used_rect()
-	if used_rect.size == Vector2i.ZERO:
-		print("[EnemySpawner] _get_random_grass_position: get_used_rect() вернул пустой прямоугольник!")
-		return Vector2.ZERO
+	print("[EnemySpawner] _get_random_grass_position: get_used_rect() = ", used_rect)
 	
-	print("[EnemySpawner] _get_random_grass_position: Ищем в прямоугольнике ", used_rect)
+	if used_rect.size == Vector2i.ZERO:
+		print("[EnemySpawner] _get_random_grass_position: ОШИБКА - get_used_rect() вернул пустой прямоугольник!")
+		return Vector2.ZERO
 	
 	# Пробуем найти случайную клетку с травой (несколько попыток)
 	var max_attempts = 50
 	for i in range(max_attempts):
 		var random_x = randi_range(used_rect.position.x, used_rect.end.x - 1)
 		var random_y = randi_range(used_rect.position.y, used_rect.end.y - 1)
+		var cell_coords = Vector2i(random_x, random_y)
 		
-		# Проверяем, является ли эта клетка травой
-		var tile_data = _tile_map_layer.get_cell_tile_data(Vector2i(random_x, random_y))
-		if tile_data:
-			# Проверяем terrain
-			var terrain_type = tile_data.get_terrain_type(_grass_terrain_set, 0)
-			if terrain_type == _grass_terrain:
-				# Преобразуем координаты клетки в мировые координаты
-				var world_position = _tile_map_layer.to_global(
-					_tile_map_layer.map_to_local(Vector2i(random_x, random_y)) + Vector2(0.5, 0.5)
-				)
-				print("[EnemySpawner] Найдена трава на позиции (", random_x, ", ", random_y, "), terrain=", terrain_type)
-				return world_position
-		else:
-			if i < 5:  # Показываем только первые несколько сообщений
-				print("[EnemySpawner] Клетка (", random_x, ", ", random_y, ") пуста или не имеет tile_data")
+		# Проверяем, существует ли клетка
+		var cell_tile_data = _tile_map_layer.get_cell_tile_data(cell_coords)
+		
+		if cell_tile_data == null:
+			if i < 5:
+				print("[EnemySpawner] Попытка ", i, ": Клетка ", cell_coords, " пуста (нет tile_data)")
+			continue
+		
+		# Проверяем источник данных (для отладки)
+		if i < 3:
+			print("[EnemySpawner] Попытка ", i, ": Клетка ", cell_coords, " имеет tile_data")
+			print("  - Количество источников: ", cell_tile_data.get_source_count())
+			
+			# Проверяем все источники в клетке
+			for src_id in range(cell_tile_data.get_source_count()):
+				var source_id = cell_tile_data.get_source_id(src_id)
+				if i < 3:
+					print("    - Источник ", src_id, ": ID=", source_id)
+				
+				# Проверяем terrain для этого источника
+				# В Godot 4.x terrain привязан к источнику (source)
+				var terrain_set_count = tile_set.get_terrain_set_count(source_id)
+				if i < 3:
+					print("      - Terrain sets для источника ", source_id, ": ", terrain_set_count)
+				
+				if terrain_set_count > _grass_terrain_set:
+					var terrain_type = cell_tile_data.get_terrain_type(_grass_terrain_set)
+					if i < 3:
+						print("      - Terrain type (set=", _grass_terrain_set, "): ", terrain_type, " (ожидаем ", _grass_terrain, ")")
+					
+					if terrain_type == _grass_terrain:
+						# Преобразуем координаты клетки в мировые координаты
+						var local_pos = _tile_map_layer.map_to_local(cell_coords)
+						var world_position = _tile_map_layer.to_global(local_pos + Vector2(0.5, 0.5) * _tile_map_layer.tile_set.tile_size)
+						print("[EnemySpawner] НАЙДЕНА трава! Клетка=", cell_coords, " Мир.позиция=", world_position)
+						return world_position
 	
 	print("[EnemySpawner] После ", max_attempts, " попыток не найдено подходящей клетки с Grass!")
+	print("[EnemySpawner] Подсказка: Проверьте, что в TileSet настроены terrain'ы и клетки имеют правильный terrain type.")
 	return Vector2.ZERO
 
 func _spawn_enemy(position: Vector2) -> void:
