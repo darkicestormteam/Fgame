@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d15dwj5s4a5gl"]
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("res://script/timer_game.gd")
 
 [node name="TimerGame" type="Label" parent="."]
 offset_right = 40.0
