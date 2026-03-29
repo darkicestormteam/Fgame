@@ -269,3 +269,14 @@ position = Vector2(472, 1519)
 
 [node name="Tree" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(821, 1610)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="TimerGame" type="Label" parent="HUD"]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(-15, -15)
+text = "Время жизни: 0"
+
+[node name="Timer" type="Timer" parent="HUD"]

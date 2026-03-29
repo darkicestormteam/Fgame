@@ -1,7 +1,8 @@
+Timer
+Label
+CanvasLayer
 ColorRect
 Button
-CanvasLayer
-Label
 Control
 CollisionShape2D
 Area2D
