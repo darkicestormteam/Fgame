@@ -16,3 +16,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body.name.to_lower().contains("player"):
 		# Ставим игру на паузу
 		get_tree().paused = true
+		GameOver.show()

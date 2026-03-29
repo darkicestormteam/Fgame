@@ -7,3 +7,5 @@ res://script/enemy.gd
 res://scenes/tree.tscn
 res://scenes/kill_zone.tscn
 res://script/kill_zone.gd
+res://scenes/game_over.tscn
+res://script/game_over.gd
