@@ -54,4 +54,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+	if body.is_in_group("enemy"):
+		body.queue_free()
