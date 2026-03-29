@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 
 
 func _on_reset_game_pressed() -> void:
+	get_tree().paused = false
 	get_tree().reload_current_scene()
