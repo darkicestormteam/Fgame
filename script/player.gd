@@ -4,6 +4,7 @@ const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
+@onready var attack_area: Area2D = $AttackArea
 
 var is_attacking: bool = false
 
@@ -17,17 +18,24 @@ func _ready() -> void:
 	
 	# Подключаемся к окончанию анимации
 	animated_sprite.animation_finished.connect(_on_animation_finished)
+	
+	# Отключаем мониторинг AttackArea по умолчанию
+	attack_area.monitoring = false
 
 func _on_attack_timer_timeout() -> void:
 	# Проигрываем анимацию атаки только если не атакуем сейчас
 	if not is_attacking:
 		is_attacking = true
 		animated_sprite.play("attack")
+		# Включаем мониторинг AttackArea во время атаки
+		attack_area.monitoring = true
 
 func _on_animation_finished() -> void:
 	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
 		is_attacking = false
+		# Отключаем мониторинг AttackArea после завершения атаки
+		attack_area.monitoring = false
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
