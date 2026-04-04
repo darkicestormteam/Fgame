@@ -47,8 +47,10 @@ func _physics_process(delta: float) -> void:
 		# Поворот спрайта
 		if velocity.x > 0:
 			animated_sprite.flip_h = false
+			attack_area.rotation = 0
 		elif velocity.x < 0:
 			animated_sprite.flip_h = true
+			attack_area.rotation = deg_to_rad(180)
 		
 		# Анимация ходьбы (не прерываем атаку)
 		if not is_attacking and animated_sprite.animation != "walk":
