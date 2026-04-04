@@ -7,6 +7,7 @@ const SPEED = 300.0
 @onready var attack_area: Area2D = $AttackArea
 
 var is_attacking: bool = false
+var enemies_in_area: Array = []
 
 func _ready() -> void:
 	# Создаем таймер для атаки
@@ -18,6 +19,9 @@ func _ready() -> void:
 	
 	# Подключаемся к окончанию анимации
 	animated_sprite.animation_finished.connect(_on_animation_finished)
+	
+	# Подключаемся к изменению кадра анимации
+	animated_sprite.frame_changed.connect(_on_frame_changed)
 	
 	# Отключаем мониторинг AttackArea по умолчанию
 	attack_area.monitoring = false
@@ -36,6 +40,18 @@ func _on_animation_finished() -> void:
 		is_attacking = false
 		# Отключаем мониторинг AttackArea после завершения атаки
 		attack_area.monitoring = false
+		# Очищаем список врагов
+		enemies_in_area.clear()
+
+func _on_frame_changed() -> void:
+	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)
+	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
+		# Наносим урон всем врагам в зоне
+		for enemy in enemies_in_area:
+			if is_instance_valid(enemy):
+				enemy.queue_free()
+		# Очищаем список после нанесения урона
+		enemies_in_area.clear()
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
@@ -65,4 +81,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.queue_free()
+		# Добавляем врага в список, но не уничтожаем сразу
+		if body not in enemies_in_area:
+			enemies_in_area.append(body)
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	if body in enemies_in_area:
+		enemies_in_area.erase(body)
