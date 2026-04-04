@@ -115,8 +115,9 @@ radius = 15.0
 radius = 15.0
 height = 48.0
 
-[node name="Enemy" type="CharacterBody2D" collision_layer=4 groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 position = Vector2(-2, 1)
+collision_layer = 4
 script = ExtResource("1_md0e3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -126,11 +127,11 @@ autoplay = "idle"
 frame = 5
 frame_progress = 0.77643
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_7p1mj")
 
-[node name="KillZone" parent="." instance=ExtResource("3_4ra3w")]
+[node name="KillZone" parent="." groups=["Enemy"] instance=ExtResource("3_4ra3w")]
 
 [node name="CollisionShape2D" parent="KillZone" index="0" groups=["Enemy"]]
 position = Vector2(0, 7)
