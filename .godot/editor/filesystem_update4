@@ -4,11 +4,6 @@ res://scenes/enemy.tscn
 res://scenes/tree.tscn
 res://scenes/kill_zone.tscn
 res://scenes/game_over.tscn
-res://script/kill_zone.gd
-res://script/game_over.gd
 res://scenes/TimerGame.tscn
-res://script/timer_game.gd
 res://scenes/enemy_spawner.tscn
-res://script/enemy.gd
-res://script/enemy_spawner.gd
 res://script/player.gd
