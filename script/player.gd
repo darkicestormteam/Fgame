@@ -48,6 +48,7 @@ func _on_frame_changed() -> void:
 	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
 		# Воспроизводим звук Sword Whoosh
+		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		# Наносим урон всем врагам в зоне
 		for enemy in enemies_in_area:

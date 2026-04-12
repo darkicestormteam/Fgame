@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://bb4e8xp5dj8gh"]
+[gd_scene load_steps=25 format=3 uid="uid://bb4e8xp5dj8gh"]
 
 [ext_resource type="Texture2D" uid="uid://byjjpclstmt6y" path="res://assets/Warrior_Red.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cupqlhlddwom4" path="res://script/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://ib12dwewfudb" path="res://assets/sounds/sfx/footstep.wav" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("1_3vyb7")
@@ -180,5 +181,8 @@ polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
 [node name="Sword Whoosh" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qhqgy")
 bus = &"SFX"
+
+[node name="Footstep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dqkch")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

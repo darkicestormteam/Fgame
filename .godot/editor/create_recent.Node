@@ -12,4 +12,3 @@ TileMapLayer
 StaticBody2D
 AnimatedSprite2D
 Node2D
-Camera2D
