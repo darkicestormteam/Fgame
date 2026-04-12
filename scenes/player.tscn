@@ -2,30 +2,31 @@
 
 [ext_resource type="Texture2D" uid="uid://byjjpclstmt6y" path="res://assets/Warrior_Red.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cupqlhlddwom4" path="res://script/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(0, 576, 192, 192)
+region = Rect2(0, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(192, 576, 192, 192)
+region = Rect2(192, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(384, 576, 192, 192)
+region = Rect2(384, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(576, 576, 192, 192)
+region = Rect2(576, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(768, 576, 192, 192)
+region = Rect2(768, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(960, 576, 192, 192)
+region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqjtg"]
 atlas = ExtResource("1_3vyb7")
@@ -151,10 +152,6 @@ animations = [{
 radius = 14.0
 height = 28.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1ej7"]
-radius = 21.9889
-height = 105.998
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_g2els")
@@ -176,10 +173,12 @@ shape = SubResource("CapsuleShape2D_g2els")
 collision_mask = 4
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(45, 4)
-rotation = -2.26258
-shape = SubResource("CapsuleShape2D_f1ej7")
-debug_color = Color(0.944949, 0.189268, 0.362157, 0.42)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackArea"]
+modulate = Color(0.721917, 0.000294368, 0.694279, 1)
+polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
+
+[node name="Sword Whoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qhqgy")
+bus = &"SFX"
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]

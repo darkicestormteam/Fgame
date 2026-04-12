@@ -24,6 +24,13 @@ GameOver="*res://scenes/game_over.tscn"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[filesystem]
+
+import/fbx2gltf/enabled.android=true
+import/fbx2gltf/enabled.web=true
+import/blender/enabled.android=true
+import/blender/enabled.web=true
+
 [global_group]
 
 Enemy=""
