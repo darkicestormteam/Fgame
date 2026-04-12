@@ -6,9 +6,12 @@ const SPEED = 300.0
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_area: Area2D = $AttackArea
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
+@onready var footstep: AudioStreamPlayer2D = $Footstep
 
 var is_attacking: bool = false
 var enemies_in_area: Array = []
+var last_footstep_time: float = 0.0
+const FOOTSTEP_INTERVAL: float = 0.4
 
 func _ready() -> void:
 	# Создаем таймер для атаки
@@ -75,6 +78,12 @@ func _physics_process(delta: float) -> void:
 		# Анимация ходьбы (не прерываем атаку)
 		if not is_attacking and animated_sprite.animation != "walk":
 			animated_sprite.play("walk")
+		
+		# Воспроизведение звука шагов с изменением высоты тона
+		if not is_attacking and Time.get_ticks_msec() / 1000.0 - last_footstep_time >= FOOTSTEP_INTERVAL:
+			last_footstep_time = Time.get_ticks_msec() / 1000.0
+			footstep.pitch_scale = randf_range(0.8, 1.2)
+			footstep.play()
 	else:
 		# Анимация покоя (не прерываем атаку)
 		if not is_attacking and animated_sprite.animation != "idle":
