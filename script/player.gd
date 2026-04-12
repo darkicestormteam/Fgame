@@ -5,6 +5,7 @@ const SPEED = 300.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var attack_area: Area2D = $AttackArea
+@onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 
 var is_attacking: bool = false
 var enemies_in_area: Array = []
@@ -46,6 +47,8 @@ func _on_animation_finished() -> void:
 func _on_frame_changed() -> void:
 	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
+		# Воспроизводим звук Sword Whoosh
+		sword_whoosh.play()
 		# Наносим урон всем врагам в зоне
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
