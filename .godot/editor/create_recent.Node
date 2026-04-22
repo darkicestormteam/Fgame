@@ -1,3 +1,6 @@
+TileMapLayer
+TileMap
+AudioListener2D
 AudioStreamPlayer2D
 CollisionPolygon2D
 CollisionShape2D
@@ -8,7 +11,4 @@ CanvasLayer
 ColorRect
 Button
 Control
-TileMapLayer
 StaticBody2D
-AnimatedSprite2D
-Node2D

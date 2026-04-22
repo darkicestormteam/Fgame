@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxebh8ui2vi8y"]
+
+[ext_resource type="AudioStream" uid="uid://c4mgrmnx4jrf4" path="res://assets/sounds/sfx/Week 1.5 - Super Retro Lounge.ogg" id="1_s5gcu"]
+
+[node name="World" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_s5gcu")
+autoplay = true
+max_distance = 4096.0

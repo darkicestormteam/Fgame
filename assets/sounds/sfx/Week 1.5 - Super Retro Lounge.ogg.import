@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4mgrmnx4jrf4"
+path="res://.godot/imported/Week 1.5 - Super Retro Lounge.ogg-864dbadfba16798ba84862c58b835cd7.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/Week 1.5 - Super Retro Lounge.ogg"
+dest_files=["res://.godot/imported/Week 1.5 - Super Retro Lounge.ogg-864dbadfba16798ba84862c58b835cd7.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
