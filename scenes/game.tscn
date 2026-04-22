@@ -9,16 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_p57ef"]
 tile_size = Vector2i(64, 64)
-sources/1 = SubResource("TileSetAtlasSource_iywne")
+sources/1 = SubResource("TileSetAtlasSource_gee14")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0tnpc"]
 texture = ExtResource("1_lnu2h")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -232,13 +232,13 @@ terrain_set_0/terrain_0/name = "Grass"
 terrain_set_0/terrain_0/color = Color(0.199805, 0.60904, 9.62615e-07, 1)
 terrain_set_0/terrain_1/name = "Sand"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+sources/0 = SubResource("TileSetAtlasSource_0tnpc")
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_iywne"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vtaks"]
 scenes/2/scene = ExtResource("5_iywne")
 
 [sub_resource type="TileSet" id="TileSet_u5sy4"]
-sources/0 = SubResource("TileSetScenesCollectionSource_iywne")
+sources/0 = SubResource("TileSetScenesCollectionSource_vtaks")
 
 [node name="game" type="Node2D"]
 y_sort_enabled = true
