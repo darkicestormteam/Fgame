@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://ldito7hwbs5p"]
+
+[ext_resource type="Texture2D" uid="uid://dd80ssnu2do7j" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="1_5mbse"]
+[ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_7yvfd"]
+[ext_resource type="Texture2D" uid="uid://muocld532s2n" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides.png" id="1_s5g8n"]
+[ext_resource type="Texture2D" uid="uid://hyn5a0atbetr" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides.png" id="3_7yvfd"]
+[ext_resource type="FontFile" uid="uid://dnn7h6mtd3m4q" path="res://SonicPressStartButton[NolivantNTEdit]-Regular.ttf" id="4_85riq"]
+[ext_resource type="Texture2D" uid="uid://cnf808aoh46wx" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="4_dfy5j"]
+[ext_resource type="Texture2D" uid="uid://tr0jcus8wff0" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Hover_3Slides.png" id="5_85riq"]
+
+[node name="Mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7yvfd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_s5g8n")
+texture_pressed = ExtResource("1_5mbse")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Start"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 23
+text = "старт"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_7yvfd")
+texture_pressed = ExtResource("4_dfy5j")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 14
+text = "настройки"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_85riq")
+texture_pressed = ExtResource("1_5mbse")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Exit"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 19
+text = "выход"
+horizontal_alignment = 1
+vertical_alignment = 1
