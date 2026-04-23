@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://5kov2dcmnn85"]
+
+[ext_resource type="Script" uid="uid://cfx45sdjiya7m" path="res://script/hp_bar.gd" id="1_enrm0"]
+
+[node name="HPbar" type="CanvasLayer"]
+script = ExtResource("1_enrm0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
