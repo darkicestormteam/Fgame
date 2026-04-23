@@ -490,4 +490,5 @@ bus = &"Music"
 
 [node name="Tap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("31_jqs8n")
+volume_db = 11.32
 bus = &"SFX"

@@ -21,24 +21,24 @@ func _process(delta: float) -> void:
 func _on_start_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
-	# Ждем 1.5 секунды и переключаемся на сцену игры
-	await get_tree().create_timer(1.5).timeout
+	# Ждем 1.0 секунды и переключаемся на сцену игры
+	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file(game_scene)
 
 
 func _on_exit_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
-	# Ждем 1.5 секунды и закрываем игру
-	await get_tree().create_timer(1.5).timeout
+	# Ждем 1.0 секунды и закрываем игру
+	await get_tree().create_timer(1.0).timeout
 	get_tree().quit()
 
 
 func _on_settings_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
-	# Ждем 1.5 секунды и переключаемся на сцену настроек
-	await get_tree().create_timer(1.5).timeout
+	# Ждем 1.0 секунды и переключаемся на сцену настроек
+	await get_tree().create_timer(1.0).timeout
 	if ResourceLoader.exists(settings_scene):
 		get_tree().change_scene_to_file(settings_scene)
 	else:
