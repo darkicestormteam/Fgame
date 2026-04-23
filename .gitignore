@@ -1,1 +1,12 @@
-Nothing should be ignored based on the provided file changes. The only modified file is `script/mainmenu.gd`, which appears to be a source code file for a Godot project and should not be ignored.
+```
+# Godot-specific ignores
+*.import
+*.remap
+.project
+.ios/
+.android/
+.windows/
+.linux/
+.macos/
+export_presets.cfg
+```
