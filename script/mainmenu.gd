@@ -15,15 +15,21 @@ func _process(delta: float) -> void:
 
 
 func _on_start_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
 	# Загружаем и переключаемся на сцену игры
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 
 func _on_exit_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
 	# Закрываем игру
 	get_tree().quit()
 
 
 func _on_settings_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
 	# Здесь можно добавить логику для настроек
 	pass
