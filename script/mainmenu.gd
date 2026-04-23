@@ -7,20 +7,11 @@ func _ready() -> void:
 	$MarginContainer/VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$MarginContainer/VBoxContainer/Exit.pressed.connect(_on_exit_pressed)
 	$MarginContainer/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
-	
-	# Подключаем сигнал нажатия на все кнопки для воспроизведения звука
-	for button in $MarginContainer/VBoxContainer.get_children():
-		if button is BaseButton:
-			button.pressed.connect(_play_tap_sound)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-func _play_tap_sound() -> void:
-	$Tap.play()
 
 
 func _on_start_pressed() -> void:

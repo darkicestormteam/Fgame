@@ -9,3 +9,4 @@ res://scenes/enemy_spawner.tscn
 res://scenes/worldmusic.tscn
 res://scenes/mainmenu.tscn
 res://default_bus_layout.tres
+res://script/mainmenu.gd

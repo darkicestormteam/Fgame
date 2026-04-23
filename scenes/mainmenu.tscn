@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://ldito7hwbs5p"]
+[gd_scene load_steps=56 format=4 uid="uid://ldito7hwbs5p"]
 
 [ext_resource type="Texture2D" uid="uid://dd80ssnu2do7j" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_7yvfd"]
@@ -10,7 +10,6 @@
 [ext_resource type="FontFile" uid="uid://dnn7h6mtd3m4q" path="res://SonicPressStartButton[NolivantNTEdit]-Regular.ttf" id="4_85riq"]
 [ext_resource type="Texture2D" uid="uid://cnf808aoh46wx" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="4_dfy5j"]
 [ext_resource type="Texture2D" uid="uid://tr0jcus8wff0" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Hover_3Slides.png" id="5_85riq"]
-[ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="6_tap"]
 [ext_resource type="Texture2D" uid="uid://5brfokumpj2m" path="res://Tiny Swords (Update 010)/Deco/18.png" id="5_kcrt3"]
 [ext_resource type="Texture2D" uid="uid://ct850dtwd7w1" path="res://Tiny Swords (Update 010)/Deco/01.png" id="6_a5e1i"]
 [ext_resource type="Texture2D" uid="uid://mcx7y8uq03hi" path="res://Tiny Swords (Update 010)/Deco/02.png" id="7_f107f"]
@@ -31,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://d3x0xfquldpp" path="res://Tiny Swords (Update 010)/Deco/17.png" id="22_0hngf"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="29_a5e1i"]
 [ext_resource type="AudioStream" uid="uid://c3d331r2s0p0s" path="res://assets/sounds/sfx/simple_loop.ogg" id="30_f107f"]
+[ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="31_jqs8n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjjcl"]
 texture = ExtResource("2_h73c4")
@@ -489,5 +489,5 @@ volume_db = -15.0
 bus = &"Music"
 
 [node name="Tap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("31_jqs8n")
 bus = &"SFX"
-stream = ExtResource("6_tap")
