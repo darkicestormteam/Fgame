@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dnn7h6mtd3m4q" path="res://SonicPressStartButton[NolivantNTEdit]-Regular.ttf" id="4_85riq"]
 [ext_resource type="Texture2D" uid="uid://cnf808aoh46wx" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="4_dfy5j"]
 [ext_resource type="Texture2D" uid="uid://tr0jcus8wff0" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Hover_3Slides.png" id="5_85riq"]
+[ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="6_tap"]
 [ext_resource type="Texture2D" uid="uid://5brfokumpj2m" path="res://Tiny Swords (Update 010)/Deco/18.png" id="5_kcrt3"]
 [ext_resource type="Texture2D" uid="uid://ct850dtwd7w1" path="res://Tiny Swords (Update 010)/Deco/01.png" id="6_a5e1i"]
 [ext_resource type="Texture2D" uid="uid://mcx7y8uq03hi" path="res://Tiny Swords (Update 010)/Deco/02.png" id="7_f107f"]
@@ -489,3 +490,4 @@ bus = &"Music"
 
 [node name="Tap" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
+stream = ExtResource("6_tap")
