@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://ldito7hwbs5p"]
+[gd_scene load_steps=55 format=4 uid="uid://ldito7hwbs5p"]
 
 [ext_resource type="Texture2D" uid="uid://dd80ssnu2do7j" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_7yvfd"]
@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://d0m6crs5h4xx6" path="res://Tiny Swords (Update 010)/Deco/15.png" id="20_sxpsc"]
 [ext_resource type="Texture2D" uid="uid://ci1tv4de0q8m5" path="res://Tiny Swords (Update 010)/Deco/16.png" id="21_u5kgo"]
 [ext_resource type="Texture2D" uid="uid://d3x0xfquldpp" path="res://Tiny Swords (Update 010)/Deco/17.png" id="22_0hngf"]
+[ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="29_a5e1i"]
+[ext_resource type="AudioStream" uid="uid://c3d331r2s0p0s" path="res://assets/sounds/sfx/simple_loop.ogg" id="30_f107f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjjcl"]
 texture = ExtResource("2_h73c4")
@@ -477,3 +479,13 @@ vertical_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+
+[node name="Menusong" parent="." instance=ExtResource("29_a5e1i")]
+process_mode = 3
+position = Vector2(-76, -1743)
+stream = ExtResource("30_f107f")
+volume_db = -15.0
+bus = &"Music"
+
+[node name="Tap" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

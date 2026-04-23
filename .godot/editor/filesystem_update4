@@ -1,5 +1,4 @@
 res://scenes/game.tscn
-res://scenes/mainmenu.tscn
 res://scenes/player.tscn
 res://scenes/enemy.tscn
 res://scenes/tree.tscn
@@ -8,4 +7,5 @@ res://scenes/game_over.tscn
 res://scenes/TimerGame.tscn
 res://scenes/enemy_spawner.tscn
 res://scenes/worldmusic.tscn
-res://script/mainmenu.gd
+res://scenes/mainmenu.tscn
+res://default_bus_layout.tres

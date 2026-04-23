@@ -271,6 +271,7 @@ position = Vector2(76, 1743)
 process_mode = 3
 position = Vector2(-76, -1743)
 volume_db = -15.0
+bus = &"Music"
 
 [node name="Enemy" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(472, 1519)
