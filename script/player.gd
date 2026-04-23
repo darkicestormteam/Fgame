@@ -7,11 +7,18 @@ const SPEED = 300.0
 @onready var attack_area: Area2D = $AttackArea
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
+@onready var invincibility_timer: Timer = $InvincibilityTimer
 
 var is_attacking: bool = false
 var enemies_in_area: Array = []
 var last_footstep_time: float = 0.0
 const FOOTSTEP_INTERVAL: float = 0.4
+
+# Система жизней
+var max_lives: int = 3
+var current_lives: int = 3
+var is_invincible: bool = false
+var blink_visible: bool = true
 
 func _ready() -> void:
 	# Создаем таймер для атаки
@@ -29,6 +36,56 @@ func _ready() -> void:
 	
 	# Отключаем мониторинг AttackArea по умолчанию
 	attack_area.monitoring = false
+	
+	# Запускаем процесс мигания
+	set_process(true)
+
+func _process(delta: float) -> void:
+	# Мигание во время неуязвимости (каждые 0.1 секунды)
+	if is_invincible:
+		var current_time = Time.get_ticks_msec() / 1000.0
+		# Меняем видимость каждые 0.1 секунды
+		if fmod(current_time, 0.2) < 0.1:
+			animated_sprite.visible = true
+		else:
+			animated_sprite.visible = false
+	else:
+		animated_sprite.visible = true
+
+func _on_invincibility_timer_timeout() -> void:
+	is_invincible = false
+	animated_sprite.visible = true
+	# Включаем коллизию обратно
+	collision_layer = 2
+
+func take_damage() -> void:
+	if is_invincible:
+		return
+	
+	current_lives -= 1
+	
+	if current_lives <= 0:
+		# Игра окончена
+		get_tree().paused = true
+		var game_over = get_tree().get_first_node_in_group("game_over")
+		if not game_over:
+			game_over = get_node("/root/GameOver")
+		if not game_over:
+			game_over = get_tree().current_scene.get_node_or_null("GameOver")
+		
+		if game_over:
+			game_over.visible = true
+	else:
+		# Активируем неуязвимость
+		is_invincible = true
+		invincibility_timer.start()
+		# Отключаем коллизию чтобы враги проходили сквозь
+		collision_layer = 0
+
+# Функция для добавления жизней (для бафов)
+func add_life(amount: int = 1) -> void:
+	max_lives += amount
+	current_lives = min(current_lives + amount, max_lives)
 
 func _on_attack_timer_timeout() -> void:
 	# Проигрываем анимацию атаки только если не атакуем сейчас
