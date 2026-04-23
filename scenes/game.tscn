@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=15 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://d15dwj5s4a5gl" path="res://scenes/TimerGame.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
-[ext_resource type="PackedScene" uid="uid://livesui12345" path="res://scenes/lives_ui.tscn" id="9_livesui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
@@ -272,7 +271,6 @@ position = Vector2(76, 1743)
 process_mode = 3
 position = Vector2(-76, -1743)
 volume_db = -15.0
-bus = &"Music"
 
 [node name="Enemy" parent="." instance=ExtResource("2_lnu2h")]
 position = Vector2(472, 1519)
@@ -284,5 +282,3 @@ position = Vector2(821, 1610)
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 grass_layer = NodePath("../TileMap/Grass")
-
-[node name="LivesUI" parent="." instance=ExtResource("9_livesui")]
