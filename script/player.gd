@@ -19,6 +19,7 @@ var max_lives: int = 3
 var current_lives: int = 3
 var is_invincible: bool = false
 var blink_visible: bool = true
+var hp_bar_node: Node = null
 
 func _ready() -> void:
 	# Создаем таймер для атаки
@@ -39,6 +40,9 @@ func _ready() -> void:
 	
 	# Запускаем процесс мигания
 	set_process(true)
+	
+	# Находим HP_bar и сохраняем ссылку
+	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
 
 func _process(delta: float) -> void:
 	# Мигание во время неуязвимости (каждые 0.1 секунды)
@@ -63,6 +67,10 @@ func take_damage() -> void:
 		return
 	
 	current_lives -= 1
+	
+	# Обновляем HP бар
+	if hp_bar_node and hp_bar_node.has_method("update_hearts"):
+		hp_bar_node.update_hearts(current_lives)
 	
 	if current_lives <= 0:
 		# Игра окончена
