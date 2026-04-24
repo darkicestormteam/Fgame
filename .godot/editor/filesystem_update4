@@ -17,3 +17,4 @@ res://script/lives_ui.gd
 res://scenes/lives_ui.tscn
 res://scenes/HP_bur.tscn
 res://scenes/HP_bar.tscn
+res://script/hp_bar.gd

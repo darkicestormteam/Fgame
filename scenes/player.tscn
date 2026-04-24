@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bb4e8xp5dj8gh"]
+[gd_scene load_steps=26 format=3 uid="uid://bb4e8xp5dj8gh"]
 
 [ext_resource type="Texture2D" uid="uid://byjjpclstmt6y" path="res://assets/Warrior_Red.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cupqlhlddwom4" path="res://script/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://ib12dwewfudb" path="res://assets/sounds/sfx/footstep.wav" id="4_dqkch"]
+[ext_resource type="PackedScene" uid="uid://5kov2dcmnn85" path="res://scenes/HP_bar.tscn" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
 atlas = ExtResource("1_3vyb7")
@@ -189,6 +190,8 @@ bus = &"steps"
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HPbar" parent="." instance=ExtResource("5_qlg0r")]
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
