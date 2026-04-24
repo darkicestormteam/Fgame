@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfx45sdjiya7m" path="res://script/hp_bar.gd" id="1_enrm0"]
 
-[node name="HPbar" type="CanvasLayer"]
+[node name="HPbar" type="CanvasLayer" groups=["hp_bar"]]
 script = ExtResource("1_enrm0")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
