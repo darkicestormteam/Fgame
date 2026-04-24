@@ -44,9 +44,6 @@ func _ready() -> void:
 	# Находим HP_bar и сохраняем ссылку
 	await get_tree().process_frame
 	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
-	print("Player: hp_bar_node found: ", hp_bar_node)
-	if hp_bar_node:
-		print("Player: hp_bar_node has update_hearts method: ", hp_bar_node.has_method("update_hearts"))
 
 func _process(delta: float) -> void:
 	# Мигание во время неуязвимости (каждые 0.1 секунды)
@@ -67,24 +64,14 @@ func _on_invincibility_timer_timeout() -> void:
 	collision_layer = 2
 
 func take_damage() -> void:
-	print("Player: take_damage() called, current_lives = ", current_lives)
 	if is_invincible:
-		print("Player is invincible, returning early")
 		return
 	
 	current_lives -= 1
-	print("Player: damage taken, new current_lives = ", current_lives)
 	
 	# Обновляем HP бар
 	if hp_bar_node and hp_bar_node.has_method("update_hearts"):
-		print("Player: calling update_hearts(", current_lives, ") on hp_bar_node")
 		hp_bar_node.update_hearts(current_lives)
-	else:
-		print("Player: hp_bar_node is null or doesn't have update_hearts method")
-		if not hp_bar_node:
-			print("hp_bar_node is null")
-		elif not hp_bar_node.has_method("update_hearts"):
-			print("hp_bar_node doesn't have update_hearts method")
 	
 	if current_lives <= 0:
 		# Игра окончена
