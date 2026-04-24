@@ -19,9 +19,12 @@ func _ready() -> void:
 
 # Функция для обновления сердечек (вызывается извне)
 func update_hearts(lives: int) -> void:
+	print("HP_bar: update_hearts called with lives = ", lives)
 	# Показываем/скрываем сердечки в зависимости от количества жизней
 	for i in range(heart_nodes.size()):
 		if i < lives:
 			heart_nodes[i].visible = true
+			print("HP_bar: heart ", i, " visible = true")
 		else:
 			heart_nodes[i].visible = false
+			print("HP_bar: heart ", i, " visible = false")
