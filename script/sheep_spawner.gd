@@ -8,6 +8,10 @@ var _player: Node2D = null
 var _spawn_timer: float = 0.0
 
 func _ready() -> void:
+    # Если sheep_scene не назначен, загружаем его автоматически
+    if sheep_scene == null:
+        sheep_scene = load("res://scenes/sheep.tscn")
+    
     # Ждем пока игрок будет готов
     await get_tree().process_frame
     if has_node(player_node):
