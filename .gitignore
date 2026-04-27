@@ -2,38 +2,9 @@
 # Godot-specific ignores
 *.import
 *.remap
-export_presets.cfg
-.autoload_singleton.gd
-.editor/
-
-# Build artifacts
-*.exe
-*.dll
-*.so
-*.dylib
-*.bin
-
-# Dependencies
-res://addons/
-*.import
-*.metadata
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-
-# User-specific settings
+.project
 .user
-*.user
-*.cache
-
-# Compressed files
-*.zip
-*.tar.gz
-*.tar.xz
-*.bz2
-*.gz
-*.rar
-*.7z
+.autoloads/
+.editor/
+export_presets.cfg
 ```
