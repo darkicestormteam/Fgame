@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pt82y")
 }],
-"loop": true,
+"loop": false,
 "name": &"explosion",
 "speed": 10.0
 }, {
@@ -126,7 +126,7 @@ animations = [{
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6qn06"]
-radius = 62.2896
+radius = 49.0102
 
 [node name="Sheep" type="CharacterBody2D"]
 collision_layer = 2
@@ -135,7 +135,9 @@ script = ExtResource("1_gw4f6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5g05w")
-animation = &"walk"
+animation = &"explosion"
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s32ju")
@@ -145,6 +147,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]
+visible = false
 shape = SubResource("CircleShape2D_6qn06")
 debug_color = Color(0.874713, 0.308445, 0.409753, 0.42)
 
