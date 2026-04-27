@@ -1,3 +1,7 @@
+CollisionShape2D
+Area2D
+AnimatedSprite2D
+CharacterBody2D
 TextureRect
 HBoxContainer
 CanvasLayer
@@ -8,8 +12,3 @@ Label
 VBoxContainer
 MarginContainer
 MenuBar
-MenuButton
-TileMapLayer
-TileMap
-AudioListener2D
-CollisionPolygon2D
