@@ -58,7 +58,7 @@ func _find_nearest_enemy() -> void:
 				_target_enemy = enemy
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") and not _is_exploding:
 		# Воспроизводим звук Sheepsay при соприкосновении с врагом
 		sheepsay_sound.play()
 		# Запускаем процесс взрыва с задержкой, но не останавливаем овцу здесь
