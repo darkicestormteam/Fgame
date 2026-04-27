@@ -1,15 +1,62 @@
 ```
 # Godot-specific ignores
+*.uid
 *.import
-*.pid
-*.lock
 export_presets.cfg
-.autoload_singleton.gd
-.Godot/
+.user
+.autoload_names
+.editor
+.godot/
 
-# Build artifacts
-res://.import/
-res://.mono/
-mono_crash.*
-crash_handler.*
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.out
+*.exe
+*.dll
+*.so
+*.a
+
+# Dependencies
+node_modules/
+venv/
+.venv/
+.env
+.env.local
+.env.*
+
+# Build directories
+dist/
+build/
+target/
+.gradle/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+*.pyc
+__pycache__/
+.mypy_cache/
+.pytest_cache/
 ```
