@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b6lfcu161mncb" path="res://scenes/sheep.tscn" id="2_sheep"]
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://d15dwj5s4a5gl" path="res://scenes/TimerGame.tscn" id="6_p57ef"]
@@ -282,3 +283,9 @@ position = Vector2(821, 1610)
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 grass_layer = NodePath("../TileMap/Grass")
+
+[node name="SheepSpawner" parent="." instance="uid://bsheepspawn123"]
+position = Vector2(76, 1743)
+sheep_scene = ExtResource("2_sheep")
+spawn_interval = 5.0
+player_node = NodePath("../Player")
