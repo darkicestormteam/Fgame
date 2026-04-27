@@ -2,9 +2,7 @@
 # Godot-specific ignores
 *.import
 *.remap
-.project
-.user
-.autoloads/
-.editor/
 export_presets.cfg
+.autoload_singleton.gd
+.editor/
 ```
