@@ -5,6 +5,7 @@ const EXPLOSION_RADIUS = 100.0
 
 var _target_enemy: Node2D = null
 var _player: Node2D = null
+var _is_exploding: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
@@ -17,6 +18,11 @@ func _ready() -> void:
 	animated_sprite.play("walk")
 
 func _physics_process(delta: float) -> void:
+	if _is_exploding:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
 	if _player == null:
 		_player = get_tree().get_first_node_in_group("player")
 	
@@ -57,6 +63,9 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 		_explode()
 
 func _explode() -> void:
+	_is_exploding = true
+	velocity = Vector2.ZERO
+	
 	# Воспроизводим анимацию взрыва
 	animated_sprite.play("explosion")
 	
