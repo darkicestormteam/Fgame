@@ -66,6 +66,9 @@ func _explode() -> void:
 	_is_exploding = true
 	velocity = Vector2.ZERO
 	
+	# Задержка перед взрывом (0.2 секунды)
+	await get_tree().create_timer(0.2).timeout
+	
 	# Воспроизводим анимацию взрыва
 	animated_sprite.play("explosion")
 	
