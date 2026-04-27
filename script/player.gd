@@ -22,6 +22,9 @@ var blink_visible: bool = true
 var hp_bar_node: Node = null
 
 func _ready() -> void:
+	# Добавляем игрока в группу "player"
+	add_to_group("player")
+	
 	# Создаем таймер для атаки
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 2.0
