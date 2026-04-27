@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pt82y")
 }],
-"loop": true,
+"loop": false,
 "name": &"explosion",
 "speed": 10.0
 }, {
