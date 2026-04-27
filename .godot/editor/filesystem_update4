@@ -12,3 +12,4 @@ res://scenes/mainmenu.tscn
 res://scenes/HP_bar.tscn
 res://scenes/sheep.tscn
 res://script/sheep.gd
+res://scenes/sheep_spawner.tscn
