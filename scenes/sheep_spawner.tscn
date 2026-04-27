@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=4 uid="uid://bsheepspawn123"]
+[gd_scene load_steps=3 format=3 uid="uid://dwu0xsxse3rv0"]
 
-[ext_resource type="Script" path="res://script/sheep_spawner.gd" id="1_sheepspawner"]
+[ext_resource type="Script" uid="uid://b72212q0k1n75" path="res://script/sheep_spawner.gd" id="1_sheepspawner"]
+[ext_resource type="PackedScene" uid="uid://b6lfcu161mncb" path="res://scenes/sheep.tscn" id="2_gd3bi"]
 
 [node name="SheepSpawner" type="Node2D"]
 script = ExtResource("1_sheepspawner")
+sheep_scene = ExtResource("2_gd3bi")
+player_node = NodePath(".")

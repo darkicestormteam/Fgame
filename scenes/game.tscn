@@ -1,15 +1,13 @@
-[gd_scene load_steps=16 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=15 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://b6lfcu161mncb" path="res://scenes/sheep.tscn" id="2_sheep"]
-[ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://d15dwj5s4a5gl" path="res://scenes/TimerGame.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
-[ext_resource type="PackedScene" uid="uid://bsheepspawn123" path="res://scenes/sheep_spawner.tscn" id="9_sheepspawner"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
@@ -274,9 +272,6 @@ process_mode = 3
 position = Vector2(-76, -1743)
 volume_db = -15.0
 
-[node name="Enemy" parent="." instance=ExtResource("2_lnu2h")]
-position = Vector2(472, 1519)
-
 [node name="Tree" parent="." instance=ExtResource("5_iywne")]
 position = Vector2(821, 1610)
 
@@ -285,8 +280,18 @@ position = Vector2(821, 1610)
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 grass_layer = NodePath("../TileMap/Grass")
 
-[node name="SheepSpawner" parent="." instance=ExtResource("9_sheepspawner")]
+[node name="SheepSpawner" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 position = Vector2(76, 1743)
 sheep_scene = ExtResource("2_sheep")
 spawn_interval = 5.0
 player_node = NodePath("../Player")
+script = null
