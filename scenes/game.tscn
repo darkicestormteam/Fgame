@@ -265,7 +265,7 @@ tile_map_data = PackedByteArray("AADd/1wAAAAAAAAAAgDf/4QAAAAAAAAAAgDg/zsAAAAAAAA
 tile_set = SubResource("TileSet_u5sy4")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(76, 137)
+position = Vector2(923, 1738)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
@@ -281,3 +281,4 @@ position = Vector2(821, 1610)
 grass_layer = NodePath("../TileMap/Grass")
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
+player_node = NodePath("../Player")
