@@ -19,8 +19,7 @@ func _ready() -> void:
 	else:
 		_player = get_tree().get_first_node_in_group("player")
 	
-	print("[SheepSpawner] Ready! Player found: ", _player != null)
-	print("[SheepSpawner] Sheep scene loaded: ", sheep_scene != null)
+
 
 func _process(delta: float) -> void:
 	if _player == null:
@@ -40,12 +39,12 @@ func _spawn_sheep() -> void:
 	# Создаем овцу в случайной позиции около игрока
 	var sheep = sheep_scene.instantiate()
 
-	# Спавним овцу в случайном направлении от игрока на расстоянии 50-100 пикселей
+	# Спавним овцу в случайном направлении от игрока на расстоянии 30-50 пикселей
 	var angle = randf() * TAU
-	var distance = randf_range(50.0, 100.0)
+	var distance = randf_range(30.0, 50.0)
 	var spawn_position = _player.global_position + Vector2(cos(angle), sin(angle)) * distance
 
 	sheep.global_position = spawn_position
 	get_parent().add_child(sheep)
 	
-	print("[SheepSpawner] Sheep spawned at: ", spawn_position)
+	

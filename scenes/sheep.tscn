@@ -1,8 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6lfcu161mncb"]
+[gd_scene load_steps=24 format=3 uid="uid://b6lfcu161mncb"]
 
 [ext_resource type="Script" uid="uid://duj441wiuybte" path="res://script/sheep.gd" id="1_gw4f6"]
 [ext_resource type="Texture2D" uid="uid://cc0gol5os3keb" path="res://assets/HappySheep_All.png" id="1_t8l8v"]
 [ext_resource type="Texture2D" uid="uid://bvq0cilpcm704" path="res://assets/Explosions.png" id="2_6qn06"]
+[ext_resource type="AudioStream" uid="uid://cfys26w5eam8l" path="res://assets/sounds/sfx/say-2-1.mp3" id="4_n54i3"]
+[ext_resource type="AudioStream" uid="uid://c7b8bvq36pctt" path="res://assets/sounds/sfx/single-remote-explosion.mp3" id="5_vrdyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5g05w"]
 atlas = ExtResource("2_6qn06")
@@ -147,8 +149,15 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]
-visible = false
 shape = SubResource("CircleShape2D_6qn06")
 debug_color = Color(0.874713, 0.308445, 0.409753, 0.42)
+
+[node name="Sheepsay" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_n54i3")
+bus = &"SFX"
+
+[node name="explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vrdyb")
+bus = &"SFX"
 
 [connection signal="body_entered" from="damage_zone" to="." method="_on_damage_zone_body_entered"]
