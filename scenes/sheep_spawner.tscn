@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4 uid="uid://bsheepspawn123"]
+
+[ext_resource type="Script" path="res://script/sheep_spawner.gd" id="1_sheepspawner"]
+
+[node name="SheepSpawner" type="Node2D"]
+script = ExtResource("1_sheepspawner")
