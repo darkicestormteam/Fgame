@@ -5,7 +5,8 @@ const EXPLOSION_RADIUS = 100.0
 
 var _target_enemy: Node2D = null
 var _player: Node2D = null
-var _is_exploding: bool = false # Теперь этот флаг означает "уже взрываюсь (анимация)", а не "жду взрыва"
+var _is_exploding: bool = false # Флаг: идет ли уже анимация взрыва
+var _explode_triggered: bool = false # Флаг: был ли уже запущен процесс взрыва
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
@@ -58,10 +59,11 @@ func _find_nearest_enemy() -> void:
 				_target_enemy = enemy
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and not _is_exploding:
+	if body.is_in_group("enemy") and not _explode_triggered:
 		# Воспроизводим звук Sheepsay при соприкосновении с врагом
 		sheepsay_sound.play()
-		# Запускаем процесс взрыва с задержкой, но не останавливаем овцу здесь
+		# Запускаем процесс взрыва с задержкой (только один раз!)
+		_explode_triggered = true
 		_explode_with_delay()
 
 func _explode_with_delay() -> void:
