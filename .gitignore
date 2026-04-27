@@ -2,42 +2,7 @@
 # Godot-specific ignores
 *.import
 *.remap
-.project.godot
-*.tscn
-*.tres
-*.res
-*.gdns
-*.gdnlib
-*.import
-*.metadata
-*.meta
-*.fnt
-*.otf
-*.ttf
-*.woff
-*.woff2
-*.png
-*.jpg
-*.jpeg
-*.bmp
-*.gif
-*.webm
-
-# Build artifacts
 export_presets.cfg
-
-# Editor settings
 .user
-*.user
-.vscode/
-.idea/
-
-# Temp files
-*.tmp
-*.temp
-*.log
-
-# Dependencies
-*.import
-*.import*
+.scons_cache/
 ```
