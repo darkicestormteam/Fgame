@@ -139,7 +139,7 @@ animation = &"walk"
 shape = SubResource("CircleShape2D_s32ju")
 
 [node name="damage_zone" type="Area2D" parent="."]
-monitoring = false
+monitoring = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]
 shape = SubResource("CircleShape2D_6qn06")
