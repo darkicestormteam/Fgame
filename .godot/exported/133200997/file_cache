@@ -1,0 +1,15 @@
+res://scenes/enemy.tscn::7ede83fa5b40fafa6760c7ece6f7f26c::1777303152::res://.godot/exported/133200997/export-a930820ec0ab16db6719aff4daa500f9-enemy.scn
+res://scenes/enemy_spawner.tscn::ac926d571dbfd03a285e5ae7978df24f::1777303152::res://.godot/exported/133200997/export-e56eb753f9e7a01522dd85211d4eb598-enemy_spawner.scn
+res://scenes/game.tscn::75c07c5304a878413f93810b0edd8323::1777303152::res://.godot/exported/133200997/export-c2a7af834e91ff64325daddf58e45dc0-game.scn
+res://scenes/game_over.tscn::544b7112531d198d04a435f03ef261eb::1777292574::res://.godot/exported/133200997/export-21b8bee24a2bf9e9929bc898cc82b612-game_over.scn
+res://scenes/heart.tscn::f369cc48bcd0b92cb0aedcd36b6a3d9a::1776988670::res://.godot/exported/133200997/export-79edeac40d592684e55ba74036767dc5-heart.scn
+res://scenes/HP_bar.tscn::1c009989e6ec48b26ce26550895394e0::1777303152::res://.godot/exported/133200997/export-05444728b4699a00df9e8d08130330d7-HP_bar.scn
+res://scenes/kill_zone.tscn::3d258315619ae65ccfc622da3a417eef::1777292574::res://.godot/exported/133200997/export-1cd5da8c23a7ca54aecb209d47883734-kill_zone.scn
+res://scenes/mainmenu.tscn::e444cfdffcf41261a40beef8a626d555::1777303152::res://.godot/exported/133200997/export-1a75c62674f0e88c69acf03f4897b8b1-mainmenu.scn
+res://scenes/player.tscn::2de2750455c133b4465df725d0bbb0c4::1777303152::res://.godot/exported/133200997/export-234fb6894ec6226e856ab7f825500d3d-player.scn
+res://scenes/sheep.tscn::20311fce70079748459153a10c9a9e33::1777303152::res://.godot/exported/133200997/export-626ae7978120dc793d3b2f78a19e0a94-sheep.scn
+res://scenes/sheep_spawner.tscn::b8ea94c031101d212751dbf8d2878a0c::1777303152::res://.godot/exported/133200997/export-dd24898cfbeb51107d2751ebcdcd4bc5-sheep_spawner.scn
+res://scenes/TimerGame.tscn::e7dc93b26bd78ceab6977ff124e30572::1777292574::res://.godot/exported/133200997/export-7f21d251b0d1ae337d4420810d3843b9-TimerGame.scn
+res://scenes/tree.tscn::ae965703ebe06f816bb993482a554aa7::1777303152::res://.godot/exported/133200997/export-a9120a52d578fc4f9832f17b0458a97d-tree.scn
+res://scenes/worldmusic.tscn::94a10dcd1dacc990dbb0408b706f95cd::1777292574::res://.godot/exported/133200997/export-5fb55bd4eb6264613ab858df4a3a8e92-worldmusic.scn
+res://default_bus_layout.tres::366a0f66309a0a0904fa4791c56e5528::1776979897::res://.godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res
