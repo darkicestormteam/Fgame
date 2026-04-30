@@ -287,6 +287,7 @@ grass_layer = NodePath("../TileMap/Grass")
 player_node = NodePath("../Player")
 
 [node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
+visible = false
 
 [node name="SpellTimer" type="Timer" parent="."]
 
