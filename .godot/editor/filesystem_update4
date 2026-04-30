@@ -11,3 +11,5 @@ res://scenes/mainmenu.tscn
 res://scenes/spellmenu.tscn
 res://scenes/game_over.tscn
 res://script/spellmenu.gd
+res://scenes/TimerGame.tscn
+res://script/game.gd
