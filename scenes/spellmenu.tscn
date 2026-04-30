@@ -5,17 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://pxux0o4k4f2a" path="res://assets/sheepicon.png" id="2_q75c1"]
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="4_1sp5a"]
 
-[node name="Spellmenu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Spellmenu" type="CanvasLayer"]
 script = ExtResource("1_vu6c6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +17,6 @@ grow_vertical = 2
 color = Color(0.443137, 0.54902, 0.513726, 0.603922)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
