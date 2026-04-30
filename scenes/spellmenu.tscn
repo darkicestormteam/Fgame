@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="4_1sp5a"]
 
 [node name="Spellmenu" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,8 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vu6c6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,24 +25,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.443137, 0.54902, 0.513726, 0.603922)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SpellSheep" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="SpellSheep" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SpellSheep"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/SpellSheep"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -53,11 +54,11 @@ grow_horizontal = 2
 texture = ExtResource("2_q75c1")
 stretch_mode = 2
 
-[node name="SwordUP" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="SwordUP" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
 
-[node name="Test" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="Test" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
 

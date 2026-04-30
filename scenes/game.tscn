@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://dwu0xsxse3rv0" path="res://scenes/sheep_spawner.tscn" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
-[ext_resource type="Script" uid="uid://newgameuid12345" path="res://script/game.gd" id="9_game"]
+[ext_resource type="Script" uid="uid://mgfdnbyv4fjh" path="res://script/game.gd" id="9_game"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
