@@ -53,7 +53,7 @@ texture_normal = ExtResource("1_rmaiu")
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
 
-[node name="Tap" type="AudioStreamPlayer2D" parent="."]
+[node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1sp5a")
 volume_db = 11.32
 bus = &"SFX"
