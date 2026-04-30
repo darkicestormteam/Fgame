@@ -30,3 +30,9 @@ func show_spellmenu() -> void:
 
 func _on_button_pressed() -> void:
 	tap_sound.play()
+	# Скрываем меню сразу
+	visible = false
+	is_visible = false
+	# Возобновляем игру через 0.5 секунды
+	await get_tree().create_timer(0.5).timeout
+	get_tree().paused = false
