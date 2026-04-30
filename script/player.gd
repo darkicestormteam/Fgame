@@ -3,8 +3,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var attack_timer: Timer = $AttackTimer
 @onready var attack_area: Area2D = $AttackArea
+var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
 @onready var invincibility_timer: Timer = $InvincibilityTimer
