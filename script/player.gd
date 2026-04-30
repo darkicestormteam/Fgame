@@ -14,6 +14,11 @@ var enemies_in_area: Array = []
 var last_footstep_time: float = 0.0
 const FOOTSTEP_INTERVAL: float = 0.4
 
+# Улучшение атаки SwordUP
+var sword_up_unlocked: bool = false
+var is_second_attack: bool = false
+var second_attack_rotation: float = 0.0
+
 # Система жизней
 var max_lives: int = 3
 var current_lives: int = 3
@@ -99,6 +104,10 @@ func add_life(amount: int = 1) -> void:
 	max_lives += amount
 	current_lives = min(current_lives + amount, max_lives)
 
+# Функция для разблокировки улучшения SwordUP
+func unlock_sword_up() -> void:
+	sword_up_unlocked = true
+
 func _on_attack_timer_timeout() -> void:
 	# Проигрываем анимацию атаки только если не атакуем сейчас
 	if not is_attacking:
@@ -110,11 +119,25 @@ func _on_attack_timer_timeout() -> void:
 func _on_animation_finished() -> void:
 	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
-		is_attacking = false
-		# Отключаем мониторинг AttackArea после завершения атаки
-		attack_area.monitoring = false
-		# Очищаем список врагов
-		enemies_in_area.clear()
+		# Если SwordUP разблокирован и это была первая атака, запускаем вторую атаку
+		if sword_up_unlocked and not is_second_attack:
+			is_second_attack = true
+			# Запоминаем текущий rotation чтобы вернуть его после второй атаки
+			second_attack_rotation = attack_area.rotation
+			# Разворачиваем атаку в противоположную сторону
+			attack_area.rotation += deg_to_rad(180)
+			# Запускаем вторую атаку через небольшую задержку
+			await get_tree().create_timer(0.2).timeout
+			# Воспроизводим анимацию второй атаки
+			animated_sprite.play("attack")
+			attack_area.monitoring = true
+		else:
+			is_attacking = false
+			is_second_attack = false
+			# Отключаем мониторинг AttackArea после завершения атаки
+			attack_area.monitoring = false
+			# Очищаем список врагов
+			enemies_in_area.clear()
 
 func _on_frame_changed() -> void:
 	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)
@@ -128,6 +151,9 @@ func _on_frame_changed() -> void:
 				enemy.queue_free()
 		# Очищаем список после нанесения урона
 		enemies_in_area.clear()
+		# Если это была вторая атака, возвращаем rotation обратно
+		if is_second_attack:
+			attack_area.rotation = second_attack_rotation
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
