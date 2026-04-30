@@ -6,6 +6,7 @@ extends Node2D
 
 var _player: Node2D = null
 var _spawn_timer: float = 0.0
+var _is_enabled: bool = false  # Флаг активности спавнера
 
 func _ready() -> void:
 	# Если sheep_scene не назначен, загружаем его автоматически
@@ -18,11 +19,11 @@ func _ready() -> void:
 		_player = get_node(player_node)
 	else:
 		_player = get_tree().get_first_node_in_group("player")
-	
 
 
 func _process(delta: float) -> void:
-	if _player == null:
+	# Спавним овец только если способность разблокирована
+	if not _is_enabled or _player == null:
 		return
 
 	_spawn_timer += delta
@@ -46,5 +47,8 @@ func _spawn_sheep() -> void:
 
 	sheep.global_position = spawn_position
 	get_parent().add_child(sheep)
-	
-	
+
+# Метод для разблокировки способности (вызывается из spellmenu)
+func enable_sheep_spell() -> void:
+	_is_enabled = true
+	print("[SheepSpawner] Sheep spell enabled!")
