@@ -145,6 +145,8 @@ func _on_animation_finished() -> void:
 			second_attack_rotation = attack_area.rotation
 			# Разворачиваем атаку в противоположную сторону
 			attack_area.rotation += deg_to_rad(180)
+			# Разворачиваем спрайт персонажа для визуального эффекта
+			animated_sprite.flip_h = not animated_sprite.flip_h
 			# Запускаем вторую атаку через небольшую задержку
 			get_tree().create_timer(0.2).timeout.connect(_on_second_attack_timer_timeout)
 		else:
