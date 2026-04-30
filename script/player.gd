@@ -19,6 +19,7 @@ var sword_up_unlocked: bool = false
 var is_second_attack: bool = false
 var second_attack_rotation: float = 0.0
 var second_attack_pending: bool = false
+var original_facing_right: bool = true  # Запоминаем направление взгляда игрока
 
 # Система жизней
 var max_lives: int = 3
@@ -114,6 +115,8 @@ func _on_attack_timer_timeout() -> void:
 	if not is_attacking and not second_attack_pending:
 		is_attacking = true
 		is_second_attack = false
+		# Запоминаем текущее направление взгляда перед атакой
+		original_facing_right = not animated_sprite.flip_h
 		animated_sprite.play("attack")
 		# Включаем мониторинг AttackArea во время атаки
 		attack_area.monitoring = true
@@ -121,12 +124,18 @@ func _on_attack_timer_timeout() -> void:
 func _on_animation_finished() -> void:
 	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
-		# Если это была вторая атака, просто завершаем её
+		# Если это была вторая атака, просто завершаем её и возвращаем направление
 		if is_second_attack:
 			is_attacking = false
 			is_second_attack = false
 			attack_area.monitoring = false
 			enemies_in_area.clear()
+			# Возвращаем направление взгляда игрока после второй атаки
+			animated_sprite.flip_h = not original_facing_right
+			if original_facing_right:
+				attack_area.rotation = 0
+			else:
+				attack_area.rotation = deg_to_rad(180)
 			return
 		
 		# Если SwordUP разблокирован, запускаем вторую атаку
@@ -163,9 +172,9 @@ func _on_frame_changed() -> void:
 				enemy.queue_free()
 		# Очищаем список после нанесения урона
 		enemies_in_area.clear()
-		# Если это была вторая атака, возвращаем rotation обратно
+		# Если это была вторая атака, сбрасываем флаг pending
 		if is_second_attack:
-			attack_area.rotation = second_attack_rotation
+			second_attack_pending = false
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
@@ -174,13 +183,14 @@ func _physics_process(delta: float) -> void:
 	velocity = input_direction * SPEED
 
 	if velocity.length_squared() > 0:
-		# Поворот спрайта
-		if velocity.x > 0:
-			animated_sprite.flip_h = false
-			attack_area.rotation = 0
-		elif velocity.x < 0:
-			animated_sprite.flip_h = true
-			attack_area.rotation = deg_to_rad(180)
+		# Поворот спрайта (не меняем направление во время атаки)
+		if not is_attacking and not second_attack_pending:
+			if velocity.x > 0:
+				animated_sprite.flip_h = false
+				attack_area.rotation = 0
+			elif velocity.x < 0:
+				animated_sprite.flip_h = true
+				attack_area.rotation = deg_to_rad(180)
 		
 		# Анимация ходьбы (не прерываем атаку)
 		if not is_attacking and animated_sprite.animation != "walk":

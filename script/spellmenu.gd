@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 	# Подключаем сигналы нажатия кнопок к функции воспроизведения звука
 	spell_sheep_btn.pressed.connect(_on_spell_sheep_pressed)
-	sword_up_btn.pressed.connect(_on_button_pressed)
+	sword_up_btn.pressed.connect(_on_sword_up_pressed)
 	test_btn.pressed.connect(_on_button_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,6 +43,19 @@ func _on_spell_sheep_pressed() -> void:
 	# Разблокируем способность овцы
 	if sheep_spawner and sheep_spawner.has_method("enable_sheep_spell"):
 		sheep_spawner.enable_sheep_spell()
+	# Скрываем меню сразу
+	visible = false
+	is_visible = false
+	# Возобновляем игру через 0.5 секунды
+	await get_tree().create_timer(0.5).timeout
+	get_tree().paused = false
+
+func _on_sword_up_pressed() -> void:
+	tap_sound.play()
+	# Находим игрока и разблокируем улучшение SwordUP
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("unlock_sword_up"):
+		player.unlock_sword_up()
 	# Скрываем меню сразу
 	visible = false
 	is_visible = false
