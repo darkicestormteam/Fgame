@@ -1,8 +1,1 @@
-```
-# Godot-specific ignores
-*.import
-*.remap
-export_presets.cfg
-.user
-.scons_cache/
-```
+Nothing needs to be added to .gitignore since the changes only include source code files (.gd) and scene files (.tscn) which are part of the normal Godot project structure and should be tracked in version control.

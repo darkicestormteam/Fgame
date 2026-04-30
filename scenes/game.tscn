@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=17 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://dwu0xsxse3rv0" path="res://scenes/sheep_spawner.tscn" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
+[ext_resource type="Script" uid="uid://newgameuid12345" path="res://script/game.gd" id="9_game"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
@@ -243,6 +244,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_vtaks")
 
 [node name="game" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("9_game")
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -285,3 +287,7 @@ grass_layer = NodePath("../TileMap/Grass")
 player_node = NodePath("../Player")
 
 [node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
+
+[node name="SpellTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
