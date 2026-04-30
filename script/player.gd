@@ -18,6 +18,7 @@ const FOOTSTEP_INTERVAL: float = 0.4
 var sword_up_unlocked: bool = false
 var is_second_attack: bool = false
 var second_attack_rotation: float = 0.0
+var second_attack_pending: bool = false
 
 # Система жизней
 var max_lives: int = 3
@@ -110,7 +111,7 @@ func unlock_sword_up() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	# Проигрываем анимацию атаки только если не атакуем сейчас
-	if not is_attacking:
+	if not is_attacking and not second_attack_pending:
 		is_attacking = true
 		animated_sprite.play("attack")
 		# Включаем мониторинг AttackArea во время атаки
@@ -120,17 +121,15 @@ func _on_animation_finished() -> void:
 	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
 		# Если SwordUP разблокирован и это была первая атака, запускаем вторую атаку
-		if sword_up_unlocked and not is_second_attack:
+		if sword_up_unlocked and not is_second_attack and not second_attack_pending:
 			is_second_attack = true
+			second_attack_pending = true
 			# Запоминаем текущий rotation чтобы вернуть его после второй атаки
 			second_attack_rotation = attack_area.rotation
 			# Разворачиваем атаку в противоположную сторону
 			attack_area.rotation += deg_to_rad(180)
 			# Запускаем вторую атаку через небольшую задержку
-			await get_tree().create_timer(0.2).timeout
-			# Воспроизводим анимацию второй атаки
-			animated_sprite.play("attack")
-			attack_area.monitoring = true
+			get_tree().create_timer(0.2).timeout.connect(_on_second_attack_timer_timeout)
 		else:
 			is_attacking = false
 			is_second_attack = false
@@ -138,6 +137,12 @@ func _on_animation_finished() -> void:
 			attack_area.monitoring = false
 			# Очищаем список врагов
 			enemies_in_area.clear()
+
+func _on_second_attack_timer_timeout() -> void:
+	# Воспроизводим анимацию второй атаки
+	animated_sprite.play("attack")
+	attack_area.monitoring = true
+	second_attack_pending = false
 
 func _on_frame_changed() -> void:
 	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)

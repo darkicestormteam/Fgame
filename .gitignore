@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The modified files (`script/player.gd` and `script/spellmenu.gd`) are source code files that should be tracked in version control.
+(script/player.gd)
