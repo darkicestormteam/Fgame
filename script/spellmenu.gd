@@ -52,12 +52,6 @@ func _on_spell_sheep_pressed() -> void:
 
 func _on_button_pressed() -> void:
 	tap_sound.play()
-	# Проверяем, какая кнопка была нажата
-	if get_focus_owner() == sword_up_btn:
-		# Разблокируем улучшение SwordUP для игрока
-		var player = get_tree().get_first_node_in_group("player")
-		if player and player.has_method("unlock_sword_up"):
-			player.unlock_sword_up()
 	# Скрываем меню сразу
 	visible = false
 	is_visible = false
