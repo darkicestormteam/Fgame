@@ -286,8 +286,14 @@ grass_layer = NodePath("../TileMap/Grass")
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")
 
-[node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
+[node name="SpellmenuContainer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Spellmenu" parent="SpellmenuContainer" instance=ExtResource("6_0tnpc")]
 
 [node name="SpellTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

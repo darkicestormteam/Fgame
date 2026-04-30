@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var spellmenu = $Spellmenu
+@onready var spellmenu = $SpellmenuContainer/Spellmenu
 @onready var timer = $SpellTimer
 
 func _ready() -> void:

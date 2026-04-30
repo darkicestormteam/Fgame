@@ -1,1 +1,16 @@
-Nothing needs to be added to .gitignore since the changes only include source code files (.gd) and scene files (.tscn) which are part of the normal Godot project structure and should be tracked in version control.
+```
+# Build artifacts
+*.import
+*.bin
+*.tres
+*.tscn
+*.gd
+export_presets.cfg
+
+# Dependencies
+.addons/
+.cache/
+
+# Logs
+*.log
+```
