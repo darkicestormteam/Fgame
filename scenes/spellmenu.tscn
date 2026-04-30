@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7hyauted5gjs"]
+
+[ext_resource type="Texture2D" uid="uid://de2gtq1dco12h" path="res://Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="1_rmaiu"]
+[ext_resource type="Script" uid="uid://b7c74bu4w1ded" path="res://script/spellmenu.gd" id="1_vu6c6"]
+[ext_resource type="Texture2D" uid="uid://pxux0o4k4f2a" path="res://assets/sheepicon.png" id="2_q75c1"]
+[ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="4_1sp5a"]
+
+[node name="Spellmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vu6c6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.443137, 0.54902, 0.513726, 0.603922)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SpellSheep" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_rmaiu")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SpellSheep"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -30.0
+offset_right = 104.0
+offset_bottom = 170.0
+grow_horizontal = 2
+texture = ExtResource("2_q75c1")
+stretch_mode = 2
+
+[node name="SwordUP" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_rmaiu")
+
+[node name="Test" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_rmaiu")
+
+[node name="Tap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1sp5a")
+volume_db = 11.32
+bus = &"SFX"
