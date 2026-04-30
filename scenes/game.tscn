@@ -289,5 +289,6 @@ player_node = NodePath("../Player")
 [node name="SpellTimer" type="Timer" parent="."]
 
 [node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
+process_mode = 3
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

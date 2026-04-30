@@ -3,7 +3,7 @@ extends CanvasLayer
 
 var is_visible: bool = false
 
-@onready var tap_sound: AudioStreamPlayer2D = $Tap
+@onready var tap_sound: AudioStreamPlayer = $Tap
 @onready var spell_sheep_btn: TextureButton = $MarginContainer/HBoxContainer/SpellSheep
 @onready var sword_up_btn: TextureButton = $MarginContainer/HBoxContainer/SwordUP
 @onready var test_btn: TextureButton = $MarginContainer/HBoxContainer/Test

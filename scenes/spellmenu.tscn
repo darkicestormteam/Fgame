@@ -27,10 +27,12 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 10
 
 [node name="SpellSheep" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
+texture_pressed = ExtResource("1_rmaiu")
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SpellSheep"]
 layout_mode = 1
@@ -48,12 +50,14 @@ stretch_mode = 2
 [node name="SwordUP" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
+texture_pressed = ExtResource("1_rmaiu")
 
 [node name="Test" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
+texture_pressed = ExtResource("1_rmaiu")
 
-[node name="Tap" type="AudioStreamPlayer2D" parent="."]
+[node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1sp5a")
 volume_db = 11.32
 bus = &"SFX"
