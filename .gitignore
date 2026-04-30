@@ -1,1 +1,11 @@
-Nothing should be ignored in this case, as only a single source code file (`script/spellmenu.gd`) was modified and there are no build artifacts, dependencies, or temporary files in the change list.
+```
+# Build artifacts
+*.import
+*.cache
+*.tmp
+
+# Godot-specific
+.project
+.scn
+.gd
+```
