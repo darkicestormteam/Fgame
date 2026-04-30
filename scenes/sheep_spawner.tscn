@@ -7,4 +7,3 @@
 script = ExtResource("1_sheepspawner")
 sheep_scene = ExtResource("2_sheep")
 player_node = NodePath(".")
-
