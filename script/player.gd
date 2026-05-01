@@ -26,7 +26,7 @@ var second_attack_direction: float = 0.0
 var original_facing_right: bool = true
 var second_attack_timer: Timer = null
 
-# Система жизней
+# Система жизней (теперь синхронизируется с GameManager)
 var max_lives: int = 3
 var current_lives: int = 3
 var is_invincible: bool = false
@@ -86,27 +86,44 @@ func take_damage() -> void:
 	if is_invincible:
 		return
 	
-	current_lives -= 1
+	# Используем GameManager для уменьшения жизней
+	var game_manager = get_node_or_null("/root/GameManager")
+	if game_manager and game_manager.has_method("add_life"):
+		# Отнимаем жизнь через менеджер (передаем -1)
+		game_manager.add_life(-1)
+		current_lives = game_manager.current_lives  # Синхронизируем с менеджером
 	
+	# Обновляем HP бар
 	if hp_bar_node and hp_bar_node.has_method("update_hearts"):
 		hp_bar_node.update_hearts(current_lives)
 	
 	if current_lives <= 0:
 		get_tree().paused = true
-		var game_over = get_tree().get_first_node_in_group("game_over")
-		if not game_over:
-			game_over = get_node("/root/GameOver")
-		if not game_over:
-			game_over = get_tree().current_scene.get_node_or_null("GameOver")
-		
-		if game_over:
-			game_over.visible = true
+		# Используем GameManager для запуска конца игры
+		if game_manager and game_manager.has_method("trigger_game_over"):
+			game_manager.trigger_game_over()
+		else:
+			# Фоллбэк на старый метод
+			var game_over = get_tree().get_first_node_in_group("game_over")
+			if not game_over:
+				game_over = get_node("/root/GameOver")
+			if not game_over:
+				game_over = get_tree().current_scene.get_node_or_null("GameOver")
+			
+			if game_over:
+				game_over.visible = true
 	else:
 		is_invincible = true
 		invincibility_timer.start()
 		collision_layer = 0
 
 func add_life(amount: int = 1) -> void:
+	# Синхронизируем с GameManager если он есть
+	var game_manager = get_node_or_null("/root/GameManager")
+	if game_manager and game_manager.has_method("add_life"):
+		game_manager.add_life(amount)
+		current_lives = game_manager.current_lives  # Синхронизируем с менеджером
+	
 	max_lives += amount
 	current_lives = min(current_lives + amount, max_lives)
 
