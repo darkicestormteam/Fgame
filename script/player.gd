@@ -231,21 +231,13 @@ func _physics_process(delta: float) -> void:
 	velocity = input_direction * SPEED
 
 	if velocity.length_squared() > 0:
-		# Поворот спрайта (не меняем направление во время обычной атаки или второй атаки)
-		if not is_attacking and not second_attack_pending:
-			if velocity.x > 0:
-				animated_sprite.flip_h = false
-				attack_area.rotation = 0
-			elif velocity.x < 0:
-				animated_sprite.flip_h = true
-				attack_area.rotation = deg_to_rad(180)
-		
-		# Для splash атаки - обновляем направление зоны атаки в реальном времени
-		if is_attacking and animated_sprite.animation == "splash":
-			if velocity.x > 0:
-				attack_area.rotation = 0
-			elif velocity.x < 0:
-				attack_area.rotation = deg_to_rad(180)
+		# Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
+		if velocity.x > 0:
+			animated_sprite.flip_h = false
+			attack_area.rotation = 0
+		elif velocity.x < 0:
+			animated_sprite.flip_h = true
+			attack_area.rotation = deg_to_rad(180)
 		
 		# Анимация ходьбы (не прерываем атаку)
 		if not is_attacking and animated_sprite.animation != "walk":
