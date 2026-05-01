@@ -1,1 +1,13 @@
-(script/player.gd)
+```
+# Build artifacts
+*.import
+*.bin
+*.res
+# Editor
+.vscode/
+.idea/
+*.tmp
+*.log
+# Generated files
+export_presets.cfg
+```
