@@ -1,13 +1,11 @@
 ```
-# Build artifacts
+# Godot-specific ignores
 *.import
-*.bin
-*.res
-# Editor
-.vscode/
-.idea/
-*.tmp
-*.log
-# Generated files
+*.remap
+.project.godot
+*.tscn.meta
+*.tres.meta
+*.gd.meta
+*.import
 export_presets.cfg
 ```
