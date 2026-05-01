@@ -20,7 +20,7 @@ var sword_up_unlocked: bool = false
 var is_second_attack: bool = false
 var second_attack_rotation: float = 0.0
 var second_attack_pending: bool = false
-var original_facing_right: bool = true  # Запоминаем направление взгляда игрока
+var original_facing_right: bool = true
 
 # Система жизней
 var max_lives: int = 3
@@ -30,44 +30,32 @@ var blink_visible: bool = true
 var hp_bar_node: Node = null
 
 # Тип текущей атаки
-var attack_type: String = "normal"  # "normal" или "splash"
-var splash_attack_timer: Timer  # Таймер для атаки splash
+var attack_type: String = "normal"
+var splash_attack_timer: Timer
 
 func _ready() -> void:
-	# Добавляем игрока в группу "player"
 	add_to_group("player")
 	
-	# Создаем таймер для атаки
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 2.0
 	attack_timer.autostart = true
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
 	add_child(attack_timer)
 	
-	# Подключаемся к окончанию анимации
 	animated_sprite.animation_finished.connect(_on_animation_finished)
-	
-	# Подключаемся к изменению кадра анимации
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	
-	# Отключаем мониторинг AttackArea по умолчанию
 	attack_area.monitoring = false
-	
-	# Изначально отключаем splash коллизию
 	splash_collision.disabled = true
 	
-	# Запускаем процесс мигания
 	set_process(true)
 	
-	# Находим HP_bar и сохраняем ссылку
 	await get_tree().process_frame
 	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
 
-func _process(delta: float) -> void:
-	# Мигание во время неуязвимости (каждые 0.1 секунды)
+func _process(_delta: float) -> void:
 	if is_invincible:
 		var current_time = Time.get_ticks_msec() / 1000.0
-		# Меняем видимость каждые 0.1 секунды
 		if fmod(current_time, 0.2) < 0.1:
 			animated_sprite.visible = true
 		else:
@@ -78,7 +66,6 @@ func _process(delta: float) -> void:
 func _on_invincibility_timer_timeout() -> void:
 	is_invincible = false
 	animated_sprite.visible = true
-	# Включаем коллизию обратно
 	collision_layer = 2
 
 func take_damage() -> void:
@@ -87,12 +74,10 @@ func take_damage() -> void:
 	
 	current_lives -= 1
 	
-	# Обновляем HP бар
 	if hp_bar_node and hp_bar_node.has_method("update_hearts"):
 		hp_bar_node.update_hearts(current_lives)
 	
 	if current_lives <= 0:
-		# Игра окончена
 		get_tree().paused = true
 		var game_over = get_tree().get_first_node_in_group("game_over")
 		if not game_over:
@@ -103,30 +88,27 @@ func take_damage() -> void:
 		if game_over:
 			game_over.visible = true
 	else:
-		# Активируем неуязвимость
 		is_invincible = true
 		invincibility_timer.start()
-		# Отключаем коллизию чтобы враги проходили сквозь
 		collision_layer = 0
 
-# Функция для добавления жизней (для бафов)
 func add_life(amount: int = 1) -> void:
 	max_lives += amount
 	current_lives = min(current_lives + amount, max_lives)
 
-# Функция для разблокировки улучшения SwordUP
 func unlock_sword_up() -> void:
 	sword_up_unlocked = true
 
-# Функция для переключения на атаку splash
 func enable_splash_attack() -> void:
 	attack_type = "splash"
-	# Отключаем обычную атаку (таймер атаки)
 	attack_timer.stop()
-	# Включаем splash коллизию
+	
+	if splash_attack_timer:
+		splash_attack_timer.stop()
+		splash_attack_timer.queue_free()
+	
 	splash_collision.disabled = false
 	
-	# Создаем и запускаем таймер для атаки splash
 	splash_attack_timer = Timer.new()
 	splash_attack_timer.wait_time = 2.0
 	splash_attack_timer.autostart = true
@@ -134,34 +116,27 @@ func enable_splash_attack() -> void:
 	add_child(splash_attack_timer)
 
 func _on_splash_attack_timer_timeout() -> void:
-	# Проигрываем анимацию splash атаки только если не атакуем сейчас
 	if not is_attacking:
 		is_attacking = true
 		animated_sprite.play("splash")
-		# Включаем мониторинг AttackArea во время атаки
 		attack_area.monitoring = true
 
 func _on_attack_timer_timeout() -> void:
-	# Проигрываем анимацию атаки только если не атакуем сейчас и тип атаки normal
 	if not is_attacking and not second_attack_pending and attack_type == "normal":
 		is_attacking = true
 		is_second_attack = false
-		# Запоминаем текущее направление взгляда перед атакой
 		original_facing_right = not animated_sprite.flip_h
 		animated_sprite.play("attack")
-		# Включаем мониторинг AttackArea во время атаки
 		attack_area.monitoring = true
 
 func _on_animation_finished() -> void:
-	# Сбрасываем флаг атаки когда анимация закончилась
 	if animated_sprite.animation == "attack":
-		# Если это была вторая атака, просто завершаем её и возвращаем направление
 		if is_second_attack:
 			is_attacking = false
 			is_second_attack = false
 			attack_area.monitoring = false
 			enemies_in_area.clear()
-			# Возвращаем направление взгляда игрока после второй атаки
+			
 			animated_sprite.flip_h = not original_facing_right
 			if original_facing_right:
 				attack_area.rotation = 0
@@ -169,98 +144,78 @@ func _on_animation_finished() -> void:
 				attack_area.rotation = deg_to_rad(180)
 			return
 		
-		# Если SwordUP разблокирован, запускаем вторую атаку
 		if sword_up_unlocked and not second_attack_pending:
 			second_attack_pending = true
-			# Запоминаем текущий rotation чтобы вернуть его после второй атаки
 			second_attack_rotation = attack_area.rotation
-			# Разворачиваем атаку в противоположную сторону
 			attack_area.rotation += deg_to_rad(180)
-			# Разворачиваем спрайт персонажа для визуального эффекта
 			animated_sprite.flip_h = not animated_sprite.flip_h
-			# Запускаем вторую атаку через небольшую задержку
-			get_tree().create_timer(0.2).timeout.connect(_on_second_attack_timer_timeout)
+			get_tree().create_timer(0.15).timeout.connect(_on_second_attack_timer_timeout)
 		else:
 			is_attacking = false
-			# Отключаем мониторинг AttackArea после завершения атаки
 			attack_area.monitoring = false
-			# Очищаем список врагов
 			enemies_in_area.clear()
 	elif animated_sprite.animation == "splash":
-		# Завершаем splash атаку
 		is_attacking = false
 		attack_area.monitoring = false
 		enemies_in_area.clear()
 
 func _on_second_attack_timer_timeout() -> void:
-	# Воспроизводим анимацию второй атаки
 	is_second_attack = true
 	animated_sprite.play("attack")
 	attack_area.monitoring = true
 
 func _on_frame_changed() -> void:
-	# Проверяем, что это анимация атаки и 4-й кадр (индекс 3)
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
-		# Воспроизводим звук Sword Whoosh
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
-		# Наносим урон всем врагам в зоне
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
 				enemy.queue_free()
-		# Очищаем список после нанесения урона
 		enemies_in_area.clear()
-		# Если это была вторая атака, сбрасываем флаг pending
 		if is_second_attack:
 			second_attack_pending = false
 	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
-		# Воспроизводим звук Sword Whoosh для splash атаки
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
-		# Наносим урон всем врагам в зоне
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
 				enemy.queue_free()
-		# Очищаем список после нанесения урона
 		enemies_in_area.clear()
 
-func _physics_process(delta: float) -> void:
-		# Используем ваши кастомные имена действий
-		var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-
-		velocity = input_direction * SPEED
-
-		if velocity.length_squared() > 0:
-				# Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
-				# НО не во время второй атаки SwordUP (чтобы сохранить направление удара)
-				if not is_second_attack:
-						if velocity.x > 0:
-								animated_sprite.flip_h = false
-								attack_area.rotation = 0
-						elif velocity.x < 0:
-								animated_sprite.flip_h = true
-								attack_area.rotation = deg_to_rad(180)
-
-				# Анимация ходьбы (не прерываем атаку)
-				if not is_attacking and animated_sprite.animation != "walk":
-						animated_sprite.play("walk")
-
-				# Воспроизведение звука шагов с изменением высоты тона
-				if not is_attacking and Time.get_ticks_msec() / 1000.0 - last_footstep_time >= FOOTSTEP_INTERVAL:
-						last_footstep_time = Time.get_ticks_msec() / 1000.0
-						footstep.pitch_scale = randf_range(0.8, 1.2)
-						footstep.play()
-		else:
-				# Анимация покоя (не прерываем атаку)
-				if not is_attacking and animated_sprite.animation != "idle":
-						animated_sprite.play("idle")
-
-		move_and_slide()
-
+func _physics_process(_delta: float) -> void:
+	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	
+	velocity = input_direction * SPEED
+	
+	if velocity.length_squared() > 0:
+		# ЛОГИКА ПОВОРОТА:
+		# 1. Если активировано комбо SwordUP (ожидание или вторая атака) -> ЗАПРЕЩАЕМ поворот.
+		# 2. Если обычная атака или Splash -> РАЗРЕШАЕМ поворот (даже во время анимации).
+		var is_sword_up_combo_active: bool = (sword_up_unlocked and (second_attack_pending or is_second_attack))
+		
+		if not is_sword_up_combo_active:
+			if velocity.x > 0:
+				animated_sprite.flip_h = false
+				attack_area.rotation = 0
+			elif velocity.x < 0:
+				animated_sprite.flip_h = true
+				attack_area.rotation = deg_to_rad(180)
+		
+		if not is_attacking and animated_sprite.animation != "walk":
+			animated_sprite.play("walk")
+		
+		if not is_attacking and Time.get_ticks_msec() / 1000.0 - last_footstep_time >= FOOTSTEP_INTERVAL:
+			last_footstep_time = Time.get_ticks_msec() / 1000.0
+			footstep.pitch_scale = randf_range(0.8, 1.2)
+			footstep.play()
+	else:
+		if not is_attacking and animated_sprite.animation != "idle":
+			animated_sprite.play("idle")
+	
+	move_and_slide()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		# Добавляем врага в список, но не уничтожаем сразу
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
