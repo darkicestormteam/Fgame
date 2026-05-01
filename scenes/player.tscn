@@ -262,6 +262,7 @@ disabled = true
 [node name="SwordUP" type="CollisionPolygon2D" parent="AttackArea"]
 modulate = Color(0, 0.997553, 0.901831, 1)
 polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
+disabled = true
 
 [node name="Sword Whoosh" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qhqgy")
