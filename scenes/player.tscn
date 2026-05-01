@@ -278,7 +278,7 @@ modulate = Color(1, 1, 1, 0.482353)
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"swordUP"
 
-[node name="AttackAreaUP" type="Area2D" parent="."]
+[node name="AttackAreaUP" type="Area2D" parent="SwordPivot"]
 collision_mask = 4
 monitoring = false
 
