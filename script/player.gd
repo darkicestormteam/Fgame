@@ -232,12 +232,14 @@ func _physics_process(delta: float) -> void:
 
 		if velocity.length_squared() > 0:
 				# Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
-				if velocity.x > 0:
-						animated_sprite.flip_h = false
-						attack_area.rotation = 0
-				elif velocity.x < 0:
-						animated_sprite.flip_h = true
-						attack_area.rotation = deg_to_rad(180)
+				# НО не во время второй атаки SwordUP (чтобы сохранить направление удара)
+				if not is_second_attack:
+						if velocity.x > 0:
+								animated_sprite.flip_h = false
+								attack_area.rotation = 0
+						elif velocity.x < 0:
+								animated_sprite.flip_h = true
+								attack_area.rotation = deg_to_rad(180)
 
 				# Анимация ходьбы (не прерываем атаку)
 				if not is_attacking and animated_sprite.animation != "walk":
