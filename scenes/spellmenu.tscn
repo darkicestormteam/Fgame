@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7hyauted5gjs"]
+[gd_scene load_steps=7 format=3 uid="uid://b7hyauted5gjs"]
 
 [ext_resource type="Texture2D" uid="uid://de2gtq1dco12h" path="res://Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="1_rmaiu"]
 [ext_resource type="Script" uid="uid://b7c74bu4w1ded" path="res://script/spellmenu.gd" id="1_vu6c6"]
 [ext_resource type="Texture2D" uid="uid://pxux0o4k4f2a" path="res://assets/sheepicon.png" id="2_q75c1"]
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="4_1sp5a"]
-[ext_resource type="Texture2D" uid="uid://doioff41qcja2" path="res://assets/Sword.png" id="4_c6b1q"]
+[ext_resource type="Texture2D" uid="uid://iya662brc6ce" path="res://assets/DubleAttack.png" id="4_14f3p"]
+[ext_resource type="Texture2D" uid="uid://bgxa0jd1cqsxj" path="res://assets/Swordpush.png" id="5_xw3fp"]
 
 [node name="Spellmenu" type="CanvasLayer"]
 script = ExtResource("1_vu6c6")
@@ -61,18 +62,34 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -109.5
+offset_top = -126.0
 offset_right = 100.0
-offset_bottom = 109.5
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_c6b1q")
+texture = ExtResource("4_14f3p")
 stretch_mode = 3
 
-[node name="Test" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="Splash" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
 texture_pressed = ExtResource("1_rmaiu")
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Splash"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -91.5
+offset_right = 83.0
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_xw3fp")
+stretch_mode = 3
 
 [node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1sp5a")

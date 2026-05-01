@@ -6,7 +6,7 @@ var is_visible: bool = false
 @onready var tap_sound: AudioStreamPlayer = $Tap
 @onready var spell_sheep_btn: TextureButton = $MarginContainer/HBoxContainer/SpellSheep
 @onready var sword_up_btn: TextureButton = $MarginContainer/HBoxContainer/SwordUP
-@onready var test_btn: TextureButton = $MarginContainer/HBoxContainer/Test
+@onready var splash_btn: TextureButton = $MarginContainer/HBoxContainer/Splash
 
 # Ссылка на SheepSpawner
 var sheep_spawner: Node2D = null
@@ -26,7 +26,7 @@ func _ready() -> void:
 	# Подключаем сигналы нажатия кнопок к функции воспроизведения звука
 	spell_sheep_btn.pressed.connect(_on_spell_sheep_pressed)
 	sword_up_btn.pressed.connect(_on_sword_up_pressed)
-	test_btn.pressed.connect(_on_button_pressed)
+	splash_btn.pressed.connect(_on_button_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

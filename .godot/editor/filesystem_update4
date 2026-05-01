@@ -1,5 +1,3 @@
-res://script/sheep_spawner.gd
-res://script/spellmenu.gd
 res://scenes/game.tscn
 res://script/player.gd
 res://scenes/tree.tscn
@@ -12,3 +10,4 @@ res://scenes/sheep_spawner.tscn
 res://scenes/mainmenu.tscn
 res://scenes/spellmenu.tscn
 res://scenes/game_over.tscn
+res://script/spellmenu.gd

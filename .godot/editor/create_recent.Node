@@ -1,3 +1,4 @@
+CollisionPolygon2D
 AudioStreamPlayer
 CanvasLayer
 ColorRect
@@ -12,4 +13,3 @@ Area2D
 AnimatedSprite2D
 CharacterBody2D
 Camera2D
-Label
