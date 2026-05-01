@@ -231,13 +231,14 @@ func _physics_process(delta: float) -> void:
         velocity = input_direction * SPEED
 
         if velocity.length_squared() > 0:
-                # Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
-                if velocity.x > 0:
-                        animated_sprite.flip_h = false
-                        attack_area.rotation = 0
-                elif velocity.x < 0:
-                        animated_sprite.flip_h = true
-                        attack_area.rotation = deg_to_rad(180)
+                # Поворот спрайта и зоны атаки только если не атакуем
+                if not is_attacking:
+                        if velocity.x > 0:
+                                animated_sprite.flip_h = false
+                                attack_area.rotation = 0
+                        elif velocity.x < 0:
+                                animated_sprite.flip_h = true
+                                attack_area.rotation = deg_to_rad(180)
 
                 # Анимация ходьбы (не прерываем атаку)
                 if not is_attacking and animated_sprite.animation != "walk":
