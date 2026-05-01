@@ -7,8 +7,8 @@ const SPEED = 300.0
 @onready var animated_sprite_swordup: AnimatedSprite2D = $SwordPivot/AnimatedSprite2DSwordUP
 @onready var attack_area: Area2D = $AttackArea
 @onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
-@onready var swordup_collision: CollisionPolygon2D = $AttackAreaUP/SwordUP
-@onready var attack_area_up: Area2D = $AttackAreaUP
+@onready var swordup_collision: CollisionPolygon2D = $SwordPivot/AttackAreaUP/SwordUP
+@onready var attack_area_up: Area2D = $SwordPivot/AttackAreaUP
 var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
