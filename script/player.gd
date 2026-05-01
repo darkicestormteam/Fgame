@@ -189,10 +189,16 @@ func _on_second_attack_delay_timeout() -> void:
 	# Запуск второй атаки swordUP с противоположной стороны
 	is_second_attack_active = true
 	
+	# Отключаем коллизию ПЕРВОЙ атаки, чтобы она не задевала врагов спереди
+	if attack_type == "splash":
+		splash_collision.disabled = true
+	else:
+		attack_area.monitoring = false
+	
 	# Устанавливаем направление для второй атаки (противоположное направлению игрока)
 	attack_area.rotation = second_attack_direction
 	
-	# Отключаем коллизию перед запуском анимации (включится на 3-м кадре)
+	# Отключаем коллизию SwordUP перед запуском анимации (включится на 3-м кадре)
 	swordup_collision.disabled = true
 	
 	# Показываем второй спрайт и запускаем анимацию swordUP
