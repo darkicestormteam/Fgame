@@ -259,11 +259,6 @@ modulate = Color(0, 0.831373, 0.141176, 1)
 polygon = PackedVector2Array(11, 5, 24, -73, 85, -35, 82, 24, 8, 51, -32, 42)
 disabled = true
 
-[node name="SwordUP" type="CollisionPolygon2D" parent="AttackArea"]
-modulate = Color(0, 0.997553, 0.901831, 1)
-polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
-disabled = true
-
 [node name="Sword Whoosh" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qhqgy")
 bus = &"SFX"
@@ -279,6 +274,13 @@ one_shot = true
 [node name="HPbar" parent="." instance=ExtResource("5_qlg0r")]
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="AttackAreaUP" type="Area2D" parent="."]
+
+[node name="SwordUP" type="CollisionPolygon2D" parent="AttackAreaUP"]
+modulate = Color(0, 0.997553, 0.901831, 1)
+polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
+disabled = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]

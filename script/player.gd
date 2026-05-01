@@ -5,7 +5,6 @@ const SPEED = 300.0
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animated_sprite_swordup: AnimatedSprite2D = $AnimatedSprite2DSwordUP
 @onready var attack_area: Area2D = $AttackArea
-@onready var main_collision: CollisionPolygon2D = $AttackArea/CollisionPolygon2D
 @onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
 @onready var swordup_collision: CollisionPolygon2D = $AttackArea/SwordUP
 var attack_timer: Timer
@@ -51,7 +50,6 @@ func _ready() -> void:
 	animated_sprite_swordup.frame_changed.connect(_on_swordup_frame_changed)
 	
 	attack_area.monitoring = false
-	main_collision.disabled = true
 	splash_collision.disabled = true
 	swordup_collision.disabled = true
 	
@@ -147,7 +145,6 @@ func _on_attack_timer_timeout() -> void:
 		is_second_attack_active = false
 		original_facing_right = not animated_sprite.flip_h
 		animated_sprite.play("attack")
-		main_collision.disabled = false
 		attack_area.monitoring = true
 		
 		# Если SwordUP разблокирован, планируем вторую атаку
@@ -163,7 +160,6 @@ func _on_animation_finished() -> void:
 		# Если активирована вторая атака swordUP, не сбрасываем is_attacking здесь
 		if not is_second_attack_active:
 			is_attacking = false
-			main_collision.disabled = true
 			attack_area.monitoring = false
 			enemies_in_area.clear()
 		return
@@ -194,7 +190,10 @@ func _on_second_attack_delay_timeout() -> void:
 	is_second_attack_active = true
 	
 	# Отключаем коллизию ПЕРВОЙ атаки, чтобы она не задевала врагов спереди
-	main_collision.disabled = true
+	if attack_type == "splash":
+		splash_collision.disabled = true
+	else:
+		attack_area.monitoring = false
 	
 	# Устанавливаем направление для второй атаки (противоположное направлению игрока)
 	attack_area.rotation = second_attack_direction
@@ -214,15 +213,15 @@ func _on_frame_changed() -> void:
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
-				enemies_in_area.clear()
-				break
+				enemy.queue_free()
+		enemies_in_area.clear()
 	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
-				enemies_in_area.clear()
-				break
+				enemy.queue_free()
+		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 2:
@@ -234,8 +233,8 @@ func _on_swordup_frame_changed() -> void:
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
-				enemies_in_area.clear()
-				break
+				enemy.queue_free()
+		enemies_in_area.clear()
 
 func _physics_process(_delta: float) -> void:
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
