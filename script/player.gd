@@ -4,6 +4,7 @@ const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $AttackArea
+@onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
 var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
@@ -28,6 +29,10 @@ var is_invincible: bool = false
 var blink_visible: bool = true
 var hp_bar_node: Node = null
 
+# Тип текущей атаки
+var attack_type: String = "normal"  # "normal" или "splash"
+var splash_attack_timer: Timer  # Таймер для атаки splash
+
 func _ready() -> void:
 	# Добавляем игрока в группу "player"
 	add_to_group("player")
@@ -47,6 +52,9 @@ func _ready() -> void:
 	
 	# Отключаем мониторинг AttackArea по умолчанию
 	attack_area.monitoring = false
+	
+	# Изначально отключаем splash коллизию
+	splash_collision.disabled = true
 	
 	# Запускаем процесс мигания
 	set_process(true)
@@ -110,9 +118,32 @@ func add_life(amount: int = 1) -> void:
 func unlock_sword_up() -> void:
 	sword_up_unlocked = true
 
+# Функция для переключения на атаку splash
+func enable_splash_attack() -> void:
+	attack_type = "splash"
+	# Отключаем обычную атаку (таймер атаки)
+	attack_timer.stop()
+	# Включаем splash коллизию
+	splash_collision.disabled = false
+	
+	# Создаем и запускаем таймер для атаки splash
+	splash_attack_timer = Timer.new()
+	splash_attack_timer.wait_time = 2.0
+	splash_attack_timer.autostart = true
+	splash_attack_timer.timeout.connect(_on_splash_attack_timer_timeout)
+	add_child(splash_attack_timer)
+
+func _on_splash_attack_timer_timeout() -> void:
+	# Проигрываем анимацию splash атаки только если не атакуем сейчас
+	if not is_attacking:
+		is_attacking = true
+		animated_sprite.play("splash")
+		# Включаем мониторинг AttackArea во время атаки
+		attack_area.monitoring = true
+
 func _on_attack_timer_timeout() -> void:
-	# Проигрываем анимацию атаки только если не атакуем сейчас
-	if not is_attacking and not second_attack_pending:
+	# Проигрываем анимацию атаки только если не атакуем сейчас и тип атаки normal
+	if not is_attacking and not second_attack_pending and attack_type == "normal":
 		is_attacking = true
 		is_second_attack = false
 		# Запоминаем текущее направление взгляда перед атакой
@@ -155,6 +186,11 @@ func _on_animation_finished() -> void:
 			attack_area.monitoring = false
 			# Очищаем список врагов
 			enemies_in_area.clear()
+	elif animated_sprite.animation == "splash":
+		# Завершаем splash атаку
+		is_attacking = false
+		attack_area.monitoring = false
+		enemies_in_area.clear()
 
 func _on_second_attack_timer_timeout() -> void:
 	# Воспроизводим анимацию второй атаки
@@ -177,6 +213,16 @@ func _on_frame_changed() -> void:
 		# Если это была вторая атака, сбрасываем флаг pending
 		if is_second_attack:
 			second_attack_pending = false
+	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
+		# Воспроизводим звук Sword Whoosh для splash атаки
+		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
+		sword_whoosh.play()
+		# Наносим урон всем врагам в зоне
+		for enemy in enemies_in_area:
+			if is_instance_valid(enemy):
+				enemy.queue_free()
+		# Очищаем список после нанесения урона
+		enemies_in_area.clear()
 
 func _physics_process(delta: float) -> void:
 	# Используем ваши кастомные имена действий
