@@ -137,6 +137,13 @@ func _on_splash_attack_timer_timeout() -> void:
 	# Проигрываем анимацию splash атаки только если не атакуем сейчас
 	if not is_attacking:
 		is_attacking = true
+		# Запоминаем текущее направление взгляда перед атакой
+		original_facing_right = not animated_sprite.flip_h
+		# Поворачиваем зону атаки в зависимости от направления игрока
+		if original_facing_right:
+			attack_area.rotation = 0
+		else:
+			attack_area.rotation = deg_to_rad(180)
 		animated_sprite.play("splash")
 		# Включаем мониторинг AttackArea во время атаки
 		attack_area.monitoring = true
@@ -191,6 +198,8 @@ func _on_animation_finished() -> void:
 		is_attacking = false
 		attack_area.monitoring = false
 		enemies_in_area.clear()
+		# Возвращаем направление взгляда игрока после атаки
+		animated_sprite.flip_h = not original_facing_right
 
 func _on_second_attack_timer_timeout() -> void:
 	# Воспроизводим анимацию второй атаки
