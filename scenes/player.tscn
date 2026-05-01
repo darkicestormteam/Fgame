@@ -278,15 +278,15 @@ modulate = Color(1, 1, 1, 0.482353)
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"swordUP"
 
-[node name="AttackAreaUP" type="Area2D" parent="."]
+[node name="AttackAreaUP" type="Area2D" parent="SwordPivot"]
 collision_mask = 4
 monitoring = false
 
-[node name="SwordUP" type="CollisionPolygon2D" parent="AttackAreaUP"]
+[node name="SwordUP" type="CollisionPolygon2D" parent="SwordPivot/AttackAreaUP"]
 modulate = Color(0, 0.997553, 0.901831, 1)
 polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
 disabled = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_entered" from="AttackAreaUP" to="." method="_on_attack_area_up_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="body_entered" from="SwordPivot/AttackAreaUP" to="." method="_on_attack_area_up_body_entered"]
