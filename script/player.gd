@@ -276,3 +276,7 @@ func _on_attack_area_up_body_entered(body: Node2D) -> void:
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body in enemies_in_area:
 		enemies_in_area.erase(body)
+
+func _on_attack_area_up_body_exited(body: Node2D) -> void:
+	if body in enemies_in_area:
+		enemies_in_area.erase(body)
