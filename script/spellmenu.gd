@@ -65,6 +65,10 @@ func _on_sword_up_pressed() -> void:
 
 func _on_button_pressed() -> void:
 	tap_sound.play()
+	# Переключаем атаку игрока на splash
+	var player = get_tree().get_first_node_in_group("player")
+	if player and player.has_method("enable_splash_attack"):
+		player.enable_splash_attack()
 	# Скрываем меню сразу
 	visible = false
 	is_visible = false
