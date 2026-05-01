@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_swordup: AnimatedSprite2D = $AnimatedSprite2DSwordUP
 @onready var attack_area: Area2D = $AttackArea
 @onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
 var attack_timer: Timer
@@ -44,6 +45,8 @@ func _ready() -> void:
 	
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.frame_changed.connect(_on_frame_changed)
+	animated_sprite_swordup.animation_finished.connect(_on_swordup_animation_finished)
+	animated_sprite_swordup.frame_changed.connect(_on_swordup_frame_changed)
 	
 	attack_area.monitoring = false
 	splash_collision.disabled = true
@@ -60,14 +63,21 @@ func _ready() -> void:
 	add_child(second_attack_timer)
 
 func _process(_delta: float) -> void:
+	# Синхронизируем позицию второго спрайта с основным
+	if animated_sprite_swordup:
+		animated_sprite_swordup.global_position = global_position
+	
 	if is_invincible:
 		var current_time = Time.get_ticks_msec() / 1000.0
 		if fmod(current_time, 0.2) < 0.1:
 			animated_sprite.visible = true
+			animated_sprite_swordup.visible = animated_sprite_swordup.visible and true
 		else:
 			animated_sprite.visible = false
+			animated_sprite_swordup.visible = false
 	else:
 		animated_sprite.visible = true
+		# Не скрываем второй спрайт здесь, он управляется отдельно
 
 func _on_invincibility_timer_timeout() -> void:
 	is_invincible = false
@@ -145,47 +155,30 @@ func _on_attack_timer_timeout() -> void:
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		if is_second_attack_active:
-			# Завершение второй атаки (swordUP)
-			is_attacking = false
-			is_second_attack_active = false
-			attack_area.monitoring = false
-			enemies_in_area.clear()
-			
-			# Возвращаем направление атаки в исходное состояние
-			if original_facing_right:
-				attack_area.rotation = 0
-				animated_sprite.flip_h = false
-			else:
-				attack_area.rotation = deg_to_rad(180)
-				animated_sprite.flip_h = true
-			return
-		
-		# Завершение первой атаки - вторая атака уже запущена отдельно
-		if sword_up_unlocked:
-			# Первая атака завершена, но вторая может еще идти
+			# Завершение второй атаки (swordUP) - но это обрабатывается в animated_sprite_swordup
 			pass
-		else:
-			is_attacking = false
-			attack_area.monitoring = false
-			enemies_in_area.clear()
-	elif animated_sprite.animation == "splash":
+		return
+	
+	if animated_sprite.animation == "splash":
 		is_attacking = false
 		attack_area.monitoring = false
 		enemies_in_area.clear()
-	elif animated_sprite.animation == "swordUP":
-		# Завершение анимации swordUP
-		is_attacking = false
-		is_second_attack_active = false
-		attack_area.monitoring = false
-		enemies_in_area.clear()
-		
-		# Возвращаем направление атаки в исходное состояние
-		if original_facing_right:
-			attack_area.rotation = 0
-			animated_sprite.flip_h = false
-		else:
-			attack_area.rotation = deg_to_rad(180)
-			animated_sprite.flip_h = true
+
+func _on_swordup_animation_finished() -> void:
+	# Завершение анимации swordUP
+	is_attacking = false
+	is_second_attack_active = false
+	attack_area.monitoring = false
+	enemies_in_area.clear()
+	animated_sprite_swordup.visible = false
+	
+	# Возвращаем направление атаки в исходное состояние
+	if original_facing_right:
+		attack_area.rotation = 0
+		animated_sprite.flip_h = false
+	else:
+		attack_area.rotation = deg_to_rad(180)
+		animated_sprite.flip_h = true
 
 func _on_second_attack_delay_timeout() -> void:
 	# Запуск второй атаки swordUP с противоположной стороны
@@ -194,11 +187,10 @@ func _on_second_attack_delay_timeout() -> void:
 	# Устанавливаем направление для второй атаки (противоположное направлению игрока)
 	attack_area.rotation = second_attack_direction
 	
-	# Поворачиваем спрайт в противоположную сторону для визуального эффекта
-	animated_sprite.flip_h = not animated_sprite.flip_h
-	
-	# Запускаем анимацию swordUP
-	animated_sprite.play("swordUP")
+	# Показываем второй спрайт и запускаем анимацию swordUP
+	animated_sprite_swordup.visible = true
+	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
+	animated_sprite_swordup.play("swordUP")
 	attack_area.monitoring = true
 
 func _on_frame_changed() -> void:
@@ -209,15 +201,17 @@ func _on_frame_changed() -> void:
 			if is_instance_valid(enemy):
 				enemy.queue_free()
 		enemies_in_area.clear()
-	elif animated_sprite.animation == "swordUP" and animated_sprite.frame == 3:
-		# Звуковой эффект и урон для второй атаки swordUP
+	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
 				enemy.queue_free()
 		enemies_in_area.clear()
-	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
+
+func _on_swordup_frame_changed() -> void:
+	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
+		# Звуковой эффект и урон для второй атаки swordUP
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
