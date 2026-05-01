@@ -278,7 +278,7 @@ modulate = Color(1, 1, 1, 0.482353)
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"swordUP"
 
-[node name="AttackAreaUP" type="Area2D" parent="SwordPivot"]
+[node name="AttackAreaUP" type="Area2D" parent="."]
 collision_mask = 4
 monitoring = false
 
@@ -289,4 +289,3 @@ disabled = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
-[connection signal="body_entered" from="AttackAreaUP" to="." method="_on_attack_area_up_body_entered"]
