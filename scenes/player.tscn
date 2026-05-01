@@ -235,7 +235,6 @@ animation = &"attack"
 autoplay = "idle"
 
 [node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.482353)
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"swordUP"
