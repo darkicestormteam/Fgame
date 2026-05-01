@@ -2,11 +2,13 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 const EXPLOSION_RADIUS = 100.0
+const ENEMY_SEARCH_INTERVAL = 0.5 # Искать нового врага раз в 0.5 секунды
 
 var _target_enemy: Node2D = null
 var _player: Node2D = null
 var _is_exploding: bool = false # Флаг: идет ли уже анимация взрыва
 var _explode_triggered: bool = false # Флаг: был ли уже запущен процесс взрыва
+var _search_timer: float = 0.0 # Таймер для поиска врагов
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
@@ -29,7 +31,11 @@ func _physics_process(delta: float) -> void:
 	if _player == null:
 		_player = get_tree().get_first_node_in_group("player")
 	
-	_find_nearest_enemy()
+	# Кэшируем поиск цели: ищем нового врага только раз в ENEMY_SEARCH_INTERVAL секунд
+	_search_timer += delta
+	if _search_timer >= ENEMY_SEARCH_INTERVAL:
+		_search_timer = 0.0
+		_find_nearest_enemy()
 	
 	if _target_enemy and is_instance_valid(_target_enemy):
 		var direction: Vector2 = (_target_enemy.global_position - global_position).normalized()
@@ -40,6 +46,9 @@ func _physics_process(delta: float) -> void:
 		elif velocity.x < 0:
 			animated_sprite.flip_h = true
 	else:
+		# Если текущая цель невалидна, сбрасываем таймер для немедленного поиска
+		_search_timer = ENEMY_SEARCH_INTERVAL
+		_target_enemy = null
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
