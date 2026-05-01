@@ -225,35 +225,35 @@ func _on_frame_changed() -> void:
 		enemies_in_area.clear()
 
 func _physics_process(delta: float) -> void:
-	# Используем ваши кастомные имена действий
-	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	
-	velocity = input_direction * SPEED
+        # Используем ваши кастомные имена действий
+        var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	if velocity.length_squared() > 0:
-		# Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
-		if velocity.x > 0:
-			animated_sprite.flip_h = false
-			attack_area.rotation = 0
-		elif velocity.x < 0:
-			animated_sprite.flip_h = true
-			attack_area.rotation = deg_to_rad(180)
-		
-		# Анимация ходьбы (не прерываем атаку)
-		if not is_attacking and animated_sprite.animation != "walk":
-			animated_sprite.play("walk")
-		
-		# Воспроизведение звука шагов с изменением высоты тона
-		if not is_attacking and Time.get_ticks_msec() / 1000.0 - last_footstep_time >= FOOTSTEP_INTERVAL:
-			last_footstep_time = Time.get_ticks_msec() / 1000.0
-			footstep.pitch_scale = randf_range(0.8, 1.2)
-			footstep.play()
-	else:
-		# Анимация покоя (не прерываем атаку)
-		if not is_attacking and animated_sprite.animation != "idle":
-			animated_sprite.play("idle")
+        velocity = input_direction * SPEED
 
-	move_and_slide()
+        if velocity.length_squared() > 0:
+                # Поворот спрайта и зоны атаки в реальном времени в зависимости от направления движения
+                if velocity.x > 0:
+                        animated_sprite.flip_h = false
+                        attack_area.rotation = 0
+                elif velocity.x < 0:
+                        animated_sprite.flip_h = true
+                        attack_area.rotation = deg_to_rad(180)
+
+                # Анимация ходьбы (не прерываем атаку)
+                if not is_attacking and animated_sprite.animation != "walk":
+                        animated_sprite.play("walk")
+
+                # Воспроизведение звука шагов с изменением высоты тона
+                if not is_attacking and Time.get_ticks_msec() / 1000.0 - last_footstep_time >= FOOTSTEP_INTERVAL:
+                        last_footstep_time = Time.get_ticks_msec() / 1000.0
+                        footstep.pitch_scale = randf_range(0.8, 1.2)
+                        footstep.play()
+        else:
+                # Анимация покоя (не прерываем атаку)
+                if not is_attacking and animated_sprite.animation != "idle":
+                        animated_sprite.play("idle")
+
+        move_and_slide()
 
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
