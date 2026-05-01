@@ -228,16 +228,17 @@ height = 28.0
 collision_layer = 2
 script = ExtResource("1_g2els")
 
-[node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"attack"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_gee14")
-animation = &"attack"
 autoplay = "idle"
+
+[node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.482353)
+sprite_frames = SubResource("SpriteFrames_gee14")
+animation = &"swordUP"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -285,5 +286,5 @@ polygon = PackedVector2Array(81, 39, 88, -3, 70, -48, 49, -68, 24, -73, 24, 42)
 disabled = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_entered" from="AttackAreaUP" to="." method="_on_attack_area_up_body_entered"]
 [connection signal="timeout" from="InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="body_entered" from="AttackAreaUP" to="." method="_on_attack_area_up_body_entered"]
