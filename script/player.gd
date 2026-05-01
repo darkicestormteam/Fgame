@@ -6,7 +6,8 @@ const SPEED = 300.0
 @onready var animated_sprite_swordup: AnimatedSprite2D = $AnimatedSprite2DSwordUP
 @onready var attack_area: Area2D = $AttackArea
 @onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
-@onready var swordup_collision: CollisionPolygon2D = $AttackArea/SwordUP
+@onready var swordup_collision: CollisionPolygon2D = $AttackAreaUP/SwordUP
+@onready var attack_area_up: Area2D = $AttackAreaUP
 var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
@@ -196,7 +197,7 @@ func _on_second_attack_delay_timeout() -> void:
 		attack_area.monitoring = false
 	
 	# Устанавливаем направление для второй атаки (противоположное направлению игрока)
-	attack_area.rotation = second_attack_direction
+	attack_area_up.rotation = second_attack_direction
 	
 	# Отключаем коллизию SwordUP перед запуском анимации (включится на 3-м кадре)
 	swordup_collision.disabled = true
@@ -227,6 +228,7 @@ func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 2:
 		# Включаем коллизию SwordUP на 3-м кадре (индекс 2)
 		swordup_collision.disabled = false
+		attack_area_up.monitoring = true
 	elif animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
 		# Звуковой эффект и урон для второй атаки swordUP
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
@@ -269,6 +271,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		if body not in enemies_in_area:
+			enemies_in_area.append(body)
+
+func _on_attack_area_up_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
