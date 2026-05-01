@@ -154,9 +154,12 @@ func _on_attack_timer_timeout() -> void:
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
-		if is_second_attack_active:
-			# Завершение второй атаки (swordUP) - но это обрабатывается в animated_sprite_swordup
-			pass
+		# Завершение первой атаки (обычной)
+		# Если активирована вторая атака swordUP, не сбрасываем is_attacking здесь
+		if not is_second_attack_active:
+			is_attacking = false
+			attack_area.monitoring = false
+			enemies_in_area.clear()
 		return
 	
 	if animated_sprite.animation == "splash":
