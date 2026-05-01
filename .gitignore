@@ -1,24 +1,48 @@
 ```
 # Godot-specific ignores
 *.import
-*.uid
-export_presets.cfg
-.autoload_singleton.gdns
-.autoload_singleton.cs
-.scene
-.res
-.gdignore
-.editor/
-# Build artifacts
+*.pid
+.project
+.user
+.godot/
+
+# Compiled and build artifacts
 *.so
+*.dylib
 *.dll
 *.exe
-*.dylib
-*.bin
+*.o
+*.obj
+*.out
+
 # Dependencies
-addons/
-# Logs
+node_modules/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+target/
+.gradle/
+
+# Logs and temp files
 *.log
-# Temp files
 *.tmp
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
 ```
