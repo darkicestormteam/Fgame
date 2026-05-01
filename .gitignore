@@ -1,11 +1,24 @@
 ```
 # Godot-specific ignores
 *.import
-*.remap
-.project.godot
-*.tscn.meta
-*.tres.meta
-*.gd.meta
-*.import
+*.uid
 export_presets.cfg
+.autoload_singleton.gdns
+.autoload_singleton.cs
+.scene
+.res
+.gdignore
+.editor/
+# Build artifacts
+*.so
+*.dll
+*.exe
+*.dylib
+*.bin
+# Dependencies
+addons/
+# Logs
+*.log
+# Temp files
+*.tmp
 ```
