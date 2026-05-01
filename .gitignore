@@ -1,48 +1,9 @@
 ```
 # Godot-specific ignores
 *.import
-*.pid
+*.remap
 .project
-.user
+.editor
+.autoload.gd
 .godot/
-
-# Compiled and build artifacts
-*.so
-*.dylib
-*.dll
-*.exe
-*.o
-*.obj
-*.out
-
-# Dependencies
-node_modules/
-venv/
-.venv/
-__pycache__/
-.mypy_cache/
-.pytest_cache/
-target/
-.gradle/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# System files
-.DS_Store
-Thumbs.db
 ```
