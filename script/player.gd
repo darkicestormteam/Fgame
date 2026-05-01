@@ -194,7 +194,7 @@ func _on_second_attack_delay_timeout() -> void:
 	animated_sprite_swordup.visible = true
 	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
 	animated_sprite_swordup.play("swordUP")
-	attack_area.monitoring = true
+	# Коллизия включится на 3-м кадре анимации в _on_swordup_frame_changed
 
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
@@ -214,6 +214,8 @@ func _on_frame_changed() -> void:
 
 func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
+		# Включаем коллизию на 3-м кадре
+		attack_area.monitoring = true
 		# Звуковой эффект и урон для второй атаки swordUP
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
