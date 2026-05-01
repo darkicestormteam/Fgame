@@ -3,7 +3,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var animated_sprite_swordup: AnimatedSprite2D = $AnimatedSprite2DSwordUP
+@onready var sword_pivot: Node2D = $SwordPivot  # Ссылка на пивот
+@onready var animated_sprite_swordup: AnimatedSprite2D = $SwordPivot/AnimatedSprite2DSwordUP
 @onready var attack_area: Area2D = $AttackArea
 @onready var splash_collision: CollisionPolygon2D = $AttackArea/Splash
 @onready var swordup_collision: CollisionPolygon2D = $AttackAreaUP/SwordUP
@@ -21,7 +22,7 @@ const FOOTSTEP_INTERVAL: float = 0.4
 # Улучшение атаки SwordUP
 var sword_up_unlocked: bool = false
 var is_second_attack_active: bool = false
-var second_attack_direction: float = 0.0  # Направление второй атаки (в радианах)
+var second_attack_direction: float = 0.0
 var original_facing_right: bool = true
 var second_attack_timer: Timer = null
 
@@ -59,17 +60,12 @@ func _ready() -> void:
 	await get_tree().process_frame
 	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
 	
-	# Создаем таймер для второй атаки swordUP
 	second_attack_timer = Timer.new()
 	second_attack_timer.one_shot = true
 	second_attack_timer.timeout.connect(_on_second_attack_delay_timeout)
 	add_child(second_attack_timer)
 
 func _process(_delta: float) -> void:
-	# Синхронизируем позицию второго спрайта с основным
-	if animated_sprite_swordup:
-		animated_sprite_swordup.global_position = global_position
-	
 	if is_invincible:
 		var current_time = Time.get_ticks_msec() / 1000.0
 		if fmod(current_time, 0.2) < 0.1:
@@ -80,7 +76,6 @@ func _process(_delta: float) -> void:
 			animated_sprite_swordup.visible = false
 	else:
 		animated_sprite.visible = true
-		# Не скрываем второй спрайт здесь, он управляется отдельно
 
 func _on_invincibility_timer_timeout() -> void:
 	is_invincible = false
@@ -148,17 +143,12 @@ func _on_attack_timer_timeout() -> void:
 		animated_sprite.play("attack")
 		attack_area.monitoring = true
 		
-		# Если SwordUP разблокирован, планируем вторую атаку
 		if sword_up_unlocked:
-			# Сохраняем направление игрока для второй атаки (противоположное)
 			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			# Запускаем таймер задержки для второй атаки (0.15 сек)
 			second_attack_timer.start(0.15)
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
-		# Завершение первой атаки (обычной)
-		# Если активирована вторая атака swordUP, не сбрасываем is_attacking здесь
 		if not is_second_attack_active:
 			is_attacking = false
 			attack_area.monitoring = false
@@ -171,14 +161,12 @@ func _on_animation_finished() -> void:
 		enemies_in_area.clear()
 
 func _on_swordup_animation_finished() -> void:
-	# Завершение анимации swordUP
 	is_attacking = false
 	is_second_attack_active = false
 	swordup_collision.disabled = true
 	enemies_in_area.clear()
 	animated_sprite_swordup.visible = false
 	
-	# Возвращаем направление атаки в исходное состояние
 	if original_facing_right:
 		attack_area.rotation = 0
 		animated_sprite.flip_h = false
@@ -187,26 +175,19 @@ func _on_swordup_animation_finished() -> void:
 		animated_sprite.flip_h = true
 
 func _on_second_attack_delay_timeout() -> void:
-	# Запуск второй атаки swordUP с противоположной стороны
 	is_second_attack_active = true
 	
-	# Отключаем коллизию ПЕРВОЙ атаки, чтобы она не задевала врагов спереди
 	if attack_type == "splash":
 		splash_collision.disabled = true
 	else:
 		attack_area.monitoring = false
 	
-	# Устанавливаем направление для второй атаки (противоположное направлению игрока)
 	attack_area_up.rotation = second_attack_direction
-	
-	# Отключаем коллизию SwordUP перед запуском анимации (включится на 3-м кадре)
 	swordup_collision.disabled = true
 	
-	# Показываем второй спрайт и запускаем анимацию swordUP
 	animated_sprite_swordup.visible = true
 	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
 	animated_sprite_swordup.play("swordUP")
-	# Коллизия включится на 3-м кадре анимации в _on_swordup_frame_changed
 
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
@@ -226,11 +207,9 @@ func _on_frame_changed() -> void:
 
 func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 2:
-		# Включаем коллизию SwordUP на 3-м кадре (индекс 2)
 		swordup_collision.disabled = false
 		attack_area_up.monitoring = true
 	elif animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
-		# Звуковой эффект и урон для второй атаки swordUP
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
@@ -244,18 +223,32 @@ func _physics_process(_delta: float) -> void:
 	velocity = input_direction * SPEED
 	
 	if velocity.length_squared() > 0:
-		# ЛОГИКА ПОВОРОТА:
-		# 1. Если активировано комбо SwordUP (ожидание второй атаки или вторая атака идет) -> ЗАПРЕЩАЕМ поворот.
-		# 2. Если обычная атака или Splash -> РАЗРЕШАЕМ поворот (даже во время анимации).
 		var is_sword_up_combo_active: bool = (sword_up_unlocked and (not second_attack_timer.is_stopped() or is_second_attack_active))
 		
 		if not is_sword_up_combo_active:
 			if velocity.x > 0:
+				# Игрок смотрит ВПРАВО
 				animated_sprite.flip_h = false
 				attack_area.rotation = 0
+				animated_sprite_swordup.flip_h = false
+				
+				# ЛОГИКА ПОВОРОТА МЕЧА:
+				# Если в редакторе стоит -100 (слева), то при взгляде вправо оставляем -100.
+				# Мы берем абсолютное значение и ставим минус, чтобы было слева.
+				if sword_pivot:
+					sword_pivot.position.x = -abs(sword_pivot.position.x)
+					
 			elif velocity.x < 0:
+				# Игрок смотрит ВЛЕВО
 				animated_sprite.flip_h = true
 				attack_area.rotation = deg_to_rad(180)
+				animated_sprite_swordup.flip_h = true
+				
+				# ЛОГИКА ПОВОРОТА МЕЧА:
+				# При взгляде влево меч должен быть справа (спина).
+				# Делаем значение положительным.
+				if sword_pivot:
+					sword_pivot.position.x = abs(sword_pivot.position.x)
 		
 		if not is_attacking and animated_sprite.animation != "walk":
 			animated_sprite.play("walk")

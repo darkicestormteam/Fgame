@@ -234,11 +234,6 @@ sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"attack"
 autoplay = "idle"
 
-[node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.482353)
-sprite_frames = SubResource("SpriteFrames_gee14")
-animation = &"swordUP"
-
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 
@@ -274,6 +269,14 @@ one_shot = true
 [node name="HPbar" parent="." instance=ExtResource("5_qlg0r")]
 scale = Vector2(2, 2)
 transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="SwordPivot" type="Node2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="SwordPivot"]
+modulate = Color(1, 1, 1, 0.482353)
+sprite_frames = SubResource("SpriteFrames_gee14")
+animation = &"swordUP"
 
 [node name="AttackAreaUP" type="Area2D" parent="."]
 collision_mask = 4
