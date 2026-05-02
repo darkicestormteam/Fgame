@@ -203,7 +203,7 @@ func _on_frame_changed() -> void:
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy) and enemy.has_method("knockback"):
 				var knockback_direction = (enemy.global_position - global_position).normalized()
-				enemy.knockback(knockback_direction, 40)
+				enemy.knockback(knockback_direction, 300)
 		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
