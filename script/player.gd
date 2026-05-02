@@ -202,7 +202,10 @@ func _on_frame_changed() -> void:
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
-				enemy.queue_free()
+				var push_direction = (enemy.global_position - global_position).normalized()
+				if push_direction == Vector2.ZERO:
+					push_direction = Vector2.RIGHT if not animated_sprite.flip_h else Vector2.LEFT
+				enemy.push_back(push_direction, 40)
 		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
