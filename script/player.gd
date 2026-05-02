@@ -265,12 +265,12 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
 func _on_attack_area_up_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
