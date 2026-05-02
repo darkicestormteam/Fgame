@@ -11,6 +11,9 @@ func _ready() -> void:
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
 
+func knockback(direction: Vector2, distance: float) -> void:
+	velocity = direction * distance
+
 func _physics_process(delta: float) -> void:
 	if _player == null:
 		velocity = Vector2.ZERO
