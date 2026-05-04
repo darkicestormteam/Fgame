@@ -184,6 +184,7 @@ func _on_second_attack_delay_timeout() -> void:
 	
 	attack_area_up.rotation = second_attack_direction
 	swordup_collision.disabled = true
+	attack_area_up.monitoring = false  # Явно выключаем мониторинг до нужного кадра
 	
 	animated_sprite_swordup.visible = true
 	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
