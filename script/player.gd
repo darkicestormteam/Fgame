@@ -144,20 +144,20 @@ func _on_attack_timer_timeout() -> void:
 		animated_sprite.play("attack")
 		attack_area.monitoring = true
 		
+		# Если swordUP разблокирован, запускаем вторую атаку одновременно с основной
 		if sword_up_unlocked:
 			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			second_attack_timer.start(0.15)
+			_on_second_attack_delay_timeout()
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		# Если swordup ещё играет, не завершаем атаку полностью
 		if is_swordup_playing:
 			return
-		# Иначе завершаем обычную атаку
-		if not is_second_attack_active:
-			is_attacking = false
-			attack_area.monitoring = false
-			enemies_in_area.clear()
+		# Завершаем атаку (основную или комбо)
+		is_attacking = false
+		attack_area.monitoring = false
+		enemies_in_area.clear()
 		return
 	
 	if animated_sprite.animation == "splash":
@@ -166,7 +166,6 @@ func _on_animation_finished() -> void:
 		enemies_in_area.clear()
 
 func _on_swordup_animation_finished() -> void:
-	is_attacking = false
 	is_second_attack_active = false
 	is_swordup_playing = false
 	swordup_collision.disabled = true
@@ -184,24 +183,12 @@ func _on_second_attack_delay_timeout() -> void:
 	is_second_attack_active = true
 	is_swordup_playing = true
 	
-	if attack_type == "splash":
-		splash_collision.disabled = true
-	else:
-		attack_area.monitoring = false
-	
 	attack_area_up.rotation = second_attack_direction
 	swordup_collision.disabled = true
 	
 	animated_sprite_swordup.visible = true
 	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
 	animated_sprite_swordup.play("swordUP")
-	
-	# Запускаем основную анимацию атаки одновременно с swordup
-	if not is_attacking:
-		is_attacking = true
-		original_facing_right = not animated_sprite.flip_h
-		animated_sprite.play("attack")
-		attack_area.monitoring = true
 
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
