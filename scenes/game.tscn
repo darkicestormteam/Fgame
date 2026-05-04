@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=16 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://b7hyauted5gjs" path="res://scenes/spellmenu.tscn" id="6_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://d15dwj5s4a5gl" path="res://scenes/TimerGame.tscn" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://yr0bthw6dsrr" path="res://scenes/enemy_spawner.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://dwu0xsxse3rv0" path="res://scenes/sheep_spawner.tscn" id="8_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cxebh8ui2vi8y" path="res://scenes/worldmusic.tscn" id="8_gee14"]
 [ext_resource type="Script" uid="uid://mgfdnbyv4fjh" path="res://script/game.gd" id="9_game"]
@@ -279,9 +278,6 @@ volume_db = -15.0
 position = Vector2(821, 1610)
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
-
-[node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
-grass_layer = NodePath("../TileMap/Grass")
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")
