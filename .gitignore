@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The only modified file is `script/enemy_spawner.gd`, which appears to be a Godot script file (source code) and should not be ignored.
+Nothing should be ignored based on the provided file changes, as they only include source code files (.gd files) without any build artifacts, dependencies, or temporary files.

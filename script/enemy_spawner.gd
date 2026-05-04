@@ -13,9 +13,9 @@ extends Node2D
 # Используется по умолчанию, если не указано индивидуальное время для волны
 @export var spawner_lifetime: float = 0.0
 
-# Конфигурация волн: каждая волна имеет время активации и индивидуальное время жизни
-# Пример: [{"activation_time": 60.0, "lifetime": 30.0}, {"activation_time": 120.0, "lifetime": 45.0}]
-@export var waves: Array[Dictionary] = []
+# Конфигурация волн: массив ресурсов WaveConfig
+# Каждая волна имеет время активации и индивидуальное время жизни
+@export var waves: Array[WaveConfig] = []
 
 var _spawn_timer: Timer
 var _lifetime_timer: Timer
@@ -39,8 +39,10 @@ func _ready() -> void:
 	
 	# Создаем таймеры активации для каждой волны
 	for wave in waves:
-		var activation_time = wave.get("activation_time", 0.0)
-		var lifetime = wave.get("lifetime", spawner_lifetime)
+		if wave == null:
+			continue
+		var activation_time = wave.activation_time
+		var lifetime = wave.lifetime if wave.lifetime > 0 else spawner_lifetime
 		
 		if activation_time <= 0:
 			continue
