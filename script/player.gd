@@ -183,9 +183,10 @@ func _on_second_attack_delay_timeout() -> void:
 		attack_area.monitoring = false
 	
 	attack_area_up.rotation = second_attack_direction
-	# Не отключаем swordup_collision здесь - он уже отключен по умолчанию из _ready
-	# Просто убеждаемся, что monitoring выключен до нужного кадра
+	
+	# Явно выключаем monitoring и коллизию перед запуском, чтобы сбросить состояние
 	attack_area_up.monitoring = false
+	swordup_collision.disabled = true
 	
 	animated_sprite_swordup.visible = true
 	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
