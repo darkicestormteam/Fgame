@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
-const SPEED = 50.0
+@export var speed: float = 50.0
+@export var health: int = 3
+@export var knockback_resistance: float = 0.0
+@export var score_value: int = 10
 
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -14,9 +17,23 @@ func _ready() -> void:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
 
 func knockback(direction: Vector2, distance: float) -> void:
-	velocity = direction * distance
+	# Учитываем сопротивление отталкиванию
+	var actual_distance = distance * (1.0 - knockback_resistance)
+	if actual_distance <= 0:
+		return
+	velocity = direction * actual_distance
 	is_knockedback = true
 	knockback_timer = 0.15  # Длительность отталкивания в секундах
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0:
+		die()
+
+func die() -> void:
+	# Добавляем очки игроку (если есть система очков)
+	# Можно расширить позже
+	queue_free()
 
 func _physics_process(delta: float) -> void:
 	if is_knockedback:
@@ -34,7 +51,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction: Vector2 = (_player.global_position - global_position).normalized()
 	
-	velocity = direction * SPEED
+	velocity = direction * speed
 	
 	if velocity.x > 0:
 		animated_sprite.flip_h = false
