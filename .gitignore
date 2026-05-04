@@ -1,12 +1,1 @@
-```
-# Godot-specific ignores
-*.import
-*.remap
-.project
-.ios/
-.android/
-.windows/
-.linux/
-.macos/
-export_presets.cfg
-```
+Nothing should be ignored since only source code files (.gd files) are in the change list.

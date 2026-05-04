@@ -1,19 +1,12 @@
 extends Node2D
 
-## Класс для описания волны врагов
-class EnemyWave:
-	var spawn_time: float = 0.0  # Время появления в секундах
-	var enemy_scene: PackedScene  # Сцена врага
-	var spawn_count: int = 1  # Количество врагов в волне
-	var spawn_interval: float = 1.0  # Интервал между спавном врагов в волне
-
 @export_category("Настройки спавна")
 @export var player_node: NodePath  # Путь к игроку
 @export var spawn_radius: float = 400.0  # Радиус спавна вокруг игрока
 @export var min_spawn_distance: float = 100.0  # Минимальная дистанция от игрока
 
 @export_category("Волны врагов")
-@export var waves: Array[EnemyWave] = []  # Массив волн для настройки в инспекторе
+@export var waves: Array[WaveConfig] = []  # Массив волн для настройки в инспекторе
 
 var _player: Node2D = null
 var _game_timer: float = 0.0  # Общее время игры
@@ -59,7 +52,7 @@ func _process(delta: float) -> void:
 				_active_wave_timers[i] += delta
 				if _active_wave_timers[i] >= wave.spawn_interval:
 					# Проверяем, сколько врагов уже заспавнено
-					var spawned_count = _count_children_by_scene(wave.enemy_scene)
+					var spawned_count = _count_enemies_by_scene(wave.enemy_scene)
 					if spawned_count < wave.spawn_count:
 						_spawn_enemy(wave.enemy_scene)
 					_active_wave_timers[i] = 0.0
@@ -105,7 +98,7 @@ func _get_random_spawn_position() -> Vector2:
 	# Вычисляем позицию относительно игрока
 	return _player.global_position + Vector2(cos(angle), sin(angle)) * distance
 
-func _count_children_by_scene(scene: PackedScene) -> int:
+func _count_enemies_by_scene(scene: PackedScene) -> int:
 	var count = 0
 	for child in get_parent().get_children():
 		# Проверяем, является ли ребенок экземпляром этой сцены
@@ -115,7 +108,7 @@ func _count_children_by_scene(scene: PackedScene) -> int:
 
 # Метод для добавления волны программно (если нужно)
 func add_wave(spawn_time_seconds: float, enemy_scene: PackedScene, count: int = 1, interval: float = 1.0) -> void:
-	var wave = EnemyWave.new()
+	var wave = WaveConfig.new()
 	wave.spawn_time = spawn_time_seconds
 	wave.enemy_scene = enemy_scene
 	wave.spawn_count = count
