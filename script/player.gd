@@ -145,7 +145,7 @@ func _on_attack_timer_timeout() -> void:
 		
 		if sword_up_unlocked:
 			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			second_attack_timer.start(0.15)
+			second_attack_timer.start(0.1)
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
