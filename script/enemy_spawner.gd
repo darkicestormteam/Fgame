@@ -10,7 +10,9 @@ extends Node2D
 @export var min_distance_from_camera: float = 100.0  # Минимальное расстояние от края камеры
 
 # Время жизни спавнера в секундах после активации (0 = бесконечно до ручной деактивации)
+# Если задано несколько значений, каждое соответствует волне из activation_times
 @export var spawner_lifetime: float = 0.0
+@export var wave_lifetimes: Array[float] = []  # Отдельное время жизни для каждой волны
 
 # Временные метки для активации спавна (в секундах от начала игры)
 # Например: [60, 120] - спавнер включится на 60-й и 120-й секунде
@@ -55,7 +57,13 @@ func _ready() -> void:
 # Метод вызывается при наступлении времени активации
 func _on_activation_timer_timeout(activation_time: float) -> void:
 	print("[EnemySpawner] Активация спавнера на ", activation_time, " секунде игры")
-	activate_spawner(spawner_lifetime)
+	# Находим индекс волны для получения соответствующего времени жизни
+	var wave_index = activation_times.find(activation_time)
+	var lifetime_for_wave = 0.0
+	if wave_index >= 0 and wave_index < wave_lifetimes.size():
+		lifetime_for_wave = wave_lifetimes[wave_index]
+		print("[EnemySpawner] Используется время жизни для волны ", wave_index, ": ", lifetime_for_wave, " сек")
+	activate_spawner(lifetime_for_wave)
 
 # Метод для ручной активации спавнера (если нужно включать/выключать программно)
 func activate_spawner(lifetime: float = 0.0) -> void:
