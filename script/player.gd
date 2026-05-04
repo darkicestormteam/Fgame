@@ -22,9 +22,7 @@ const FOOTSTEP_INTERVAL: float = 0.4
 # Улучшение атаки SwordUP
 var sword_up_unlocked: bool = false
 var is_second_attack_active: bool = false
-var second_attack_direction: float = 0.0
 var original_facing_right: bool = true
-var second_attack_timer: Timer = null
 var is_swordup_playing: bool = false  # Флаг для отслеживания воспроизведения swordUP
 
 # Система жизней
@@ -60,11 +58,6 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
-	
-	second_attack_timer = Timer.new()
-	second_attack_timer.one_shot = true
-	second_attack_timer.timeout.connect(_on_second_attack_delay_timeout)
-	add_child(second_attack_timer)
 
 func _process(_delta: float) -> void:
 	if is_invincible:
@@ -137,17 +130,27 @@ func _on_splash_attack_timer_timeout() -> void:
 		attack_area.monitoring = true
 
 func _on_attack_timer_timeout() -> void:
-	if not is_attacking and not is_second_attack_active and attack_type == "normal":
+	if not is_attacking and attack_type == "normal":
 		is_attacking = true
-		is_second_attack_active = false
 		original_facing_right = not animated_sprite.flip_h
 		animated_sprite.play("attack")
 		attack_area.monitoring = true
 		
 		# Если swordUP разблокирован, запускаем вторую атаку одновременно с основной
 		if sword_up_unlocked:
-			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			_on_second_attack_delay_timeout()
+			_start_second_attack()
+
+func _start_second_attack() -> void:
+	is_second_attack_active = true
+	is_swordup_playing = true
+	
+	var second_attack_direction_rad: float = deg_to_rad(180) if original_facing_right else 0.0
+	attack_area_up.rotation = second_attack_direction_rad
+	swordup_collision.disabled = true
+	
+	animated_sprite_swordup.visible = true
+	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
+	animated_sprite_swordup.play("swordUP")
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
@@ -169,8 +172,13 @@ func _on_swordup_animation_finished() -> void:
 	is_second_attack_active = false
 	is_swordup_playing = false
 	swordup_collision.disabled = true
-	enemies_in_area.clear()
 	animated_sprite_swordup.visible = false
+	
+	# Если основная атака уже закончилась, завершаем всю комбо-атаку
+	if not animated_sprite.is_playing():
+		is_attacking = false
+		attack_area.monitoring = false
+		enemies_in_area.clear()
 	
 	if original_facing_right:
 		attack_area.rotation = 0
@@ -178,17 +186,6 @@ func _on_swordup_animation_finished() -> void:
 	else:
 		attack_area.rotation = deg_to_rad(180)
 		animated_sprite.flip_h = true
-
-func _on_second_attack_delay_timeout() -> void:
-	is_second_attack_active = true
-	is_swordup_playing = true
-	
-	attack_area_up.rotation = second_attack_direction
-	swordup_collision.disabled = true
-	
-	animated_sprite_swordup.visible = true
-	animated_sprite_swordup.flip_h = not animated_sprite.flip_h
-	animated_sprite_swordup.play("swordUP")
 
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack" and animated_sprite.frame == 3:
@@ -226,7 +223,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = input_direction * SPEED
 	
 	if velocity.length_squared() > 0:
-		var is_sword_up_combo_active: bool = (sword_up_unlocked and (not second_attack_timer.is_stopped() or is_second_attack_active))
+		var is_sword_up_combo_active: bool = (sword_up_unlocked and is_second_attack_active)
 		
 		if not is_sword_up_combo_active:
 			if velocity.x > 0:
