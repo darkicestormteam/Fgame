@@ -10,12 +10,11 @@ extends Node2D
 @export var min_distance_from_camera: float = 100.0  # Минимальное расстояние от края камеры
 
 # Время жизни спавнера в секундах после активации (0 = бесконечно до ручной деактивации)
-# Используется по умолчанию, если не указано индивидуальное время для волны
 @export var spawner_lifetime: float = 0.0
 
-# Конфигурация волн: массив ресурсов WaveConfig
-# Каждая волна имеет время активации и индивидуальное время жизни
-@export var waves: Array[WaveConfig] = []
+# Временные метки для активации спавна (в секундах от начала игры)
+# Например: [60, 120] - спавнер включится на 60-й и 120-й секунде
+@export var activation_times: Array[float] = []
 
 var _spawn_timer: Timer
 var _lifetime_timer: Timer
@@ -37,34 +36,26 @@ func _ready() -> void:
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
 	
-	# Создаем таймеры активации для каждой волны
-	for wave in waves:
-		if wave == null:
-			continue
-		var activation_time = wave.activation_time
-		var lifetime = wave.lifetime if wave.lifetime > 0 else spawner_lifetime
-		
-		if activation_time <= 0:
-			continue
-			
+	# Создаем таймеры активации для каждого указанного времени
+	for activation_time in activation_times:
 		var activation_timer = Timer.new()
 		activation_timer.wait_time = activation_time
 		activation_timer.one_shot = true
-		activation_timer.timeout.connect(_on_activation_timer_timeout.bind(activation_time, lifetime))
+		activation_timer.timeout.connect(_on_activation_timer_timeout.bind(activation_time))
 		add_child(activation_timer)
 		_activation_timers.append(activation_timer)
 		activation_timer.start()
-		print("[EnemySpawner] Запланирована волна на ", activation_time, " секунде с длительностью ", lifetime, " секунд")
+		print("[EnemySpawner] Запланирована активация на ", activation_time, " секунде")
 	
-	# Если нет волн, используем старое поведение с spawner_lifetime
-	if waves.is_empty():
+	# Если нет времен активации, запускаем спавнер сразу
+	if activation_times.is_empty():
 		activate_spawner(spawner_lifetime)
-		print("[EnemySpawner] Спавнер активирован сразу (нет настроенных волн)")
+		print("[EnemySpawner] Спавнер активирован сразу (нет времен активации)")
 
-# Метод вызывается при наступлении времени активации волны
-func _on_activation_timer_timeout(activation_time: float, lifetime: float) -> void:
-	print("[EnemySpawner] Активация спавнера на ", activation_time, " секунде игры с длительностью ", lifetime, " секунд")
-	activate_spawner(lifetime)
+# Метод вызывается при наступлении времени активации
+func _on_activation_timer_timeout(activation_time: float) -> void:
+	print("[EnemySpawner] Активация спавнера на ", activation_time, " секунде игры")
+	activate_spawner(spawner_lifetime)
 
 # Метод для ручной активации спавнера (если нужно включать/выключать программно)
 func activate_spawner(lifetime: float = 0.0) -> void:

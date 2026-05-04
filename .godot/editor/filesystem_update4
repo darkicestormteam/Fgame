@@ -1,6 +1,6 @@
 res://scenes/game.tscn
 res://script/player.gd
-res://scenes/tree.tscn
+res://script/enemy_spawner.gd
 res://scenes/enemy_spawner.tscn
 res://scenes/HP_bar.tscn
 res://scenes/player.tscn
@@ -10,4 +10,4 @@ res://scenes/sheep_spawner.tscn
 res://scenes/mainmenu.tscn
 res://scenes/spellmenu.tscn
 res://scenes/game_over.tscn
-res://script/enemy.gd
+res://scenes/enemy/enemy1.tscn
