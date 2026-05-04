@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dckydmu3yggd4"]
+
+[ext_resource type="Script" uid="uid://t6gej177uoob" path="res://script/spawn_wave.gd" id="1_bj8mv"]
+
+[resource]
+script = ExtResource("1_bj8mv")
