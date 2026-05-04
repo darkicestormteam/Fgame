@@ -1,48 +1,34 @@
 ```
-# Editor/IDE files
-.vscode/
-*.swp
-*.swo
-*.tmp
+# Godot-specific ignores
+*.import
+*.remap
+.project.godot
+.editor.settings
+.godot/
 
-# Logs
-*.log
-
-# Environment files
-.env
-.env.local
-*.env.*
-
-# Python specific
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-
-# Build artifacts
-build/
-dist/
-*.egg-info/
+# Compiled and build artifacts
+*.import
+*.remap
 
 # Dependencies
-venv/
-.venv/
-.env/
-node_modules/
+res://.godot/
 
-# System files
+# Logs and temp files
+*.log
+*.tmp
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
-
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Cache directories
-.mypy_cache/
-.pytest_cache/
-.cache/
 ```

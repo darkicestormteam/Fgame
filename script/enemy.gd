@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-const SPEED = 50.0
+@export var speed: float = 50.0
+@export var health: int = 1
 
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 	var direction: Vector2 = (_player.global_position - global_position).normalized()
 	
-	velocity = direction * SPEED
+	velocity = direction * speed
 	
 	if velocity.x > 0:
 		animated_sprite.flip_h = false
