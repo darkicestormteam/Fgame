@@ -1,12 +1,10 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene
-@export var max_enemies: int = 30
-@export var spawn_interval: float = 0.5
+@export var waves: Array[SpawnWave]  # Массив волн врагов
 @export var grass_layer: TileMapLayer
-@export var min_distance_from_camera: float = 100.0  # Минимальное расстояние от края камеры
+@export var min_distance_from_camera: float = 100.0
 
-var _spawn_timer: Timer
+var _game_timer: float = 0.0
 var _valid_spawn_positions: Array[Vector2] = []
 
 func _ready() -> void:
@@ -16,11 +14,9 @@ func _ready() -> void:
 	
 	_find_valid_spawn_positions()
 	
-	_spawn_timer = Timer.new()
-	_spawn_timer.wait_time = spawn_interval
-	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
-	add_child(_spawn_timer)
-	_spawn_timer.start()
+	# Инициализируем все волны
+	for wave in waves:
+		wave.reset()
 
 func _find_valid_spawn_positions() -> void:
 	_valid_spawn_positions.clear()
@@ -59,14 +55,32 @@ func _is_position_outside_camera(position: Vector2) -> bool:
 	
 	return false
 
-func _on_spawn_timer_timeout() -> void:
-	var current_enemies = get_tree().get_nodes_in_group("enemy")
+func _process(delta: float) -> void:
+	_game_timer += delta
 	
-	if current_enemies.size() >= max_enemies:
+	# Обрабатываем каждую волну
+	for wave in waves:
+		# Проверяем, настало ли время для этой волны
+		if _game_timer >= wave.start_time and not wave.is_wave_finished():
+			_update_wave(wave, delta)
+
+func _update_wave(wave: SpawnWave, delta: float) -> void:
+	# Проверяем количество текущих врагов этой волны на сцене
+	var current_enemies = get_tree().get_nodes_in_group("enemy")
+	# Здесь можно добавить фильтрацию по типу врага, если нужно
+	
+	if current_enemies.size() >= wave.max_enemies:
 		return
 	
-	if enemy_scene == null:
-		print("Ошибка: enemy_scene не назначен в инспекторе!")
+	# Обновляем таймер спавна
+	wave._spawn_timer += delta
+	if wave._spawn_timer >= wave.spawn_interval:
+		wave._spawn_timer = 0.0
+		_spawn_enemy(wave)
+
+func _spawn_enemy(wave: SpawnWave) -> void:
+	if wave.enemy_scene == null:
+		print("Ошибка: в волне не назначена сцена врага!")
 		return
 	
 	if _valid_spawn_positions.is_empty():
@@ -93,6 +107,8 @@ func _on_spawn_timer_timeout() -> void:
 		var random_index = randi() % _valid_spawn_positions.size()
 		spawn_position = grass_layer.to_global(_valid_spawn_positions[random_index])
 	
-	var enemy = enemy_scene.instantiate()
+	var enemy = wave.enemy_scene.instantiate()
 	enemy.global_position = spawn_position
 	get_parent().add_child(enemy)
+	
+	wave._spawned_count += 1
