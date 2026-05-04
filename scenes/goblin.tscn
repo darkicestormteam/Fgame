@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://duuwk8gpgcuaj"]
+
+[ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_tjgje"]
+
+[node name="Enemy" instance=ExtResource("1_tjgje")]
+
+[editable path="KillZone"]

@@ -1,0 +1,17 @@
+res://script/player.gd
+res://base_enemy.tscn
+res://scenes/game.tscn
+res://scenes/tree.tscn
+res://scenes/enemy_spawner.tscn
+res://scenes/HP_bar.tscn
+res://scenes/player.tscn
+res://scenes/enemy.tscn
+res://scenes/sheep.tscn
+res://scenes/sheep_spawner.tscn
+res://scenes/mainmenu.tscn
+res://scenes/spellmenu.tscn
+res://scenes/game_over.tscn
+res://script/enemy.gd
+res://scenes/goblin.tscn
+res://script/spawn_wave.gd
+res://SpawnWave.tres
