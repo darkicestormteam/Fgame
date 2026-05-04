@@ -4,14 +4,29 @@ const SPEED = 50.0
 
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+var is_knockedback: bool = false
+var knockback_timer: float = 0.0
 
 func _ready() -> void:
-	add_to_group("enemy")
+	# Исправлено: "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd
+	add_to_group("Enemy")
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
 
+func knockback(direction: Vector2, distance: float) -> void:
+	velocity = direction * distance
+	is_knockedback = true
+	knockback_timer = 0.15  # Длительность отталкивания в секундах
+
 func _physics_process(delta: float) -> void:
+	if is_knockedback:
+		knockback_timer -= delta
+		if knockback_timer <= 0.0:
+			is_knockedback = false
+		move_and_slide()
+		return
+	
 	if _player == null:
 		velocity = Vector2.ZERO
 		if animated_sprite.animation != "idle":
@@ -35,6 +50,3 @@ func _physics_process(delta: float) -> void:
 	else:
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
-
-func knockback(push_vector: Vector2) -> void:
-	global_position += push_vector

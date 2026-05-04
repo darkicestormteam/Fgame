@@ -145,7 +145,7 @@ func _on_attack_timer_timeout() -> void:
 		
 		if sword_up_unlocked:
 			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			second_attack_timer.start(0.1)
+			second_attack_timer.start(0.15)
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
@@ -200,10 +200,11 @@ func _on_frame_changed() -> void:
 	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
-		var attack_dir = get_attack_direction()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy) and enemy.has_method("knockback"):
-				enemy.knockback(attack_dir * 40)
+				var knockback_direction = (enemy.global_position - global_position).normalized()
+				# ИЗМЕНИТЬ ДАЛЬНОСТЬ ОТТАЛКИВАНИЯ ЗДЕСЬ (вместо 300 поставьте свое число)
+				enemy.knockback(knockback_direction, 300)
 		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
@@ -265,22 +266,15 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
 func _on_attack_area_up_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body in enemies_in_area:
 		enemies_in_area.erase(body)
-
-func get_attack_direction() -> Vector2:
-	var facing_right = not animated_sprite.flip_h
-	if facing_right:
-		return Vector2.RIGHT
-	else:
-		return Vector2.LEFT
