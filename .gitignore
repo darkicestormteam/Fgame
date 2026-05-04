@@ -2,33 +2,7 @@
 # Godot-specific ignores
 *.import
 *.remap
-.project.godot
-.editor.settings
-.godot/
-
-# Compiled and build artifacts
-*.import
-*.remap
-
-# Dependencies
-res://.godot/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
-.env
-.env.local
-.env.*
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
+export_presets.cfg
+.user
+.scons_cache/
 ```
