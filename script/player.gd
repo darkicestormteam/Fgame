@@ -145,7 +145,7 @@ func _on_attack_timer_timeout() -> void:
 		
 		if sword_up_unlocked:
 			second_attack_direction = deg_to_rad(180) if original_facing_right else 0.0
-			second_attack_timer.start(0.15)
+			second_attack_timer.start(0.01)
 
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
@@ -201,15 +201,17 @@ func _on_frame_changed() -> void:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
-			if is_instance_valid(enemy):
-				enemy.queue_free()
+			if is_instance_valid(enemy) and enemy.has_method("knockback"):
+				var knockback_direction = (enemy.global_position - global_position).normalized()
+				# ИЗМЕНИТЬ ДАЛЬНОСТЬ ОТТАЛКИВАНИЯ ЗДЕСЬ (вместо 300 поставьте свое число)
+				enemy.knockback(knockback_direction, 300)
 		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 2:
 		swordup_collision.disabled = false
 		attack_area_up.monitoring = true
-	elif animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
+	elif animated_sprite_swordup.animaывtion == "swordUP" and animated_sprite_swordup.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
@@ -264,12 +266,12 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
 func _on_attack_area_up_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("Enemy"):
 		if body not in enemies_in_area:
 			enemies_in_area.append(body)
 
