@@ -211,7 +211,7 @@ func _on_swordup_frame_changed() -> void:
 	if animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 2:
 		swordup_collision.disabled = false
 		attack_area_up.monitoring = true
-	elif animated_sprite_swordup.animaывtion == "swordUP" and animated_sprite_swordup.frame == 3:
+	elif animated_sprite_swordup.animation == "swordUP" and animated_sprite_swordup.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
