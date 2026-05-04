@@ -35,3 +35,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
+
+func knockback(push_vector: Vector2) -> void:
+	global_position += push_vector
