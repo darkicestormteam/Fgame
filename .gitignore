@@ -1,1 +1,1 @@
-Nothing needs to be added to the .gitignore file based on the provided changes. The modification of 'script/player.gd' is a source code file that should not be ignored.
+(script files, like .gd files, are source code and should not be ignored)
