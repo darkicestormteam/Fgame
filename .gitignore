@@ -1,1 +1,12 @@
-Nothing should be ignored in this case, as the changes only include source code files (.gd files) without any build artifacts, dependencies, or temporary files.
+```
+# Godot-specific ignores
+*.import
+*.remap
+.project
+.ios/
+.android/
+.windows/
+.linux/
+.macos/
+export_presets.cfg
+```

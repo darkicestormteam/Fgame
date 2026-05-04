@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://enemy_spawner_uid"]
+
+[ext_resource type="Script" uid="uid://enemy_spawner_script" path="res://script/enemy_spawner.gd" id="1_enemyspawner"]
+[ext_resource type="PackedScene" uid="uid://duuwk8gpgcuaj" path="res://scenes/goblin.tscn" id="2_goblin"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_enemyspawner")
+player_node = NodePath("../Player")
+spawn_radius = 400.0
+min_spawn_distance = 100.0
+waves = [{
+"spawn_time": 300.0,
+"enemy_scene": ExtResource("2_goblin"),
+"spawn_count": 1,
+"spawn_interval": 1.0
+}, {
+"spawn_time": 900.0,
+"enemy_scene": ExtResource("2_goblin"),
+"spawn_count": 3,
+"spawn_interval": 2.0
+}]
