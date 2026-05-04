@@ -200,9 +200,10 @@ func _on_frame_changed() -> void:
 	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)
 		sword_whoosh.play()
+		var attack_dir = get_attack_direction()
 		for enemy in enemies_in_area:
-			if is_instance_valid(enemy):
-				enemy.queue_free()
+			if is_instance_valid(enemy) and enemy.has_method("knockback"):
+				enemy.knockback(attack_dir * 40)
 		enemies_in_area.clear()
 
 func _on_swordup_frame_changed() -> void:
@@ -276,3 +277,10 @@ func _on_attack_area_up_body_entered(body: Node2D) -> void:
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body in enemies_in_area:
 		enemies_in_area.erase(body)
+
+func get_attack_direction() -> Vector2:
+	var facing_right = not animated_sprite.flip_h
+	if facing_right:
+		return Vector2.RIGHT
+	else:
+		return Vector2.LEFT
