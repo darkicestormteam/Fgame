@@ -193,7 +193,10 @@ func _on_frame_changed() -> void:
 		sword_whoosh.play()
 		for enemy in enemies_in_area:
 			if is_instance_valid(enemy):
-				enemy.queue_free()
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(1)
+				else:
+					enemy.queue_free()
 		enemies_in_area.clear()
 	elif animated_sprite.animation == "splash" and animated_sprite.frame == 3:
 		sword_whoosh.pitch_scale = randf_range(0.9, 1.2)

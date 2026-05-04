@@ -20,6 +20,11 @@ func knockback(direction: Vector2, distance: float) -> void:
 	is_knockedback = true
 	knockback_timer = 0.15  # Длительность отталкивания в секундах
 
+func take_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0:
+		queue_free()
+
 func _physics_process(delta: float) -> void:
 	if is_knockedback:
 		knockback_timer -= delta
