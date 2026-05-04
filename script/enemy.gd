@@ -9,7 +9,7 @@ var knockback_timer: float = 0.0
 
 func _ready() -> void:
 	# Исправлено: "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd
-	add_to_group("Enemy")
+	add_to_group("enemy")
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
