@@ -1,8 +1,1 @@
-```
-# Godot-specific ignores
-*.import
-*.remap
-export_presets.cfg
-.user
-.scons_cache/
-```
+Nothing should be ignored based on the provided file changes. The only modified file is `script/enemy_spawner.gd`, which appears to be a Godot script file (source code) and should not be ignored.
