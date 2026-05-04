@@ -1,1 +1,48 @@
-(script.gd)
+```
+# Editor/IDE files
+.vscode/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Python specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Dependencies
+venv/
+.venv/
+.env/
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Cache directories
+.mypy_cache/
+.pytest_cache/
+.cache/
+```

@@ -1,13 +1,27 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene
+# Массив сцен врагов для спавна
+@export var enemy_scenes: Array[PackedScene] = []
+# Веса вероятности для каждого врага (должны соответствовать количеству сцен)
+@export var spawn_weights: Array[int] = []
 @export var max_enemies: int = 30
 @export var spawn_interval: float = 0.5
 @export var grass_layer: TileMapLayer
 @export var min_distance_from_camera: float = 100.0  # Минимальное расстояние от края камеры
 
+# Время жизни спавнера в секундах после активации (0 = бесконечно до ручной деактивации)
+@export var spawner_lifetime: float = 0.0
+
+# Временные метки для активации спавна (в секундах от начала игры)
+# Например: [60, 120] - спавнер включится на 60-й и 120-й секунде
+@export var activation_times: Array[float] = []
+
 var _spawn_timer: Timer
+var _lifetime_timer: Timer
+var _activation_timers: Array[Timer] = []
 var _valid_spawn_positions: Array[Vector2] = []
+var _is_active: bool = false  # Изначально не активен, активируется по таймеру
+var _game_time: float = 0.0
 
 func _ready() -> void:
 	if grass_layer == null:
@@ -16,11 +30,65 @@ func _ready() -> void:
 	
 	_find_valid_spawn_positions()
 	
+	# Настраиваем таймер спавна (но не запускаем его сразу)
 	_spawn_timer = Timer.new()
 	_spawn_timer.wait_time = spawn_interval
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
+	
+	# Создаем таймеры активации для каждого указанного времени
+	for activation_time in activation_times:
+		var activation_timer = Timer.new()
+		activation_timer.wait_time = activation_time
+		activation_timer.one_shot = true
+		activation_timer.timeout.connect(_on_activation_timer_timeout.bind(activation_time))
+		add_child(activation_timer)
+		_activation_timers.append(activation_timer)
+		activation_timer.start()
+		print("[EnemySpawner] Запланирована активация на ", activation_time, " секунде")
+	
+	# Если нет времен активации, запускаем спавнер сразу
+	if activation_times.is_empty():
+		activate_spawner(spawner_lifetime)
+		print("[EnemySpawner] Спавнер активирован сразу (нет времен активации)")
+
+# Метод вызывается при наступлении времени активации
+func _on_activation_timer_timeout(activation_time: float) -> void:
+	print("[EnemySpawner] Активация спавнера на ", activation_time, " секунде игры")
+	activate_spawner(spawner_lifetime)
+
+# Метод для ручной активации спавнера (если нужно включать/выключать программно)
+func activate_spawner(lifetime: float = 0.0) -> void:
+	_is_active = true
 	_spawn_timer.start()
+	
+	# Если указано время жизни, запускаем таймер
+	var effective_lifetime = lifetime if lifetime > 0 else spawner_lifetime
+	if effective_lifetime > 0:
+		if _lifetime_timer:
+			_lifetime_timer.stop()
+			_lifetime_timer.wait_time = effective_lifetime
+			_lifetime_timer.start()
+		else:
+			_lifetime_timer = Timer.new()
+			_lifetime_timer.wait_time = effective_lifetime
+			_lifetime_timer.one_shot = true
+			_lifetime_timer.timeout.connect(_on_lifetime_expired)
+			add_child(_lifetime_timer)
+			_lifetime_timer.start()
+		print("[EnemySpawner] Активирован на ", effective_lifetime, " секунд")
+	else:
+		print("[EnemySpawner] Активирован бессрочно")
+
+# Метод для остановки спавна
+func deactivate_spawner() -> void:
+	_is_active = false
+	_spawn_timer.stop()
+	print("[EnemySpawner] Деактивирован")
+
+func _on_lifetime_expired() -> void:
+	deactivate_spawner()
+	print("[EnemySpawner] Время жизни истекло, спавн остановлен")
 
 func _find_valid_spawn_positions() -> void:
 	_valid_spawn_positions.clear()
@@ -60,13 +128,18 @@ func _is_position_outside_camera(position: Vector2) -> bool:
 	return false
 
 func _on_spawn_timer_timeout() -> void:
+	if not _is_active:
+		return
+	
 	var current_enemies = get_tree().get_nodes_in_group("enemy")
 	
 	if current_enemies.size() >= max_enemies:
 		return
 	
+	# Выбираем сцену врага на основе весов
+	var enemy_scene = _select_enemy_scene()
 	if enemy_scene == null:
-		print("Ошибка: enemy_scene не назначен в инспекторе!")
+		print("Ошибка: не назначены сцены врагов в enemy_scenes!")
 		return
 	
 	if _valid_spawn_positions.is_empty():
@@ -96,3 +169,30 @@ func _on_spawn_timer_timeout() -> void:
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_position
 	get_parent().add_child(enemy)
+
+# Метод для выбора сцены врага на основе весов вероятности
+func _select_enemy_scene() -> PackedScene:
+	if enemy_scenes.is_empty():
+		return null
+	
+	# Если веса не заданы или их количество не совпадает, используем равномерное распределение
+	if spawn_weights.is_empty() or spawn_weights.size() != enemy_scenes.size():
+		var random_index = randi() % enemy_scenes.size()
+		return enemy_scenes[random_index]
+	
+	# Вычисляем общую сумму весов
+	var total_weight = 0
+	for weight in spawn_weights:
+		total_weight += weight
+	
+	# Выбираем случайное число от 0 до общей суммы весов
+	var random_value = randi() % total_weight
+	var cumulative_weight = 0
+	
+	for i in range(enemy_scenes.size()):
+		cumulative_weight += spawn_weights[i]
+		if random_value < cumulative_weight:
+			return enemy_scenes[i]
+	
+	# На всякий случай возвращаем последний элемент
+	return enemy_scenes[enemy_scenes.size() - 1]
