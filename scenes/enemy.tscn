@@ -242,4 +242,6 @@ shape = SubResource("RectangleShape2D_4ra3w")
 stream = ExtResource("5_c4w8v")
 bus = &"SFX"
 
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
+
 [editable path="KillZone"]
