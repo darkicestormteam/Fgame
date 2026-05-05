@@ -220,6 +220,14 @@ sprite_frames = SubResource("SpriteFrames_ir15t")
 animation = &"attack"
 frame = 3
 
+[node name="Attack" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(61, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(32.25, 0)
+shape = SubResource("RectangleShape2D_4ra3w")
+
 [node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_7p1mj")
@@ -229,14 +237,6 @@ shape = SubResource("CapsuleShape2D_7p1mj")
 [node name="CollisionShape2D" parent="KillZone" index="0" groups=["Enemy"]]
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_5uy6h")
-
-[node name="Attack" type="Area2D" parent="."]
-position = Vector2(61, 0)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(32.25, 0)
-shape = SubResource("RectangleShape2D_4ra3w")
 
 [node name="Attackweapon" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_c4w8v")
