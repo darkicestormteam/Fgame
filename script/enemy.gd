@@ -7,7 +7,7 @@ extends CharacterBody2D
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $Attack
-@onready var attack_sound: AudioStreamPlayer = $Attackweapon
+@onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
@@ -98,6 +98,6 @@ func _on_frame_changed() -> void:
 			is_attacking = false
 
 func _on_attack_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "player":
 		# Вызываем метод получения урона у игрока
 		body.take_damage()

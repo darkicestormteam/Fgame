@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://cbdy1btuh6yux"]
+[gd_scene load_steps=35 format=3 uid="uid://cbdy1btuh6yux"]
 
 [ext_resource type="Texture2D" uid="uid://crg8p3tcml3nm" path="res://assets/Torch_Blue.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://c36ydl8rhu8b0" path="res://script/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://cukgshcqhp3aq" path="res://assets/Gnome-attack.png" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://bolvaplv0yrfw" path="res://scenes/kill_zone.tscn" id="3_4ra3w"]
+[ext_resource type="AudioStream" uid="uid://c71hlrq4jvmv3" path="res://assets/sounds/sfx/vzmahgnom.mp3" id="5_c4w8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
 atlas = ExtResource("2_5uy6h")
@@ -206,7 +207,7 @@ radius = 16.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(41, 24)
+size = Vector2(105.5, 24)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
@@ -217,6 +218,7 @@ attack_distance = 100.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")
 animation = &"attack"
+frame = 3
 
 [node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
@@ -229,9 +231,15 @@ position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_5uy6h")
 
 [node name="Attack" type="Area2D" parent="."]
+position = Vector2(61, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
+position = Vector2(32.25, 0)
 shape = SubResource("RectangleShape2D_4ra3w")
+
+[node name="Attackweapon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_c4w8v")
+bus = &"SFX"
 
 [editable path="KillZone"]
