@@ -282,7 +282,7 @@ tile_map_data = PackedByteArray("AADd/1wAAAAAAAAAAgDf/4QAAAAAAAAAAgDg/zsAAAAAAAA
 tile_set = SubResource("TileSet_u5sy4")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(1019, 1738)
+position = Vector2(379, 2338)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
@@ -307,6 +307,6 @@ player_node = NodePath("../Player")
 process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
-position = Vector2(-4, 1708)
+position = Vector2(302, 2499)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
