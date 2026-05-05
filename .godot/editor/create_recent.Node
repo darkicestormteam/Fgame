@@ -1,5 +1,7 @@
-Node2D
+CollisionShape2D
 Area2D
+AnimatedSprite2D
+Node2D
 CollisionPolygon2D
 AudioStreamPlayer
 CanvasLayer
@@ -10,5 +12,3 @@ Button
 HBoxContainer
 MarginContainer
 AudioStreamPlayer2D
-CollisionShape2D
-AnimatedSprite2D

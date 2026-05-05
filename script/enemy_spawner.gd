@@ -1,69 +1,73 @@
 extends Node2D
 
-# Структура для хранения настроек одной волны
-class WaveConfig:
-	var activation_time: float = 0.0
-	var lifetime: float = 0.0
-
-# Массив сцен врагов для спавна
-@export var enemy_scenes: Array[PackedScene] = []
-# Веса вероятности для каждого врага (должны соответствовать количеству сцен)
-@export var spawn_weights: Array[int] = []
-@export var max_enemies: int = 30
-@export var spawn_interval: float = 0.5
+# Глобальные настройки (одинаковые для всех волн или специфичные для карты)
 @export var grass_layer: TileMapLayer
-@export var min_distance_from_camera: float = 100.0  # Минимальное расстояние от края камеры
+@export var min_distance_from_camera: float = 100.0
 
-# Настройки волн
-@export var waves: Array[WaveConfig] = []
+# Конфигурация волн
+@export var wave_configs: Array[WaveConfig] = []
 
 var _spawn_timer: Timer
 var _lifetime_timer: Timer
 var _activation_timers: Array[Timer] = []
 var _valid_spawn_positions: Array[Vector2] = []
-var _is_active: bool = false  # Изначально не активен, активируется по таймеру
+var _is_active: bool = false
+var _current_wave_config: WaveConfig = null
 var _game_time: float = 0.0
 
 func _ready() -> void:
 	if grass_layer == null:
-		print("Ошибка: не назначен слой Grass в инспекторе!")
+		push_error("Ошибка: не назначен слой Grass в инспекторе!")
 		return
 	
 	_find_valid_spawn_positions()
 	
-	# Настраиваем таймер спавна (но не запускаем его сразу)
+	# Настраиваем базовый таймер спавна (интервал будет обновляться при старте волны)
 	_spawn_timer = Timer.new()
-	_spawn_timer.wait_time = spawn_interval
 	_spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(_spawn_timer)
 	
+	# Если волн нет, ничего не делаем
+	if wave_configs.is_empty():
+		print("[EnemySpawner] Список волн пуст. Добавьте элементы в wave_configs.")
+		# Для тестов можно активировать сразу, если нужно, но лучше оставить пустым
+		return
+
 	# Создаем таймеры активации для каждой волны
-	for wave_config in waves:
+	for i in range(wave_configs.size()):
+		var config = wave_configs[i]
 		var activation_timer = Timer.new()
-		activation_timer.wait_time = wave_config.activation_time
+		activation_timer.wait_time = config.activation_time
 		activation_timer.one_shot = true
-		activation_timer.timeout.connect(_on_activation_timer_timeout.bind(wave_config))
+		# Передаем индекс волны, чтобы найти конфиг при срабатывании
+		activation_timer.timeout.connect(_on_activation_timer_timeout.bind(i))
 		add_child(activation_timer)
 		_activation_timers.append(activation_timer)
 		activation_timer.start()
-		print("[EnemySpawner] Запланирована активация на ", wave_config.activation_time, " секунде")
+		print("[EnemySpawner] Волна %d запланирована на %.2f сек" % [i, config.activation_time])
+
+func _on_activation_timer_timeout(wave_index: int) -> void:
+	if wave_index >= wave_configs.size():
+		return
+		
+	var config = wave_configs[wave_index]
+	print("[EnemySpawner] Активация волны %d (Время: %.2f, Длительность: %.2f)" % [wave_index, config.activation_time, config.lifetime])
 	
-	# Если нет волн, ничего не делаем (спавнер не активируется автоматически)
-	if waves.is_empty():
-		print("[EnemySpawner] Нет настроенных волн")
+	_current_wave_config = config
+	activate_spawner(config.lifetime)
 
-# Метод вызывается при наступлении времени активации волны
-func _on_activation_timer_timeout(wave_config: WaveConfig) -> void:
-	print("[EnemySpawner] Активация спавнера на ", wave_config.activation_time, " секунде игры")
-	print("[EnemySpawner] Время жизни волны: ", wave_config.lifetime, " сек")
-	activate_spawner(wave_config.lifetime)
-
-# Метод для ручной активации спавнера (если нужно включать/выключать программно)
 func activate_spawner(lifetime: float = 0.0) -> void:
+	if _current_wave_config == null:
+		push_error("Активация вызвана без текущей конфигурации волны!")
+		return
+
 	_is_active = true
+	
+	# Устанавливаем интервал спавна из текущей волны
+	_spawn_timer.wait_time = _current_wave_config.spawn_interval
 	_spawn_timer.start()
 	
-	# Если указано время жизни, запускаем таймер
+	# Обработка времени жизни
 	if lifetime > 0:
 		if _lifetime_timer:
 			_lifetime_timer.stop()
@@ -76,77 +80,71 @@ func activate_spawner(lifetime: float = 0.0) -> void:
 			_lifetime_timer.timeout.connect(_on_lifetime_expired)
 			add_child(_lifetime_timer)
 			_lifetime_timer.start()
-		print("[EnemySpawner] Активирован на ", lifetime, " секунд")
+		print("[EnemySpawner] Волна активна %.2f сек" % lifetime)
 	else:
-		print("[EnemySpawner] Активирован бессрочно")
+		print("[EnemySpawner] Волна активна бессрочно")
 
-# Метод для остановки спавна
 func deactivate_spawner() -> void:
 	_is_active = false
 	_spawn_timer.stop()
-	print("[EnemySpawner] Деактивирован")
+	_current_wave_config = null
+	print("[EnemySpawner] Волна завершена")
 
 func _on_lifetime_expired() -> void:
 	deactivate_spawner()
-	print("[EnemySpawner] Время жизни истекло, спавн остановлен")
+	# Опционально: можно автоматически запускать следующую волну, если логика требует
+	# Но сейчас каждая волна имеет свой таймер активации, так что просто ждем следующего таймера
 
 func _find_valid_spawn_positions() -> void:
 	_valid_spawn_positions.clear()
+	if grass_layer == null: return
+	
 	var used_cells = grass_layer.get_used_cells()
 	for cell in used_cells:
 		var world_pos = grass_layer.map_to_local(cell)
 		_valid_spawn_positions.append(world_pos)
 	
 	if _valid_spawn_positions.is_empty():
-		print("Предупреждение: слой Grass не содержит тайлов!")
+		push_warning("Предупреждение: слой Grass не содержит тайлов!")
 
 func _is_position_outside_camera(position: Vector2) -> bool:
 	var viewport = get_viewport()
-	if viewport == null:
-		return true
+	if viewport == null: return true
 	
 	var camera = viewport.get_camera_2d()
-	if camera == null:
-		return true
+	if camera == null: return true
 	
 	var screen_size = viewport.get_visible_rect().size
 	var camera_pos = camera.global_position
 	
-	# Вычисляем границы видимой области камеры
 	var half_screen = screen_size / 2.0
 	var left_edge = camera_pos.x - half_screen.x - min_distance_from_camera
 	var right_edge = camera_pos.x + half_screen.x + min_distance_from_camera
 	var top_edge = camera_pos.y - half_screen.y - min_distance_from_camera
 	var bottom_edge = camera_pos.y + half_screen.y + min_distance_from_camera
 	
-	# Проверяем, находится ли позиция за пределами камеры
-	if position.x < left_edge or position.x > right_edge:
-		return true
-	if position.y < top_edge or position.y > bottom_edge:
-		return true
+	if position.x < left_edge or position.x > right_edge: return true
+	if position.y < top_edge or position.y > bottom_edge: return true
 	
 	return false
 
 func _on_spawn_timer_timeout() -> void:
-	if not _is_active:
+	if not _is_active or _current_wave_config == null:
 		return
 	
 	var current_enemies = get_tree().get_nodes_in_group("enemy")
 	
-	if current_enemies.size() >= max_enemies:
+	if current_enemies.size() >= _current_wave_config.max_enemies:
 		return
 	
-	# Выбираем сцену врага на основе весов
-	var enemy_scene = _select_enemy_scene()
+	var enemy_scene = _select_enemy_scene(_current_wave_config)
 	if enemy_scene == null:
-		print("Ошибка: не назначены сцены врагов в enemy_scenes!")
+		# Если сцены не настроены в волне, пропускаем спавн, но не останавливаем таймер навсегда (вдруг подгрузится)
 		return
 	
 	if _valid_spawn_positions.is_empty():
-		print("Ошибка: нет доступных позиций для спавна на слое Grass!")
 		return
 	
-	# Пытаемся найти позицию за пределами камеры
 	var max_attempts = 10
 	var spawn_position: Vector2
 	var found_valid_position = false
@@ -161,7 +159,6 @@ func _on_spawn_timer_timeout() -> void:
 			found_valid_position = true
 			break
 	
-	# Если не нашли позицию за пределами камеры, используем случайную
 	if not found_valid_position:
 		var random_index = randi() % _valid_spawn_positions.size()
 		spawn_position = grass_layer.to_global(_valid_spawn_positions[random_index])
@@ -170,29 +167,24 @@ func _on_spawn_timer_timeout() -> void:
 	enemy.global_position = spawn_position
 	get_parent().add_child(enemy)
 
-# Метод для выбора сцены врага на основе весов вероятности
-func _select_enemy_scene() -> PackedScene:
-	if enemy_scenes.is_empty():
+func _select_enemy_scene(config: WaveConfig) -> PackedScene:
+	if config.enemy_scenes.is_empty():
 		return null
 	
-	# Если веса не заданы или их количество не совпадает, используем равномерное распределение
-	if spawn_weights.is_empty() or spawn_weights.size() != enemy_scenes.size():
-		var random_index = randi() % enemy_scenes.size()
-		return enemy_scenes[random_index]
+	if config.spawn_weights.is_empty() or config.spawn_weights.size() != config.enemy_scenes.size():
+		var random_index = randi() % config.enemy_scenes.size()
+		return config.enemy_scenes[random_index]
 	
-	# Вычисляем общую сумму весов
 	var total_weight = 0
-	for weight in spawn_weights:
+	for weight in config.spawn_weights:
 		total_weight += weight
 	
-	# Выбираем случайное число от 0 до общей суммы весов
 	var random_value = randi() % total_weight
 	var cumulative_weight = 0
 	
-	for i in range(enemy_scenes.size()):
-		cumulative_weight += spawn_weights[i]
+	for i in range(config.enemy_scenes.size()):
+		cumulative_weight += config.spawn_weights[i]
 		if random_value < cumulative_weight:
-			return enemy_scenes[i]
+			return config.enemy_scenes[i]
 	
-	# На всякий случай возвращаем последний элемент
-	return enemy_scenes[enemy_scenes.size() - 1]
+	return config.enemy_scenes[config.enemy_scenes.size() - 1]
