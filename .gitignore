@@ -1,1 +1,1 @@
-(script/player.gd)
+Nothing needs to be added to .gitignore since only a single source file (`script/enemy.gd`) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
