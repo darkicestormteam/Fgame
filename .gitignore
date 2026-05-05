@@ -2,83 +2,29 @@
 # Godot-specific ignores
 *.import
 *.uid
-.project
-.godot/
-
-# Compiled and build artifacts
-*.pyc
-__pycache__/
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
+.rid
+.scene
+.tmp
+*.tmp
+*.log
+export_presets.cfg
+.autoload_singleton.gd
+.editor_settings-4.tres
 
 # Dependencies
-.venv/
-venv/
-node_modules/
-dist/
-build/
-target/
-.gradle/
-.mypy_cache/
-.pytest_cache/
-.julia/
-zig-cache/
-zig-out/
+.addons/
+.build/
+.cache/
+.ios/
+.android/
+.windows/
+.x11/
 
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-*.bak
-*.~*
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Editors
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# System
-.DS_Store
-Thumbs.db
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# Compressed files
-*.zip
-*.gz
-*.tar
-*.tgz
-*.bz2
-*.xz
-*.7z
-*.rar
-*.zst
-*.lz4
-*.lzh
-*.cab
-*.arj
-*.rpm
-*.deb
-*.Z
-*.lz
-*.lzo
-*.tar.gz
-*.tar.bz2
-*.tar.xz
-*.tar.zst
+# User-specific settings
+.user
+*.user
+*.userprefs
+.project
+.editor
+.godot/
 ```

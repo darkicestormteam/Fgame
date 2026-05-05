@@ -2,11 +2,14 @@ extends CharacterBody2D
 
 @export var speed: float = 50.0
 @export var health: int = 1
+@export var attack_distance: float = 50.0
 
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_area: Area2D = $Attack
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
+var is_attacking: bool = false
 
 func _ready() -> void:
 	# Исправлено: "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd
@@ -14,6 +17,9 @@ func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
+	
+	animated_sprite.frame_changed.connect(_on_frame_changed)
+	attack_area.monitoring = false
 
 func knockback(direction: Vector2, distance: float) -> void:
 	velocity = direction * distance
@@ -38,7 +44,17 @@ func _physics_process(delta: float) -> void:
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
 		return
-
+	
+	var distance_to_player: float = global_position.distance_to(_player.global_position)
+	
+	# Проверяем дистанцию до игрока
+	if distance_to_player <= attack_distance and not is_attacking:
+		is_attacking = true
+		animated_sprite.play("attack")
+		velocity = Vector2.ZERO
+		return
+	
+	# Если игрок вне зоны атаки, продолжаем движение к нему
 	var direction: Vector2 = (_player.global_position - global_position).normalized()
 	
 	velocity = direction * speed
@@ -56,3 +72,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
+
+func _on_frame_changed() -> void:
+	if animated_sprite.animation == "attack" and animated_sprite.frame == 4:
+		attack_area.monitoring = true
+		# Включаем коллизию на этом кадре
+	elif animated_sprite.animation == "attack" and animated_sprite.frame == 5:
+		# Выключаем коллизию после кадра атаки
+		attack_area.monitoring = false
+		is_attacking = false
+
+func _on_attack_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		# Вызываем метод получения урона у игрока
+		body.take_damage()
