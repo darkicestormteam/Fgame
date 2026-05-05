@@ -74,13 +74,15 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("idle")
 
 func _on_frame_changed() -> void:
-	if animated_sprite.animation == "attack" and animated_sprite.frame == 4:
-		attack_area.monitoring = true
-		# Включаем коллизию на этом кадре
-	elif animated_sprite.animation == "attack" and animated_sprite.frame == 5:
-		# Выключаем коллизию после кадра атаки
-		attack_area.monitoring = false
-		is_attacking = false
+	if animated_sprite.animation == "attack":
+		var current_frame = animated_sprite.frame
+		# Включаем коллизию на 4 кадре (индексация с 0, значит фактически 5-й кадр)
+		if current_frame == 3:
+			attack_area.monitoring = true
+		# Выключаем коллизию после кадра атаки (на последнем кадре)
+		elif current_frame >= 6:
+			attack_area.monitoring = false
+			is_attacking = false
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
