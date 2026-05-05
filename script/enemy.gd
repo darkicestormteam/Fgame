@@ -69,8 +69,10 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.x > 0:
 		animated_sprite.flip_h = false
+		attack_area.scale.x = abs(attack_area.scale.x)
 	elif velocity.x < 0:
 		animated_sprite.flip_h = true
+		attack_area.scale.x = -abs(attack_area.scale.x)
 
 	move_and_slide()
 
