@@ -98,6 +98,6 @@ func _on_frame_changed() -> void:
 			is_attacking = false
 
 func _on_attack_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.is_in_group("player"):
 		# Вызываем метод получения урона у игрока
 		body.take_damage()
