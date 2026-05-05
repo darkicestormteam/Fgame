@@ -206,8 +206,8 @@ radius = 15.0
 radius = 16.0
 height = 32.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(105.5, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4w8v"]
+size = Vector2(63, 20)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
@@ -235,11 +235,10 @@ stream = ExtResource("5_c4w8v")
 bus = &"SFX"
 
 [node name="Attack" type="Area2D" parent="."]
-position = Vector2(61, 0)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(-28.75, 0)
-shape = SubResource("RectangleShape2D_4ra3w")
+position = Vector2(39, 0)
+shape = SubResource("RectangleShape2D_c4w8v")
 
 [editable path="KillZone"]
