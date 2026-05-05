@@ -49,28 +49,38 @@ func _physics_process(delta: float) -> void:
 	
 	var distance_to_player: float = global_position.distance_to(_player.global_position)
 	
+	# Определяем направление к игроку
+	var direction: Vector2 = (_player.global_position - global_position).normalized()
+	
 	# Проверяем дистанцию до игрока
 	if distance_to_player <= attack_distance:
 		# Если еще не атакуем, начинаем атаку
 		if not is_attacking:
 			is_attacking = true
 			animated_sprite.play("attack")
+			# Поворачиваем врага в сторону игрока при начале атаки
+			if direction.x < 0:
+				scale.x = -1
+			else:
+				scale.x = 1
 		# Останавливаем движение во время атаки
 		velocity = Vector2.ZERO
-		# Не меняем направление спрайта во время атаки
+		# Проверяем, не переместился ли игрок на другую сторону во время атаки
+		# Если да, то мгновенно поворачиваем врага и анимацию
+		if (direction.x < 0 and scale.x > 0) or (direction.x > 0 and scale.x < 0):
+			scale.x = -scale.x
 		return
 	
 	# Если игрок вне зоны атаки, сбрасываем флаг атаки и продолжаем движение к нему
 	is_attacking = false
 	
-	var direction: Vector2 = (_player.global_position - global_position).normalized()
-	
 	velocity = direction * speed
 	
+	# Поворачиваем всего врага (включая коллизии) в сторону движения
 	if velocity.x > 0:
-		animated_sprite.flip_h = false
+		scale.x = 1
 	elif velocity.x < 0:
-		animated_sprite.flip_h = true
+		scale.x = -1
 
 	move_and_slide()
 
