@@ -269,7 +269,6 @@ one_shot = true
 
 [node name="HPbar" parent="." instance=ExtResource("5_qlg0r")]
 scale = Vector2(2, 2)
-transform = Transform2D(2, 0, 0, 2, 0, 0)
 
 [node name="SwordPivot" type="Node2D" parent="."]
 position = Vector2(-40, 0)
