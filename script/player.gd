@@ -144,8 +144,7 @@ func _start_second_attack() -> void:
 	is_second_attack_active = true
 	is_swordup_playing = true
 	
-	var second_attack_direction_rad: float = deg_to_rad(180) if original_facing_right else 0.0
-	attack_area_up.rotation = second_attack_direction_rad
+	attack_area_up.scale.x = -1 if original_facing_right else 1
 	swordup_collision.disabled = true
 	
 	animated_sprite_swordup.visible = true
@@ -181,10 +180,10 @@ func _on_swordup_animation_finished() -> void:
 		enemies_in_area.clear()
 	
 	if original_facing_right:
-		attack_area.rotation = 0
+		attack_area.scale.x = 1
 		animated_sprite.flip_h = false
 	else:
-		attack_area.rotation = deg_to_rad(180)
+		attack_area.scale.x = -1
 		animated_sprite.flip_h = true
 
 func _on_frame_changed() -> void:
@@ -232,7 +231,7 @@ func _physics_process(_delta: float) -> void:
 			if velocity.x > 0:
 				# Игрок смотрит ВПРАВО
 				animated_sprite.flip_h = false
-				attack_area.rotation = 0
+				attack_area.scale.x = 1
 				animated_sprite_swordup.flip_h = false
 				
 				# ЛОГИКА ПОВОРОТА МЕЧА:
@@ -244,7 +243,7 @@ func _physics_process(_delta: float) -> void:
 			elif velocity.x < 0:
 				# Игрок смотрит ВЛЕВО
 				animated_sprite.flip_h = true
-				attack_area.rotation = deg_to_rad(180)
+				attack_area.scale.x = -1
 				animated_sprite_swordup.flip_h = true
 				
 				# ЛОГИКА ПОВОРОТА МЕЧА:
