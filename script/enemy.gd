@@ -7,9 +7,11 @@ extends CharacterBody2D
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $Attack
+@onready var attack_sound: AudioStreamPlayer = $Attackweapon
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
+var last_pitch: float = 1.0
 
 func _ready() -> void:
 	# Исправлено: "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd
@@ -85,6 +87,11 @@ func _on_frame_changed() -> void:
 		# Включаем коллизию на 4 кадре (индексация с 0, значит фактически 5-й кадр)
 		if current_frame == 3:
 			attack_area.monitoring = true
+			# Воспроизводим звук атаки с разной тональностью
+			if attack_sound and not attack_sound.playing:
+				last_pitch = randf_range(0.9, 1.2)
+				attack_sound.pitch_scale = last_pitch
+				attack_sound.play()
 		# Выключаем коллизию после кадра атаки (на последнем кадре)
 		elif current_frame >= 6:
 			attack_area.monitoring = false
