@@ -156,6 +156,6 @@ autoplay = "walk"
 frame = 4
 
 [node name="CollisionShape2D" parent="Attack" index="0"]
-position = Vector2(36.5, 16)
+position = Vector2(67, 16)
 
 [editable path="KillZone"]
