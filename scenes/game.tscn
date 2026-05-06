@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=21 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
