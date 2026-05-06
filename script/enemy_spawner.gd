@@ -15,6 +15,9 @@ var _is_active: bool = false
 var _current_wave_config: WaveConfig = null
 var _game_time: float = 0.0
 
+# Ссылка на сцену preview
+var _preview_node: Node2D = null
+
 func _ready() -> void:
 	if grass_layer == null:
 		push_error("Ошибка: не назначен слой Grass в инспекторе!")
@@ -32,7 +35,10 @@ func _ready() -> void:
 		print("[EnemySpawner] Список волн пуст. Добавьте элементы в wave_configs.")
 		# Для тестов можно активировать сразу, если нужно, но лучше оставить пустым
 		return
-
+	
+	# Ищем сцену preview в дереве
+	_preview_node = get_tree().get_first_node_in_group("preview")
+	
 	# Создаем таймеры активации для каждой волны
 	for i in range(wave_configs.size()):
 		var config = wave_configs[i]
@@ -53,8 +59,23 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 	var config = wave_configs[wave_index]
 	print("[EnemySpawner] Активация волны %d (Время: %.2f, Длительность: %.2f)" % [wave_index, config.activation_time, config.lifetime])
 	
+	# Если это первая волна (номер 0), запускаем preview и ставим паузу
+	if wave_index == 0:
+		await _play_preview_and_pause()
+	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
+
+func _play_preview_and_pause() -> void:
+	if _preview_node and _preview_node.has_method("play_preview"):
+		# Ставим паузу в игре
+		get_tree().paused = true
+		
+		# Запускаем анимацию preview
+		await _preview_node.play_preview()
+		
+		# Снимаем паузу после завершения анимации
+		get_tree().paused = false
 
 func activate_spawner(lifetime: float = 0.0) -> void:
 	if _current_wave_config == null:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=22 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://mgfdnbyv4fjh" path="res://script/game.gd" id="9_game"]
 [ext_resource type="PackedScene" uid="uid://cvokgw0faanr" path="res://scenes/enemy/enemy1.tscn" id="10_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="13_kvuet"]
+[ext_resource type="PackedScene" uid="uid://1imqp28wx260" path="res://scenes/preview.tscn" id="14_preview"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gee14"]
 texture = ExtResource("1_lbhrr")
@@ -309,5 +310,7 @@ process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
 position = Vector2(302, 2499)
+
+[node name="Preview" parent="." groups=["preview"] instance=ExtResource("14_preview")]
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
