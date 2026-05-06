@@ -16,7 +16,7 @@ var _current_wave_config: WaveConfig = null
 var _game_time: float = 0.0
 
 # Ссылка на сцену preview
-var _preview_node: Node2D = null
+var _preview_node: ColorRect = null
 
 func _ready() -> void:
 	if grass_layer == null:
