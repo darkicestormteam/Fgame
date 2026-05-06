@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _find_nearest_enemy() -> void:
-	var enemies = get_tree().get_nodes_in_group("enemy")
+	var enemies = get_tree().get_nodes_in_group("Enemy")
 	if enemies.is_empty():
 		_target_enemy = null
 		return
@@ -68,7 +68,7 @@ func _find_nearest_enemy() -> void:
 				_target_enemy = enemy
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy") and not _explode_triggered:
+	if body.is_in_group("Enemy") and not _explode_triggered:
 		# Воспроизводим звук Sheepsay при соприкосновении с врагом
 		sheepsay_sound.play()
 		# Запускаем процесс взрыва с задержкой (только один раз!)
@@ -90,7 +90,7 @@ func _explode_with_delay() -> void:
 	animated_sprite.play("explosion")
 	damage_zone.monitoring = true
 	
-	var enemies = get_tree().get_nodes_in_group("enemy")
+	var enemies = get_tree().get_nodes_in_group("Enemy")
 	for enemy in enemies:
 		if is_instance_valid(enemy):
 			var distance = global_position.distance_to(enemy.global_position)
