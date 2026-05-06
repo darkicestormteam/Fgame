@@ -313,9 +313,9 @@ position = Vector2(302, 2499)
 
 [node name="preview" parent="." groups=["preview"] instance=ExtResource("14_preview")]
 z_index = 10
-offset_left = 74.0
-offset_top = 1529.0
-offset_right = 74.0
-offset_bottom = 1529.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
