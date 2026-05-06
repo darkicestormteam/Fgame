@@ -1,7 +1,6 @@
-res://script/enemy_spawner.gd
-res://script/preview.gd
 res://scenes/game.tscn
 res://script/player.gd
+res://script/enemy_spawner.gd
 res://scenes/enemy_spawner.tscn
 res://scenes/HP_bar.tscn
 res://scenes/player.tscn

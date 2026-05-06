@@ -1,4 +1,5 @@
 ColorRect
+CanvasLayer
 AudioStreamPlayer
 AnimationPlayer
 AudioStreamPlayer2D
@@ -7,7 +8,6 @@ Area2D
 AnimatedSprite2D
 Node2D
 CollisionPolygon2D
-CanvasLayer
 TextureRect
 TextureButton
 Button
