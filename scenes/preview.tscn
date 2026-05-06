@@ -117,7 +117,7 @@ _data = {
 [node name="preview" type="Node2D"]
 script = ExtResource("1_q0vb1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer(gnom)" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_q0vb1")
 }
