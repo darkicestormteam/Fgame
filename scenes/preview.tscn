@@ -11,7 +11,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect/GnomeIcon:position")
+tracks/0/path = NodePath("GnomeIcon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -35,7 +35,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect/GnomeIcon:visible")
+tracks/2/path = NodePath("GnomeIcon:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -62,7 +62,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect/GnomeIcon:position")
+tracks/0/path = NodePath("GnomeIcon:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -86,7 +86,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect/GnomeIcon:visible")
+tracks/2/path = NodePath("GnomeIcon:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -114,22 +114,26 @@ _data = {
 &"RESET": SubResource("Animation_virtx")
 }
 
-[node name="preview" type="CanvasLayer"]
+[node name="preview" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 script = ExtResource("1_q0vb1")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="AnimationPlayer(gnom)" type="AnimationPlayer" parent="ColorRect"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer(gnom)" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_q0vb1")
 }
 autoplay = "Gnom"
 
-[node name="GnomeIcon" type="Sprite2D" parent="ColorRect"]
+[node name="GnomeIcon" type="Sprite2D" parent="."]
 position = Vector2(-134, 539)
+scale = Vector2(2, 2)
 texture = ExtResource("1_lbu0d")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
