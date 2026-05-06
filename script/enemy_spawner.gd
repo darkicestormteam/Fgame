@@ -1,5 +1,8 @@
 extends Node2D
 
+# Сигнал для уведомления о начале первой волны (волна 0)
+signal first_wave_started
+
 # Глобальные настройки (одинаковые для всех волн или специфичные для карты)
 @export var grass_layer: TileMapLayer
 @export var min_distance_from_camera: float = 100.0
@@ -52,6 +55,10 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 		
 	var config = wave_configs[wave_index]
 	print("[EnemySpawner] Активация волны %d (Время: %.2f, Длительность: %.2f)" % [wave_index, config.activation_time, config.lifetime])
+	
+	# Если это первая волна (номер 0), отправляем сигнал
+	if wave_index == 0:
+		first_wave_started.emit()
 	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
