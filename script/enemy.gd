@@ -14,8 +14,8 @@ var is_attacking: bool = false
 var last_pitch: float = 1.0
 
 func _ready() -> void:
-	# Исправлено: "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd
-	add_to_group("enemy")
+	# Добавляем в группу "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd и сценой
+	add_to_group("Enemy")
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
@@ -100,6 +100,6 @@ func _on_frame_changed() -> void:
 			is_attacking = false
 
 func _on_attack_body_entered(body: Node2D) -> void:
-	if body.name == "player":
+	if body.is_in_group("player"):
 		# Вызываем метод получения урона у игрока
 		body.take_damage()

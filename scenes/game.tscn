@@ -282,7 +282,7 @@ tile_map_data = PackedByteArray("AADd/1wAAAAAAAAAAgDf/4QAAAAAAAAAAgDg/zsAAAAAAAA
 tile_set = SubResource("TileSet_u5sy4")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(494, 2502)
+position = Vector2(792, 2054)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
@@ -295,6 +295,7 @@ position = Vector2(821, 1610)
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
+position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
 wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu")])
 
