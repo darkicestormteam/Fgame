@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=25 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -249,7 +249,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_vtaks")
 
 [sub_resource type="Resource" id="Resource_dinhu"]
 script = ExtResource("9_dinhu")
-activation_time = 40.0
+activation_time = 120.0
 lifetime = 40.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([100])
@@ -260,12 +260,23 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("9_dinhu")
-activation_time = 1.0
+activation_time = 140.0
 lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
 spawn_weights = Array[int]([100])
 max_enemies = 20
 spawn_interval = 1.0
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_ir15t"]
+script = ExtResource("9_dinhu")
+activation_time = 1.0
+lifetime = 60.0
+enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu"), ExtResource("12_ir15t")])
+spawn_weights = Array[int]([])
+max_enemies = 80
+spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
@@ -312,13 +323,17 @@ z_index = 10
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
+offset_left = -45.0
+offset_top = 14.0
+offset_right = -45.0
+offset_bottom = 14.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
-wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v")])
+wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t")])
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")

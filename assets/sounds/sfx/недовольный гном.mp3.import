@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjef4vindakos"
+path="res://.godot/imported/недовольный гном.mp3-d2ef6acc56d0692e631c9e71ada25e01.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/недовольный гном.mp3"
+dest_files=["res://.godot/imported/недовольный гном.mp3-d2ef6acc56d0692e631c9e71ada25e01.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
