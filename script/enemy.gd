@@ -14,6 +14,11 @@ var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
 var last_pitch: float = 1.0
+var is_flashing: bool = false
+var flash_timer: float = 0.0
+var flash_duration: float = 0.5
+var flash_interval: float = 0.1
+var original_modulate: Color = Color.WHITE
 
 func _ready() -> void:
 	# Добавляем в группу "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd и сценой
@@ -25,6 +30,7 @@ func _ready() -> void:
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	attack_area.monitoring = false
+	original_modulate = animated_sprite.modulate
 
 func knockback(direction: Vector2, distance: float) -> void:
 	velocity = direction * distance
@@ -33,10 +39,27 @@ func knockback(direction: Vector2, distance: float) -> void:
 
 func take_damage(amount: int) -> void:
 	health -= amount
+	if not is_flashing:
+		is_flashing = true
+		flash_timer = flash_duration
 	if health <= 0:
 		queue_free()
 
 func _physics_process(delta: float) -> void:
+	# Обработка мигания при получении урона
+	if is_flashing:
+		flash_timer -= delta
+		if flash_timer <= 0.0:
+			is_flashing = false
+			animated_sprite.modulate = original_modulate
+		else:
+			# Мигаем красным и белым
+			var flash_state = int(flash_timer / flash_interval) % 2
+			if flash_state == 0:
+				animated_sprite.modulate = Color.RED
+			else:
+				animated_sprite.modulate = original_modulate
+	
 	if is_knockedback:
 		knockback_timer -= delta
 		if knockback_timer <= 0.0:
