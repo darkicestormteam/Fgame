@@ -207,7 +207,7 @@ radius = 16.0
 height = 32.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4w8v"]
-size = Vector2(55, 18)
+size = Vector2(16, 25.5)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
@@ -238,7 +238,7 @@ bus = &"SFX"
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(30.5, 23)
+position = Vector2(30.5, 10.25)
 shape = SubResource("RectangleShape2D_c4w8v")
 
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

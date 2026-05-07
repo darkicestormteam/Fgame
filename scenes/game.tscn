@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=24 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cfrcvx8y0cx8o" path="res://assets/Tilemap_Flat.png" id="1_lnu2h"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bi7y74mffo7cv" path="res://script/wave_config.gd" id="9_dinhu"]
 [ext_resource type="Script" uid="uid://mgfdnbyv4fjh" path="res://script/game.gd" id="9_game"]
 [ext_resource type="PackedScene" uid="uid://cvokgw0faanr" path="res://scenes/enemy/enemy1.tscn" id="10_dinhu"]
+[ext_resource type="PackedScene" uid="uid://dtw1q77jl2wyr" path="res://scenes/enemy/enemy2.tscn" id="12_ir15t"]
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://1imqp28wx260" path="res://scenes/preview.tscn" id="14_preview"]
 
@@ -248,11 +249,22 @@ sources/0 = SubResource("TileSetScenesCollectionSource_vtaks")
 
 [sub_resource type="Resource" id="Resource_dinhu"]
 script = ExtResource("9_dinhu")
-activation_time = 1.0
-lifetime = 30.0
+activation_time = 40.0
+lifetime = 40.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([100])
 max_enemies = 30
+spawn_interval = 1.0
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_ca42v"]
+script = ExtResource("9_dinhu")
+activation_time = 1.0
+lifetime = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
+spawn_weights = Array[int]([100])
+max_enemies = 20
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
@@ -306,7 +318,7 @@ offset_bottom = 0.0
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
-wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu")])
+wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v")])
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")

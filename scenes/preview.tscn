@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://1imqp28wx260"]
+[gd_scene load_steps=11 format=3 uid="uid://1imqp28wx260"]
 
 [ext_resource type="Texture2D" uid="uid://c4qeip5v6pm0v" path="res://assets/GnomeIcon.png" id="1_lbu0d"]
 [ext_resource type="Script" uid="uid://dutfqrwr5hb3i" path="res://script/preview.gd" id="1_q0vb1"]
 [ext_resource type="AudioStream" uid="uid://bltiucha3w8h7" path="res://assets/sounds/sfx/звуканонсаволны.mp3" id="2_hej5o"]
+[ext_resource type="Texture2D" uid="uid://dhnc55vups8x3" path="res://assets/SnakeIcon.png" id="3_af0jo"]
 [ext_resource type="AudioStream" uid="uid://bwcqcphj71f8n" path="res://assets/sounds/sfx/гном атакует.mp3" id="3_virtx"]
+[ext_resource type="AudioStream" uid="uid://gmh8p1yq75hx" path="res://assets/sounds/sfx/змеяпревью.mp3" id="6_ys25t"]
 
 [sub_resource type="Animation" id="Animation_hej5o"]
 resource_name = "Gnom"
@@ -107,11 +109,100 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SnakeIcon:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-192, 540)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SnakeIcon:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Змеяпревью:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dmwkb"]
+resource_name = "Snake"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SnakeIcon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-192, 540), Vector2(960, 540), Vector2(960, 540), Vector2(2120, 540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SnakeIcon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Змеяпревью:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q0vb1"]
 _data = {
 &"Gnom": SubResource("Animation_hej5o"),
-&"RESET": SubResource("Animation_virtx")
+&"RESET": SubResource("Animation_virtx"),
+&"Snake": SubResource("Animation_dmwkb")
 }
 
 [node name="preview" type="ColorRect"]
@@ -129,12 +220,18 @@ script = ExtResource("1_q0vb1")
 libraries = {
 &"": SubResource("AnimationLibrary_q0vb1")
 }
-autoplay = "Gnom"
+autoplay = "Snake"
 
 [node name="GnomeIcon" type="Sprite2D" parent="."]
 position = Vector2(-134, 539)
 scale = Vector2(2, 2)
 texture = ExtResource("1_lbu0d")
+
+[node name="SnakeIcon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-192, 540)
+scale = Vector2(2, 2)
+texture = ExtResource("3_af0jo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_hej5o")
@@ -144,4 +241,8 @@ bus = &"SFX"
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_virtx")
 pitch_scale = 1.19
+bus = &"SFX"
+
+[node name="Змеяпревью" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ys25t")
 bus = &"SFX"
