@@ -59,20 +59,23 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 	var config = wave_configs[wave_index]
 	print("[EnemySpawner] Активация волны %d (Время: %.2f, Длительность: %.2f)" % [wave_index, config.activation_time, config.lifetime])
 	
-	# Если это первая волна (номер 0), запускаем preview и ставим паузу
+	# Если это первая волна (номер 0), запускаем preview с анимацией Gnom и ставим паузу
 	if wave_index == 0:
-		await _play_preview_and_pause()
+		await _play_preview_and_pause("Gnom")
+	# Если это вторая волна (номер 1), запускаем preview с анимацией Snake и ставим паузу
+	elif wave_index == 1:
+		await _play_preview_and_pause("Snake")
 	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
 
-func _play_preview_and_pause() -> void:
+func _play_preview_and_pause(animation_name: String = "Gnom") -> void:
 	if _preview_node and _preview_node.has_method("play_preview"):
 		# Ставим паузу в игре
 		get_tree().paused = true
 		
-		# Запускаем анимацию preview
-		await _preview_node.play_preview()
+		# Запускаем анимацию preview с указанным именем
+		await _preview_node.play_preview(animation_name)
 		
 		# Снимаем паузу после завершения анимации
 		get_tree().paused = false
