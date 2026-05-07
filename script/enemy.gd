@@ -23,6 +23,7 @@ func _ready() -> void:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
 	
 	animated_sprite.frame_changed.connect(_on_frame_changed)
+	animated_sprite.animation_finished.connect(_on_animation_finished)
 	attack_area.monitoring = false
 
 func knockback(direction: Vector2, distance: float) -> void:
@@ -62,26 +63,25 @@ func _physics_process(delta: float) -> void:
 		# Не меняем направление спрайта во время атаки
 		return
 	
-	# Если игрок вне зоны атаки, сбрасываем флаг атаки и продолжаем движение к нему
-	is_attacking = false
+	# Если игрок вне зоны атаки и мы не в процессе атаки, продолжаем движение
+	if not is_attacking:
+		var direction: Vector2 = (_player.global_position - global_position).normalized()
+		
+		velocity = direction * speed
+		
+		if velocity.x > 0:
+			animated_sprite.flip_h = false
+			attack_area.scale.x = abs(attack_area.scale.x)
+		elif velocity.x < 0:
+			animated_sprite.flip_h = true
+			attack_area.scale.x = -abs(attack_area.scale.x)
 	
-	var direction: Vector2 = (_player.global_position - global_position).normalized()
-	
-	velocity = direction * speed
-	
-	if velocity.x > 0:
-		animated_sprite.flip_h = false
-		attack_area.scale.x = abs(attack_area.scale.x)
-	elif velocity.x < 0:
-		animated_sprite.flip_h = true
-		attack_area.scale.x = -abs(attack_area.scale.x)
-
 	move_and_slide()
-
-	if velocity.length_squared() > 1.0:
+	
+	if not is_attacking and velocity.length_squared() > 1.0:
 		if animated_sprite.animation != "walk":
 			animated_sprite.play("walk")
-	else:
+	elif not is_attacking:
 		if animated_sprite.animation != "idle":
 			animated_sprite.play("idle")
 
@@ -105,3 +105,7 @@ func _on_attack_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		# Вызываем метод получения урона у игрока
 		body.take_damage()
+
+func _on_animation_finished() -> void:
+	if animated_sprite.animation == "attack":
+		is_attacking = false
