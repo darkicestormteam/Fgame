@@ -13,7 +13,7 @@ func _ready() -> void:
 		process_mode = Node.PROCESS_MODE_ALWAYS
 		animation_player.process_mode = Node.PROCESS_MODE_ALWAYS
 
-func play_preview() -> void:
+func play_preview(animation_name: String = "Gnom") -> void:
 		if _is_preview_active:
 				return
 
@@ -24,8 +24,8 @@ func play_preview() -> void:
 		animation_player.play("RESET")
 		await get_tree().process_frame
 
-		# Запускаем анимацию Gnom
-		animation_player.play("Gnom")
+		# Запускаем указанную анимацию
+		animation_player.play(animation_name)
 
 		# Ждем окончания анимации
 		await animation_player.animation_finished
