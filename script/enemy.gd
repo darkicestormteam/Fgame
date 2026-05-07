@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed: float = 50.0
 @export var health: int = 1
 @export var attack_distance: float = 50.0
+@export var attack_collision_start_frame: int = 3
+@export var attack_collision_end_frame: int = 6
 
 var _player: Node2D = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -86,16 +88,16 @@ func _physics_process(delta: float) -> void:
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack":
 		var current_frame = animated_sprite.frame
-		# Включаем коллизию на 4 кадре (индексация с 0, значит фактически 5-й кадр)
-		if current_frame == 3:
+		# Включаем коллизию на указанном кадре (настраивается в инспекторе)
+		if current_frame == attack_collision_start_frame:
 			attack_area.monitoring = true
 			# Воспроизводим звук атаки с разной тональностью
 			if attack_sound and not attack_sound.playing:
 				last_pitch = randf_range(0.9, 1.2)
 				attack_sound.pitch_scale = last_pitch
 				attack_sound.play()
-		# Выключаем коллизию после кадра атаки (на последнем кадре)
-		elif current_frame >= 6:
+		# Выключаем коллизию после указанного кадра (настраивается в инспекторе)
+		elif current_frame >= attack_collision_end_frame:
 			attack_area.monitoring = false
 			is_attacking = false
 
