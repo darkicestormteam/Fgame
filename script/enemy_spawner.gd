@@ -68,6 +68,9 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 	# Если это третья волна (номер 2), запускаем preview с анимацией Gnom_Snake и ставим паузу
 	elif wave_index == 2:
 		await _play_preview_and_pause("Gnom_Snake")
+	# Если это четвертая волна (номер 3), запускаем preview с анимацией Bear и ставим паузу
+	elif wave_index == 3:
+		await _play_preview_and_pause("Bear")
 	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
