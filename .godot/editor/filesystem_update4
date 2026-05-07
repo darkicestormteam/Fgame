@@ -11,3 +11,4 @@ res://scenes/enemy.tscn
 res://scenes/preview.tscn
 res://scenes/enemy/enemy2.tscn
 res://scenes/enemy/enemy3.tscn
+res://script/enemy.gd
