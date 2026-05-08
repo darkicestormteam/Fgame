@@ -22,9 +22,12 @@ func _desync_tile_animations(layer: TileMapLayer) -> void:
 	
 	var used_cells = layer.get_used_cells()
 	for cell in used_cells:
-		# Устанавливаем случайное смещение времени анимации от 0 до 1
-		# Это заставит каждую плитку начинаться с разной фазы анимации
-		layer.set_cell_animation_time_offset(cell, randf())
+		# Получаем текущий источник анимации для клетки
+		var source_id = layer.get_cell_source_id(cell)
+		if source_id != -1:
+			# Устанавливаем случайное смещение кадра анимации
+			# Это заставит каждую плитку начинаться с разной фазы анимации
+			layer.set_cell_animation_frame_offset(cell, randi() % 100)
 
 func _on_spell_timer_timeout() -> void:
 	# Показываем меню улучшений
