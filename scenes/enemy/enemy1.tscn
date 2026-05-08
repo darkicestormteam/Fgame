@@ -163,6 +163,8 @@ height = 88.0
 attack_distance = 45.0
 attack_collision_start_frame = 4
 attack_collision_end_frame = 5
+teleport_distance = 2500.0
+camera_buffer = 200.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5thvk")
