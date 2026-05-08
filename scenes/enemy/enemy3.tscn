@@ -201,8 +201,6 @@ health = 10
 attack_distance = 80.0
 attack_collision_start_frame = 6
 attack_collision_end_frame = 7
-teleport_distance = 2500.0
-camera_buffer = 200.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fofnl")

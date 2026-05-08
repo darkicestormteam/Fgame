@@ -214,8 +214,8 @@ z_index = 1
 collision_layer = 4
 script = ExtResource("1_md0e3")
 attack_distance = 100.0
-teleport_distance = 2500.0
-camera_buffer = 200.0
+teleport_distance = 1000.0
+camera_buffer = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")
