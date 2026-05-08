@@ -21,7 +21,6 @@ var flash_interval: float = 0.1
 var original_modulate: Color = Color.WHITE
 
 func _ready() -> void:
-	# Добавляем в группу "Enemy" с большой буквы, чтобы совпадать с проверкой в player.gd и сценой
 	add_to_group("Enemy")
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
@@ -35,7 +34,7 @@ func _ready() -> void:
 func knockback(direction: Vector2, distance: float) -> void:
 	velocity = direction * distance
 	is_knockedback = true
-	knockback_timer = 0.15  # Длительность отталкивания в секундах
+	knockback_timer = 0.15
 
 func take_damage(amount: int) -> void:
 	health -= amount
@@ -53,7 +52,6 @@ func _physics_process(delta: float) -> void:
 			is_flashing = false
 			animated_sprite.modulate = original_modulate
 		else:
-			# Мигаем красным и белым
 			var flash_state = int(flash_timer / flash_interval) % 2
 			if flash_state == 0:
 				animated_sprite.modulate = Color.RED
@@ -77,56 +75,86 @@ func _physics_process(delta: float) -> void:
 	
 	# Проверяем дистанцию до игрока
 	if distance_to_player <= attack_distance:
-		# Если еще не атакуем, начинаем атаку
 		if not is_attacking:
 			is_attacking = true
 			animated_sprite.play("attack")
-		# Останавливаем движение во время атаки
 		velocity = Vector2.ZERO
-		# Не меняем направление спрайта во время атаки
 		return
 	
-	# Если игрок вне зоны атаки и мы не в процессе атаки, продолжаем движение
+	# Логика движения
 	if not is_attacking:
 		var direction: Vector2 = (_player.global_position - global_position).normalized()
 		
-		velocity = direction * speed
+		# Запоминаем желаемое направление для анимации и логики
+		var desired_velocity = direction * speed
 		
-		if velocity.x > 0:
+		if desired_velocity.x > 0:
 			animated_sprite.flip_h = false
 			attack_area.scale.x = abs(attack_area.scale.x)
-		elif velocity.x < 0:
+		elif desired_velocity.x < 0:
 			animated_sprite.flip_h = true
 			attack_area.scale.x = -abs(attack_area.scale.x)
-	
-	move_and_slide()
-	
-	if not is_attacking and velocity.length_squared() > 1.0:
-		if animated_sprite.animation != "walk":
-			animated_sprite.play("walk")
-	elif not is_attacking:
-		if animated_sprite.animation != "idle":
-			animated_sprite.play("idle")
+		
+		velocity = desired_velocity
+		
+		# Первый проход физики
+		move_and_slide()
+		
+		# --- УЛУЧШЕННАЯ ЛОГИКА СКОЛЬЖЕНИЯ ---
+		# Если произошло столкновение
+		if get_slide_collision_count() > 0:
+			var collision = get_slide_collision(0)
+			var normal = collision.get_normal()
+			
+			# Получаем оставшуюся скорость после удара о стену (она обычно гасится движком)
+			# Но мы хотим заставить врага скользить вдоль стены активно
+			var tangent = -normal.orthogonal() # Вектор вдоль стены
+			
+			# Определяем, в какую сторону вдоль стены выгоднее идти (к игроку)
+			var to_player = (_player.global_position - global_position).normalized()
+			
+			# Если касательная направлена от игрока, разворачиваем её
+			if tangent.dot(to_player) < 0:
+				tangent = -tangent
+			
+			# ХИТРОСТЬ: Мы смешиваем исходное желание идти к игроку и скольжение.
+			# Это предотвращает "прилипание", так как мы не ждем полной остановки.
+			# Проекция желаемой скорости на касательную
+			var slide_speed = desired_velocity.dot(tangent)
+			
+			# Если проекция положительная (мы хотим двигаться вдоль стены к игроку)
+			if slide_speed > 0:
+				# Принудительно задаем скорость скольжения. 
+				# Умножаем на 1.05, чтобы быть чуть быстрее обычного трения, пробивая застревание
+				velocity = tangent * slide_speed * 1.05
+				
+				# Второй проход физики для применения нового вектора сразу же
+				move_and_slide()
+
+	# Анимация
+	if not is_attacking:
+		if velocity.length_squared() > 1.0:
+			if animated_sprite.animation != "walk":
+				animated_sprite.play("walk")
+		else:
+			if animated_sprite.animation != "idle":
+				animated_sprite.play("idle")
 
 func _on_frame_changed() -> void:
 	if animated_sprite.animation == "attack":
 		var current_frame = animated_sprite.frame
-		# Включаем коллизию на указанном кадре (настраивается в инспекторе)
 		if current_frame == attack_collision_start_frame:
 			attack_area.monitoring = true
-			# Воспроизводим звук атаки с разной тональностью
 			if attack_sound and not attack_sound.playing:
 				last_pitch = randf_range(0.9, 1.2)
 				attack_sound.pitch_scale = last_pitch
 				attack_sound.play()
-		# Выключаем коллизию после указанного кадра (настраивается в инспекторе)
 		elif current_frame >= attack_collision_end_frame:
 			attack_area.monitoring = false
 			is_attacking = false
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		# Вызываем метод получения урона у игрока
 		body.take_damage()
 
 func _on_animation_finished() -> void:

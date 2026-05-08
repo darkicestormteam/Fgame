@@ -27,3 +27,4 @@ res://scenes/Tree/deco.tscn
 res://scenes/Tree/water.tscn
 res://script/TreeRandomizer.gd
 res://script/game.gd
+res://script/enemy.gd

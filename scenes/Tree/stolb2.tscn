@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://lckt3n3t6w2e"]
+[gd_scene load_steps=4 format=3 uid="uid://lckt3n3t6w2e"]
 
 [ext_resource type="Texture2D" uid="uid://d3x0xfquldpp" path="res://Tiny Swords (Update 010)/Deco/17.png" id="1_e73na"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_avsvi"]
-radius = 7.0
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e73na"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e73na"]
+size = Vector2(10, 10)
 
 [node name="Stolb" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_e73na")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -14,5 +18,6 @@ texture = ExtResource("1_e73na")
 offset = Vector2(0, -50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 28)
-shape = SubResource("CircleShape2D_avsvi")
+position = Vector2(0, 22)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_e73na")
