@@ -5,30 +5,58 @@ extends Node2D
 @onready var objects_layer: TileMapLayer = $TileMap/Objects
 
 func _ready() -> void:
-	# Инициализируем таймер на 3 секунды для теста
+	# Инициализируем таймер
 	timer.wait_time = 3.0
 	timer.one_shot = true
 	timer.start()
 	
-	# Скрываем Spellmenu при старте
 	spellmenu.visible = false
 	
-	# Разсинхронизируем анимацию деревьев в слое Objects
-	_desync_tile_animations(objects_layer)
+	# Вызываем разсинхронизацию с задержкой, чтобы сцены успели создаться
+	call_deferred("_desync_tile_animations", objects_layer)
 
 func _desync_tile_animations(layer: TileMapLayer) -> void:
 	if not layer:
+		print("Слой Objects не найден!")
 		return
 	
-	var used_cells = layer.get_used_cells()
-	for cell in used_cells:
-		# Получаем текущий источник анимации для клетки
-		var source_id = layer.get_cell_source_id(cell)
-		if source_id != -1:
-			# Устанавливаем случайное смещение кадра анимации
-			# Это заставит каждую плитку начинаться с разной фазы анимации
-			layer.set_cell_animation_frame_offset(cell, randi() % 100)
+	print("Начинаем разсинхронизацию анимации в слое: ", layer.name)
+	var count = 0
+	
+	for child in layer.get_children():
+		count += _find_and_desync_animated_sprites(child)
+	
+	if count == 0:
+		print("Warning: Не найдено узлов AnimatedSprite2D в слое Objects.")
+	else:
+		print("Разсинхронизировано анимаций: ", count)
+
+func _find_and_desync_animated_sprites(node: Node) -> int:
+	var found_count = 0
+	
+	# Проверяем сам узел
+	if node is AnimatedSprite2D:
+		var anim_name = node.animation
+		if anim_name and node.sprite_frames:
+			if node.sprite_frames.has_animation(anim_name):
+				var frame_count = node.sprite_frames.get_frame_count(anim_name)
+				
+				if frame_count > 1:
+					# 1. Устанавливаем случайный начальный кадр (нормализованный 0.0 - 1.0)
+					# randf() возвращает число от 0.0 до 1.0
+					node.frame_progress = randf() * frame_count
+					
+					# 2. Устанавливаем случайную скорость анимации (от 0.8 до 1.2 от нормы)
+					# Это критически важно, чтобы они со временем не синхронизировались снова
+					node.speed_scale = 0.8 + randf() * 0.4
+					
+					found_count += 1
+	
+	# Рекурсивно проверяем всех детей
+	for child in node.get_children():
+		found_count += _find_and_desync_animated_sprites(child)
+	
+	return found_count
 
 func _on_spell_timer_timeout() -> void:
-	# Показываем меню улучшений
 	spellmenu.show_spellmenu()
