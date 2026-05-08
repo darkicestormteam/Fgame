@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcmcdljum6y1m"]
+
+[ext_resource type="Texture2D" uid="uid://vffr15tqw8ho" path="res://assets/Bushes-Sheet.png" id="1_cujx4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1nyi"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txdq4"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54dcc"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aacit"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08xny"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c85ru"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1wm2"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6ade"]
+atlas = ExtResource("1_cujx4")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xh0w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1nyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txdq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54dcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aacit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08xny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c85ru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1wm2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6ade")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Tree" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 75)
+sprite_frames = SubResource("SpriteFrames_5xh0w")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.532382
+offset = Vector2(0, -50)

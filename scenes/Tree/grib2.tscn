@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://8w3j2t2qa3su"]
+
+[ext_resource type="Texture2D" uid="uid://ct850dtwd7w1" path="res://Tiny Swords (Update 010)/Deco/01.png" id="1_6i7xo"]
+
+[node name="Tree" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 75)
+texture = ExtResource("1_6i7xo")
+offset = Vector2(0, -50)

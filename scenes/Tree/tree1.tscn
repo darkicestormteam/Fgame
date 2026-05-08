@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://u8e1hyktanbv"]
+
+[ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="1_4diw5"]
+[ext_resource type="Texture2D" uid="uid://bqf07m5h8hogk" path="res://assets/Trees-Sheet.png" id="2_vkyjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww8nl"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(0, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvedg"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(192, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu0jt"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(384, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_che17"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(576, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hapmr"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(768, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q82r8"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(960, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v0dt"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(1152, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmqa4"]
+atlas = ExtResource("2_vkyjv")
+region = Rect2(1344, 256, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_si864"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ww8nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvedg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu0jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_che17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hapmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q82r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v0dt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmqa4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_avsvi"]
+radius = 7.0
+
+[node name="Tree" instance=ExtResource("1_4diw5")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_si864")
+frame = 0
+frame_progress = 0.623909
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_avsvi")

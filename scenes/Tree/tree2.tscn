@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://7i181q8sdruw"]
+
+[ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="1_5ivul"]
+[ext_resource type="Texture2D" uid="uid://bqf07m5h8hogk" path="res://assets/Trees-Sheet.png" id="2_b1pgc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8x4u"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(0, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtavx"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(192, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r25ng"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(384, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpf05"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(576, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dfxp"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(768, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74d3e"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(960, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq07t"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(1152, 512, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p76y8"]
+atlas = ExtResource("2_b1pgc")
+region = Rect2(1344, 512, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lbg8d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8x4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtavx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r25ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpf05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dfxp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74d3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq07t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p76y8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Tree" instance=ExtResource("1_5ivul")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_lbg8d")
+frame = 0
+frame_progress = 0.0
