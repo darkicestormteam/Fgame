@@ -1,1 +1,53 @@
-(script.gd)
+```
+# Godot-specific ignores
+*.import
+*.pid
+.project
+.user
+.sln
+.csproj
+.vs/
+
+# Compiled and build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+*.o
+*.obj
+*.out
+build/
+dist/
+bin/
+obj/
+
+# Dependencies
+node_modules/
+vendor/
+libs/
+dependencies/
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+*.cache
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+Thumbs.db
+```

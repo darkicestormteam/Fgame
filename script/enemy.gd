@@ -6,7 +6,12 @@ extends CharacterBody2D
 @export var attack_collision_start_frame: int = 3
 @export var attack_collision_end_frame: int = 6
 
+# Настройки телепортации
+@export var teleport_distance: float = 2500.0
+@export var camera_buffer: float = 200.0
+
 var _player: Node2D = null
+var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $Attack
 @onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
@@ -25,6 +30,15 @@ func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player")
 	if _player == null:
 		print("Предупреждение: Игрок не найден в группе 'player'.")
+	
+	# Находим слой травы через получение сцены игры
+	var game_scene = get_tree().current_scene
+	if game_scene:
+		var tilemap = game_scene.get_node_or_null("TileMap")
+		if tilemap:
+			_grass_layer = tilemap.get_node_or_null("Grass") as TileMapLayer
+			if _grass_layer == null:
+				print("Предупреждение: Слой 'Grass' не найден в TileMap.")
 	
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	animated_sprite.animation_finished.connect(_on_animation_finished)
@@ -71,10 +85,16 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("idle")
 		return
 	
+	# Проверка дистанции для телепортации
 	var distance_to_player: float = global_position.distance_to(_player.global_position)
+	if distance_to_player > teleport_distance:
+		_teleport_to_player()
+		return
+	
+	var distance_to_player_after: float = global_position.distance_to(_player.global_position)
 	
 	# Проверяем дистанцию до игрока
-	if distance_to_player <= attack_distance:
+	if distance_to_player_after <= attack_distance:
 		if not is_attacking:
 			is_attacking = true
 			animated_sprite.play("attack")
@@ -160,3 +180,68 @@ func _on_attack_body_entered(body: Node2D) -> void:
 func _on_animation_finished() -> void:
 	if animated_sprite.animation == "attack":
 		is_attacking = false
+
+# Функция телепортации врага ближе к игроку
+func _teleport_to_player() -> void:
+	if _player == null or _grass_layer == null:
+		return
+	
+	# Получаем камеру игрока
+	var camera = _player.get_viewport().get_camera_2d()
+	if camera == null:
+		# Если камеры нет, используем позицию игрока
+		_teleport_to_random_grass_position(_player.global_position, camera_buffer)
+		return
+	
+	# Вычисляем целевую точку на расстоянии camera_buffer от края камеры
+	var camera_position = camera.global_position
+	var viewport_size = get_viewport().get_visible_rect().size
+	var half_viewport = viewport_size / 2 * camera.zoom
+	
+	# Определяем направление от камеры к текущей позиции врага
+	var direction_to_enemy = (global_position - camera_position).normalized()
+	
+	# Если направление нулевое, используем случайное
+	if direction_to_enemy == Vector2.ZERO:
+		direction_to_enemy = Vector2.RIGHT.rotated(randf() * TAU)
+	
+	# Целевая позиция на расстоянии buffer от края камеры в направлении врага
+	var target_distance_from_camera = min(half_viewport.x, half_viewport.y) + camera_buffer
+	var target_position = camera_position + direction_to_enemy * target_distance_from_camera
+	
+	# Телепортируем на ближайший тайл травы
+	_teleport_to_random_grass_position(target_position, camera_buffer * 0.5)
+
+# Поиск и телепортация на случайную позицию с травой рядом с целевой точкой
+func _teleport_to_random_grass_position(target_pos: Vector2, search_radius: float) -> void:
+	if _grass_layer == null:
+		global_position = target_pos
+		return
+	
+	# Получаем размер тайла
+	var tile_size = _grass_layer.tile_set.tile_size
+	var half_tile = tile_size / 2.0
+	
+	# Определяем область поиска в тайлах
+	var start_tile = _grass_layer.local_to_map(target_pos - Vector2(search_radius, search_radius))
+	var end_tile = _grass_layer.local_to_map(target_pos + Vector2(search_radius, search_radius))
+	
+	var valid_positions: Array[Vector2] = []
+	
+	# Перебираем все тайлы в области поиска
+	for x in range(start_tile.x, end_tile.x + 1):
+		for y in range(start_tile.y, end_tile.y + 1):
+			# Проверяем, есть ли здесь тайл травы
+			var tile_data = _grass_layer.get_cell_tile_data(Vector2i(x, y))
+			if tile_data != null:
+				# Конвертируем координаты тайла обратно в мировые
+				var world_pos = _grass_layer.map_to_local(Vector2i(x, y)) + half_tile
+				valid_positions.append(world_pos)
+	
+	# Если нашли подходящие позиции, выбираем случайную
+	if valid_positions.size() > 0:
+		var random_index = randi() % valid_positions.size()
+		global_position = valid_positions[random_index]
+	else:
+		# Если не нашли траву, просто телепортируем в целевую точку
+		global_position = target_pos
