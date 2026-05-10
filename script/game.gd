@@ -82,13 +82,3 @@ func _on_boundary_zone_body_exited(body: Node2D) -> void:
 		# Возвращаем игрока обратно в круг, устанавливая позицию на границе
 		player.global_position = boundary_center + direction_to_player * boundary_radius
 		print("Игрок попытался выйти за границу и был возвращен")
-
-func _process(_delta: float) -> void:
-	# Дополнительная проверка позиции игрока каждый кадр для более плавного ограничения
-	if boundary_radius > 0:
-		var player = get_tree().get_first_node_in_group("player")
-		if player and player is CharacterBody2D:
-			var distance_from_center = player.global_position.distance_to(boundary_center)
-			if distance_from_center > boundary_radius:
-				var direction_to_player = (player.global_position - boundary_center).normalized()
-				player.global_position = boundary_center + direction_to_player * boundary_radius
