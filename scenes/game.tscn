@@ -781,11 +781,14 @@ process_mode = 3
 [node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
 position = Vector2(302, 2499)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="BoundaryZone" type="Area2D" parent="."]
+collision_layer = 1
+collision_mask = 2
 
-[node name="woll" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="woll" type="CollisionShape2D" parent="BoundaryZone"]
 position = Vector2(1280, 2304)
 scale = Vector2(41.1192, 41.1192)
 shape = SubResource("CircleShape2D_js0lu")
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
+[connection signal="body_exited" from="BoundaryZone" to="." method="_on_boundary_zone_body_exited"]

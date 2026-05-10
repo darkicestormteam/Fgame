@@ -3,6 +3,10 @@ extends Node2D
 @onready var spellmenu = $Spellmenu
 @onready var timer = $SpellTimer
 @onready var objects_layer: TileMapLayer = $TileMap/Objects
+@onready var boundary_zone: Area2D = $BoundaryZone
+
+var boundary_center: Vector2
+var boundary_radius: float
 
 func _ready() -> void:
 	# Инициализируем таймер
@@ -14,6 +18,14 @@ func _ready() -> void:
 	
 	# Вызываем разсинхронизацию с задержкой, чтобы сцены успели создаться
 	call_deferred("_desync_tile_animations", objects_layer)
+	
+	# Инициализируем параметры границы
+	if boundary_zone and boundary_zone.get_node_or_null("woll"):
+		var collision_shape = boundary_zone.get_node("woll") as CollisionShape2D
+		if collision_shape and collision_shape.shape is CircleShape2D:
+			boundary_center = collision_shape.global_position
+			boundary_radius = collision_shape.shape.radius * collision_shape.global_scale.x
+			print("Граница установлена: центр=", boundary_center, " радиус=", boundary_radius)
 
 func _desync_tile_animations(layer: TileMapLayer) -> void:
 	if not layer:
@@ -60,3 +72,23 @@ func _find_and_desync_animated_sprites(node: Node) -> int:
 
 func _on_spell_timer_timeout() -> void:
 	spellmenu.show_spellmenu()
+
+func _on_boundary_zone_body_exited(body: Node2D) -> void:
+	# Проверяем, что это игрок
+	if body.is_in_group("player") or body is CharacterBody2D:
+		var player = body
+		# Вычисляем направление от центра границы к игроку
+		var direction_to_player = (player.global_position - boundary_center).normalized()
+		# Возвращаем игрока обратно в круг, устанавливая позицию на границе
+		player.global_position = boundary_center + direction_to_player * boundary_radius
+		print("Игрок попытался выйти за границу и был возвращен")
+
+func _process(_delta: float) -> void:
+	# Дополнительная проверка позиции игрока каждый кадр для более плавного ограничения
+	if boundary_radius > 0:
+		var player = get_tree().get_first_node_in_group("player")
+		if player and player is CharacterBody2D:
+			var distance_from_center = player.global_position.distance_to(boundary_center)
+			if distance_from_center > boundary_radius:
+				var direction_to_player = (player.global_position - boundary_center).normalized()
+				player.global_position = boundary_center + direction_to_player * boundary_radius
