@@ -13,6 +13,7 @@ var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
 @onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var boundary_zone: Area2D = null  # Ссылка на зону границы (будет найдена в _ready)
 
 var is_attacking: bool = false
 var enemies_in_area: Array = []
@@ -25,16 +26,13 @@ var is_second_attack_active: bool = false
 var original_facing_right: bool = true
 var is_swordup_playing: bool = false  # Флаг для отслеживания воспроизведения swordUP
 
-# Система жизней
-var max_lives: int = 3
-var current_lives: int = 3
-var is_invincible: bool = false
-var blink_visible: bool = true
-var hp_bar_node: Node = null
-
 # Тип текущей атаки
 var attack_type: String = "normal"
 var splash_attack_timer: Timer
+
+# Параметры границы
+var boundary_center: Vector2
+var boundary_radius: float
 
 func _ready() -> void:
 	add_to_group("player")
@@ -58,6 +56,15 @@ func _ready() -> void:
 	
 	await get_tree().process_frame
 	hp_bar_node = get_tree().get_first_node_in_group("hp_bar")
+	
+	# Инициализация параметров границы
+	boundary_zone = get_tree().get_first_node_in_group("boundary_zone")
+	if boundary_zone and boundary_zone.get_node_or_null("woll"):
+		var collision_shape = boundary_zone.get_node("woll") as CollisionShape2D
+		if collision_shape and collision_shape.shape is CircleShape2D:
+			boundary_center = collision_shape.global_position
+			boundary_radius = collision_shape.shape.radius * collision_shape.global_scale.x
+			print("Граница установлена в player.gd: центр=", boundary_center, " радиус=", boundary_radius)
 
 func _process(_delta: float) -> void:
 	if is_invincible:
@@ -223,6 +230,15 @@ func _physics_process(_delta: float) -> void:
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	velocity = input_direction * SPEED
+	
+	# Проверка и ограничение выхода за границу круга
+	if boundary_radius > 0:
+		var distance_from_center = global_position.distance_to(boundary_center)
+		if distance_from_center > boundary_radius:
+			# Вычисляем направление от центра к игроку
+			var direction_to_player = (global_position - boundary_center).normalized()
+			# Устанавливаем позицию игрока точно на границе круга
+			global_position = boundary_center + direction_to_player * boundary_radius
 	
 	if velocity.length_squared() > 0:
 		var is_sword_up_combo_active: bool = (sword_up_unlocked and is_second_attack_active)

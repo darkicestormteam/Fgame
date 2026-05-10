@@ -74,11 +74,6 @@ func _on_spell_timer_timeout() -> void:
 	spellmenu.show_spellmenu()
 
 func _on_boundary_zone_body_exited(body: Node2D) -> void:
-	# Проверяем, что это игрок
-	if body.is_in_group("player") or body is CharacterBody2D:
-		var player = body
-		# Вычисляем направление от центра границы к игроку
-		var direction_to_player = (player.global_position - boundary_center).normalized()
-		# Возвращаем игрока обратно в круг, устанавливая позицию на границе
-		player.global_position = boundary_center + direction_to_player * boundary_radius
-		print("Игрок попытался выйти за границу и был возвращен")
+	# Этот метод больше не используется для телепортации,
+	# так как мы используем непрерывную проверку в player.gd
+	pass

@@ -783,6 +783,7 @@ position = Vector2(302, 2499)
 
 [node name="BoundaryZone" type="Area2D" parent="."]
 collision_layer = 1
+groups = ["boundary_zone"]
 collision_mask = 2
 
 [node name="woll" type="CollisionShape2D" parent="BoundaryZone"]
