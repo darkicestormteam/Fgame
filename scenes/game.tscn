@@ -744,7 +744,7 @@ tile_map_data = PackedByteArray("AAD3/xMAAAAGAAQAAAD4/xMAAAAGAAQAAAD5/xMAAAAGAAQ
 tile_set = SubResource("TileSet_twgab")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(792, 2054)
+position = Vector2(1152, 2176)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
@@ -784,11 +784,10 @@ position = Vector2(302, 2499)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(607, 141)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="wall" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(545, 2099)
 scale = Vector2(27.6758, 27.6758)
 shape = SubResource("CircleShape2D_js0lu")
-one_way_collision = true
 one_way_collision_margin = 1.5
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
