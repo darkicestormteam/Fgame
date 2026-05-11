@@ -1,3 +1,5 @@
+CollisionPolygon2D
+Area2D
 CollisionShape2D
 StaticBody2D
 AnimatedSprite2D
@@ -8,7 +10,5 @@ ColorRect
 CanvasLayer
 AudioStreamPlayer
 AudioStreamPlayer2D
-Area2D
 Node2D
-CollisionPolygon2D
 TextureRect

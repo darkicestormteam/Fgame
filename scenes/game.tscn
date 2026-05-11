@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=50 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -714,9 +714,6 @@ spawn_interval = 1.0
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_js0lu"]
-radius = 1000.0
-
 [node name="game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("9_game")
@@ -781,16 +778,5 @@ process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
 position = Vector2(302, 2499)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(607, 141)
-collision_layer = 4
-collision_priority = 1.0
-
-[node name="wall" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(545, 2099)
-scale = Vector2(27.6758, 27.6758)
-shape = SubResource("CircleShape2D_js0lu")
-one_way_collision_margin = 0.0
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
