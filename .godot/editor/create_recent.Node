@@ -1,6 +1,6 @@
 CollisionShape2D
-AnimatedSprite2D
 StaticBody2D
+AnimatedSprite2D
 TileMapLayer
 Sprite2D
 AnimationPlayer
