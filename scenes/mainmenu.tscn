@@ -756,7 +756,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 23
-text = tr("menu_start")
+text = "старт"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -776,7 +776,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 14
-text = tr("menu_settings")
+text = "настройки"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -796,7 +796,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = tr("menu_exit")
+text = "выход"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -868,6 +868,6 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = tr("menu_back")
+text = "назад"
 horizontal_alignment = 1
 vertical_alignment = 1
