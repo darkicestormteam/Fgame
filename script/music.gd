@@ -3,9 +3,27 @@ extends HSlider
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	# Настройка ползунка: от 0 до 1, шаг 0.1, начальное значение 0.5
+	min_value = 0.0
+	max_value = 1.0
+	step = 0.1
+	value = 0.5
+	
+	# Применяем начальную громкость
+	_update_music_volume()
+	
+	# Подключаем сигнал изменения значения
+	value_changed.connect(_update_music_volume)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# Функция для обновления громкости музыки
+func _update_music_volume(new_value: float = value) -> void:
+	# Преобразуем значение 0-1 в dB (-40dB до 0dB)
+	var db: float
+	if new_value == 0:
+		db = -80.0  # Полная тишина
+	else:
+		db = linear_to_db(new_value)
+	
+	# Устанавливаем громкость на шину "music"
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("music"), db)
