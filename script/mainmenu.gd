@@ -59,15 +59,11 @@ func _on_eng_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
 	# Устанавливаем английский язык
-	var localization = get_node_or_null("/root/Localization")
-	if localization:
-		localization.set_locale("en")
+	Localization.set_locale("en")
 
 
 func _on_rus_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
 	# Устанавливаем русский язык
-	var localization = get_node_or_null("/root/Localization")
-	if localization:
-		localization.set_locale("ru")
+	Localization.set_locale("ru")
