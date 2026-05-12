@@ -9,3 +9,7 @@ res://scenes/spellmenu.tscn
 res://scenes/enemy.tscn
 res://scenes/preview.tscn
 res://default_bus_layout.tres
+res://script/mainmenu.gd
+res://script/music.gd
+res://script/sfx.gd
+res://scenes/enemy/enemy3.tscn

@@ -807,45 +807,74 @@ zoom = Vector2(1.5, 1.5)
 process_mode = 3
 position = Vector2(-76, -1743)
 stream = ExtResource("30_f107f")
-volume_db = -15.0
 bus = &"music"
 
 [node name="Tap" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("31_jqs8n")
-volume_db = 11.32
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 visible = false
+z_index = 4
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -101.0
-offset_right = 96.0
-offset_bottom = 101.0
+offset_left = -148.0
+offset_top = -155.0
+offset_right = 149.0
+offset_bottom = 99.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+z_index = 4
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 19
+text = "громкость"
 
-[node name="music" type="HSlider" parent="MarginContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
-min_value = 0.0
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_85riq")
+text = "Музыка "
+
+[node name="music" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 max_value = 1.0
 step = 0.1
 value = 0.5
 script = ExtResource("36_dsjw7")
 
-[node name="SFX" type="HSlider" parent="MarginContainer2/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
-min_value = 0.0
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_85riq")
+text = "Эффекты"
+
+[node name="SFX" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 max_value = 1.0
 step = 0.1
 value = 0.5
@@ -853,7 +882,8 @@ script = ExtResource("37_altoc")
 
 [node name="Back" type="TextureButton" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("5_85riq")
 texture_pressed = ExtResource("1_5mbse")
 

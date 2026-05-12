@@ -1,3 +1,5 @@
+Label
+HBoxContainer
 HSlider
 LineEdit
 VBoxContainer
@@ -10,6 +12,3 @@ StaticBody2D
 Node2D
 Area2D
 TileMapLayer
-AnimationPlayer
-ColorRect
-CanvasLayer

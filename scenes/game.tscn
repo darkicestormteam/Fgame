@@ -694,7 +694,7 @@ sources/1 = SubResource("TileSetAtlasSource_oaba0")
 
 [sub_resource type="Resource" id="Resource_dinhu"]
 script = ExtResource("9_dinhu")
-activation_time = 5555.0
+activation_time = 3.0
 lifetime = 40.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([100])
@@ -705,8 +705,8 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("9_dinhu")
-activation_time = 5555.0
-lifetime = 30.0
+activation_time = 43.0
+lifetime = 40.0
 enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
 spawn_weights = Array[int]([100])
 max_enemies = 20
@@ -716,7 +716,7 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ir15t"]
 script = ExtResource("9_dinhu")
-activation_time = 5555.0
+activation_time = 83.0
 lifetime = 60.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu"), ExtResource("12_ir15t")])
 spawn_weights = Array[int]([])
@@ -727,7 +727,7 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_rysoc"]
 script = ExtResource("9_dinhu")
-activation_time = 55555.0
+activation_time = 260.0
 lifetime = 1.0
 enemy_scenes = Array[PackedScene]([ExtResource("13_ca42v")])
 spawn_weights = Array[int]([])
@@ -772,7 +772,6 @@ position = Vector2(1311, 2515)
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
 position = Vector2(-76, -1743)
-volume_db = -15.0
 bus = &"music"
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]

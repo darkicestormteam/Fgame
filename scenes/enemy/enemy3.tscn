@@ -204,8 +204,7 @@ attack_collision_end_frame = 7
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fofnl")
-frame = 9
-frame_progress = 0.276173
+frame = 0
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 11)
