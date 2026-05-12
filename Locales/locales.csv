@@ -8,4 +8,5 @@ btn_exit,Exit,выход
 lbl_volume,Volume,громкость
 lbl_music,Music,Музыка
 lbl_sfx,SFX,Эффекты
+lbl_language,Language,язык
 btn_back,Back,назад
