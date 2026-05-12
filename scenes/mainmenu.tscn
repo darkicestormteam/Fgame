@@ -901,3 +901,51 @@ theme_override_font_sizes/font_size = 19
 text = "btn_back"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Eng" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_7yvfd")
+texture_pressed = ExtResource("4_dfy5j")
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3/Eng"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 16
+text = "btn_eng"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rus" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_7yvfd")
+texture_pressed = ExtResource("4_dfy5j")
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3/Rus"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 16
+text = "btn_rus"
+horizontal_alignment = 1
+vertical_alignment = 1

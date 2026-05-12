@@ -3,6 +3,5 @@
 *.import
 *.remap
 export_presets.cfg
-.user
-*.autosave
+user://*
 ```
