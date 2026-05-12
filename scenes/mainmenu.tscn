@@ -37,9 +37,9 @@
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="31_jqs8n"]
 [ext_resource type="Script" uid="uid://b8wymmxcoglgj" path="res://script/music.gd" id="36_dsjw7"]
 [ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="37_altoc"]
-[ext_resource type="Script" uid="uid://811b10a95cd64a5fb6a2bc783f4667ec" path="res://script/localized_label.gd" id="40_localized"]
 [ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="38_owq6t"]
 [ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="39_hn8mj"]
+[ext_resource type="Script" uid="uid://newlocalizedcontrol123" path="res://script/localized_control.gd" id="40_localized"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wny6h"]
 texture = ExtResource("2_h73c4")
@@ -765,6 +765,8 @@ theme_override_font_sizes/font_size = 23
 text = "btn_start"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("40_localized")
+key = "btn_start"
 
 [node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -785,6 +787,8 @@ theme_override_font_sizes/font_size = 14
 text = "btn_settings"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("40_localized")
+key = "btn_settings"
 
 [node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -805,6 +809,8 @@ theme_override_font_sizes/font_size = 19
 text = "btn_exit"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("40_localized")
+key = "btn_exit"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -946,3 +952,5 @@ theme_override_font_sizes/font_size = 19
 text = "btn_back"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("40_localized")
+key = "btn_back"
