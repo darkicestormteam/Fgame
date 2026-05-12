@@ -13,6 +13,9 @@ func _ready() -> void:
 	$MarginContainer/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
 	# Подключаем сигнал кнопки Back в настройках
 	$MarginContainer2/VBoxContainer/Back.pressed.connect(_on_back_pressed)
+	# Подключаем сигналы кнопок выбора языка
+	$MarginContainer2/VBoxContainer/HBoxContainer3/Eng.pressed.connect(_on_eng_pressed)
+	$MarginContainer2/VBoxContainer/HBoxContainer3/Rus.pressed.connect(_on_rus_pressed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,3 +53,21 @@ func _on_back_pressed() -> void:
 	# Скрываем настройки и показываем главное меню
 	$MarginContainer2.visible = false
 	$MarginContainer.visible = true
+
+
+func _on_eng_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
+	# Устанавливаем английский язык
+	var localization = get_node_or_null("/root/Localization")
+	if localization:
+		localization.set_locale("en")
+
+
+func _on_rus_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
+	# Устанавливаем русский язык
+	var localization = get_node_or_null("/root/Localization")
+	if localization:
+		localization.set_locale("ru")
