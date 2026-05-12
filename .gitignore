@@ -1,43 +1,69 @@
-```
-# Godot-specific ignores
-*.import
-export_presets.cfg
-.user
-.autoload_singleton.gd
-.godot/
-
-# Dependencies
-.addons/
-.build/
-.ios_native/
-.linux_native/
-.osx_native/
-.windows_native/
-.vs/
-.vscode/
-
-# Build artifacts
-*.exe
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
 *.dll
 *.so
-*.dylib
-*.app
-*.apk
-*.aab
-*.zip
-*.tar
-*.tar.gz
+*.a
+*.out
 
-# Temp files
-*.tmp
-*.temp
+# Dependencies
+.venv/
+venv/
+node_modules/
+dist/
+build/
+target/
+.gradle/
+.mypy_cache/
+.pytest_cache/
+
+# Logs and temp files
 *.log
-*~
-.DS_Store
-Thumbs.db
+*.tmp
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
 *.env.*
-```
+
+# Editors
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst

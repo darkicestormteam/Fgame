@@ -7,10 +7,12 @@ var settings_scene := "res://scenes/settings.tscn" # Если сцены нас�
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Подключаем сигналы кнопок
+	# Подключаем сигналы кнопок главного меню
 	$MarginContainer/VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$MarginContainer/VBoxContainer/Exit.pressed.connect(_on_exit_pressed)
 	$MarginContainer/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
+	# Подключаем сигнал кнопки Back в настройках
+	$MarginContainer2/VBoxContainer/Back.pressed.connect(_on_back_pressed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,9 +39,14 @@ func _on_exit_pressed() -> void:
 func _on_settings_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
-	# Ждем 1.0 секунды и переключаемся на сцену настроек
-	await get_tree().create_timer(1.0).timeout
-	if ResourceLoader.exists(settings_scene):
-		get_tree().change_scene_to_file(settings_scene)
-	else:
-		print("Сцена настроек не найдена: ", settings_scene)
+	# Скрываем главное меню и показываем настройки
+	$MarginContainer.visible = false
+	$MarginContainer2.visible = true
+
+
+func _on_back_pressed() -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
+	# Скрываем настройки и показываем главное меню
+	$MarginContainer2.visible = false
+	$MarginContainer.visible = true
