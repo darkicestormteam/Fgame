@@ -921,7 +921,9 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxEmpty_owq6t")
-text = "Полный экран"
+text = "btn_fullscreen"
+script = ExtResource("40_localized")
+key = "btn_fullscreen"
 
 [node name="Back" type="TextureButton" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2

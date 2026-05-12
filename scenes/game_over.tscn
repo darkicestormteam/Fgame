@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjrjkoopyi22d"]
+[gd_scene load_steps=10 format=3 uid="uid://cjrjkoopyi22d"]
 
 [ext_resource type="Script" uid="uid://y0rtrumf0r6l" path="res://script/game_over.gd" id="1_xeevv"]
 [ext_resource type="Texture2D" uid="uid://clw1rp4vw1ldc" path="res://assets/Bunners/Ribbons/Ribbon_Blue_3Slides.png" id="2_wqhvx"]
 [ext_resource type="Texture2D" uid="uid://k8c3kmmnh1t4" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red.png" id="3_racf3"]
 [ext_resource type="Texture2D" uid="uid://muocld532s2n" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides.png" id="4_7m3ot"]
+[ext_resource type="Script" uid="uid://811b10a95cd64a5fb6a2bc783f4667ec" path="res://script/localized_label.gd" id="40_localized"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbwuq"]
 texture = ExtResource("2_wqhvx")
@@ -56,6 +57,8 @@ offset_bottom = 738.0
 theme_override_font_sizes/font_size = 120
 text = "game_over"
 horizontal_alignment = 1
+script = ExtResource("40_localized")
+key = "game_over"
 
 [node name="ResetGame" type="Button" parent="."]
 offset_left = 871.0
@@ -64,5 +67,7 @@ offset_right = 1111.0
 offset_bottom = 746.0
 theme_override_font_sizes/font_size = 40
 text = "btn_reset"
+script = ExtResource("40_localized")
+key = "btn_reset"
 
 [connection signal="pressed" from="ResetGame" to="." method="_on_reset_game_pressed"]
