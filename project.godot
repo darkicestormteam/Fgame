@@ -66,6 +66,7 @@ move_down={
 [internationalization]
 
 locale/translations=PackedStringArray("res://Locales/locales.en.translation", "res://Locales/locales.ru.translation")
+locale/test="en"
 
 [layer_names]
 
