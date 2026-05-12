@@ -39,11 +39,7 @@
 [ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="37_altoc"]
 [ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="38_owq6t"]
 [ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="39_hn8mj"]
-языковой-переключатель-495d0
-[ext_resource type="Script" uid="uid://newlocalizedcontrol123" path="res://script/localized_control.gd" id="40_localized"]
-=======
-[ext_resource type="Script" uid="uid://d18mkfdnijepn" path="res://script/localized_label.gd" id="40_localized"]
-main
+[ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="40_localized"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wny6h"]
 texture = ExtResource("2_h73c4")
