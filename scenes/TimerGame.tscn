@@ -10,7 +10,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(-15, -15)
-text = "Время жизни: 0"
+text = tr("timer_lives").format([0])
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
