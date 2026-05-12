@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=4 uid="uid://ldito7hwbs5p"]
+[gd_scene load_steps=53 format=4 uid="uid://ldito7hwbs5p"]
 
 [ext_resource type="Texture2D" uid="uid://dd80ssnu2do7j" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_7yvfd"]
@@ -37,6 +37,8 @@
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="31_jqs8n"]
 [ext_resource type="Script" uid="uid://b8wymmxcoglgj" path="res://script/music.gd" id="36_dsjw7"]
 [ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="37_altoc"]
+[ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="38_owq6t"]
+[ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="39_hn8mj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wny6h"]
 texture = ExtResource("2_h73c4")
@@ -691,6 +693,8 @@ terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_64fcs")
 sources/1 = SubResource("TileSetAtlasSource_td05j")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owq6t"]
+
 [node name="Mainmenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -726,6 +730,7 @@ tile_map_data = PackedByteArray("AAD3/x0AAAABAAEAAAD2/x0AAAABAAEAAAD1/x0AAAABAAE
 tile_set = SubResource("TileSet_c5dw7")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -815,7 +820,6 @@ volume_db = 5.0
 bus = &"SFX"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-visible = false
 z_index = 4
 layout_mode = 1
 anchors_preset = 8
@@ -879,6 +883,36 @@ max_value = 1.0
 step = 0.1
 value = 0.5
 script = ExtResource("37_altoc")
+
+[node name="Label2" type="Label" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 19
+text = "язык"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Eng" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("38_owq6t")
+
+[node name="Rus" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("39_hn8mj")
+
+[node name="FullScreen" type="CheckButton" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_85riq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owq6t")
+text = "Полный экран"
 
 [node name="Back" type="TextureButton" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2

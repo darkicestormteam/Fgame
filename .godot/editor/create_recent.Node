@@ -1,5 +1,7 @@
-Label
+CheckButton
+TextureButton
 HBoxContainer
+Label
 HSlider
 LineEdit
 VBoxContainer
@@ -11,4 +13,3 @@ CollisionShape2D
 StaticBody2D
 Node2D
 Area2D
-TileMapLayer

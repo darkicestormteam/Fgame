@@ -9,3 +9,6 @@ res://scenes/spellmenu.tscn
 res://scenes/enemy.tscn
 res://scenes/preview.tscn
 res://scenes/enemy/enemy3.tscn
+res://Locales/locales.en.translation
+res://Locales/locales.ru.translation
+res://script/timer_game.gd

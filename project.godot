@@ -63,6 +63,10 @@ move_down={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Locales/locales.en.translation", "res://Locales/locales.ru.translation")
+
 [layer_names]
 
 2d_physics/layer_2="player"
