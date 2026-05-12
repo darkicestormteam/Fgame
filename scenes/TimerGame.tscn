@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d15dwj5s4a5gl"]
+[gd_scene load_steps=3 format=3 uid="uid://d15dwj5s4a5gl"]
 
 [ext_resource type="Script" uid="uid://d32m1g2dcmh6v" path="res://script/timer_game.gd" id="1_j78np"]
+[ext_resource type="Script" uid="uid://811b10a95cd64a5fb6a2bc783f4667ec" path="res://script/localized_label.gd" id="40_localized"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_j78np")
@@ -11,6 +12,8 @@ offset_bottom = 23.0
 scale = Vector2(2, 2)
 pivot_offset = Vector2(-15, -15)
 text = "timer_label"
+script = ExtResource("40_localized")
+key = "timer_label"
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
