@@ -756,7 +756,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 23
-text = "старт"
+text = "btn_start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -776,7 +776,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 14
-text = "настройки"
+text = "btn_settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -796,7 +796,7 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = "выход"
+text = "btn_exit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -842,7 +842,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = "громкость"
+text = "lbl_volume"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -851,7 +851,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_85riq")
-text = "Музыка "
+text = "lbl_music"
 
 [node name="music" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -869,7 +869,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_85riq")
-text = "Эффекты"
+text = "lbl_sfx"
 
 [node name="SFX" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -898,6 +898,6 @@ offset_right = 173.936
 offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = "назад"
+text = "btn_back"
 horizontal_alignment = 1
 vertical_alignment = 1
