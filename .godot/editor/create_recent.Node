@@ -1,3 +1,7 @@
+HSlider
+LineEdit
+VBoxContainer
+MarginContainer
 AnimatedSprite2D
 Sprite2D
 CollisionPolygon2D
@@ -9,6 +13,3 @@ TileMapLayer
 AnimationPlayer
 ColorRect
 CanvasLayer
-AudioStreamPlayer
-AudioStreamPlayer2D
-TextureRect

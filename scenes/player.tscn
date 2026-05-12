@@ -262,7 +262,7 @@ bus = &"SFX"
 
 [node name="Footstep" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dqkch")
-bus = &"steps"
+bus = &"SFX"
 
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 2.0
