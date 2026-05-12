@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://t4add6y0057h"]
+
+[ext_resource type="Texture2D" uid="uid://560cfuq8f5sw" path="res://Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Active.png" id="1_at6pv"]
+
+[node name="Tree" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_at6pv")
