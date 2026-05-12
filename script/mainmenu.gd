@@ -81,3 +81,7 @@ func _update_localized_labels() -> void:
 	for node in $MarginContainer2/VBoxContainer/HBoxContainer2.get_children():
 		if node.has_method("update_text"):
 			node.update_text()
+	# Обновляем метку языка
+	var language_label = $MarginContainer2/VBoxContainer/Label2
+	if language_label.has_method("update_text"):
+		language_label.update_text()
