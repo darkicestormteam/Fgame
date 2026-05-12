@@ -37,6 +37,7 @@
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="31_jqs8n"]
 [ext_resource type="Script" uid="uid://b8wymmxcoglgj" path="res://script/music.gd" id="36_dsjw7"]
 [ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="37_altoc"]
+[ext_resource type="Script" uid="uid://811b10a95cd64a5fb6a2bc783f4667ec" path="res://script/localized_label.gd" id="40_localized"]
 [ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="38_owq6t"]
 [ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="39_hn8mj"]
 
@@ -847,6 +848,8 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
 text = "lbl_volume"
+script = ExtResource("40_localized")
+key = "lbl_volume"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -856,6 +859,8 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_85riq")
 text = "lbl_music"
+script = ExtResource("40_localized")
+key = "lbl_music"
 
 [node name="music" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
