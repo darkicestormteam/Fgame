@@ -1,0 +1,8 @@
+keys,ru,en
+menu_start,старт,Start
+menu_settings,настройки,Settings
+menu_exit,выход,Exit
+menu_back,назад,Back
+game_over_title,GAME OVER,GAME OVER
+game_over_reset,Reset,Reset
+timer_lives,Время жизни: {0},Lifetime: {0}
