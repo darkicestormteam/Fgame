@@ -1,19 +1,26 @@
 ```
-# Build artifacts
+# Godot-specific ignores
 *.import
-*.uid
-*.gdignore
+*.remap
+export_presets.cfg
+.autosave/
 
-# Editor files
+# Build artifacts
+*.so
+*.dylib
+*.dll
+*.exe
+*.bin
+
+# Dependencies
+res://addons/
+
+# Logs
+*.log
+*.tmp
+
+# Editor
 .vscode/
 .idea/
-
-# Temporary files
-*.tmp
-*.temp
-*.log
-
-# Godot specific
-.export/
-.godot/
+*.swp
 ```
