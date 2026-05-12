@@ -1,1 +1,19 @@
-Nothing should be ignored in this case, as the only change is adding a CSV translation file, which is a source/config file and not a build artifact, dependency, or temporary file.
+```
+# Build artifacts
+*.import
+*.uid
+*.gdignore
+
+# Editor files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Godot specific
+.export/
+.godot/
+```
