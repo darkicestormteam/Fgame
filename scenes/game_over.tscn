@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://clw1rp4vw1ldc" path="res://assets/Bunners/Ribbons/Ribbon_Blue_3Slides.png" id="2_wqhvx"]
 [ext_resource type="Texture2D" uid="uid://k8c3kmmnh1t4" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red.png" id="3_racf3"]
 [ext_resource type="Texture2D" uid="uid://muocld532s2n" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides.png" id="4_7m3ot"]
-[ext_resource type="Script" uid="uid://811b10a95cd64a5fb6a2bc783f4667ec" path="res://script/localized_label.gd" id="40_localized"]
+[ext_resource type="Script" uid="uid://newlocalizedcontrol123" path="res://script/localized_control.gd" id="40_localized"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbwuq"]
 texture = ExtResource("2_wqhvx")
