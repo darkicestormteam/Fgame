@@ -7,9 +7,9 @@ func _ready() -> void:
 	load_translations()
 
 func load_translations() -> void:
-	var file = FileAccess.open("res://locales.csv", FileAccess.READ)
+	var file = FileAccess.open("res://Locales/locales.csv", FileAccess.READ)
 	if not file:
-		push_error("Failed to open locales.csv")
+		push_error("Failed to open Locales/locales.csv")
 		return
 	
 	# Skip header line

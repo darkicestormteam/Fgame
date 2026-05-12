@@ -879,6 +879,8 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_85riq")
 text = "lbl_sfx"
+script = ExtResource("40_localized")
+key = "lbl_sfx"
 
 [node name="SFX" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -895,8 +897,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("4_85riq")
 theme_override_font_sizes/font_size = 19
-text = "язык"
+text = "lbl_language"
 horizontal_alignment = 1
+script = ExtResource("40_localized")
+key = "lbl_language"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2

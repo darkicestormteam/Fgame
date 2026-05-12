@@ -60,6 +60,8 @@ func _on_eng_pressed() -> void:
 	$Tap.play()
 	# Устанавливаем английский язык
 	Localization.set_locale("en")
+	# Обновляем все тексты в настройках
+	_update_localized_labels()
 
 
 func _on_rus_pressed() -> void:
@@ -67,3 +69,15 @@ func _on_rus_pressed() -> void:
 	$Tap.play()
 	# Устанавливаем русский язык
 	Localization.set_locale("ru")
+	# Обновляем все тексты в настройках
+	_update_localized_labels()
+
+
+func _update_localized_labels() -> void:
+	# Находим все Label с скриптом localized_label и обновляем их текст
+	for node in $MarginContainer2/VBoxContainer/HBoxContainer.get_children():
+		if node.has_method("update_text"):
+			node.update_text()
+	for node in $MarginContainer2/VBoxContainer/HBoxContainer2.get_children():
+		if node.has_method("update_text"):
+			node.update_text()
