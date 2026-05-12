@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes. The modified file 'scenes/mainmenu.tscn' appears to be a source configuration file that should be tracked in version control.
+Nothing should be ignored based on the provided file changes. The only modified file is `script/mainmenu.gd`, which appears to be a Godot script source file and should not be ignored.

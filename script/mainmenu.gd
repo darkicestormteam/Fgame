@@ -4,6 +4,8 @@ extends Control
 var game_scene := "res://scenes/game.tscn"
 var settings_scene := "res://scenes/settings.tscn" # Если сцены настроек нет, можно удалить или изменить
 
+@onready var full_screen_toggle = $MarginContainer2/VBoxContainer/FullScreen
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +18,12 @@ func _ready() -> void:
 	# Подключаем сигналы кнопок выбора языка
 	$MarginContainer2/VBoxContainer/HBoxContainer3/Eng.pressed.connect(_on_eng_pressed)
 	$MarginContainer2/VBoxContainer/HBoxContainer3/Rus.pressed.connect(_on_rus_pressed)
+	# Подключаем сигнал переключателя FullScreen
+	if full_screen_toggle:
+		full_screen_toggle.toggled.connect(_on_full_screen_toggled)
+		# Устанавливаем начальное состояние переключателя
+		var current_mode = DisplayServer.window_get_mode()
+		full_screen_toggle.button_pressed = (current_mode == DisplayServer.WINDOW_MODE_FULLSCREEN || current_mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -83,3 +91,12 @@ func _update_node_recursive(node: Node) -> void:
 		node.update_text()
 	for child in node.get_children():
 		_update_node_recursive(child)
+
+
+func _on_full_screen_toggled(is_fullscreen: bool) -> void:
+	# Воспроизводим звук Tap
+	$Tap.play()
+	if is_fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
