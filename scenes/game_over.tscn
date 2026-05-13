@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="40_localized"]
 
 [node name="GameOver" type="CanvasLayer"]
-process_mode = 2
 visible = false
 script = ExtResource("1_xeevv")
 
