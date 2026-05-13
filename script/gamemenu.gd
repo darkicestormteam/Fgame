@@ -196,13 +196,16 @@ func _on_music1_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	# Проверяем нажатие клавиши Esc (или ui_cancel)
 	if event.is_action_pressed("ui_cancel"):
-		# Получаем актуальную ссылку на SpellMenu если она еще не получена
-		if not spell_menu:
-			spell_menu = get_tree().get_first_node_in_group("spell_menu")
-			if not spell_menu:
-				spell_menu = get_node_or_null("/root/game/SpellMenu")
+		# Получаем актуальную ссылку на SpellMenu каждый раз
+		var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
+		if not current_spell_menu:
+			current_spell_menu = get_node_or_null("/root/game/SpellMenu")
 		
-		var spell_menu_active = spell_menu and spell_menu.is_active
+		# Определяем, активно ли SpellMenu (видимо и ждет выбора)
+		var spell_menu_active = current_spell_menu and current_spell_menu.visible and current_spell_menu.has_method("get_is_active") and current_spell_menu.is_active
+		# Если метода is_active нет, проверяем просто видимость
+		if current_spell_menu and not current_spell_menu.has_method("get_is_active"):
+			spell_menu_active = current_spell_menu.visible
 		
 		# Если открыто меню настроек (MarginContainer2), закрываем его первым делом
 		if $MarginContainer2.visible:
@@ -212,30 +215,29 @@ func _input(event: InputEvent) -> void:
 		
 		# Если открыто главное меню паузы (MarginContainer)
 		if $MarginContainer.visible:
-			# Если активно SpellMenu, мы НЕ снимаем паузу, а просто закрываем меню
-			if spell_menu_active:
-				_on_settings1_pressed() # Закрываем меню, но пауза остается
-			else:
-				_on_settings1_pressed() # Закрываем меню и снимаем паузу
+			# Закрываем меню паузы
+			_on_settings1_pressed() 
 			get_viewport().set_input_as_handled()
 			return
 		
-		# Если меню не открыто
-		# Если активно SpellMenu, открываем меню паузы поверх него (пауза уже стоит)
-		if spell_menu_active:
-			_on_settings1_pressed() # Открываем меню
-			get_viewport().set_input_as_handled()
-			return
-		
-		# Стандартное поведение: открываем меню и ставим паузу
+		# Если ни одно меню не открыто
+		# Открываем меню паузы (пауза уже стоит если активно SpellMenu, иначе поставим мы)
 		_on_settings1_pressed()
 		get_viewport().set_input_as_handled()
 
 
 func _on_settings1_pressed() -> void:
+	# Получаем актуальную ссылку на SpellMenu
+	var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
+	if not current_spell_menu:
+		current_spell_menu = get_node_or_null("/root/game/SpellMenu")
+	
+	# Проверяем, активно ли SpellMenu (видимо)
+	var spell_menu_active = current_spell_menu and current_spell_menu.visible
+	
 	# Если активно SpellMenu, мы все равно открываем меню паузы поверх него
 	# Но не снимаем паузу и не скрываем SpellMenu
-	if spell_menu and spell_menu.is_active:
+	if spell_menu_active:
 		# Если меню паузы уже открыто, закрываем его (но паузу не снимаем, т.к. SpellMenu активен)
 		if is_game_menu_open:
 			is_game_menu_open = false
