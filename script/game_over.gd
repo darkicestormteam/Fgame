@@ -14,10 +14,12 @@ func _process(delta: float) -> void:
 
 func _on_reset_game_pressed() -> void:
 	get_tree().paused = false
+	if tap_sound:
+		tap_sound.play()
+	await get_tree().create_timer(0.1).timeout
 	get_tree().reload_current_scene()
 	GameOver.hide()
 
 
 func _on_texture_button_mouse_entered() -> void:
-	if tap_sound:
-		tap_sound.play()
+	pass
