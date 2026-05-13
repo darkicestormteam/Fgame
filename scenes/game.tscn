@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://drubtahq832lf" path="res://scenes/Tree/bushes1.tscn" id="9_5newe"]
 [ext_resource type="Script" uid="uid://bi7y74mffo7cv" path="res://script/wave_config.gd" id="9_dinhu"]
 [ext_resource type="Script" uid="uid://mgfdnbyv4fjh" path="res://script/game.gd" id="9_game"]
+[ext_resource type="Script" uid="uid://bwqxymxcoglgj" path="res://script/audio_manager.gd" id="10_audio_manager"]
 [ext_resource type="PackedScene" uid="uid://b628iiyfaj6qr" path="res://scenes/Tree/bushes2.tscn" id="10_37s47"]
 [ext_resource type="PackedScene" uid="uid://cvokgw0faanr" path="res://scenes/enemy/enemy1.tscn" id="10_dinhu"]
 [ext_resource type="PackedScene" uid="uid://inqevl72d7qd" path="res://scenes/Tree/stone1.tscn" id="10_gxtfn"]
@@ -742,6 +743,10 @@ friction = 0.0
 [node name="game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("9_game")
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("10_audio_manager")
+groups = [ &"audio_manager" ]
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true
