@@ -26,6 +26,11 @@ func _on_texture_button_mouse_entered() -> void:
 	pass
 
 
+func show_game_over() -> void:
+	update_all_localized_texts()
+	show()
+
+
 func update_all_localized_texts() -> void:
 	_update_node_recursive(self)
 

@@ -94,7 +94,7 @@ func take_damage() -> void:
 			game_over = get_tree().current_scene.get_node_or_null("GameOver")
 		
 		if game_over:
-			game_over.visible = true
+			game_over.show_game_over()
 	else:
 		is_invincible = true
 		invincibility_timer.start()
