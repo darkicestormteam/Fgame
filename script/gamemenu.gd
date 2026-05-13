@@ -9,6 +9,9 @@ var music_volume_db := 0.0
 # Переменные для отслеживания состояния настроек
 var settings2_was_open := false # Был ли открыт MarginContainer2 (настройки) до нажатия settings1
 
+# Ссылка на SpellMenu
+var spell_menu: CanvasLayer = null
+
 # Переменные для хранения путей к сценам
 var game_scene := "res://scenes/game.tscn"
 var settings_scene := "res://scenes/settings.tscn" # Если сцены настроек нет, можно удалить или изменить
@@ -30,6 +33,13 @@ func _ready() -> void:
 	# Сохраняем текущие уровни громкости
 	sfx_volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
 	music_volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("music"))
+	
+	# Находим SpellMenu в сцене
+	await get_tree().process_frame
+	spell_menu = get_tree().get_first_node_in_group("spell_menu")
+	if not spell_menu:
+		# Пробуем найти по имени узла, если группа не назначена
+		spell_menu = get_node_or_null("/root/game/SpellMenu")
 	
 	# Подключаем сигналы кнопок главного меню
 	$MarginContainer/VBoxContainer/Start.pressed.connect(_on_start_pressed)
@@ -68,6 +78,12 @@ func _on_start_pressed() -> void:
 	# Скрываем все контейнеры меню
 	$MarginContainer.visible = false
 	$MarginContainer2.visible = false
+	# Если активно SpellMenu, скрываем его и сбрасываем флаг активности
+	if spell_menu and spell_menu.has_method("hide_spellmenu"):
+		spell_menu.hide_spellmenu()
+	elif spell_menu:
+		spell_menu.visible = false
+		spell_menu.is_active = false
 
 
 func _on_exit_pressed() -> void:
@@ -172,6 +188,10 @@ func _on_music1_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	# Проверяем нажатие клавиши Esc
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		# Если активно SpellMenu, игнорируем Esc (игрок должен сделать выбор)
+		if spell_menu and spell_menu.is_active:
+			return
+		
 		# Вызываем функцию нажатия на кнопку settings1
 		_on_settings1_pressed()
 		# "Поглощаем" событие, чтобы оно не обрабатывалось дальше (опционально)
@@ -179,6 +199,10 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_settings1_pressed() -> void:
+	# Если активно SpellMenu, игнорируем нажатие (игрок должен сделать выбор)
+	if spell_menu and spell_menu.is_active:
+		return
+
 	if get_tree().paused:
 		# Снимаем с паузы
 		get_tree().paused = false
