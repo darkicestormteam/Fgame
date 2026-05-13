@@ -20,3 +20,5 @@ res://scenes/settings.tscn
 res://menugame.tscn
 res://scenes/gamemenu.tscn
 res://scenes/worldmusic.tscn
+res://script/gamemenu.gd
+res://script/spellmenu.gd
