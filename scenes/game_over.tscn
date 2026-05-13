@@ -54,6 +54,7 @@ grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("4_7m3ot")
 texture_pressed = ExtResource("6_v3hpu")
+[connection signal="pressed" from="TextureButton" to="." method="_on_reset_game_pressed"]
 
 [node name="Label" type="Label" parent="TextureButton"]
 layout_mode = 1
