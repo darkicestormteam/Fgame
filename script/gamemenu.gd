@@ -225,8 +225,21 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_settings1_pressed() -> void:
-	# Если активно SpellMenu, игнорируем нажатие (игрок должен сделать выбор)
+	# Если активно SpellMenu, мы все равно открываем меню паузы поверх него
+	# Но не снимаем паузу и не скрываем SpellMenu
 	if spell_menu and spell_menu.is_active:
+		# Если меню паузы уже открыто, закрываем его (но паузу не снимаем, т.к. SpellMenu активен)
+		if is_game_menu_open:
+			is_game_menu_open = false
+			settings_container.visible = false
+			if settings2_was_open:
+				$MarginContainer2.visible = false
+				settings2_was_open = false
+		else:
+			# Открываем меню паузы поверх SpellMenu
+			get_tree().paused = true # Убеждаемся что пауза стоит
+			is_game_menu_open = true
+			settings_container.visible = true
 		return
 
 	if get_tree().paused:
