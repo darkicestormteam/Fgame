@@ -789,7 +789,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Mainmenu" parent="HUD" instance=ExtResource("31_7025r")]
-groups = ["game_menu"]
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
@@ -803,7 +802,6 @@ player_node = NodePath("../Player")
 
 [node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
 process_mode = 3
-groups = ["spell_menu"]
 
 [node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
 position = Vector2(302, 2499)
