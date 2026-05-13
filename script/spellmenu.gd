@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 var is_visible: bool = false
+var is_active: bool = false # Флаг активности меню (открыто и ждет выбора)
 
 @onready var tap_sound: AudioStreamPlayer = $Tap
 @onready var spell_sheep_btn: TextureButton = $MarginContainer/HBoxContainer/SpellSheep
@@ -15,6 +16,7 @@ var sheep_spawner: Node2D = null
 func _ready() -> void:
 	# Скрываем меню при старте
 	visible = false
+	is_active = false
 	
 	# Находим SheepSpawner в сцене
 	await get_tree().process_frame
@@ -36,7 +38,17 @@ func show_spellmenu() -> void:
 	# Показываем меню и ставим игру на паузу
 	visible = true
 	is_visible = true
+	is_active = true # Устанавливаем флаг активности
 	get_tree().paused = true
+
+func _hide_and_resume() -> void:
+	# Общая функция для скрытия меню и возобновления игры
+	visible = false
+	is_visible = false
+	is_active = false # Сбрасываем флаг активности
+	# Возобновляем игру через 0.5 секунды
+	await get_tree().create_timer(0.5).timeout
+	get_tree().paused = false
 
 func _on_spell_sheep_pressed() -> void:
 	tap_sound.play()
@@ -44,11 +56,7 @@ func _on_spell_sheep_pressed() -> void:
 	if sheep_spawner and sheep_spawner.has_method("enable_sheep_spell"):
 		sheep_spawner.enable_sheep_spell()
 	# Скрываем меню сразу
-	visible = false
-	is_visible = false
-	# Возобновляем игру через 0.5 секунды
-	await get_tree().create_timer(0.5).timeout
-	get_tree().paused = false
+	_hide_and_resume()
 
 func _on_sword_up_pressed() -> void:
 	tap_sound.play()
@@ -57,11 +65,7 @@ func _on_sword_up_pressed() -> void:
 	if player and player.has_method("unlock_sword_up"):
 		player.unlock_sword_up()
 	# Скрываем меню сразу
-	visible = false
-	is_visible = false
-	# Возобновляем игру через 0.5 секунды
-	await get_tree().create_timer(0.5).timeout
-	get_tree().paused = false
+	_hide_and_resume()
 
 func _on_button_pressed() -> void:
 	tap_sound.play()
@@ -70,8 +74,4 @@ func _on_button_pressed() -> void:
 	if player and player.has_method("enable_splash_attack"):
 		player.enable_splash_attack()
 	# Скрываем меню сразу
-	visible = false
-	is_visible = false
-	# Возобновляем игру через 0.5 секунды
-	await get_tree().create_timer(0.5).timeout
-	get_tree().paused = false
+	_hide_and_resume()
