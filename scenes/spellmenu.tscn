@@ -39,8 +39,11 @@ color = Color(0.443137, 0.54902, 0.513726, 0.603922)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -116,11 +119,14 @@ bus = &"SFX"
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 visible = false
 z_index = 10
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 0.5875
+anchor_bottom = 0.518519
+offset_right = 152.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
@@ -207,12 +213,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = -155.0
-offset_right = 149.0
-offset_bottom = 99.0
+offset_left = -224.0
+offset_top = -324.0
+offset_right = 73.0
+offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer3"]
 z_index = 4
@@ -333,17 +340,19 @@ z_index = 5
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -210.0
-offset_top = 37.0
-offset_bottom = 124.0
+offset_left = -126.0
+offset_top = 33.0
+offset_right = 84.0001
+offset_bottom = 120.0
 grow_horizontal = 0
-scale = Vector2(0.8, 0.8)
+scale = Vector2(1.2, 1.2)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer4"]
 layout_mode = 2
 theme_override_constants/separation = 9
 
 [node name="sound1" type="TextureButton" parent="MarginContainer4/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("18_c36ay")
 
@@ -353,6 +362,7 @@ position = Vector2(33.3333, 31.6667)
 texture = ExtResource("19_70yj0")
 
 [node name="music1" type="TextureButton" parent="MarginContainer4/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture_normal = ExtResource("20_aegn6")
 
