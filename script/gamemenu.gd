@@ -169,6 +169,15 @@ func _on_music1_pressed() -> void:
 		music_muted = true
 
 
+func _input(event: InputEvent) -> void:
+	# Проверяем нажатие клавиши Esc
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		# Вызываем функцию нажатия на кнопку settings1
+		_on_settings1_pressed()
+		# "Поглощаем" событие, чтобы оно не обрабатывалось дальше (опционально)
+		get_viewport().set_input_as_handled()
+
+
 func _on_settings1_pressed() -> void:
 	if get_tree().paused:
 		# Снимаем с паузы
