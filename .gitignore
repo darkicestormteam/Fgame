@@ -1,1 +1,13 @@
-Nothing should be ignored based on the provided file changes, as they only include source code files (.gd files) without any build artifacts, dependencies, or temporary files.
+```
+# Build artifacts
+*.import
+*.pidb
+.rsp
+# Dependencies
+addons/
+# Editor files
+.scenes/
+# Configuration
+*.import
+*.remap
+```
