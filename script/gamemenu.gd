@@ -25,7 +25,6 @@ var settings_scene := "res://scenes/settings.tscn" # Если сцены нас�
 @onready var settings1_button: TextureButton = $MarginContainer3/HBoxContainer/settings1
 @onready var settings_container: MarginContainer = $MarginContainer
 @onready var settings2_container: MarginContainer = $MarginContainer2 # Контейнер настроек (MarginContainer2)
-@onready var margin_container3: MarginContainer = $MarginContainer3
 @onready var sound_mute_sprite: Sprite2D = $MarginContainer3/HBoxContainer/sound1/Sprite2D
 @onready var music_mute_sprite: Sprite2D = $MarginContainer3/HBoxContainer/music1/Sprite2D2
 @onready var full_screen_toggle = $MarginContainer2/VBoxContainer/FullScreen
@@ -203,8 +202,6 @@ func _input(event: InputEvent) -> void:
 
 				# Вызываем функцию нажатия на кнопку settings1
 				_on_settings1_pressed()
-				# Показываем MarginContainer3 при нажатии Esc
-				margin_container3.visible = true
 				# "Поглощаем" событие, чтобы оно не обрабатывалось дальше (опционально)
 				get_viewport().set_input_as_handled()
 

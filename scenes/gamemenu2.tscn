@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dy3u01yjmyucj"]
-
-[ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="1_glcws"]
-
-[node name="Mainmenu" instance=ExtResource("1_glcws")]
-
-[node name="MarginContainer3" parent="." index="3"]
-visible = false

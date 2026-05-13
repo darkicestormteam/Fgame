@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7hyauted5gjs"]
+[gd_scene load_steps=7 format=3 uid="uid://b7hyauted5gjs"]
 
 [ext_resource type="Texture2D" uid="uid://de2gtq1dco12h" path="res://Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="1_rmaiu"]
 [ext_resource type="Script" uid="uid://b7c74bu4w1ded" path="res://script/spellmenu.gd" id="1_vu6c6"]
@@ -6,7 +6,6 @@
 [ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="4_1sp5a"]
 [ext_resource type="Texture2D" uid="uid://iya662brc6ce" path="res://assets/DubleAttack.png" id="4_14f3p"]
 [ext_resource type="Texture2D" uid="uid://bgxa0jd1cqsxj" path="res://assets/Swordpush.png" id="5_xw3fp"]
-[ext_resource type="PackedScene" uid="uid://dy3u01yjmyucj" path="res://scenes/gamemenu2.tscn" id="7_xw3fp"]
 
 [node name="Spellmenu" type="CanvasLayer"]
 script = ExtResource("1_vu6c6")
@@ -96,5 +95,3 @@ stretch_mode = 3
 stream = ExtResource("4_1sp5a")
 volume_db = 11.32
 bus = &"SFX"
-
-[node name="gamemenu2" parent="." instance=ExtResource("7_xw3fp")]
