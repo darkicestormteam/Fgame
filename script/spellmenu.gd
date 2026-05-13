@@ -99,6 +99,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 		pass
 
+func _input(event: InputEvent) -> void:
+		if event.is_action_pressed("ui_cancel"):
+				_on_settings1_pressed()
+
 func show_spellmenu() -> void:
 		# Показываем меню и ставим игру на паузу
 		visible = true
