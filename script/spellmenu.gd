@@ -162,8 +162,6 @@ func _on_button_pressed() -> void:
 func _on_start_pressed() -> void:
 		# Воспроизводим звук
 		tap_sound.play()
-		# Снимаем игру с паузы
-		get_tree().paused = false
 		is_active = false
 		# Сбрасываем флаг состояния настроек
 		settings_open = false
