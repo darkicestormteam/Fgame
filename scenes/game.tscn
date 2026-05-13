@@ -744,9 +744,6 @@ friction = 0.0
 y_sort_enabled = true
 script = ExtResource("9_game")
 
-[node name="AudioManager" type="Node" parent="."]
-script = ExtResource("10_audio_manager")
-groups = [ &"audio_manager" ]
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true

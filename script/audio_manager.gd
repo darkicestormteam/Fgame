@@ -11,6 +11,9 @@ const SFX_VOLUME_KEY := "audio/sfx_volume"
 # Значения по умолчанию
 const DEFAULT_VOLUME := 0.5
 
+# Флаг, чтобы применить настройки только один раз
+var _settings_applied := false
+
 
 func _ready() -> void:
 	# Применяем сохранённые настройки при запуске
@@ -18,6 +21,11 @@ func _ready() -> void:
 
 
 func _apply_saved_settings() -> void:
+	if _settings_applied:
+		return
+	
+	_settings_applied = true
+	
 	# Получаем сохранённые значения или используем значения по умолчанию
 	var music_vol = ProjectSettings.get_setting(MUSIC_VOLUME_KEY, DEFAULT_VOLUME)
 	var sfx_vol = ProjectSettings.get_setting(SFX_VOLUME_KEY, DEFAULT_VOLUME)

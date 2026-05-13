@@ -8,10 +8,9 @@ func _ready() -> void:
 	max_value = 1.0
 	step = 0.1
 	
-	# Получаем текущее значение громкости из AudioManager (если он существует)
-	var audio_manager = get_tree().get_first_node_in_group("audio_manager")
-	if audio_manager and audio_manager.has_method("get_sfx_volume"):
-		value = audio_manager.get_sfx_volume()
+	# Получаем текущее значение громкости из AudioManager (теперь это autoload)
+	if AudioManager and AudioManager.has_method("get_sfx_volume"):
+		value = AudioManager.get_sfx_volume()
 	else:
 		# Если менеджера нет, используем значение по умолчанию
 		value = 0.5
@@ -35,7 +34,6 @@ func _update_sfx_volume(new_value: float = value) -> void:
 	# Устанавливаем громкость на шину "SFX"
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), db)
 	
-	# Сохраняем настройку через AudioManager (если он существует)
-	var audio_manager = get_tree().get_first_node_in_group("audio_manager")
-	if audio_manager and audio_manager.has_method("set_sfx_volume"):
-		audio_manager.set_sfx_volume(new_value)
+	# Сохраняем настройку через AudioManager (теперь это autoload)
+	if AudioManager and AudioManager.has_method("set_sfx_volume"):
+		AudioManager.set_sfx_volume(new_value)

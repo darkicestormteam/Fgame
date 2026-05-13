@@ -708,9 +708,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7yvfd")
 
-[node name="AudioManager" type="Node" parent="."]
-script = ExtResource("41_audio_manager")
-groups = [ &"audio_manager" ]
 
 [node name="TileMap2" type="Node2D" parent="."]
 y_sort_enabled = true

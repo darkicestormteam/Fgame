@@ -1,53 +1,7 @@
 ```
 # Godot-specific ignores
 *.import
-*.remap
-export_presets.cfg
-.autosave/
-
-# Compiled and build artifacts
-*.so
-*.dylib
-*.dll
-*.exe
-*.o
-*.obj
-*.a
-*.lib
-
-# Dependencies and build directories
-res://.godot/
-user://
-build/
-dist/
+.export
+.godot/
 bin/
-*.app/
-*.dmg
-*.msi
-*.deb
-*.rpm
-
-# Editor/IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
-
-# Logs
-*.log
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Coverage and testing
-.coverage
-coverage/
-htmlcov/
-
-# OS specific
-.DS_Store
-Thumbs.db
 ```

@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+AudioManager="*res://script/audio_manager.gd"
 GameOver="*res://scenes/game_over.tscn"
 Localization="*res://script/localization.gd"
 
