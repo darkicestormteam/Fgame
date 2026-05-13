@@ -789,13 +789,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="Mainmenu" parent="HUD" instance=ExtResource("31_7025r")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 0.0
-offset_bottom = 0.0
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
