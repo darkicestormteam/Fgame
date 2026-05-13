@@ -57,9 +57,10 @@ func _process(delta: float) -> void:
 func _on_start_pressed() -> void:
 	# Воспроизводим звук Tap
 	$Tap.play()
-	# Ждем 1.0 секунды и переключаемся на сцену игры
-	await get_tree().create_timer(1.0).timeout
-	get_tree().change_scene_to_file(game_scene)
+	# Снимаем игру с паузы (если она была на паузе)
+	get_tree().paused = false
+	# Скрываем контейнер меню
+	$MarginContainer.visible = false
 
 
 func _on_exit_pressed() -> void:
