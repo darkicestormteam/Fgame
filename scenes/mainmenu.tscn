@@ -40,7 +40,6 @@
 [ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="38_owq6t"]
 [ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="39_hn8mj"]
 [ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="40_localized"]
-[ext_resource type="Script" uid="uid://bwqxymxcoglgj" path="res://script/audio_manager.gd" id="41_audio_manager"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wny6h"]
 texture = ExtResource("2_h73c4")
@@ -707,10 +706,6 @@ offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7yvfd")
-
-[node name="AudioManager" type="Node" parent="."]
-script = ExtResource("41_audio_manager")
-groups = [ &"audio_manager" ]
 
 [node name="TileMap2" type="Node2D" parent="."]
 y_sort_enabled = true

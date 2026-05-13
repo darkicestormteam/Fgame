@@ -23,3 +23,8 @@ res://scenes/worldmusic.tscn
 res://script/gamemenu.gd
 res://script/spellmenu.gd
 res://scenes/gamemenu2.tscn
+res://script/music.gd
+res://script/sfx.gd
+res://script/audio_manager.gd
+res://scenes/game_over.tscn
+res://scenes/213123123123.tscn
