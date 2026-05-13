@@ -4,6 +4,7 @@ extends CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group("game_over")
 	pass # Replace with function body.
 
 
@@ -23,3 +24,14 @@ func _on_reset_game_pressed() -> void:
 
 func _on_texture_button_mouse_entered() -> void:
 	pass
+
+
+func update_all_localized_texts() -> void:
+	_update_node_recursive(self)
+
+
+func _update_node_recursive(node: Node) -> void:
+	if node.has_method("update_text"):
+		node.update_text()
+	for child in node.get_children():
+		_update_node_recursive(child)
