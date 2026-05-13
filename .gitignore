@@ -4,19 +4,21 @@
 __pycache__/
 *.o
 *.obj
+dist/
+build/
 *.class
+*.exe
 *.dll
 *.so
 *.a
-*.exe
 *.out
 
 # Dependencies
 .venv/
 venv/
 node_modules/
-dist/
-build/
+.julia/
+zig*/
 target/
 .gradle/
 .mypy_cache/
