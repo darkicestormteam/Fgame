@@ -196,6 +196,14 @@ func _on_music1_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	# Проверяем нажатие клавиши Esc (или ui_cancel)
 	if event.is_action_pressed("ui_cancel"):
+		# Получаем актуальную ссылку на SpellMenu если она еще не получена
+		if not spell_menu:
+			spell_menu = get_tree().get_first_node_in_group("spell_menu")
+			if not spell_menu:
+				spell_menu = get_node_or_null("/root/game/SpellMenu")
+		
+		var spell_menu_active = spell_menu and spell_menu.is_active
+		
 		# Если открыто меню настроек (MarginContainer2), закрываем его первым делом
 		if $MarginContainer2.visible:
 			_on_back_pressed()
@@ -205,7 +213,7 @@ func _input(event: InputEvent) -> void:
 		# Если открыто главное меню паузы (MarginContainer)
 		if $MarginContainer.visible:
 			# Если активно SpellMenu, мы НЕ снимаем паузу, а просто закрываем меню
-			if spell_menu and spell_menu.is_active:
+			if spell_menu_active:
 				_on_settings1_pressed() # Закрываем меню, но пауза остается
 			else:
 				_on_settings1_pressed() # Закрываем меню и снимаем паузу
@@ -214,7 +222,7 @@ func _input(event: InputEvent) -> void:
 		
 		# Если меню не открыто
 		# Если активно SpellMenu, открываем меню паузы поверх него (пауза уже стоит)
-		if spell_menu and spell_menu.is_active:
+		if spell_menu_active:
 			_on_settings1_pressed() # Открываем меню
 			get_viewport().set_input_as_handled()
 			return
