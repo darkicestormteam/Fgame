@@ -203,8 +203,10 @@ func _input(event: InputEvent) -> void:
 			current_spell_menu = get_node_or_null("/root/game/SpellMenu")
 		var is_spellmenu_active = current_spell_menu and current_spell_menu.is_active
 		
-		# 1. Если активно SpellMenu - игнорируем Esc (оно обрабатывается в spellmenu.gd)
+		# 1. Если активно SpellMenu - ПОЛНОСТЬЮ игнорируем Esc
+		# Это предотвращает открытие/закрытие настроек и снятие паузы
 		if is_spellmenu_active:
+			get_viewport().set_input_as_handled()
 			return
 		
 		# 2. Если открыто меню настроек (MarginContainer2) - закрываем его
