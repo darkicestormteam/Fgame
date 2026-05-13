@@ -240,6 +240,6 @@ func _toggle_pause_menu():
 # Старую функцию _on_settings1_pressed можно оставить как заглушку или удалить, 
 # если она больше не используется кнопкой
 func _on_settings1_pressed() -> void:
-# Теперь эта кнопка просто вызывает ту же логику что и Esc
-_toggle_pause_menu()
+	# Теперь эта кнопка просто вызывает ту же логику что и Esc
+	_toggle_pause_menu()
 
