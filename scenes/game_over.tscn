@@ -40,6 +40,7 @@ key = "game_over"
 
 [node name="TextureButton" type="TextureButton" parent="."]
 z_index = 4
+name = "ResetGame"
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -66,9 +67,14 @@ offset_right = 67.0
 offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_7m3ot")
-text = "рестарт"
+text = "btn_restart"
+script = ExtResource("40_localized")
+key = "btn_restart"
 
 [node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_irg28")
 volume_db = 5.0
 bus = &"SFX"
+
+[connection signal="pressed" from="ResetGame" to="." method="_on_reset_game_pressed"]
+[connection signal="mouse_entered" from="ResetGame" to="." method="_on_texture_button_mouse_entered"]

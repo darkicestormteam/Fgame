@@ -1,10 +1,11 @@
 key,en,ru
 timer_label,"Lifetime: %d","Время жизни: %d"
-game_over,"GAME OVER","GAME OVER"
+game_over,"GAME OVER","ИГРА ОКОНЧЕНА"
 btn_reset,Reset,Сброс
 btn_start,Start,старт
 btn_settings,Settings,настройки
 btn_exit,Exit,выход
+btn_restart,Restart,рестарт
 lbl_volume,Volume,громкость
 lbl_music,Music,Музыка
 lbl_sfx,SFX,Эффекты
