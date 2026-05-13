@@ -5,7 +5,7 @@ extends CanvasLayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("game_over")
-	pass # Replace with function body.
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,7 +19,7 @@ func _on_reset_game_pressed() -> void:
 		tap_sound.play()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().reload_current_scene()
-	GameOver.hide()
+	hide()
 
 
 func _on_texture_button_mouse_entered() -> void:

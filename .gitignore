@@ -1,1 +1,28 @@
-Nothing should be ignored based on the provided file changes. The only modified file is 'script/game_over.gd', which appears to be a source code file and should not be ignored.
+```
+# Godot-specific ignores
+*.import
+*.remap
+.project
+.editor
+.autoload
+.vs/
+.vscode/
+.idea/
+
+# Build artifacts
+export_presets.cfg
+.snapshot
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local configuration
+.godot/
+```

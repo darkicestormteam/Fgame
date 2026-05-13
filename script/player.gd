@@ -89,8 +89,8 @@ func take_damage() -> void:
 		get_tree().paused = true
 		var game_over = get_tree().get_first_node_in_group("game_over")
 		if not game_over:
-			game_over = get_node("/root/GameOver")
-		if not game_over:
+			game_over = get_node_or_null("/root/GameOver")
+		if not game_over and get_tree().current_scene:
 			game_over = get_tree().current_scene.get_node_or_null("GameOver")
 		
 		if game_over:
