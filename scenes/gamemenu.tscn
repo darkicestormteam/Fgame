@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cl5yywevbbsov"]
+[gd_scene load_steps=20 format=3 uid="uid://cl5yywevbbsov"]
 
 [ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_on0xv"]
 [ext_resource type="Texture2D" uid="uid://by53qviqpmik8" path="res://assets/Bunners/dinamik.png" id="14_a2i7n"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="38_21wcx"]
 [ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="39_vq2m7"]
 [ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="40_i3rbo"]
+[ext_resource type="Script" uid="uid://gamemenuscript123" path="res://script/gamemenu.gd" id="41_gmenu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owq6t"]
 
@@ -30,7 +31,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
-script = ExtResource("1_on0xv")
+script = ExtResource("41_gmenu")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 visible = false
