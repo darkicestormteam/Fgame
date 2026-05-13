@@ -193,97 +193,53 @@ func _on_music1_pressed() -> void:
 		music_muted = true
 
 
+
 func _input(event: InputEvent) -> void:
-	# Проверяем нажатие клавиши Esc (или ui_cancel)
-	if event.is_action_pressed("ui_cancel"):
-		# Получаем актуальную ссылку на SpellMenu каждый раз
-		var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
-		if not current_spell_menu:
-			current_spell_menu = get_node_or_null("/root/game/SpellMenu")
-		
-		# Определяем, активно ли SpellMenu (видимо и ждет выбора)
-		var spell_menu_active = current_spell_menu and current_spell_menu.visible and current_spell_menu.has_method("get_is_active") and current_spell_menu.is_active
-		# Если метода is_active нет, проверяем просто видимость
-		if current_spell_menu and not current_spell_menu.has_method("get_is_active"):
-			spell_menu_active = current_spell_menu.visible
-		
-		# Если открыто меню настроек (MarginContainer2), закрываем его первым делом
-		if $MarginContainer2.visible:
-			_on_back_pressed()
-			get_viewport().set_input_as_handled()
-			return
-		
-		# Если открыто главное меню паузы (MarginContainer)
-		if $MarginContainer.visible:
-			# Закрываем меню паузы
-			_on_settings1_pressed() 
-			get_viewport().set_input_as_handled()
-			return
-		
-		# Если ни одно меню не открыто
-		# Открываем меню паузы (пауза уже стоит если активно SpellMenu, иначе поставим мы)
-		_on_settings1_pressed()
-		get_viewport().set_input_as_handled()
+# Проверяем нажатие клавиши Esc (или ui_cancel)
+if event.is_action_pressed("ui_cancel"):
+# 1. Если открыто меню настроек (MarginContainer2) - закрываем его
+if $MarginContainer2.visible:
+_on_back_pressed()
+get_viewport().set_input_as_handled()
+return
 
+# 2. Если открыто главное меню паузы (MarginContainer) - закрываем его
+if $MarginContainer.visible:
+_toggle_pause_menu()
+get_viewport().set_input_as_handled()
+return
 
+# 3. Если ни одно наше меню не открыто - открываем меню паузы
+_toggle_pause_menu()
+get_viewport().set_input_as_handled()
+
+func _toggle_pause_menu():
+# Получаем ссылку на SpellMenu для проверки его активности
+var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
+if not current_spell_menu:
+current_spell_menu = get_node_or_null("/root/game/SpellMenu")
+
+var is_spellmenu_active = current_spell_menu and current_spell_menu.visible
+
+if $MarginContainer.visible:
+# Меню открыто -> Закрываем его
+$MarginContainer.visible = false
+$MarginContainer2.visible = false
+settings2_was_open = false
+is_game_menu_open = false
+
+# Снимаем паузу ТОЛЬКО если SpellMenu не активно
+if not is_spellmenu_active:
+get_tree().paused = false
+else:
+# Меню закрыто -> Открываем его
+$MarginContainer.visible = true
+is_game_menu_open = true
+get_tree().paused = true
+
+# Старую функцию _on_settings1_pressed можно оставить как заглушку или удалить, 
+# если она больше не используется кнопкой
 func _on_settings1_pressed() -> void:
-	# Получаем актуальную ссылку на SpellMenu
-	var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
-	if not current_spell_menu:
-		current_spell_menu = get_node_or_null("/root/game/SpellMenu")
-	
-	# Проверяем, активно ли SpellMenu (видимо)
-	var spell_menu_active = current_spell_menu and current_spell_menu.visible
-	
-	# Если активно SpellMenu, мы все равно открываем меню паузы поверх него
-	# Но не снимаем паузу и не скрываем SpellMenu
-	if spell_menu_active:
-		# Если меню паузы уже открыто, закрываем его (но паузу не снимаем, т.к. SpellMenu активен)
-		if is_game_menu_open:
-			is_game_menu_open = false
-			settings_container.visible = false
-			if settings2_was_open:
-				$MarginContainer2.visible = false
-				settings2_was_open = false
-		else:
-			# Открываем меню паузы поверх SpellMenu
-			get_tree().paused = true # Убеждаемся что пауза стоит
-			is_game_menu_open = true
-			settings_container.visible = true
-		return
+# Теперь эта кнопка просто вызывает ту же логику что и Esc
+_toggle_pause_menu()
 
-	if get_tree().paused:
-		# Снимаем с паузы только если открыто GameMenu
-		if is_game_menu_open:
-			get_tree().paused = false
-			is_game_menu_open = false
-			
-			# Если настройки (MarginContainer2) были открыты, скрываем их и сбрасываем флаг
-			if settings2_was_open:
-				$MarginContainer2.visible = false
-				settings2_was_open = false
-			
-			# Скрываем контейнер меню паузы
-			settings_container.visible = false
-	else:
-		# Ставим на паузу
-		get_tree().paused = true
-		is_game_menu_open = true
-		# Показываем контейнер меню паузы
-		settings_container.visible = true
-
-
-# Метод для скрытия GameMenu при открытии SpellMenu
-func hide_for_spellmenu() -> void:
-	is_game_menu_open = false
-	settings_container.visible = false
-	if settings2_was_open:
-		$MarginContainer2.visible = false
-		settings2_was_open = false
-
-
-# Метод вызывается когда SpellMenu закрывается после выбора улучшения
-func on_spellmenu_closed() -> void:
-	# Пауза уже снята в spellmenu, просто убеждаемся что флаги корректны
-	is_game_menu_open = false
-	settings_container.visible = false
