@@ -1,0 +1,244 @@
+[gd_scene load_steps=15 format=3 uid="uid://cl5yywevbbsov"]
+
+[ext_resource type="Script" uid="uid://di2ej1q3o0bdi" path="res://script/mainmenu.gd" id="1_on0xv"]
+[ext_resource type="Texture2D" uid="uid://muocld532s2n" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides.png" id="27_d73g5"]
+[ext_resource type="Texture2D" uid="uid://dd80ssnu2do7j" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Red_3Slides_Pressed.png" id="28_ue6e5"]
+[ext_resource type="FontFile" uid="uid://dnn7h6mtd3m4q" path="res://SonicPressStartButton[NolivantNTEdit]-Regular.ttf" id="29_ec7r0"]
+[ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="30_vecjn"]
+[ext_resource type="Texture2D" uid="uid://hyn5a0atbetr" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides.png" id="31_kmubw"]
+[ext_resource type="Texture2D" uid="uid://cnf808aoh46wx" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Blue_3Slides_Pressed.png" id="32_w1fpn"]
+[ext_resource type="Texture2D" uid="uid://tr0jcus8wff0" path="res://Tiny Swords (Update 010)/UI/Buttons/Button_Hover_3Slides.png" id="33_hte3w"]
+[ext_resource type="AudioStream" uid="uid://dwof0d1ttn87n" path="res://assets/sounds/sfx/vgmenuhighlight.wav" id="36_xaq7d"]
+[ext_resource type="Script" uid="uid://b8wymmxcoglgj" path="res://script/music.gd" id="37_su70c"]
+[ext_resource type="Script" uid="uid://bqy2jtvd4egk5" path="res://script/sfx.gd" id="38_21wcx"]
+[ext_resource type="Texture2D" uid="uid://8xyiaw55sktc" path="res://assets/engflag.png" id="39_vq2m7"]
+[ext_resource type="Texture2D" uid="uid://js8bm1dd5ruf" path="res://assets/rusflag.png" id="40_i3rbo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_owq6t"]
+
+[node name="Mainmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_on0xv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+z_index = 4
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Start" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("27_d73g5")
+texture_pressed = ExtResource("28_ue6e5")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Start"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 12
+text = "продолжить"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("30_vecjn")
+
+[node name="Settings" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("31_kmubw")
+texture_pressed = ExtResource("32_w1fpn")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 14
+text = "btn_settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("30_vecjn")
+key = "btn_settings"
+
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("33_hte3w")
+texture_pressed = ExtResource("28_ue6e5")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Exit"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 19
+text = "btn_exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("30_vecjn")
+key = "btn_exit"
+
+[node name="Tap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("36_xaq7d")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+visible = false
+z_index = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -155.0
+offset_right = 149.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+z_index = 4
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 19
+text = "lbl_volume"
+script = ExtResource("30_vecjn")
+key = "lbl_volume"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("29_ec7r0")
+text = "lbl_music"
+script = ExtResource("30_vecjn")
+key = "lbl_music"
+
+[node name="music" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+value = 0.5
+script = ExtResource("37_su70c")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("29_ec7r0")
+text = "lbl_sfx"
+script = ExtResource("30_vecjn")
+key = "lbl_sfx"
+
+[node name="SFX" type="HSlider" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+value = 0.5
+script = ExtResource("38_21wcx")
+
+[node name="Label2" type="Label" parent="MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 19
+text = "lbl_language"
+horizontal_alignment = 1
+script = ExtResource("30_vecjn")
+key = "lbl_language"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="Eng" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("39_vq2m7")
+
+[node name="Rus" type="TextureButton" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("40_i3rbo")
+
+[node name="FullScreen" type="CheckButton" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxEmpty_owq6t")
+text = "btn_fullscreen"
+script = ExtResource("30_vecjn")
+key = "btn_fullscreen"
+
+[node name="Back" type="TextureButton" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("33_hte3w")
+texture_pressed = ExtResource("28_ue6e5")
+
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/Back"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_right = 0.042
+offset_left = 5.936
+offset_top = -3.0
+offset_right = 173.936
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("29_ec7r0")
+theme_override_font_sizes/font_size = 19
+text = "btn_back"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("30_vecjn")
+key = "btn_back"

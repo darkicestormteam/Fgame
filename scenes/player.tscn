@@ -279,6 +279,7 @@ position = Vector2(-40, 0)
 [node name="AnimatedSprite2DSwordUP" type="AnimatedSprite2D" parent="SwordPivot"]
 visible = false
 modulate = Color(1, 1, 1, 0.482353)
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_gee14")
 animation = &"swordUP"
 frame = 3

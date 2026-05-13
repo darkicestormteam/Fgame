@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=57 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://lce7vl7b1krr" path="res://scenes/Tree/duck.tscn" id="18_nepv3"]
 [ext_resource type="PackedScene" uid="uid://lckt3n3t6w2e" path="res://scenes/Tree/stolb2.tscn" id="21_nepv3"]
 [ext_resource type="Texture2D" uid="uid://bf4ow0a62qqjk" path="res://Tiny Swords (Update 010)/Terrain/Bridge/Bridge_All.png" id="24_twgab"]
+[ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="31_7025r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nepv3"]
 texture = ExtResource("1_lbhrr")
@@ -771,7 +772,6 @@ position = Vector2(1311, 2515)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
-position = Vector2(-76, -1743)
 bus = &"music"
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
@@ -787,6 +787,15 @@ offset_right = -45.0
 offset_bottom = 14.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="Mainmenu" parent="HUD" instance=ExtResource("31_7025r")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)

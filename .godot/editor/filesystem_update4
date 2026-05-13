@@ -15,3 +15,8 @@ res://script/timer_game.gd
 res://script/mainmenu.gd
 res://script/localization.gd
 res://scenes/TimerGame.tscn
+res://script/localized_control.gd
+res://scenes/settings.tscn
+res://menugame.tscn
+res://scenes/gamemenu.tscn
+res://scenes/worldmusic.tscn
