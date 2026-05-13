@@ -19,18 +19,12 @@ func _ready() -> void:
 	$MarginContainer2/VBoxContainer/HBoxContainer3/Eng.pressed.connect(_on_eng_pressed)
 	$MarginContainer2/VBoxContainer/HBoxContainer3/Rus.pressed.connect(_on_rus_pressed)
 	
-	# Отладка: проверяем наличие узла FullScreen
-	print("Попытка найти FullScreen: ", $MarginContainer2/VBoxContainer/FullScreen)
-	
 	# Подключаем сигнал переключателя FullScreen
 	if full_screen_toggle:
-		print("Узел FullScreen найден, подключаем сигнал")
 		full_screen_toggle.toggled.connect(_on_full_screen_toggled)
 		# Устанавливаем начальное состояние переключателя
 		var current_mode = DisplayServer.window_get_mode()
 		full_screen_toggle.button_pressed = (current_mode == DisplayServer.WINDOW_MODE_FULLSCREEN || current_mode == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
-	else:
-		print("Ошибка: Узел FullScreen не найден!")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
