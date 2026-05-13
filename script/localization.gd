@@ -1,3 +1,4 @@
+class_name Localization
 extends Node
 
 var current_locale: String = "ru"  # Default to Russian
