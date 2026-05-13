@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="40_localized"]
 
 [node name="GameOver" type="CanvasLayer"]
-process_mode = 2
 script = ExtResource("1_xeevv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -18,6 +17,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.0509804, 0.0745098, 0.215686)
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -33,13 +33,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_7m3ot")
 theme_override_font_sizes/font_size = 70
-text = "игра окончена"
+text = "GAME OVER"
 horizontal_alignment = 1
 script = ExtResource("40_localized")
 key = "game_over"
 
 [node name="TextureButton" type="TextureButton" parent="."]
-z_index = 4
+z_index = 5
 name = "ResetGame"
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,7 +67,8 @@ offset_right = 67.0
 offset_bottom = 32.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("2_7m3ot")
-text = "btn_restart"
+text = "Restart"
+horizontal_alignment = 1
 script = ExtResource("40_localized")
 key = "btn_restart"
 
