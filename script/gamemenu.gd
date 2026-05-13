@@ -255,8 +255,17 @@ func _toggle_pause_menu():
 		is_game_menu_open = true
 		get_tree().paused = true
 
-# Старую функцию _on_settings1_pressed можно оставить как заглушку или удалить, 
-# если она больше не используется кнопкой
+# Функция _on_settings1_pressed теперь проверяет активность SpellMenu
 func _on_settings1_pressed() -> void:
-	# Теперь эта кнопка просто вызывает ту же логику что и Esc
-		_toggle_pause_menu()
+	# Получаем актуальную ссылку на SpellMenu и проверяем его активность
+	var current_spell_menu = get_tree().get_first_node_in_group("spell_menu")
+	if not current_spell_menu:
+		current_spell_menu = get_node_or_null("/root/game/SpellMenu")
+	var is_spellmenu_active = current_spell_menu and current_spell_menu.is_active
+	
+	# Если активно SpellMenu - игнорируем нажатие кнопки settings1
+	if is_spellmenu_active:
+		return
+	
+	# Иначе вызываем ту же логику что и Esc
+	_toggle_pause_menu()
