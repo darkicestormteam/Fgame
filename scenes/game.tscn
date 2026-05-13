@@ -773,6 +773,7 @@ position = Vector2(1311, 2515)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
+volume_db = -18.0
 bus = &"music"
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]

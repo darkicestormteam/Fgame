@@ -113,7 +113,7 @@ stretch_mode = 3
 
 [node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1sp5a")
-volume_db = 11.32
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]

@@ -29,3 +29,6 @@ res://script/audio_manager.gd
 res://scenes/game_over.tscn
 res://scenes/213123123123.tscn
 res://script/game_over.gd
+res://default_bus_layout.tres
+res://scenes/enemy/enemy1.tscn
+res://scenes/enemy/enemy2.tscn

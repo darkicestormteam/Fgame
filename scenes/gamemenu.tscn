@@ -116,7 +116,6 @@ key = "btn_exit"
 
 [node name="Tap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("36_xaq7d")
-volume_db = 5.0
 bus = &"SFX"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]

@@ -9,8 +9,8 @@ const MUSIC_VOLUME_KEY := "audio/music_volume"
 const SFX_VOLUME_KEY := "audio/sfx_volume"
 
 # Значения по умолчанию
-const DEFAULT_MUSIC_VOLUME := 0.1  # Начальная громкость музыки потише (30%)
-const DEFAULT_SFX_VOLUME := 0.3    # Громкость эффектов по умолчанию (50%)
+const DEFAULT_MUSIC_VOLUME := 0.5  # Начальная громкость музыки потише (30%)
+const DEFAULT_SFX_VOLUME := 0.5    # Громкость эффектов по умолчанию (50%)
 
 # Флаг, чтобы применить настройки только один раз
 var _settings_applied := false

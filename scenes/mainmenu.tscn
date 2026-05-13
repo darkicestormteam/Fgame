@@ -817,6 +817,7 @@ zoom = Vector2(1.5, 1.5)
 [node name="Menusong" parent="." instance=ExtResource("29_a5e1i")]
 process_mode = 3
 stream = ExtResource("30_f107f")
+volume_db = -18.0
 bus = &"music"
 
 [node name="Tap" type="AudioStreamPlayer2D" parent="."]

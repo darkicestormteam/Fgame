@@ -495,26 +495,32 @@ texture = ExtResource("4_qpmln")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_hej5o")
+volume_db = -5.0
 pitch_scale = 0.8
 bus = &"SFX"
 
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_virtx")
+volume_db = -5.0
 pitch_scale = 1.19
 bus = &"SFX"
 
 [node name="Змеяпревью" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ys25t")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Звукстолкновения" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_dmwkb")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="НедовольныйГном" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_voshf")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Ревмедведя" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_405vw")
+volume_db = -5.0
 bus = &"SFX"

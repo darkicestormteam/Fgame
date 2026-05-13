@@ -158,6 +158,7 @@ frame = 4
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_eby80")
+volume_db = -5.0
 
 [node name="CollisionShape2D" parent="Attack" index="0"]
 position = Vector2(21, 2)

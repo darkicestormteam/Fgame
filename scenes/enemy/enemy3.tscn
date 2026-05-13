@@ -218,6 +218,7 @@ shape = SubResource("CapsuleShape2D_8aryt")
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_ednf7")
+volume_db = -5.0
 
 [node name="CollisionShape2D" parent="Attack" index="0"]
 shape = SubResource("CapsuleShape2D_5muev")
