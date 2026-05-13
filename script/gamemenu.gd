@@ -196,23 +196,30 @@ func _on_music1_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	# Проверяем нажатие клавиши Esc (или ui_cancel)
 	if event.is_action_pressed("ui_cancel"):
-		# Если открыто меню настроек (MarginContainer), закрываем его первым делом
+		# Если открыто меню настроек (MarginContainer2), закрываем его первым делом
+		if $MarginContainer2.visible:
+			_on_back_pressed()
+			get_viewport().set_input_as_handled()
+			return
+		
+		# Если открыто главное меню паузы (MarginContainer)
 		if $MarginContainer.visible:
-			_on_settings1_pressed() # Это скроет меню и, если нужно, снимет паузу
+			# Если активно SpellMenu, мы НЕ снимаем паузу, а просто закрываем меню
+			if spell_menu and spell_menu.is_active:
+				_on_settings1_pressed() # Закрываем меню, но пауза остается
+			else:
+				_on_settings1_pressed() # Закрываем меню и снимаем паузу
 			get_viewport().set_input_as_handled()
 			return
-
-		# Если активно SpellMenu, мы можем открыть меню паузы поверх него,
-		# но не можем снять паузу через Esc, пока SpellMenu не будет закрыт.
+		
+		# Если меню не открыто
+		# Если активно SpellMenu, открываем меню паузы поверх него (пауза уже стоит)
 		if spell_menu and spell_menu.is_active:
-			if not $MarginContainer.visible:
-				# Открываем меню паузы поверх SpellMenu
-				_on_settings1_pressed()
-			# Если меню уже открыто, игнорируем Esc, чтобы не снять паузу случайно
+			_on_settings1_pressed() # Открываем меню
 			get_viewport().set_input_as_handled()
 			return
-
-		# Стандартное поведение, если SpellMenu не активен и меню не открыто
+		
+		# Стандартное поведение: открываем меню и ставим паузу
 		_on_settings1_pressed()
 		get_viewport().set_input_as_handled()
 
