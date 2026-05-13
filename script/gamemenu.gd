@@ -219,7 +219,7 @@ func _toggle_pause_menu():
 	if not current_spell_menu:
 		current_spell_menu = get_node_or_null("/root/game/SpellMenu")
 	
-	var is_spellmenu_active = current_spell_menu and current_spell_menu.visible
+	var is_spellmenu_active = current_spell_menu and current_spell_menu.is_active
 	
 	if $MarginContainer.visible:
 		# Меню открыто -> Закрываем его
@@ -228,7 +228,7 @@ func _toggle_pause_menu():
 		settings2_was_open = false
 		is_game_menu_open = false
 		
-		# Снимаем паузу ТОЛЬКО если SpellMenu не активно
+		# Снимаем паузу ТОЛЬКО если SpellMenu не активен
 		if not is_spellmenu_active:
 			get_tree().paused = false
 	else:
