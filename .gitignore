@@ -1,1 +1,13 @@
-Nothing needs to be added to the .gitignore file since only a single source code file (`script/enemy.gd`) was modified and there are no build artifacts, dependencies, or temporary files in the changes.
+```
+# Editor/IDE files
+.vscode/
+
+# Compiled/build artifacts
+*.import
+
+# Dependencies
+.build/
+bin/
+addons/
+export_presets.cfg
+```
