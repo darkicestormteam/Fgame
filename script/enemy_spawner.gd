@@ -68,12 +68,14 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 	# Если это третья волна (номер 2), запускаем preview с анимацией Gnom_Snake и ставим паузу
 	elif wave_index == 2:
 		await _play_preview_and_pause("Gnom_Snake")
-		# Включаем музыку босса на третьей волне
-		_play_boss_music()
 	# Если это четвертая волна (номер 3), запускаем preview с анимацией Bear и ставим паузу
 	elif wave_index == 3:
 		await _play_preview_and_pause("Bear")
-		# Возвращаем музыку world на четвертой волне
+		# Включаем музыку босса на четвертой волне
+		_play_boss_music()
+	# Если это пятая волна (номер 4), возвращаем обычную музыку
+	elif wave_index == 4:
+		# Возвращаем музыку world на пятой волне
 		_play_world_music()
 	
 	_current_wave_config = config
