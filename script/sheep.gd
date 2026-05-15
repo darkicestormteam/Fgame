@@ -95,8 +95,9 @@ func _explode_with_delay() -> void:
 		if is_instance_valid(enemy):
 			var distance = global_position.distance_to(enemy.global_position)
 			if distance <= EXPLOSION_RADIUS:
-				# Проверка, чтобы не нанести урон самому себе или другим, если нужно
-				enemy.queue_free()
+				# Наносим 1 урон врагу
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(1)
 	
 	await animated_sprite.animation_finished
 	queue_free()
