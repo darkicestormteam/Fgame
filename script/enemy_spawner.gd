@@ -132,8 +132,15 @@ func deactivate_spawner() -> void:
 
 func _on_lifetime_expired() -> void:
 	deactivate_spawner()
-	# Опционально: можно автоматически запускать следующую волну, если логика требует
-	# Но сейчас каждая волна имеет свой таймер активации, так что просто ждем следующего таймера
+	# Автоматически запускаем следующую волну, если она есть в конфиге
+	var current_index = wave_configs.find(_current_wave_config)
+	if current_index != -1 and current_index + 1 < wave_configs.size():
+		print("[EnemySpawner] Переход к следующей волне через 2 секунды...")
+		await get_tree().create_timer(2.0).timeout
+		# Активируем следующую волну вручную, так как таймер активации может еще тикать
+		_on_activation_timer_timeout(current_index + 1)
+	else:
+		print("[EnemySpawner] Все волны пройдены!")
 
 func _on_enemy_died(dead_enemy: Node = null) -> void:
 	# Удаляем умершего врага из списка текущей волны
