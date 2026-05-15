@@ -29,6 +29,8 @@ var flash_duration: float = 0.5
 var flash_interval: float = 0.1
 var original_modulate: Color = Color.WHITE
 
+signal died
+
 func _ready() -> void:
 	add_to_group("Enemy")
 	_player = get_tree().get_first_node_in_group("player")
@@ -60,6 +62,7 @@ func take_damage(amount: int) -> void:
 		is_flashing = true
 		flash_timer = flash_duration
 	if health <= 0:
+		emit_signal("died")
 		queue_free()
 
 func _physics_process(delta: float) -> void:
