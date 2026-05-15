@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=61 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://lce7vl7b1krr" path="res://scenes/Tree/duck.tscn" id="18_nepv3"]
 [ext_resource type="PackedScene" uid="uid://lckt3n3t6w2e" path="res://scenes/Tree/stolb2.tscn" id="21_nepv3"]
 [ext_resource type="Texture2D" uid="uid://bf4ow0a62qqjk" path="res://Tiny Swords (Update 010)/Terrain/Bridge/Bridge_All.png" id="24_twgab"]
+[ext_resource type="AudioStream" uid="uid://bsvefvukxyua0" path="res://assets/sounds/boss_battle_8_retro_01_loop.wav" id="29_pr1ej"]
 [ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="31_7025r"]
 [ext_resource type="PackedScene" uid="uid://cjrjkoopyi22d" path="res://scenes/game_over.tscn" id="40_m4url"]
 [ext_resource type="PackedScene" uid="uid://j5pbroa7lnkm" path="res://scenes/enemy/trolik.tscn" id="41_8ool0"]
@@ -728,14 +729,25 @@ spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
-[sub_resource type="Resource" id="Resource_rysoc"]
+[sub_resource type="Resource" id="Resource_05nbr"]
 script = ExtResource("9_dinhu")
-activation_time = 3123.0
-lifetime = 1.0
+activation_time = 15.0
+lifetime = 10.0
 enemy_scenes = Array[PackedScene]([ExtResource("13_ca42v")])
 spawn_weights = Array[int]([])
-max_enemies = 1
-spawn_interval = 1.0
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_0sl42"]
+script = ExtResource("9_dinhu")
+activation_time = 25.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
@@ -778,6 +790,11 @@ process_mode = 3
 volume_db = -18.0
 bus = &"music"
 
+[node name="Bossmusic" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("29_pr1ej")
+volume_db = -12.391
+bus = &"music"
+
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
 
 [node name="preview" parent="HUD" groups=["preview"] instance=ExtResource("14_preview")]
@@ -797,7 +814,7 @@ grow_vertical = 1
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
-wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_rysoc")])
+wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_05nbr"), SubResource("Resource_0sl42")])
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")

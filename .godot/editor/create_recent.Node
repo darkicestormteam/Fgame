@@ -1,10 +1,10 @@
+AudioStreamPlayer
 Label
 TextureButton
 Control
 Sprite2D
 HBoxContainer
 MarginContainer
-AudioStreamPlayer
 CheckButton
 HSlider
 LineEdit

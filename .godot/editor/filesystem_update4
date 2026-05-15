@@ -13,3 +13,9 @@ res://scenes/spellmenu.tscn
 res://scenes/gamemenu.tscn
 res://scenes/game_over.tscn
 res://scenes/enemy/trolik.tscn
+res://script/sheep_spawner.gd
+res://scenes/sheep.tscn
+res://scenes/sheep_spawner.tscn
+res://script/sheep.gd
+res://script/gamemenu.gd
+res://scenes/worldmusic.tscn
