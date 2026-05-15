@@ -1,3 +1,5 @@
+CharacterBody2D
+CollisionShape2D
 AudioStreamPlayer
 Label
 TextureButton
@@ -11,4 +13,3 @@ LineEdit
 VBoxContainer
 AnimatedSprite2D
 CollisionPolygon2D
-CollisionShape2D

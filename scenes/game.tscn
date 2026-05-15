@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=59 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://df5k43kbsx2wf" path="res://scenes/Tree/bushes4.tscn" id="12_e1j6l"]
 [ext_resource type="PackedScene" uid="uid://dtw1q77jl2wyr" path="res://scenes/enemy/enemy2.tscn" id="12_ir15t"]
 [ext_resource type="PackedScene" uid="uid://bjtvmy1pcef37" path="res://scenes/enemy/enemy3.tscn" id="13_ca42v"]
-[ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="13_kvuet"]
 [ext_resource type="PackedScene" uid="uid://b2fy3yj1w1tt4" path="res://scenes/Tree/grib.tscn" id="13_pl11u"]
 [ext_resource type="PackedScene" uid="uid://8w3j2t2qa3su" path="res://scenes/Tree/grib2.tscn" id="14_bhx41"]
 [ext_resource type="PackedScene" uid="uid://bqtewqxeoknot" path="res://scenes/Tree/water.tscn" id="14_js0lu"]
@@ -41,7 +40,6 @@
 [ext_resource type="AudioStream" uid="uid://bsvefvukxyua0" path="res://assets/sounds/boss_battle_8_retro_01_loop.wav" id="29_pr1ej"]
 [ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="31_7025r"]
 [ext_resource type="PackedScene" uid="uid://cjrjkoopyi22d" path="res://scenes/game_over.tscn" id="40_m4url"]
-[ext_resource type="PackedScene" uid="uid://j5pbroa7lnkm" path="res://scenes/enemy/trolik.tscn" id="41_8ool0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nepv3"]
 texture = ExtResource("1_lbhrr")
@@ -698,51 +696,51 @@ sources/1 = SubResource("TileSetAtlasSource_oaba0")
 
 [sub_resource type="Resource" id="Resource_dinhu"]
 script = ExtResource("9_dinhu")
-activation_time = 321312.0
-lifetime = 40.0
+activation_time = 1.0
+lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([100])
 max_enemies = 30
-spawn_interval = 1.0
+spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("9_dinhu")
-activation_time = 3.12312e+06
-lifetime = 40.0
+activation_time = 30.0
+lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
 spawn_weights = Array[int]([100])
-max_enemies = 20
-spawn_interval = 1.0
+max_enemies = 30
+spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ir15t"]
 script = ExtResource("9_dinhu")
-activation_time = 31312.0
-lifetime = 60.0
+activation_time = 60.0
+lifetime = 40.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu"), ExtResource("12_ir15t")])
 spawn_weights = Array[int]([])
-max_enemies = 80
+max_enemies = 60
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_05nbr"]
 script = ExtResource("9_dinhu")
-activation_time = 15.0
-lifetime = 10.0
+activation_time = 100.0
+lifetime = 6.0
 enemy_scenes = Array[PackedScene]([ExtResource("13_ca42v")])
 spawn_weights = Array[int]([])
-max_enemies = 10
-spawn_interval = 0.5
+max_enemies = 3
+spawn_interval = 2.0
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_0sl42"]
 script = ExtResource("9_dinhu")
-activation_time = 25.0
+activation_time = 1000.0
 lifetime = 10.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([])
@@ -824,9 +822,6 @@ player_node = NodePath("../Player")
 [node name="Spellmenu" parent="." instance=ExtResource("6_0tnpc")]
 process_mode = 3
 
-[node name="Enemy" parent="." instance=ExtResource("13_kvuet")]
-position = Vector2(302, 2499)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(607, 141)
 physics_material_override = SubResource("PhysicsMaterial_js0lu")
@@ -837,8 +832,5 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 
 [node name="GameOver" parent="." instance=ExtResource("40_m4url")]
 process_mode = 3
-
-[node name="Enemy2" parent="." instance=ExtResource("41_8ool0")]
-position = Vector2(1775, 2606)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
