@@ -1,11 +1,6 @@
 extends Control
 
-# Переменные для хранения состояния громкости
-var sfx_muted := false
-var music_muted := false
-var sfx_volume_db := 0.0
-var music_volume_db := 0.0
-
+# Ссылка на AudioManager (autoload)
 # Переменные для отслеживания состояния настроек
 var settings2_was_open := false # Был ли открыт MarginContainer2 (настройки) до нажатия settings1
 
@@ -33,9 +28,13 @@ func _ready() -> void:
 		# Устанавливаем режим обработки чтобы игнорировать паузу
 		process_mode = Node.PROCESS_MODE_ALWAYS
 
-		# Сохраняем текущие уровни громкости
-		sfx_volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
-		music_volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("music"))
+		# Подключаемся к сигналам изменения громкости от AudioManager (autoload)
+		if AudioManager:
+				AudioManager.music_volume_changed.connect(_on_music_volume_changed)
+				AudioManager.sfx_volume_changed.connect(_on_sfx_volume_changed)
+		
+		# Обновляем состояние кнопок в соответствии с текущими настройками
+		_update_button_states()
 
 		# Находим SpellMenu в сцене
 		await get_tree().process_frame
@@ -69,6 +68,22 @@ func _ready() -> void:
 		# Изначально скрываем меню паузы
 		settings_container.visible = false
 		is_game_menu_open = false
+
+
+# Обновить состояние кнопок в соответствии с текущей громкостью
+func _update_button_states() -> void:
+		var sfx_bus_index := AudioServer.get_bus_index("SFX")
+		var music_bus_index := AudioServer.get_bus_index("music")
+		
+		var sfx_db = AudioServer.get_bus_volume_db(sfx_bus_index)
+		var music_db = AudioServer.get_bus_volume_db(music_bus_index)
+		
+		# Проверяем, заглушен ли звук (громкость -80dB или ниже)
+		var sfx_muted = sfx_db <= -79.0
+		var music_muted = music_db <= -79.0
+		
+		sound_mute_sprite.visible = sfx_muted
+		music_mute_sprite.visible = music_muted
 
 
 func _process(delta: float) -> void:
@@ -163,34 +178,55 @@ func _on_full_screen_toggled(is_fullscreen: bool) -> void:
 
 func _on_sound1_pressed() -> void:
 		var sfx_bus_index := AudioServer.get_bus_index("SFX")
+		var current_db = AudioServer.get_bus_volume_db(sfx_bus_index)
+		var is_muted = current_db <= -79.0
 
-		if sfx_muted:
-				# Включаем звук - восстанавливаем предыдущую громкость
-				AudioServer.set_bus_volume_db(sfx_bus_index, sfx_volume_db)
+		if is_muted:
+				# Включаем звук - восстанавливаем громкость из AudioManager
+				if AudioManager:
+						var saved_volume = AudioManager.get_sfx_volume()
+						AudioManager.set_sfx_volume(saved_volume)
+				else:
+						AudioServer.set_bus_volume_db(sfx_bus_index, 0.0)
 				sound_mute_sprite.visible = false
-				sfx_muted = false
 		else:
-				# Выключаем звук - сохраняем текущую громкость и ставим -80dB
-				sfx_volume_db = AudioServer.get_bus_volume_db(sfx_bus_index)
-				AudioServer.set_bus_volume_db(sfx_bus_index, -80.0)
+				# Выключаем звук - используем AudioManager для сохранения состояния
+				if AudioManager:
+						AudioManager.set_sfx_volume(0.0)
+				else:
+						AudioServer.set_bus_volume_db(sfx_bus_index, -80.0)
 				sound_mute_sprite.visible = true
-				sfx_muted = true
 
 
 func _on_music1_pressed() -> void:
 		var music_bus_index := AudioServer.get_bus_index("music")
+		var current_db = AudioServer.get_bus_volume_db(music_bus_index)
+		var is_muted = current_db <= -79.0
 
-		if music_muted:
-				# Включаем музыку - восстанавливаем предыдущую громкость
-				AudioServer.set_bus_volume_db(music_bus_index, music_volume_db)
+		if is_muted:
+				# Включаем музыку - восстанавливаем громкость из AudioManager
+				if AudioManager:
+						var saved_volume = AudioManager.get_music_volume()
+						AudioManager.set_music_volume(saved_volume)
+				else:
+						AudioServer.set_bus_volume_db(music_bus_index, 0.0)
 				music_mute_sprite.visible = false
-				music_muted = false
 		else:
-				# Выключаем музыку - сохраняем текущую громкость и ставим -80dB
-				music_volume_db = AudioServer.get_bus_volume_db(music_bus_index)
-				AudioServer.set_bus_volume_db(music_bus_index, -80.0)
+				# Выключаем музыку - используем AudioManager для сохранения состояния
+				if AudioManager:
+						AudioManager.set_music_volume(0.0)
+				else:
+						AudioServer.set_bus_volume_db(music_bus_index, -80.0)
 				music_mute_sprite.visible = true
-				music_muted = true
+
+
+# Обработчики сигналов от AudioManager для обновления состояния кнопок
+func _on_sfx_volume_changed(value: float) -> void:
+		sound_mute_sprite.visible = (value == 0.0)
+
+
+func _on_music_volume_changed(value: float) -> void:
+		music_mute_sprite.visible = (value == 0.0)
 
 
 func _input(event: InputEvent) -> void:
