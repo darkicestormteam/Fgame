@@ -37,8 +37,15 @@ func _spawn_sheep() -> void:
 		print("[SheepSpawner] Cannot spawn: sheep_scene=", sheep_scene != null, " player=", _player != null)
 		return
 
-	# Создаем овцу в случайной позиции около игрока
+	# Создаем овцу
 	var sheep = sheep_scene.instantiate()
+	
+	# Сначала добавляем овцу в тот же родительский узел, где находится игрок
+	# Это гарантирует корректную работу с глобальными координатами
+	if _player.get_parent():
+		_player.get_parent().add_child(sheep)
+	else:
+		get_tree().root.add_child(sheep)
 
 	# Спавним овцу в случайном направлении от игрока на расстоянии 30-50 пикселей
 	var angle = randf() * TAU
@@ -46,13 +53,6 @@ func _spawn_sheep() -> void:
 	var spawn_position = _player.global_position + Vector2(cos(angle), sin(angle)) * distance
 
 	sheep.global_position = spawn_position
-	
-	# Добавляем овцу в тот же родительский узел, где находится игрок
-	# Это гарантирует корректную работу с глобальными координатами
-	if _player.get_parent():
-		_player.get_parent().add_child(sheep)
-	else:
-		get_tree().root.add_child(sheep)
 
 # Метод для разблокировки способности (вызывается из spellmenu)
 func enable_sheep_spell() -> void:
