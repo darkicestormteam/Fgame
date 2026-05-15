@@ -174,7 +174,7 @@ func _on_spawn_timer_timeout() -> void:
 	if not _is_active or _current_wave_config == null:
 		return
 	
-	var current_enemies = get_tree().get_nodes_in_group("enemy")
+	var current_enemies = get_tree().get_nodes_in_group("Enemy")
 	
 	# Если достигнут лимит врагов - останавливаем таймер
 	if current_enemies.size() >= _current_wave_config.max_enemies:
