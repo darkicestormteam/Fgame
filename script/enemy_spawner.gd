@@ -133,9 +133,6 @@ func _on_lifetime_expired() -> void:
 
 func _on_enemy_died(_dead_enemy = null) -> void:
 	# Перезапускаем таймер спавна, если волна активна и таймер остановлен
-	if _is_active and not _spawn_timer.is_stopped():
-		return
-	
 	if _is_active and _spawn_timer.is_stopped():
 		_spawn_timer.start()
 		print("[EnemySpawner] Враг убит. Таймер спавна перезапущен.")
@@ -211,16 +208,16 @@ func _on_spawn_timer_timeout() -> void:
 		var random_index = randi() % _valid_spawn_positions.size()
 		spawn_position = grass_layer.to_global(_valid_spawn_positions[random_index])
 	
-	var enemy = enemy_scene.instantiate()
-	enemy.global_position = spawn_position
-	get_parent().add_child(enemy)
+	var enemy_scene_instance = enemy_scene.instantiate()
+	enemy_scene_instance.global_position = spawn_position
+	get_parent().add_child(enemy_scene_instance)
 	
 	# Добавляем врагу сигнал смерти для перезапуска таймера
-	if enemy.has_signal("died") or enemy.has_signal("tree_exited"):
-		if enemy.has_signal("died"):
-			enemy.connect("died", _on_enemy_died)
+	if enemy_scene_instance.has_signal("died") or enemy_scene_instance.has_signal("tree_exited"):
+		if enemy_scene_instance.has_signal("died"):
+			enemy_scene_instance.connect("died", _on_enemy_died)
 		else:
-			enemy.connect("tree_exited", _on_enemy_died)
+			enemy_scene_instance.connect("tree_exited", _on_enemy_died)
 
 func _select_enemy_scene(config: WaveConfig) -> PackedScene:
 	if config.enemy_scenes.is_empty():
