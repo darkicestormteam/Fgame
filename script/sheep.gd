@@ -71,7 +71,6 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy") and not _explode_triggered:
 		# Воспроизводим звук Sheepsay при соприкосновении с врагом
 		sheepsay_sound.play()
-		# Запускаем процесс взрыва с задержкой (только один раз!)
 		_explode_triggered = true
 		_explode_with_delay()
 
@@ -95,8 +94,9 @@ func _explode_with_delay() -> void:
 		if is_instance_valid(enemy):
 			var distance = global_position.distance_to(enemy.global_position)
 			if distance <= EXPLOSION_RADIUS:
-				# Проверка, чтобы не нанести урон самому себе или другим, если нужно
-				enemy.queue_free()
+				# Наносим 1 единицу урона врагу
+				if enemy.has_method("take_damage"):
+					enemy.take_damage(1)
 	
 	await animated_sprite.animation_finished
 	queue_free()
