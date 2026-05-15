@@ -19,3 +19,5 @@ res://scenes/sheep_spawner.tscn
 res://script/sheep.gd
 res://script/gamemenu.gd
 res://scenes/worldmusic.tscn
+res://script/enemy.gd
+res://scenes/enemy/enemy2.tscn
