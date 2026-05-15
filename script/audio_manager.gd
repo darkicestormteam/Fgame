@@ -15,6 +15,10 @@ const DEFAULT_SFX_VOLUME := 0.5    # Громкость эффектов по у
 # Флаг, чтобы применить настройки только один раз
 var _settings_applied := false
 
+# Переменные для хранения последней громкости перед выключением
+var _last_music_volume := DEFAULT_MUSIC_VOLUME
+var _last_sfx_volume := DEFAULT_SFX_VOLUME
+
 
 func _ready() -> void:
 		# Применяем сохранённые настройки при запуске
@@ -61,6 +65,14 @@ func _set_sfx_volume_internal(value: float) -> void:
 # Публичный метод для установки громкости музыки
 func set_music_volume(value: float) -> void:
 		value = clamp(value, 0.0, 1.0)
+		
+		# Если выключаем звук (value == 0), сохраняем текущую громкость
+		if value == 0.0:
+				_last_music_volume = get_music_volume()
+		else:
+				# Если включаем звук, используем сохраненное значение
+				_last_music_volume = value
+		
 		_set_music_volume_internal(value)
 		ProjectSettings.set_setting(MUSIC_VOLUME_KEY, value)
 		music_volume_changed.emit(value)
@@ -69,6 +81,14 @@ func set_music_volume(value: float) -> void:
 # Публичный метод для установки громкости эффектов
 func set_sfx_volume(value: float) -> void:
 		value = clamp(value, 0.0, 1.0)
+		
+		# Если выключаем звук (value == 0), сохраняем текущую громкость
+		if value == 0.0:
+				_last_sfx_volume = get_sfx_volume()
+		else:
+				# Если включаем звук, используем сохраненное значение
+				_last_sfx_volume = value
+		
 		_set_sfx_volume_internal(value)
 		ProjectSettings.set_setting(SFX_VOLUME_KEY, value)
 		sfx_volume_changed.emit(value)
