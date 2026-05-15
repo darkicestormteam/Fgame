@@ -1,1 +1,1 @@
-Nothing should be ignored based on the provided file changes, as only a source code file (`script/enemy_spawner.gd`) was modified and no build artifacts, dependencies, or temporary files were detected.
+Nothing needs to be added to .gitignore since the changes only include source code files (.gd files) without any build artifacts, dependencies, or temporary files.

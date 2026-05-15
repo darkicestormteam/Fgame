@@ -182,15 +182,15 @@ func _on_sound1_pressed() -> void:
 		var is_muted = current_db <= -79.0
 
 		if is_muted:
-				# Включаем звук - восстанавливаем громкость из AudioManager
+				# Включаем звук - восстанавливаем последнюю громкость
 				if AudioManager:
-						var saved_volume = AudioManager.get_sfx_volume()
+						var saved_volume = AudioManager._last_sfx_volume
 						AudioManager.set_sfx_volume(saved_volume)
 				else:
 						AudioServer.set_bus_volume_db(sfx_bus_index, 0.0)
 				sound_mute_sprite.visible = false
 		else:
-				# Выключаем звук - используем AudioManager для сохранения состояния
+				# Выключаем звук
 				if AudioManager:
 						AudioManager.set_sfx_volume(0.0)
 				else:
@@ -204,15 +204,15 @@ func _on_music1_pressed() -> void:
 		var is_muted = current_db <= -79.0
 
 		if is_muted:
-				# Включаем музыку - восстанавливаем громкость из AudioManager
+				# Включаем музыку - восстанавливаем последнюю громкость
 				if AudioManager:
-						var saved_volume = AudioManager.get_music_volume()
+						var saved_volume = AudioManager._last_music_volume
 						AudioManager.set_music_volume(saved_volume)
 				else:
 						AudioServer.set_bus_volume_db(music_bus_index, 0.0)
 				music_mute_sprite.visible = false
 		else:
-				# Выключаем музыку - используем AudioManager для сохранения состояния
+				# Выключаем музыку
 				if AudioManager:
 						AudioManager.set_music_volume(0.0)
 				else:
