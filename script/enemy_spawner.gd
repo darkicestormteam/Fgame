@@ -14,6 +14,7 @@ var _valid_spawn_positions: Array[Vector2] = []
 var _is_active: bool = false
 var _current_wave_config: WaveConfig = null
 var _game_time: float = 0.0
+var _current_wave_enemies: Array = [] # Список врагов текущей волны
 
 # Ссылка на сцену preview
 var _preview_node: ColorRect = null
@@ -58,6 +59,9 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 		
 	var config = wave_configs[wave_index]
 	print("[EnemySpawner] Активация волны %d (Время: %.2f, Длительность: %.2f)" % [wave_index, config.activation_time, config.lifetime])
+	
+	# Очищаем список врагов предыдущей волны при старте новой
+	_current_wave_enemies.clear()
 	
 	# Если это первая волна (номер 0), запускаем preview с анимацией Gnom и ставим паузу
 	if wave_index == 0:
@@ -131,7 +135,11 @@ func _on_lifetime_expired() -> void:
 	# Опционально: можно автоматически запускать следующую волну, если логика требует
 	# Но сейчас каждая волна имеет свой таймер активации, так что просто ждем следующего таймера
 
-func _on_enemy_died(_dead_enemy = null) -> void:
+func _on_enemy_died(dead_enemy: Node = null) -> void:
+	# Удаляем умершего врага из списка текущей волны
+	if dead_enemy and _current_wave_enemies.has(dead_enemy):
+		_current_wave_enemies.erase(dead_enemy)
+	
 	# Перезапускаем таймер спавна, если волна активна и таймер остановлен
 	if _is_active and _spawn_timer.is_stopped():
 		_spawn_timer.start()
@@ -174,12 +182,13 @@ func _on_spawn_timer_timeout() -> void:
 	if not _is_active or _current_wave_config == null:
 		return
 	
-	var current_enemies = get_tree().get_nodes_in_group("Enemy")
+	# Считаем только врагов текущей волны
+	var current_enemies_count = _current_wave_enemies.size()
 	
 	# Если достигнут лимит врагов - останавливаем таймер
-	if current_enemies.size() >= _current_wave_config.max_enemies:
+	if current_enemies_count >= _current_wave_config.max_enemies:
 		_spawn_timer.stop()
-		print("[EnemySpawner] Достигнут лимит врагов: %d/%d. Таймер остановлен." % [current_enemies.size(), _current_wave_config.max_enemies])
+		print("[EnemySpawner] Достигнут лимит врагов текущей волны: %d/%d. Таймер остановлен." % [current_enemies_count, _current_wave_config.max_enemies])
 		return
 	
 	var enemy_scene = _select_enemy_scene(_current_wave_config)
@@ -212,12 +221,15 @@ func _on_spawn_timer_timeout() -> void:
 	enemy_scene_instance.global_position = spawn_position
 	get_parent().add_child(enemy_scene_instance)
 	
-	# Добавляем врагу сигнал смерти для перезапуска таймера
+	# Добавляем врага в список текущей волны
+	_current_wave_enemies.append(enemy_scene_instance)
+	
+	# Добавляем врагу сигнал смерти для удаления из списка и перезапуска таймера
 	if enemy_scene_instance.has_signal("died") or enemy_scene_instance.has_signal("tree_exited"):
 		if enemy_scene_instance.has_signal("died"):
-			enemy_scene_instance.connect("died", _on_enemy_died)
+			enemy_scene_instance.connect("died", _on_enemy_died.bind(enemy_scene_instance))
 		else:
-			enemy_scene_instance.connect("tree_exited", _on_enemy_died)
+			enemy_scene_instance.connect("tree_exited", _on_enemy_died.bind(enemy_scene_instance))
 
 func _select_enemy_scene(config: WaveConfig) -> PackedScene:
 	if config.enemy_scenes.is_empty():
