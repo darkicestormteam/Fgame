@@ -800,7 +800,7 @@ grass_layer = NodePath("../TileMap/Grass")
 wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_rysoc")])
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
-player_node = NodePath("/root/Game/Player")
+player_node = NodePath("../Player")
 
 [node name="SpellTimer" type="Timer" parent="."]
 

@@ -1,9 +1,1 @@
-```
-# Godot-specific ignores
-*.import
-*.remap
-export_presets.cfg
-.autoload_register
-.editor
-.godot/
-```
+Nothing should be ignored based on the provided file changes. The only modified file is 'scenes/game.tscn', which appears to be a source configuration file for a Godot project and should not be ignored.
