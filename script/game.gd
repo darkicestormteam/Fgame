@@ -5,8 +5,8 @@ extends Node2D
 @onready var objects_layer: TileMapLayer = $TileMap/Objects
 
 func _ready() -> void:
-	# Инициализируем таймер
-	timer.wait_time = 3.0
+	# Инициализируем таймер для spellmenu
+	timer.wait_time = 10.0
 	timer.one_shot = true
 	timer.start()
 	
