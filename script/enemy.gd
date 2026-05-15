@@ -10,6 +10,10 @@ extends CharacterBody2D
 @export var teleport_distance: float = 2500.0
 @export var camera_buffer: float = 200.0
 
+# Настройки расстояния между врагами
+@export var separation_distance: float = 30.0
+@export var separation_strength: float = 50.0
+
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -107,6 +111,10 @@ func _physics_process(delta: float) -> void:
 		
 		# Запоминаем желаемое направление для анимации и логики
 		var desired_velocity = direction * speed
+		
+		# Применяем силу разделения от других врагов
+		var separation_force = _calculate_separation()
+		desired_velocity += separation_force
 		
 		if desired_velocity.x > 0:
 			animated_sprite.flip_h = false
@@ -245,3 +253,25 @@ func _teleport_to_random_grass_position(target_pos: Vector2, search_radius: floa
 	else:
 		# Если не нашли траву, просто телепортируем в целевую точку
 		global_position = target_pos
+
+# Вычисляет силу отталкивания от других врагов
+func _calculate_separation() -> Vector2:
+	var separation_force = Vector2.ZERO
+	var enemies = get_tree().get_nodes_in_group("Enemy")
+	
+	for enemy in enemies:
+		if enemy == self:
+			continue
+		
+		var distance = global_position.distance_to(enemy.global_position)
+		
+		# Если другой враг слишком близко
+		if distance > 0 and distance < separation_distance:
+			# Вектор отталкивания (от другого врага к нам)
+			var push_direction = (global_position - enemy.global_position).normalized()
+			
+			# Сила отталкивания увеличивается, когда враги ближе друг к другу
+			var push_strength = (separation_distance - distance) / separation_distance
+			separation_force += push_direction * push_strength * separation_strength
+	
+	return separation_force
