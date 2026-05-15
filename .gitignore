@@ -6,7 +6,6 @@ __pycache__/
 *.obj
 dist/
 build/
-*.class
 *.exe
 *.dll
 *.so
@@ -17,8 +16,6 @@ build/
 .venv/
 venv/
 node_modules/
-.julia/
-zig-cache/
 target/
 .gradle/
 
@@ -36,6 +33,8 @@ target/
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # System files
 .DS_Store
@@ -65,4 +64,8 @@ htmlcov/
 *.Z
 *.lz
 *.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
 ```
