@@ -68,9 +68,13 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 	# Если это третья волна (номер 2), запускаем preview с анимацией Gnom_Snake и ставим паузу
 	elif wave_index == 2:
 		await _play_preview_and_pause("Gnom_Snake")
+		# Включаем музыку босса на третьей волне
+		_play_boss_music()
 	# Если это четвертая волна (номер 3), запускаем preview с анимацией Bear и ставим паузу
 	elif wave_index == 3:
 		await _play_preview_and_pause("Bear")
+		# Возвращаем музыку world на четвертой волне
+		_play_world_music()
 	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
@@ -218,3 +222,25 @@ func _select_enemy_scene(config: WaveConfig) -> PackedScene:
 			return config.enemy_scenes[i]
 	
 	return config.enemy_scenes[config.enemy_scenes.size() - 1]
+
+func _play_boss_music() -> void:
+	# Находим узел World (обычная музыка) и Bossmusic в сцене
+	var world_music = get_node_or_null("/root/game/Player/World")
+	var boss_music = get_node_or_null("/root/game/Player/Bossmusic")
+	
+	if world_music and world_music is AudioStreamPlayer:
+		world_music.stop()
+	
+	if boss_music and boss_music is AudioStreamPlayer:
+		boss_music.play()
+
+func _play_world_music() -> void:
+	# Находим узел World (обычная музыка) и Bossmusic в сцене
+	var world_music = get_node_or_null("/root/game/Player/World")
+	var boss_music = get_node_or_null("/root/game/Player/Bossmusic")
+	
+	if boss_music and boss_music is AudioStreamPlayer:
+		boss_music.stop()
+	
+	if world_music and world_music is AudioStreamPlayer:
+		world_music.play()
