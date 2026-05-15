@@ -62,6 +62,7 @@ func take_damage(amount: int) -> void:
 		is_flashing = true
 		flash_timer = flash_duration
 	if health <= 0:
+		remove_from_group("Enemy")
 		emit_signal("died")
 		queue_free()
 
