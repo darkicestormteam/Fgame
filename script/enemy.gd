@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var attack_distance: float = 50.0
 @export var attack_collision_start_frame: int = 3
 @export var attack_collision_end_frame: int = 6
+@export var attack_cooldown: float = 1.0
 
 # Настройки телепортации
 @export var teleport_distance: float = 2500.0
@@ -27,6 +28,7 @@ var _grass_layer: TileMapLayer = null
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
+var attack_cooldown_timer: float = 0.0
 var last_pitch: float = 1.0
 var is_flashing: bool = false
 var flash_timer: float = 0.0
@@ -72,6 +74,10 @@ func take_damage(amount: int) -> void:
 		queue_free()
 
 func _physics_process(delta: float) -> void:
+	# Обработка таймера перезарядки атаки
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer -= delta
+	
 	# Обработка мигания при получении урона
 	if is_flashing:
 		flash_timer -= delta
@@ -107,7 +113,7 @@ func _physics_process(delta: float) -> void:
 	var distance_to_player_after: float = global_position.distance_to(_player.global_position)
 	
 	# Проверяем дистанцию до игрока
-	if distance_to_player_after <= attack_distance:
+	if attack_cooldown_timer <= 0.0 and distance_to_player_after <= attack_distance:
 		if not is_attacking:
 			is_attacking = true
 			# Поворачиваем врага к игроку перед атакой
@@ -197,6 +203,7 @@ func _on_frame_changed() -> void:
 		elif current_frame >= attack_collision_end_frame:
 			attack_area.monitoring = false
 			is_attacking = false
+			attack_cooldown_timer = attack_cooldown
 		
 		# Выстрел снарядом на нужном кадре для babka
 		if boom_scene != null and current_frame == boom_shoot_frame:
