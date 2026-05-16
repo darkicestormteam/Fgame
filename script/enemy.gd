@@ -111,10 +111,13 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var distance_to_player_after: float = global_position.distance_to(_player.global_position)
+	var is_in_attack_range = distance_to_player_after <= attack_distance
 	
-	# Проверяем дистанцию до игрока
-	if attack_cooldown_timer <= 0.0 and distance_to_player_after <= attack_distance:
-		if not is_attacking:
+	# Логика поведения в зависимости от нахождения игрока в зоне атаки
+	if is_in_attack_range:
+		# Игрок в зоне атаки
+		if attack_cooldown_timer <= 0.0 and not is_attacking:
+			# Кулдаун прошел, начинаем атаку
 			is_attacking = true
 			# Поворачиваем врага к игроку перед атакой
 			var direction_to_player = (_player.global_position - global_position).normalized()
@@ -125,8 +128,15 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.flip_h = false
 				attack_area.scale.x = abs(attack_area.scale.x)
 			animated_sprite.play("attack")
-		velocity = Vector2.ZERO
-		return
+			velocity = Vector2.ZERO
+			return
+		else:
+			# Кулдаун еще идет или уже атакуем -> стоим на месте и ждем
+			velocity = Vector2.ZERO
+			if not is_attacking:
+				if animated_sprite.animation != "idle":
+					animated_sprite.play("idle")
+			return
 	
 	# Логика движения
 	if not is_attacking:
