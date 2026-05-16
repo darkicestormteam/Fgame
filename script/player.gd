@@ -42,7 +42,8 @@ func _ready() -> void:
 	# Создаем материал с нулевым трением для скольжения
 	var material = PhysicsMaterial.new()
 	material.friction = 0.0
-	physics_material_override = material
+	# Используем set для явного указания свойства
+	set("physics_material_override", material)
 	
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 2.0
