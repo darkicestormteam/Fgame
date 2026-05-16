@@ -178,6 +178,9 @@ func _physics_process(delta: float) -> void:
 												collision_mask = original_collision_mask
 												# Выключаем хитбокс атаки после завершения рывка
 												attack_area.monitoring = false
+												# Останавливаем звук рывка
+												if dash_sound and dash_sound.playing:
+													dash_sound.stop()
 												# Устанавливаем кулдаун
 												dash_cooldown_timer = dash_cooldown
 												# Сбрасываем флаг атаки
@@ -222,9 +225,10 @@ func _physics_process(delta: float) -> void:
 												animated_sprite.play("attack")
 												# Включаем хитбокс атаки сразу
 												attack_area.monitoring = true
-										# Запускаем звук рывка
-										if dash_sound:
-											dash_sound.play()
+												# Запускаем звук рывка
+												if dash_sound:
+													dash_sound.loop = true
+													dash_sound.play()
 												return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
