@@ -31,7 +31,7 @@ extends CharacterBody2D
 @export var enable_dash: bool = false
 @export var dash_speed: float = 200.0
 @export var dash_range: float = 150.0
-@export var dash_length: float = 100.0  # Расстояние, которое враг попытается преодолеть за рывок
+@export var dash_duration: float = 0.3  # Длительность рывка в секундах
 @export var dash_cooldown: float = 3.0
 
 var _player: Node2D = null
@@ -54,7 +54,9 @@ var is_defending: bool = false
 var defense_cooldown_timer: float = 0.0
 var dash_cooldown_timer: float = 0.0
 var is_dashing: bool = false
-var dash_distance_traveled: float = 0.0
+var dash_timer: float = 0.0
+var dash_direction: Vector2 = Vector2.ZERO
+var original_collision_mask: int = 0
 
 signal died
 
@@ -79,6 +81,9 @@ func _ready() -> void:
 				original_modulate = animated_sprite.modulate
 				# Сбрасываем таймер защиты при старте, чтобы защита была доступна с начала игры
 				defense_cooldown_timer = 0.0
+				
+				# Сохраняем оригинальную маску коллизии для восстановления после рывка
+				original_collision_mask = collision_mask
 
 				# Проверяем наличие анимации def
 				if has_defense_ability:
@@ -159,30 +164,26 @@ func _physics_process(delta: float) -> void:
 
 				# Логика рывка (Dash) - если уже идет рывок, обрабатываем его
 				if is_dashing:
-								var dash_direction = (_player.global_position - global_position).normalized()
+								dash_timer -= delta
+								
+								# Движение по сохранённому направлению
 								velocity = dash_direction * dash_speed
 								move_and_slide()
-
-								dash_distance_traveled += velocity.length() * delta
-
-								if dash_distance_traveled >= dash_length or get_slide_collision_count() > 0:
+								
+								# Проверка завершения рывка по таймеру
+								if dash_timer <= 0.0:
 												is_dashing = false
-												dash_distance_traveled = 0.0
-												# Сразу начинаем атаку после завершения рывка
-												dash_cooldown_timer = dash_cooldown  # Устанавливаем кулдаун
-												if attack_cooldown_timer <= 0.0:
-																is_attacking = true
-																var direction_to_player = (_player.global_position - global_position).normalized()
-																if direction_to_player.x < 0:
-																				animated_sprite.flip_h = true
-																				attack_area.scale.x = -abs(attack_area.scale.x)
-																else:
-																				animated_sprite.flip_h = false
-																				attack_area.scale.x = abs(attack_area.scale.x)
-																animated_sprite.play("attack")
-												return
-								else:
-												return
+												# Восстанавливаем маску коллизии
+												collision_mask = original_collision_mask
+												# Выключаем хитбокс атаки после завершения рывка
+												attack_area.monitoring = false
+												# Устанавливаем кулдаун
+												dash_cooldown_timer = dash_cooldown
+												# Сбрасываем флаг атаки
+												is_attacking = false
+												# Возвращаемся к анимации idle
+												animated_sprite.play("idle")
+								return
 
 				if _player == null:
 								velocity = Vector2.ZERO
@@ -204,9 +205,22 @@ func _physics_process(delta: float) -> void:
 								# Проверяем, находится ли игрок в радиусе активации рывка и дальше чем обычная дистанция атаки
 								if distance_to_player_after <= dash_range and distance_to_player_after > attack_distance:
 												is_dashing = true
-												dash_distance_traveled = 0.0
+												dash_timer = dash_duration
+												# Сохраняем направление к игроку в момент начала рывка
+												dash_direction = (_player.global_position - global_position).normalized()
+												# Поворачиваем врага по направлению рывка
+												if dash_direction.x < 0:
+																animated_sprite.flip_h = true
+																attack_area.scale.x = -abs(attack_area.scale.x)
+												else:
+																animated_sprite.flip_h = false
+																attack_area.scale.x = abs(attack_area.scale.x)
+												# Отключаем коллизию со стенами (бит 4=8) и врагами (бит 3=4), оставляем только для игрока (бит 2=2)
+												collision_mask = 2
 												# Запускаем анимацию атаки сразу при начале рывка
 												animated_sprite.play("attack")
+												# Включаем хитбокс атаки сразу
+												attack_area.monitoring = true
 												return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
