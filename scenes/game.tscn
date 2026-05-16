@@ -40,7 +40,7 @@
 [ext_resource type="AudioStream" uid="uid://bsvefvukxyua0" path="res://assets/sounds/boss_battle_8_retro_01_loop.wav" id="29_pr1ej"]
 [ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="31_7025r"]
 [ext_resource type="PackedScene" uid="uid://cjrjkoopyi22d" path="res://scenes/game_over.tscn" id="40_m4url"]
-[ext_resource type="PackedScene" uid="uid://lbqocvm2e6s5" path="res://scenes/enemy/Troll-boss.tscn" id="41_8ool0"]
+[ext_resource type="PackedScene" uid="uid://c2wbov3mx2xek" path="res://scenes/enemy/skelet.tscn" id="44_458eo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nepv3"]
 texture = ExtResource("1_lbhrr")
@@ -834,7 +834,7 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 [node name="GameOver" parent="." instance=ExtResource("40_m4url")]
 process_mode = 3
 
-[node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
-position = Vector2(1053, 2505)
+[node name="Enemy" parent="." instance=ExtResource("44_458eo")]
+position = Vector2(1281, 2534)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

@@ -500,13 +500,13 @@ health = 50
 attack_distance = 200.0
 attack_collision_start_frame = 8
 attack_collision_end_frame = 23
-attack_cooldown = 10.0
+attack_cooldown = 3.0
 can_interact_with_tree = true
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -61)
 sprite_frames = SubResource("SpriteFrames_03y6r")
-animation = &"idle"
+animation = &"attack"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, -45)
