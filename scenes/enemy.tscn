@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://cbdy1btuh6yux"]
+[gd_scene load_steps=36 format=3 uid="uid://cbdy1btuh6yux"]
 
 [ext_resource type="Texture2D" uid="uid://crg8p3tcml3nm" path="res://assets/Torch_Blue.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://c36ydl8rhu8b0" path="res://script/enemy.gd" id="1_md0e3"]
 [ext_resource type="Texture2D" uid="uid://cukgshcqhp3aq" path="res://assets/Gnome-attack.png" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://bolvaplv0yrfw" path="res://scenes/kill_zone.tscn" id="3_4ra3w"]
 [ext_resource type="AudioStream" uid="uid://c71hlrq4jvmv3" path="res://assets/sounds/sfx/vzmahgnom.mp3" id="5_c4w8v"]
+[ext_resource type="AudioStream" uid="uid://22187clccqt3" path="res://assets/sounds/sfx/Sword Hit  01.wav" id="6_xwavj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
 atlas = ExtResource("2_5uy6h")
@@ -247,6 +248,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
 position = Vector2(30.5, 10.25)
 shape = SubResource("RectangleShape2D_c4w8v")
+
+[node name="Def" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xwavj")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
 

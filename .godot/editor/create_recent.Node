@@ -1,6 +1,7 @@
+AudioStreamPlayer2D
+AudioStreamPlayer
 CharacterBody2D
 CollisionShape2D
-AudioStreamPlayer
 Label
 TextureButton
 Control
@@ -12,4 +13,3 @@ HSlider
 LineEdit
 VBoxContainer
 AnimatedSprite2D
-CollisionPolygon2D
