@@ -72,3 +72,7 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and not _is_exploding:
 		body.take_damage()
 		_explode()
+
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and not _is_exploding:
+		_explode()
