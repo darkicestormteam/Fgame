@@ -331,6 +331,7 @@ stream = ExtResource("6_xwavj")
 bus = &"SFX"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
+loop = true
 stream = ExtResource("8_md484")
 bus = &"SFX"
 
