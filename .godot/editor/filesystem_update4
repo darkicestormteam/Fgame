@@ -1,8 +1,7 @@
+res://scenes/game.tscn
 res://script/player.gd
 res://script/enemy_spawner.gd
-res://scenes/game.tscn
-res://scenes/enemy_spawner.tscn
-res://scenes/HP_bar.tscn
+res://script/enemy.gd
 res://scenes/player.tscn
 res://scenes/enemy.tscn
 res://scenes/preview.tscn
@@ -13,8 +12,6 @@ res://scenes/enemy/boom.tscn
 res://scenes/sheep.tscn
 res://scenes/enemy/trolik.tscn
 res://scenes/enemy/rouge.tscn
-res://scenes/heart.tscn
-res://scenes/TimerGame.tscn
 res://scenes/enemy/skelet.tscn
-res://scenes/tree.tscn
 res://scenes/enemy/minotavr.tscn
+res://scenes/tree.tscn

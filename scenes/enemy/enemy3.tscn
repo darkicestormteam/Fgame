@@ -201,10 +201,15 @@ health = 10
 attack_distance = 80.0
 attack_collision_start_frame = 6
 attack_collision_end_frame = 7
+attack_cooldown = 1.0
+separation_distance = 30.0
+separation_strength = 50.0
+boom_spawn_offset = 95.0
+boom_shoot_frame = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fofnl")
-frame = 0
+animation = &"attack"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 11)
