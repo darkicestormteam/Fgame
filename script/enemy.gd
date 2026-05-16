@@ -120,6 +120,10 @@ func take_damage(amount: int) -> void:
 								queue_free()
 
 func _physics_process(delta: float) -> void:
+				# Обработка таймера перезарядки атаки
+				if attack_cooldown_timer > 0.0:
+							attack_cooldown_timer -= delta
+
 				# Обработка таймера перезарядки защиты
 				if defense_cooldown_timer > 0.0:
 								defense_cooldown_timer -= delta
