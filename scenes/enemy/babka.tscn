@@ -224,13 +224,18 @@ health = 2
 attack_distance = 300.0
 attack_collision_start_frame = 5
 boom_scene = ExtResource("3_boom")
+game-mechanics-review-56d6b
 boom_spawn_offset = 95.0
 boom_shoot_frame = 5
+=======
+main
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5l7r7")
 frame = 0
 frame_progress = 0.509265
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
 
 [editable path="KillZone"]
 

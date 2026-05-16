@@ -20,3 +20,5 @@ res://scenes/heart.tscn
 res://scenes/enemy/orc.tscn
 res://scenes/enemy/babka.tscn
 res://scenes/enemy/boom.tscn
+res://script/boom.gd
+res://script/enemy.gd
