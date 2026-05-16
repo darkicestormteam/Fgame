@@ -40,7 +40,6 @@ var _grass_layer: TileMapLayer = null
 @onready var attack_area: Area2D = $Attack
 @onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
 @onready var def_sound: AudioStreamPlayer2D = $Def
-@onready var dash_sound: AudioStreamPlayer2D = $Dash
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
@@ -172,22 +171,19 @@ func _physics_process(delta: float) -> void:
 								move_and_slide()
 								
 								# Проверка завершения рывка по таймеру
-									if dash_timer <= 0.0:
-										is_dashing = false
-										# Восстанавливаем маску коллизии
-										collision_mask = original_collision_mask
-										# Выключаем хитбокс атаки после завершения рывка
-										attack_area.monitoring = false
-										# Устанавливаем кулдаун
-										dash_cooldown_timer = dash_cooldown
-										# Сбрасываем флаг атаки
-										is_attacking = false
-										# Останавливаем звук рывка
-										if dash_sound and dash_sound.playing:
-											dash_sound.stop()
-										# Возвращаемся к анимации idle
-										animated_sprite.play("idle")
-									return
+								if dash_timer <= 0.0:
+												is_dashing = false
+												# Восстанавливаем маску коллизии
+												collision_mask = original_collision_mask
+												# Выключаем хитбокс атаки после завершения рывка
+												attack_area.monitoring = false
+												# Устанавливаем кулдаун
+												dash_cooldown_timer = dash_cooldown
+												# Сбрасываем флаг атаки
+												is_attacking = false
+												# Возвращаемся к анимации idle
+												animated_sprite.play("idle")
+								return
 
 				if _player == null:
 								velocity = Vector2.ZERO
@@ -225,11 +221,6 @@ func _physics_process(delta: float) -> void:
 												animated_sprite.play("attack")
 												# Включаем хитбокс атаки сразу
 												attack_area.monitoring = true
-												# Запускаем звук рывка с зацикливанием
-												if dash_sound:
-													if dash_sound.stream:
-														dash_sound.stream.loop = true
-													dash_sound.play()
 												return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
