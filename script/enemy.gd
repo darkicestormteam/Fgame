@@ -73,18 +73,17 @@ func knockback(direction: Vector2, distance: float) -> void:
 		knockback_timer = 0.15
 
 func take_damage(amount: int) -> void:
-		# Проверка способности защиты
+		# Если защита активна, блокируем урон
+		if is_defending:
+				return
+		
+		# Проверка способности защиты - не срабатывает во время атаки
 		if has_defense_ability and not is_defending and defense_cooldown_timer <= 0.0 and not is_attacking:
 				is_defending = true
-				defense_cooldown_timer = defense_cooldown
 				animated_sprite.play("def")
 				if def_sound:
 						def_sound.pitch_scale = randf_range(0.9, 1.2)
 						def_sound.play()
-				return
-
-		# Если защита активна, блокируем урон
-		if is_defending:
 				return
 
 		health -= amount
@@ -245,15 +244,6 @@ func _on_frame_changed() -> void:
 				# Выстрел снарядом на нужном кадре для babka
 				if boom_scene != null and current_frame == boom_shoot_frame:
 						_spawn_boom()
-		elif animated_sprite.animation == "def":
-				var current_frame = animated_sprite.frame
-				# Проверка: если анимация защиты подходит к концу (последний кадр или близок к нему)
-				var total_frames = animated_sprite.get_sprite_frames().get_frame_count("def")
-				if current_frame >= total_frames - 1 and total_frames > 0:
-						is_defending = false
-						# Возвращаемся к idle анимации
-						if animated_sprite.animation == "def":
-								animated_sprite.play("idle")
 
 func _spawn_boom() -> void:
 		if boom_scene == null or _player == null:
@@ -285,8 +275,9 @@ func _on_animation_finished() -> void:
 				is_attacking = false
 		elif animated_sprite.animation == "def":
 				is_defending = false
-				if animated_sprite.animation == "def":
-						animated_sprite.play("idle")
+				# Запускаем кулдаун только после завершения анимации защиты
+				defense_cooldown_timer = defense_cooldown
+				animated_sprite.play("idle")
 
 # Функция телепортации врага ближе к игроку
 func _teleport_to_player() -> void:
