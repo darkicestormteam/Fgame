@@ -6,6 +6,8 @@ extends CharacterBody2D
 @export var attack_collision_start_frame: int = 3
 @export var attack_collision_end_frame: int = 6
 @export var attack_cooldown: float = 1.0
+# Галочка для включения взаимодействия со сценой tree
+@export var can_interact_with_tree: bool = false
 
 # Настройки телепортации
 @export var teleport_distance: float = 2500.0
@@ -285,6 +287,11 @@ func _spawn_boom() -> void:
 func _on_attack_body_entered(body: Node2D) -> void:
 		if body.is_in_group("player"):
 				body.take_damage()
+		# Взаимодействие с деревом при атаке
+		if can_interact_with_tree and body.is_in_group("Tree"):
+				var tree = body.get_node_or_null(".") as Node
+				if tree and tree.has_method("disable_tree"):
+						tree.disable_tree()
 
 func _on_animation_finished() -> void:
 		if animated_sprite.animation == "attack":

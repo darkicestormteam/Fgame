@@ -73,6 +73,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_avsvi"]
 
 [node name="Tree" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_avsvi")
 script = ExtResource("1_vplca")
 
