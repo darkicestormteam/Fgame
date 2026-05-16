@@ -292,7 +292,7 @@ height = 32.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4w8v"]
 size = Vector2(16, 25.5)
 
-[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Enemy2" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
 collision_layer = 4
 collision_mask = 14
@@ -331,7 +331,6 @@ stream = ExtResource("6_xwavj")
 bus = &"SFX"
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="."]
-loop = true
 stream = ExtResource("8_md484")
 bus = &"SFX"
 

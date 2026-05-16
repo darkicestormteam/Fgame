@@ -836,8 +836,14 @@ process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
 position = Vector2(1418, 2520)
-attack_distance = 20.0
-enable_dash = true
+speed = 50.0
+separation_distance = 30.0
+separation_strength = 50.0
+boom_spawn_offset = 95.0
+boom_shoot_frame = 5
+has_defense_ability = false
+defense_cooldown = 5.0
+defense_duration = 1.0
 dash_speed = 240.0
 dash_range = 400.0
 dash_duration = 2.0
