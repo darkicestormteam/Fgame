@@ -20,11 +20,16 @@ extends CharacterBody2D
 @export var boom_spawn_offset: float = 95.0
 @export var boom_shoot_frame: int = 5
 
+# Настройки способности защиты
+@export var has_defense_ability: bool = false
+@export var defense_cooldown: float = 3.0
+
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_area: Area2D = $Attack
 @onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
+@onready var def_sound: AudioStreamPlayer2D = $Def
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
@@ -35,6 +40,8 @@ var flash_timer: float = 0.0
 var flash_duration: float = 0.5
 var flash_interval: float = 0.1
 var original_modulate: Color = Color.WHITE
+var is_defending: bool = false
+var defense_cooldown_timer: float = 0.0
 
 signal died
 
@@ -64,6 +71,16 @@ func knockback(direction: Vector2, distance: float) -> void:
 	knockback_timer = 0.15
 
 func take_damage(amount: int) -> void:
+	# Проверка способности защиты
+	if has_defense_ability and not is_defending and defense_cooldown_timer <= 0.0 and not is_attacking:
+		is_defending = true
+		defense_cooldown_timer = defense_cooldown
+		animated_sprite.play("def")
+		if def_sound:
+			def_sound.pitch_scale = randf_range(0.9, 1.2)
+			def_sound.play()
+		return
+	
 	health -= amount
 	if not is_flashing:
 		is_flashing = true
@@ -74,6 +91,10 @@ func take_damage(amount: int) -> void:
 		queue_free()
 
 func _physics_process(delta: float) -> void:
+	# Обработка таймера перезарядки защиты
+	if defense_cooldown_timer > 0.0:
+		defense_cooldown_timer -= delta
+	
 	# Обработка таймера перезарядки атаки
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
@@ -218,6 +239,15 @@ func _on_frame_changed() -> void:
 		# Выстрел снарядом на нужном кадре для babka
 		if boom_scene != null and current_frame == boom_shoot_frame:
 			_spawn_boom()
+	elif animated_sprite.animation == "def":
+		var current_frame = animated_sprite.frame
+		# Проверка: если анимация защиты подходит к концу (последний кадр или близок к нему)
+		var total_frames = animated_sprite.get_sprite_frames().get_frame_count("def")
+		if current_frame >= total_frames - 1:
+			is_defending = false
+			# Возвращаемся к idle анимации
+			if animated_sprite.animation != "idle":
+				animated_sprite.play("idle")
 
 func _spawn_boom() -> void:
 	if boom_scene == null or _player == null:
