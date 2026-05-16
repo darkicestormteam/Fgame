@@ -222,11 +222,6 @@ func _spawn_boom() -> void:
 	
 	boom_instance.global_position = spawn_position
 	boom_instance.set_direction(direction)
-	
-	# Явно поворачиваем снаряд в сторону игрока, чтобы он летел правильно
-	# Если снаряд смотрит вправо по умолчанию (rotation = 0), то используем atan2
-	if direction.x != 0 or direction.y != 0:
-		boom_instance.rotation = direction.angle()
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
