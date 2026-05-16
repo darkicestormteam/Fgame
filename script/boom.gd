@@ -77,10 +77,10 @@ func get_start_position() -> Vector2:
 	return _start_position
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and not _is_exploding:
+	if body.is_in_group("player"):
 		body.take_damage()
 		_explode()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and not _is_exploding:
+	if body.is_in_group("player"):
 		_explode()
