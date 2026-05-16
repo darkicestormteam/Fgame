@@ -229,7 +229,7 @@ func _physics_process(delta: float) -> void:
 								if dash_sound:
 										dash_sound.loop = true
 										dash_sound.play()
-												return
+						return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
 				if is_in_attack_range:
