@@ -1,3 +1,4 @@
+Sprite2D
 AudioStreamPlayer2D
 AudioStreamPlayer
 CharacterBody2D
@@ -5,7 +6,6 @@ CollisionShape2D
 Label
 TextureButton
 Control
-Sprite2D
 HBoxContainer
 MarginContainer
 CheckButton

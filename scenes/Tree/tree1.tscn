@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://u8e1hyktanbv"]
+[gd_scene load_steps=14 format=3 uid="uid://u8e1hyktanbv"]
 
 [ext_resource type="PackedScene" uid="uid://diqqm4uvkc6to" path="res://scenes/tree.tscn" id="1_4diw5"]
 [ext_resource type="Texture2D" uid="uid://bqf07m5h8hogk" path="res://assets/Trees-Sheet.png" id="2_vkyjv"]
@@ -70,6 +70,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_vkyjv"]
 radius = 7.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vkyjv"]
+load_path = "res://.godot/imported/Trees-Sheet.png-eaae364d28a28e43f6d1ae36b817f8d8.ctex"
+
 [node name="Tree" instance=ExtResource("1_4diw5")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
@@ -82,3 +85,9 @@ frame_progress = 0.0
 z_index = 4
 position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_vkyjv")
+
+[node name="Sprite2D" parent="." index="2"]
+visible = true
+position = Vector2(-2, 42)
+texture = SubResource("CompressedTexture2D_vkyjv")
+region_rect = Rect2(1609, 466, 43, 35)
