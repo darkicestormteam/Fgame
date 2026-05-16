@@ -110,6 +110,14 @@ func _physics_process(delta: float) -> void:
 	if distance_to_player_after <= attack_distance:
 		if not is_attacking:
 			is_attacking = true
+			# Поворачиваем врага к игроку перед атакой
+			var direction_to_player = (_player.global_position - global_position).normalized()
+			if direction_to_player.x < 0:
+				animated_sprite.flip_h = true
+				attack_area.scale.x = -abs(attack_area.scale.x)
+			else:
+				animated_sprite.flip_h = false
+				attack_area.scale.x = abs(attack_area.scale.x)
 			animated_sprite.play("attack")
 		velocity = Vector2.ZERO
 		return
