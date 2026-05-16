@@ -222,10 +222,10 @@ func _physics_process(delta: float) -> void:
 												animated_sprite.play("attack")
 												# Включаем хитбокс атаки сразу
 												attack_area.monitoring = true
-							# Воспроизводим звук рывка
-							if dash_sound:
-								dash_sound.pitch_scale = randf_range(0.9, 1.2)
-								dash_sound.play()
+												# Воспроизводим звук рывка
+												if dash_sound:
+													dash_sound.pitch_scale = randf_range(0.9, 1.2)
+													dash_sound.play()
 												return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
