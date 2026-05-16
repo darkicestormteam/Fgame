@@ -40,6 +40,7 @@ var _grass_layer: TileMapLayer = null
 @onready var attack_area: Area2D = $Attack
 @onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
 @onready var def_sound: AudioStreamPlayer2D = $Def
+@onready var dash_sound: AudioStreamPlayer2D = $Dash
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
@@ -183,6 +184,9 @@ func _physics_process(delta: float) -> void:
 												is_attacking = false
 												# Возвращаемся к анимации idle
 												animated_sprite.play("idle")
+ 								# Останавливаем звук рывка
+								if dash_sound and dash_sound.playing:
+										dash_sound.stop()
 								return
 
 				if _player == null:
@@ -221,6 +225,10 @@ func _physics_process(delta: float) -> void:
 												animated_sprite.play("attack")
 												# Включаем хитбокс атаки сразу
 												attack_area.monitoring = true
+ 								# Запускаем звук рывка зацикленно
+								if dash_sound:
+										dash_sound.loop = true
+										dash_sound.play()
 												return
 
 				# Логика поведения в зависимости от нахождения игрока в зоне атаки
