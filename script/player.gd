@@ -39,6 +39,11 @@ var splash_attack_timer: Timer
 func _ready() -> void:
 	add_to_group("player")
 	
+	# Создаем материал с нулевым трением для скольжения
+	var material = PhysicsMaterial.new()
+	material.friction = 0.0
+	physics_material_override = material
+	
 	attack_timer = Timer.new()
 	attack_timer.wait_time = 2.0
 	attack_timer.autostart = true
