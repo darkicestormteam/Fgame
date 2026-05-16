@@ -29,6 +29,14 @@ func _physics_process(delta: float) -> void:
 	velocity = _direction * speed
 	move_and_slide()
 	
+	# Проверка коллизий с игроком после движения
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("player") and not _is_exploding:
+			_explode()
+			return
+	
 	# Подсчёт пройденной дистанции
 	_travelled_distance += velocity.length() * delta
 	
