@@ -451,11 +451,12 @@ data = PackedByteArray("SUQzAwAAAABvdlRZRVIAAAAFAAAAMjAyNFRJVDIAAAAYAAAAU3dpbmcg
 [node name="Enemy" instance=ExtResource("1_r3gmo")]
 position = Vector2(0, 15)
 health = 50
-attack_distance = 200.0
+attack_distance = 20.0
 attack_collision_start_frame = 8
 attack_collision_end_frame = 23
 attack_cooldown = 3.0
 can_interact_with_tree = true
+enable_dash = true
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -61)
@@ -488,6 +489,5 @@ stream = SubResource("AudioStreamWAV_00hyq")
 
 [node name="Dash" parent="." index="6"]
 stream = SubResource("AudioStreamMP3_nktmg")
-bus = &"SFX"
 
 [editable path="KillZone"]
