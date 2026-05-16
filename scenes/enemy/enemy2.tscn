@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtw1q77jl2wyr"]
+[gd_scene load_steps=25 format=3 uid="uid://dtw1q77jl2wyr"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_1v4kc"]
 [ext_resource type="Texture2D" uid="uid://bwgq5ssbn1d43" path="res://assets/Snake-Sheet.png" id="2_dhsvk"]
@@ -145,6 +145,10 @@ animations = [{
 radius = 19.0
 height = 84.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_in4a1"]
+radius = 20.049
+height = 88.0212
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_dhsvk"]
 radius = 50.0
 
@@ -165,6 +169,11 @@ frame = 2
 position = Vector2(5, 10)
 rotation = -1.56159
 shape = SubResource("CapsuleShape2D_eby80")
+
+[node name="CollisionShape2D" parent="KillZone" index="0"]
+position = Vector2(4, 10)
+rotation = -1.54223
+shape = SubResource("CapsuleShape2D_in4a1")
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_eby80")

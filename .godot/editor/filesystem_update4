@@ -1,7 +1,6 @@
 res://scenes/game.tscn
 res://script/player.gd
 res://script/enemy_spawner.gd
-res://script/game.gd
 res://scenes/enemy_spawner.tscn
 res://scenes/HP_bar.tscn
 res://scenes/player.tscn
@@ -13,11 +12,11 @@ res://scenes/spellmenu.tscn
 res://scenes/gamemenu.tscn
 res://scenes/game_over.tscn
 res://scenes/enemy/trolik.tscn
-res://script/sheep_spawner.gd
 res://scenes/sheep.tscn
 res://scenes/sheep_spawner.tscn
-res://script/sheep.gd
-res://script/gamemenu.gd
 res://scenes/worldmusic.tscn
-res://script/enemy.gd
 res://scenes/enemy/enemy2.tscn
+res://scenes/heart.tscn
+res://scenes/enemy/orc.tscn
+res://scenes/enemy/babka.tscn
+res://scenes/enemy/boom.tscn

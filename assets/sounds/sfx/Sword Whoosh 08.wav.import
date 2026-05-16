@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgc2fy1asktkj"
+path="res://.godot/imported/Sword Whoosh 08.wav-ae4975aa1d3d1bd458dba977fc45e1dc.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sfx/Sword Whoosh 08.wav"
+dest_files=["res://.godot/imported/Sword Whoosh 08.wav-ae4975aa1d3d1bd458dba977fc45e1dc.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
