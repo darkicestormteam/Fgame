@@ -149,6 +149,11 @@ animations = [{
 "name": &"attack",
 "speed": 10.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"def",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gee14")
@@ -200,7 +205,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7p1mj"]
-radius = 15.0
+radius = 43.0
+height = 86.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5uy6h"]
 radius = 15.0
@@ -219,8 +225,7 @@ camera_buffer = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")
-animation = &"attack"
-frame = 3
+animation = &"def"
 
 [node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
