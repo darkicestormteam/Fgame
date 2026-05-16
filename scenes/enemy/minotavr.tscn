@@ -209,7 +209,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -244,7 +244,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"def",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,7 +282,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -311,7 +311,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n11lt"]
@@ -329,11 +329,12 @@ attack_collision_start_frame = 6
 attack_collision_end_frame = 8
 attack_cooldown = 2.0
 has_defense_ability = true
-defense_cooldown = 1.0
+defense_cooldown = 3.0
+defense_duration = 1.5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_gyblw")
-animation = &"def"
+autoplay = "idle"
 
 [node name="CollisionShape2D" parent="KillZone" index="0"]
 shape = SubResource("CapsuleShape2D_n11lt")
