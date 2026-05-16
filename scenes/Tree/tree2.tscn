@@ -73,11 +73,13 @@ load_path = "res://.godot/imported/Trees-Sheet.png-eaae364d28a28e43f6d1ae36b817f
 [node name="Tree" instance=ExtResource("1_5ivul")]
 
 [node name="AnimatedSprite2D" parent="." index="0"]
+visible = true
 sprite_frames = SubResource("SpriteFrames_lbg8d")
 frame = 0
 frame_progress = 0.0
 
 [node name="Sprite2D" parent="." index="2"]
-position = Vector2(1, 36)
+visible = false
+position = Vector2(1, 26)
 texture = SubResource("CompressedTexture2D_5ivul")
 region_rect = Rect2(1621, 709, 24, 35)
