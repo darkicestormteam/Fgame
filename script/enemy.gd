@@ -261,7 +261,6 @@ func _on_frame_changed() -> void:
 				# Выстрел снарядом на нужном кадре для babka
 				if boom_scene != null and current_frame == boom_shoot_frame:
 						_spawn_boom()
-
 func _spawn_boom() -> void:
 		if boom_scene == null or _player == null:
 				return
@@ -295,7 +294,7 @@ func _on_animation_finished() -> void:
 				# Запускаем кулдаун только после завершения анимации защиты
 				defense_cooldown_timer = defense_cooldown
 				# Возвращаемся к анимации idle, но только если мы все еще существуем
-				if is_instance_valid(animated_sprite) and animated_sprite.sprite_frames.has_animation("idle"):
+				if is_instance_valid(animated_sprite) and animated_sprite.sprite_frames.has_animation("idle") and not is_attacking:
 						animated_sprite.play("idle")
 		
 		# Очищаем соединение для атаки, чтобы не было конфликтов
