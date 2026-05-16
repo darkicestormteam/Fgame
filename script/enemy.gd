@@ -22,7 +22,8 @@ extends CharacterBody2D
 
 # Настройки способности защиты
 @export var has_defense_ability: bool = false
-@export var defense_cooldown: float = 3.0
+@export var defense_cooldown: float = 5.0
+@export var defense_duration: float = 1.0  # Длительность анимации защиты (если нужно)
 
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
@@ -66,6 +67,13 @@ func _ready() -> void:
 		original_modulate = animated_sprite.modulate
 		# Сбрасываем таймер защиты при старте, чтобы защита была доступна с начала игры
 		defense_cooldown_timer = 0.0
+		
+		# Проверяем наличие анимации def
+		if has_defense_ability:
+				var sprite_frames = animated_sprite.sprite_frames
+				if sprite_frames and not sprite_frames.has_animation("def"):
+						print("Предупреждение: У врага нет анимации 'def', но включена способность защиты!")
+						has_defense_ability = false
 
 func knockback(direction: Vector2, distance: float) -> void:
 		velocity = direction * distance
@@ -77,15 +85,19 @@ func take_damage(amount: int) -> void:
 		if is_defending:
 				return
 		
-		# Проверка способности защиты - не срабатывает во время атаки
+		# Проверка способности защиты - не срабатывает во время атаки и если кулдаун еще не прошел
 		if has_defense_ability and not is_defending and defense_cooldown_timer <= 0.0 and not is_attacking:
 				is_defending = true
+				# Сбрасываем анимацию и запускаем защиту
+				animated_sprite.stop()
 				animated_sprite.play("def")
 				if def_sound:
 						def_sound.pitch_scale = randf_range(0.9, 1.2)
 						def_sound.play()
+				# Возвращаемся, чтобы урон не был нанесен (защита активировалась успешно)
 				return
 
+		# Наносим урон только если защита не сработала
 		health -= amount
 		if not is_flashing:
 				is_flashing = true
@@ -122,6 +134,11 @@ func _physics_process(delta: float) -> void:
 				if knockback_timer <= 0.0:
 						is_knockedback = false
 				move_and_slide()
+				return
+
+		# Если враг защищается, он не двигается и не атакует
+		if is_defending:
+				velocity = Vector2.ZERO
 				return
 
 		if _player == null:
@@ -277,7 +294,13 @@ func _on_animation_finished() -> void:
 				is_defending = false
 				# Запускаем кулдаун только после завершения анимации защиты
 				defense_cooldown_timer = defense_cooldown
-				animated_sprite.play("idle")
+				# Возвращаемся к анимации idle, но только если мы все еще существуем
+				if is_instance_valid(animated_sprite) and animated_sprite.sprite_frames.has_animation("idle"):
+						animated_sprite.play("idle")
+		
+		# Очищаем соединение для атаки, чтобы не было конфликтов
+		if animated_sprite.animation == "attack":
+				attack_area.monitoring = false
 
 # Функция телепортации врага ближе к игроку
 func _teleport_to_player() -> void:
