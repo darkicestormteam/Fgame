@@ -12,6 +12,7 @@ const SPEED = 300.0
 var attack_timer: Timer
 @onready var sword_whoosh: AudioStreamPlayer2D = $"Sword Whoosh"
 @onready var footstep: AudioStreamPlayer2D = $Footstep
+@onready var takedamage: AudioStreamPlayer2D = $takedamage
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 
 var is_attacking: bool = false
@@ -85,6 +86,8 @@ func _on_invincibility_timer_timeout() -> void:
 func take_damage() -> void:
 	if is_invincible:
 		return
+	
+	takedamage.play()
 	
 	current_lives -= 1
 	
