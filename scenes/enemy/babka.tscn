@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://cvopkofao5bqk"]
+[gd_scene load_steps=33 format=3 uid="uid://cvopkofao5bqk"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_iewrs"]
 [ext_resource type="Texture2D" uid="uid://bjf5yrh577rsf" path="res://assets/Enemy/Babka-Sheet.png" id="2_6vaig"]
+[ext_resource type="PackedScene" uid="uid://dylm05ehsd77s" path="res://scenes/enemy/boom.tscn" id="3_boom"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4tqny"]
 atlas = ExtResource("2_6vaig")
@@ -222,10 +223,13 @@ speed = 90.0
 health = 2
 attack_distance = 300.0
 attack_collision_start_frame = 5
+boom_scene = ExtResource("3_boom")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5l7r7")
 frame = 0
 frame_progress = 0.509265
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
 
 [editable path="KillZone"]

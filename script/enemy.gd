@@ -14,6 +14,11 @@ extends CharacterBody2D
 @export var separation_distance: float = 30.0
 @export var separation_strength: float = 50.0
 
+# Настройки для babka (выстрел снарядом)
+@export var boom_scene: PackedScene = null
+@export var boom_spawn_offset: float = 95.0
+@export var boom_shoot_frame: int = 5
+
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -184,6 +189,31 @@ func _on_frame_changed() -> void:
 		elif current_frame >= attack_collision_end_frame:
 			attack_area.monitoring = false
 			is_attacking = false
+		
+		# Выстрел снарядом на нужном кадре для babka
+		if boom_scene != null and current_frame == boom_shoot_frame:
+			_spawn_boom()
+
+func _spawn_boom() -> void:
+	if boom_scene == null or _player == null:
+		return
+	
+	# Создаём снаряд
+	var boom_instance = boom_scene.instantiate()
+	get_tree().current_scene.add_child(boom_instance)
+	
+	# Определяем направление к игроку
+	var direction = (_player.global_position - global_position).normalized()
+	
+	# Позиция спавна с учётом flip_h бабки (по оси X)
+	var spawn_position = global_position
+	if animated_sprite.flip_h:
+		spawn_position.x -= boom_spawn_offset
+	else:
+		spawn_position.x += boom_spawn_offset
+	
+	boom_instance.global_position = spawn_position
+	boom_instance.set_direction(direction)
 
 func _on_attack_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
