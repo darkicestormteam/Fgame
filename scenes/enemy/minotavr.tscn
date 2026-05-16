@@ -244,7 +244,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"def",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -329,8 +329,6 @@ attack_collision_start_frame = 6
 attack_collision_end_frame = 8
 attack_cooldown = 2.0
 has_defense_ability = true
-defense_cooldown = 3.0
-defense_duration = 1.5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_gyblw")

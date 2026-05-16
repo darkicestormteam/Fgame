@@ -835,7 +835,6 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
-position = Vector2(1202, 3064)
-attack_cooldown = 10.0
+position = Vector2(1266, 2781)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
