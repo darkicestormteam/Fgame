@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://d15dwj5s4a5gl"]
 
 [ext_resource type="Script" uid="uid://d32m1g2dcmh6v" path="res://script/timer_game.gd" id="1_j78np"]
-[ext_resource type="Script" uid="uid://newlocalizedcontrol123" path="res://script/localized_control.gd" id="40_localized"]
+[ext_resource type="Script" uid="uid://cvjo78hak63vd" path="res://script/localized_control.gd" id="40_localized"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_j78np")

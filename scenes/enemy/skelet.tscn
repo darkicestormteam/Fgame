@@ -1,0 +1,216 @@
+[gd_scene load_steps=30 format=3 uid="uid://c2wbov3mx2xek"]
+
+[ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_vhmil"]
+[ext_resource type="Texture2D" uid="uid://b53glu1xby743" path="res://assets/Enemy/Skelet-fule.png" id="2_7je4i"]
+[ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="3_vahwm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq5ja"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(0, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibt06"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(152, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk8ag"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(304, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13pk1"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(456, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85ecw"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(608, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkp0g"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(760, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpidc"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(912, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1dbq"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(1064, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppky6"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(0, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb70a"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(152, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jggs"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(304, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8ai4"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(456, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg182"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(608, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p01w8"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(760, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kekq"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(912, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt8yr"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(1064, 0, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqp7f"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(0, 128, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnact"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(152, 128, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i6xo"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(304, 128, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jay3"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(456, 128, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfve0"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(608, 128, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieon3"]
+atlas = ExtResource("2_7je4i")
+region = Rect2(760, 128, 152, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dg06"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq5ja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibt06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk8ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13pk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85ecw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkp0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpidc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1dbq")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppky6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vb70a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jggs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8ai4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg182")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p01w8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kekq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt8yr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqp7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnact")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i6xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jay3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfve0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieon3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_btsr8"]
+radius = 15.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cybt8"]
+radius = 16.0
+height = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q5ls"]
+size = Vector2(70.0522, 89.9427)
+
+[node name="Enemy" instance=ExtResource("1_vhmil")]
+speed = 140.0
+health = 4
+attack_distance = 55.0
+attack_collision_end_frame = 5
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_1dg06")
+frame = 0
+
+[node name="EnemyCollisionShape2D" parent="." index="1"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_btsr8")
+
+[node name="CollisionShape2D" parent="KillZone" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_cybt8")
+
+[node name="Attackweapon" parent="." index="3"]
+stream = ExtResource("3_vahwm")
+
+[node name="CollisionShape2D" parent="Attack" index="0"]
+position = Vector2(18, -0.499999)
+rotation = 0.900311
+shape = SubResource("RectangleShape2D_3q5ls")
+
+[editable path="KillZone"]
