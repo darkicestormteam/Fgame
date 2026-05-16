@@ -227,15 +227,15 @@ func _spawn_boom() -> void:
 	var boom_instance = boom_scene.instantiate()
 	get_tree().current_scene.add_child(boom_instance)
 	
-	# Определяем направление к игроку
-	var direction = (_player.global_position - global_position).normalized()
-	
-	# Позиция спавна с учётом flip_h бабки (по оси X)
+	# Определяем направление к игроку ОТ ПОЗИЦИИ СПАВНА, а не от врага
+	# Это гарантирует, что снаряд полетит точно в игрока, даже если спавнится со смещением
 	var spawn_position = global_position
 	if animated_sprite.flip_h:
 		spawn_position.x -= boom_spawn_offset
 	else:
 		spawn_position.x += boom_spawn_offset
+	
+	var direction = (_player.global_position - spawn_position).normalized()
 	
 	boom_instance.global_position = spawn_position
 	boom_instance.set_direction(direction)
