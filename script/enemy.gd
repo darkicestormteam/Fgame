@@ -225,7 +225,7 @@ func _physics_process(delta: float) -> void:
 												animated_sprite.play("attack")
 												# Включаем хитбокс атаки сразу
 												attack_area.monitoring = true
- 								# Запускаем звук рывка зацикленно
+								# Запускаем звук рывка зацикленно
 								if dash_sound:
 										dash_sound.loop = true
 										dash_sound.play()
