@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://diqqm4uvkc6to"]
+[gd_scene load_steps=15 format=3 uid="uid://diqqm4uvkc6to"]
 
 [ext_resource type="Texture2D" uid="uid://bqf07m5h8hogk" path="res://assets/Trees-Sheet.png" id="1_avsvi"]
 [ext_resource type="Script" uid="uid://q6v65tnw6otx" path="res://script/tree.gd" id="1_vplca"]
+[ext_resource type="AudioStream" uid="uid://dphqmnl8bw60g" path="res://assets/sounds/sfx/tree_a.wav" id="3_viusy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_avsvi"]
 friction = 0.0
@@ -98,3 +99,7 @@ position = Vector2(0, 36)
 texture = ExtResource("1_avsvi")
 region_enabled = true
 region_rect = Rect2(1611, 200, 48, 40)
+
+[node name="treedei" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_viusy")
+bus = &"SFX"
