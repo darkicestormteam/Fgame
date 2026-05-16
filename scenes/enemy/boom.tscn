@@ -111,12 +111,20 @@ radius = 40.1123
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_2ip8m")
+speed = 150.0
+spawn_offset = 95.0
+max_distance = 300.0
+damage_zone_start_frame = 2
+damage_zone_end_frame = 6
+damage = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_5g05w")
-animation = &"explosion"
-frame = 3
+animation = &"walk"
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
+[connection signal="body_entered" from="damage_zone" to="." method="_on_damage_zone_body_entered"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s32ju")
