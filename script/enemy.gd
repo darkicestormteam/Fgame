@@ -13,9 +13,9 @@ extends CharacterBody2D
 @export var teleport_distance: float = 2500.0
 @export var camera_buffer: float = 200.0
 
-# ОТКЛЮЧЕНО: Настройки расстояния между врагами
-# @export var separation_distance: float = 30.0
-# @export var separation_strength: float = 50.0
+# Настройки расстояния между врагами
+@export var separation_distance: float = 30.0
+@export var separation_strength: float = 50.0
 
 # Настройки для babka (выстрел снарядом)
 @export var boom_scene: PackedScene = null
@@ -284,9 +284,9 @@ func _physics_process(delta: float) -> void:
 								# Запоминаем желаемое направление для анимации и логики
 								var desired_velocity = direction * speed
 
-# --- ОТКЛЮЧЕНО: Сила разделения от других врагов больше не применяется
-# var separation_force = _calculate_separation()
-# desired_velocity += separation_force
+								# Применяем силу разделения от других врагов
+								var separation_force = _calculate_separation()
+								desired_velocity += separation_force
 
 								if desired_velocity.x > 0:
 												animated_sprite.flip_h = false

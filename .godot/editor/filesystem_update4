@@ -21,3 +21,4 @@ res://scenes/enemy/orc.tscn
 res://scenes/enemy/rouge.tscn
 res://scenes/enemy/skelet.tscn
 res://scenes/enemy/Troll-boss.tscn
+res://script/enemy.gd

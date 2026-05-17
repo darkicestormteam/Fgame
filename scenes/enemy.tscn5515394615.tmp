@@ -312,8 +312,6 @@ z_index = 1
 collision_layer = 4
 collision_mask = 14
 script = ExtResource("1_md0e3")
-separation_distance = 100.0
-separation_strength = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")
