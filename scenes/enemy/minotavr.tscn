@@ -213,6 +213,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q5b8t")
 }, {
 "duration": 1.0,
@@ -332,6 +343,7 @@ has_defense_ability = true
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_gyblw")
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" parent="KillZone" index="0"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://dtw1q77jl2wyr"]
+[gd_scene load_steps=27 format=3 uid="uid://dtw1q77jl2wyr"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_1v4kc"]
 [ext_resource type="Texture2D" uid="uid://bwgq5ssbn1d43" path="res://assets/Snake-Sheet.png" id="2_dhsvk"]
 [ext_resource type="AudioStream" uid="uid://bvtx5omx46tg1" path="res://assets/sounds/sfx/змеяатакует.mp3" id="3_eby80"]
+[ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="3_in4a1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eby80"]
 atlas = ExtResource("2_dhsvk")
@@ -35,6 +36,10 @@ region = Rect2(1152, 192, 192, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vvxb"]
 atlas = ExtResource("2_dhsvk")
 region = Rect2(1344, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkul"]
+atlas = ExtResource("3_in4a1")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vc5wu"]
 atlas = ExtResource("2_dhsvk")
@@ -105,6 +110,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wtkul")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vc5wu")
 }],
 "loop": true,
@@ -161,9 +177,8 @@ attack_collision_end_frame = 5
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_wtkul")
-animation = &"walk"
+animation = &"idle"
 autoplay = "walk"
-frame = 2
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(5, 10)

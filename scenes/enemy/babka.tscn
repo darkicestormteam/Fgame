@@ -161,6 +161,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5wbts")
 }, {
 "duration": 1.0,
@@ -227,8 +238,7 @@ boom_scene = ExtResource("3_boom")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5l7r7")
-animation = &"attack"
-frame_progress = 0.509265
+animation = &"idle"
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
 

@@ -137,6 +137,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2smkw")
 }, {
 "duration": 1.0,
@@ -188,8 +199,7 @@ attack_collision_end_frame = 7
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6c035")
-animation = &"attack"
-frame = 2
+animation = &"walk"
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_41fyr")

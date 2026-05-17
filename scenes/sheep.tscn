@@ -131,7 +131,7 @@ radius = 16.0
 radius = 49.0102
 
 [node name="Sheep" type="CharacterBody2D"]
-z_index = 1
+position = Vector2(0, 13)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_gw4f6")
@@ -139,7 +139,7 @@ script = ExtResource("1_gw4f6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_5g05w")
-animation = &"explosion"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s32ju")

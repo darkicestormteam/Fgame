@@ -782,7 +782,7 @@ tile_map_data = PackedByteArray("AAAQADkAAAABAAEAAAARADkAAAABAAEAAAASADkAAAABAAE
 tile_set = SubResource("TileSet_twgab")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(820, 2480)
+position = Vector2(1080, 2512)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3
@@ -836,11 +836,6 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
-position = Vector2(1329, 2578)
-health = 1
-attack_distance = 10.0
-attack_collision_start_frame = 0
-attack_collision_end_frame = 0
-attack_cooldown = 200.0
+position = Vector2(1448, 2797)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

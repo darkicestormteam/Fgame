@@ -125,6 +125,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3ibyr")
 }],
 "loop": true,
@@ -166,8 +177,8 @@ attack_collision_end_frame = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5thvk")
+animation = &"idle"
 autoplay = "walk"
-frame = 4
 
 [node name="Attackweapon" parent="." index="3"]
 volume_db = -5.0

@@ -103,6 +103,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"dead",
+"speed": 120.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_iefs6")
 }, {
 "duration": 1.0,
@@ -170,8 +181,7 @@ attack_cooldown = 0.6
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_u0dom")
-animation = &"attack"
-frame = 2
+animation = &"idle"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 2)
