@@ -910,6 +910,7 @@ bus = &"music"
 stream = ExtResource("29_pr1ej")
 volume_db = -12.391
 bus = &"music"
+loop = true
 
 [node name="HUD" parent="." instance=ExtResource("6_p57ef")]
 
