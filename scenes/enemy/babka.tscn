@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cvopkofao5bqk"]
+[gd_scene load_steps=35 format=3 uid="uid://cvopkofao5bqk"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_iewrs"]
 [ext_resource type="Texture2D" uid="uid://bjf5yrh577rsf" path="res://assets/Enemy/Babka-Sheet.png" id="2_6vaig"]
@@ -51,6 +51,14 @@ region = Rect2(1920, 256, 192, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a00gf"]
 atlas = ExtResource("2_6vaig")
 region = Rect2(2112, 256, 192, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l7r7"]
+atlas = ExtResource("2_6vaig")
+region = Rect2(576, 384, 192, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ea6q"]
+atlas = ExtResource("2_6vaig")
+region = Rect2(768, 384, 192, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wbts"]
 atlas = ExtResource("2_6vaig")
@@ -161,10 +169,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_5l7r7")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_3ea6q")
 }],
 "loop": false,
 "name": &"dead",
@@ -238,7 +246,8 @@ boom_scene = ExtResource("3_boom")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5l7r7")
-animation = &"idle"
+animation = &"dead"
+autoplay = "walk"
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]
 

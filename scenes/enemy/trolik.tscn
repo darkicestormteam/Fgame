@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://j5pbroa7lnkm"]
+[gd_scene load_steps=30 format=3 uid="uid://j5pbroa7lnkm"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_v6e7w"]
 [ext_resource type="Texture2D" uid="uid://dafplgf27txr6" path="res://assets/Enemy/Troll-attack-walk.png" id="2_8dmqo"]
@@ -51,6 +51,14 @@ region = Rect2(1280, 128, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4elng"]
 atlas = ExtResource("2_8dmqo")
 region = Rect2(1408, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dmqo"]
+atlas = ExtResource("2_8dmqo")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41fyr"]
+atlas = ExtResource("2_8dmqo")
+region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2smkw"]
 atlas = ExtResource("2_8dmqo")
@@ -137,10 +145,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_8dmqo")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_41fyr")
 }],
 "loop": true,
 "name": &"dead",
@@ -199,7 +207,8 @@ attack_collision_end_frame = 7
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6c035")
-animation = &"walk"
+animation = &"dead"
+autoplay = "walk"
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_41fyr")

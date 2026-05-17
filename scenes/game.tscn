@@ -899,7 +899,7 @@ tile_map_data = PackedByteArray("AAAQADkAAAABAAEAAAARADkAAAABAAEAAAASADkAAAABAAE
 tile_set = SubResource("TileSet_twgab")
 
 [node name="Player" parent="." instance=ExtResource("1_yqjtg")]
-position = Vector2(1080, 2512)
+position = Vector2(1318, 2550)
 
 [node name="World" parent="Player" instance=ExtResource("8_gee14")]
 process_mode = 3

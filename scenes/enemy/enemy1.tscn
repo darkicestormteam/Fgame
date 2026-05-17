@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cvokgw0faanr"]
+[gd_scene load_steps=28 format=3 uid="uid://cvokgw0faanr"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_cjwkq"]
 [ext_resource type="Texture2D" uid="uid://cukgshcqhp3aq" path="res://assets/Gnome-attack.png" id="2_3ibyr"]
+[ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="3_5thvk"]
 [ext_resource type="Texture2D" uid="uid://cc8mvmw1efd6h" path="res://assets/Gnome-walk.png" id="3_ocqv0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocqv0"]
@@ -51,6 +52,14 @@ region = Rect2(1280, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_knf2m"]
 atlas = ExtResource("2_3ibyr")
 region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf0gm"]
+atlas = ExtResource("3_5thvk")
+region = Rect2(1296, 192, 216, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xqth"]
+atlas = ExtResource("3_5thvk")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ibyr"]
 atlas = ExtResource("2_3ibyr")
@@ -125,10 +134,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_nf0gm")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_4xqth")
 }],
 "loop": false,
 "name": &"dead",
@@ -177,7 +186,7 @@ attack_collision_end_frame = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5thvk")
-animation = &"idle"
+animation = &"dead"
 autoplay = "walk"
 
 [node name="Attackweapon" parent="." index="3"]

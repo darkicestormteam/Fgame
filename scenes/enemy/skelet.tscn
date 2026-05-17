@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://c2wbov3mx2xek"]
+[gd_scene load_steps=32 format=3 uid="uid://c2wbov3mx2xek"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_vhmil"]
 [ext_resource type="Texture2D" uid="uid://b53glu1xby743" path="res://assets/Enemy/Skelet-fule.png" id="2_7je4i"]
+[ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="3_jq5ja"]
 [ext_resource type="AudioStream" uid="uid://cyrnm5bt55qoy" path="res://assets/sounds/sfx/Sword Whoosh 03.wav" id="3_vahwm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jq5ja"]
@@ -35,6 +36,10 @@ region = Rect2(912, 256, 152, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m1dbq"]
 atlas = ExtResource("2_7je4i")
 region = Rect2(1064, 256, 152, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkul"]
+atlas = ExtResource("3_jq5ja")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ppky6"]
 atlas = ExtResource("2_7je4i")
@@ -125,10 +130,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }],
 "loop": true,
 "name": &"dead",

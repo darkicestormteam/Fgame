@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://ca4nxjh24dl84"]
+[gd_scene load_steps=28 format=3 uid="uid://ca4nxjh24dl84"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_dt4md"]
 [ext_resource type="Texture2D" uid="uid://dxv0i1ime84qy" path="res://assets/Enemy/Rogue-Sheet.png" id="2_d2uaa"]
+[ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="3_0rn5e"]
 [ext_resource type="AudioStream" uid="uid://cgurjldksixd1" path="res://assets/sounds/sfx/Sword Whoosh 12.wav" id="3_l5xru"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5xru"]
@@ -27,6 +28,10 @@ region = Rect2(768, 256, 192, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pfbno"]
 atlas = ExtResource("2_d2uaa")
 region = Rect2(960, 256, 192, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkul"]
+atlas = ExtResource("3_0rn5e")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iefs6"]
 atlas = ExtResource("2_d2uaa")
@@ -103,10 +108,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }],
 "loop": false,
 "name": &"dead",
@@ -181,7 +186,7 @@ attack_cooldown = 0.6
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_u0dom")
-animation = &"idle"
+animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 2)

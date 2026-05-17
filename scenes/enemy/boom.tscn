@@ -122,7 +122,7 @@ animation = &"walk"
 shape = SubResource("CircleShape2D_s32ju")
 
 [node name="damage_zone" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 0
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="damage_zone"]

@@ -6,7 +6,7 @@ extends Node2D
 
 func _ready() -> void:
 	# Инициализируем таймер для spellmenu
-	timer.wait_time = 60.0
+	timer.wait_time = 53.0
 	timer.one_shot = true
 	timer.start()
 	

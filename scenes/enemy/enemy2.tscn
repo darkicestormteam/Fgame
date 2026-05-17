@@ -113,7 +113,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_wtkul")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }],
 "loop": false,
 "name": &"dead",
@@ -177,7 +177,7 @@ attack_collision_end_frame = 5
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_wtkul")
-animation = &"idle"
+animation = &"dead"
 autoplay = "walk"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]

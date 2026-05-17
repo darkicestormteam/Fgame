@@ -315,6 +315,7 @@ script = ExtResource("1_md0e3")
 attack_distance = 100.0
 teleport_distance = 1000.0
 camera_buffer = 100.0
+separation_strength = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ir15t")

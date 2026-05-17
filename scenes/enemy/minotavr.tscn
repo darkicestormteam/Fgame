@@ -1,8 +1,9 @@
-[gd_scene load_steps=48 format=3 uid="uid://b2372tlyq648r"]
+[gd_scene load_steps=50 format=3 uid="uid://b2372tlyq648r"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_vt8wm"]
 [ext_resource type="Texture2D" uid="uid://cxqp2st40uuif" path="res://assets/Enemy/Minotaur-Sheet.png" id="2_3q00j"]
 [ext_resource type="AudioStream" uid="uid://du1p8hwsocq48" path="res://assets/sounds/sfx/swing-that-cuts-the-air.mp3" id="3_3q00j"]
+[ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="3_cukmg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cukmg"]
 atlas = ExtResource("2_3q00j")
@@ -51,6 +52,10 @@ region = Rect2(2880, 576, 288, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_tdoqr"]
 atlas = ExtResource("2_3q00j")
 region = Rect2(3168, 576, 288, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkul"]
+atlas = ExtResource("3_cukmg")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5b8t"]
 atlas = ExtResource("2_3q00j")
@@ -213,10 +218,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }],
 "loop": false,
 "name": &"dead",
@@ -343,7 +348,7 @@ has_defense_ability = true
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_gyblw")
-animation = &"idle"
+animation = &"dead"
 autoplay = "idle"
 
 [node name="CollisionShape2D" parent="KillZone" index="0"]

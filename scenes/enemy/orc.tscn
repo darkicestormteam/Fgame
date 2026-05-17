@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bbh6u1xrktq1m"]
+[gd_scene load_steps=29 format=3 uid="uid://bbh6u1xrktq1m"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_a30td"]
 [ext_resource type="Texture2D" uid="uid://csb01d81cuxg1" path="res://assets/Enemy/Orc-Sheet.png" id="2_gdpfx"]
@@ -31,6 +31,10 @@ region = Rect2(1080, 384, 216, 192)
 [sub_resource type="AtlasTexture" id="AtlasTexture_62n2y"]
 atlas = ExtResource("2_gdpfx")
 region = Rect2(1296, 384, 216, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtkul"]
+atlas = ExtResource("2_gdpfx")
+region = Rect2(1512, 192, 216, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u52ua"]
 atlas = ExtResource("2_gdpfx")
@@ -118,10 +122,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }, {
 "duration": 1.0,
-"texture": null
+"texture": SubResource("AtlasTexture_wtkul")
 }],
 "loop": true,
 "name": &"dead",
@@ -197,7 +201,7 @@ attack_collision_end_frame = 4
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_egbn3")
-animation = &"idle"
+animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_vnkxk")
