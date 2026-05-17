@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=77 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -39,8 +39,15 @@
 [ext_resource type="Texture2D" uid="uid://bf4ow0a62qqjk" path="res://Tiny Swords (Update 010)/Terrain/Bridge/Bridge_All.png" id="24_twgab"]
 [ext_resource type="AudioStream" uid="uid://bsvefvukxyua0" path="res://assets/sounds/boss_battle_8_retro_01_loop.wav" id="29_pr1ej"]
 [ext_resource type="PackedScene" uid="uid://cl5yywevbbsov" path="res://scenes/gamemenu.tscn" id="31_7025r"]
+[ext_resource type="PackedScene" uid="uid://j5pbroa7lnkm" path="res://scenes/enemy/trolik.tscn" id="38_fedci"]
+[ext_resource type="PackedScene" uid="uid://bbh6u1xrktq1m" path="res://scenes/enemy/orc.tscn" id="39_8qswn"]
 [ext_resource type="PackedScene" uid="uid://cjrjkoopyi22d" path="res://scenes/game_over.tscn" id="40_m4url"]
-[ext_resource type="PackedScene" uid="uid://lbqocvm2e6s5" path="res://scenes/enemy/Troll-boss.tscn" id="41_8ool0"]
+[ext_resource type="PackedScene" uid="uid://cvopkofao5bqk" path="res://scenes/enemy/babka.tscn" id="40_rm0al"]
+[ext_resource type="PackedScene" uid="uid://c23lsre8dtx8o" path="res://scenes/enemy/Gnoll.tscn" id="41_8ool0"]
+[ext_resource type="PackedScene" uid="uid://b2372tlyq648r" path="res://scenes/enemy/minotavr.tscn" id="41_i4re6"]
+[ext_resource type="PackedScene" uid="uid://c2wbov3mx2xek" path="res://scenes/enemy/skelet.tscn" id="43_pf7vy"]
+[ext_resource type="PackedScene" uid="uid://ca4nxjh24dl84" path="res://scenes/enemy/rouge.tscn" id="44_o8ni1"]
+[ext_resource type="PackedScene" uid="uid://lbqocvm2e6s5" path="res://scenes/enemy/Troll-boss.tscn" id="45_3hbvx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nepv3"]
 texture = ExtResource("1_lbhrr")
@@ -697,29 +704,29 @@ sources/1 = SubResource("TileSetAtlasSource_oaba0")
 
 [sub_resource type="Resource" id="Resource_dinhu"]
 script = ExtResource("9_dinhu")
-activation_time = 21212.0
-lifetime = 21.0
+activation_time = 2.0
+lifetime = 20.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
 spawn_weights = Array[int]([100])
-max_enemies = 3
+max_enemies = 10
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 script = ExtResource("9_dinhu")
-activation_time = 21212.0
-lifetime = 20.0
+activation_time = 22.0
+lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
 spawn_weights = Array[int]([100])
-max_enemies = 3
-spawn_interval = 0.1
+max_enemies = 12
+spawn_interval = 1.0
 min_distance_from_camera = 100.0
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ir15t"]
 script = ExtResource("9_dinhu")
-activation_time = 21212.0
+activation_time = 52.0
 lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu"), ExtResource("12_ir15t")])
 spawn_weights = Array[int]([])
@@ -730,7 +737,7 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_05nbr"]
 script = ExtResource("9_dinhu")
-activation_time = 21212.0
+activation_time = 82.0
 lifetime = 6.0
 enemy_scenes = Array[PackedScene]([ExtResource("13_ca42v")])
 spawn_weights = Array[int]([])
@@ -741,9 +748,119 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_0sl42"]
 script = ExtResource("9_dinhu")
-activation_time = 1000.0
+activation_time = 142.0
+lifetime = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("38_fedci")])
+spawn_weights = Array[int]([])
+max_enemies = 20
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_q8j3a"]
+script = ExtResource("9_dinhu")
+activation_time = 172.0
+lifetime = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("39_8qswn")])
+spawn_weights = Array[int]([])
+max_enemies = 20
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_ms3bu"]
+script = ExtResource("9_dinhu")
+activation_time = 202.0
+lifetime = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("40_rm0al")])
+spawn_weights = Array[int]([])
+max_enemies = 15
+spawn_interval = 1.0
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_7ixpq"]
+script = ExtResource("9_dinhu")
+activation_time = 232.0
+lifetime = 30.0
+enemy_scenes = Array[PackedScene]([ExtResource("40_rm0al"), ExtResource("39_8qswn")])
+spawn_weights = Array[int]([])
+max_enemies = 26
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_bk1p3"]
+script = ExtResource("9_dinhu")
+activation_time = 262.0
+lifetime = 2.0
+enemy_scenes = Array[PackedScene]([ExtResource("41_i4re6")])
+spawn_weights = Array[int]([])
+max_enemies = 1
+spawn_interval = 1.0
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_n8ral"]
+script = ExtResource("9_dinhu")
+activation_time = 321312.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("41_8ool0")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_yd4ix"]
+script = ExtResource("9_dinhu")
+activation_time = 312231.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("43_pf7vy")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_66xif"]
+script = ExtResource("9_dinhu")
+activation_time = 31231.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("44_o8ni1")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_bnuda"]
+script = ExtResource("9_dinhu")
+activation_time = 31231.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("41_8ool0"), ExtResource("44_o8ni1")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_0rmfi"]
+script = ExtResource("9_dinhu")
+activation_time = 313212.0
 lifetime = 10.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu")])
+spawn_weights = Array[int]([])
+max_enemies = 10
+spawn_interval = 0.5
+min_distance_from_camera = 100.0
+metadata/_custom_type_script = "uid://bi7y74mffo7cv"
+
+[sub_resource type="Resource" id="Resource_xbak0"]
+script = ExtResource("9_dinhu")
+activation_time = 31231.0
+lifetime = 10.0
+enemy_scenes = Array[PackedScene]([ExtResource("45_3hbvx")])
 spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
@@ -813,7 +930,7 @@ grow_vertical = 1
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
 position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
-wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_05nbr"), SubResource("Resource_0sl42")])
+wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_05nbr"), SubResource("Resource_0sl42"), SubResource("Resource_q8j3a"), SubResource("Resource_ms3bu"), SubResource("Resource_7ixpq"), SubResource("Resource_bk1p3"), SubResource("Resource_n8ral"), SubResource("Resource_yd4ix"), SubResource("Resource_66xif"), SubResource("Resource_bnuda"), SubResource("Resource_0rmfi"), SubResource("Resource_xbak0")])
 
 [node name="SheepSpawner" parent="." instance=ExtResource("8_0tnpc")]
 player_node = NodePath("../Player")
@@ -834,8 +951,5 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 
 [node name="GameOver" parent="." instance=ExtResource("40_m4url")]
 process_mode = 3
-
-[node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
-position = Vector2(1448, 2797)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

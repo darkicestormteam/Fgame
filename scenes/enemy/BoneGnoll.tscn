@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://cskc2ucomko7"]
+
+[ext_resource type="PackedScene" uid="uid://dylm05ehsd77s" path="res://scenes/enemy/boom.tscn" id="1_372jf"]
+[ext_resource type="Texture2D" uid="uid://bbk567r3ilb3q" path="res://assets/Enemy/Gnoll_03-Sheet.png" id="2_1g07s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g07s"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(640, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uc3q"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(800, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61j4w"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(960, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3xjo"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(0, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5r6m"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(160, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yc66"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(320, 384, 160, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho560"]
+atlas = ExtResource("2_1g07s")
+region = Rect2(480, 384, 160, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uc3q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g07s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uc3q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61j4w")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3xjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5r6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yc66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho560")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61j4w"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_78dvr"]
+radius = 22.0907
+
+[node name="Boom" instance=ExtResource("1_372jf")]
+speed = 250.0
+damage_zone_start_frame = 1
+damage_zone_end_frame = 2
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_6uc3q")
+animation = &"explosion"
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_61j4w")
+
+[node name="CollisionShape2D" parent="damage_zone" index="0"]
+shape = SubResource("CircleShape2D_78dvr")
+
+[node name="explosion" parent="." index="3"]
+stream = null

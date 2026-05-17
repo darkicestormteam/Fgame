@@ -234,9 +234,10 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_gee14")
-animation = &"attack"
+animation = &"splash"
 autoplay = "idle"
-frame = 3
+frame = 5
+frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -285,8 +286,9 @@ visible = false
 modulate = Color(1, 1, 1, 0.482353)
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_gee14")
-animation = &"swordUP"
-frame = 3
+animation = &"splash"
+frame = 5
+frame_progress = 1.0
 
 [node name="AttackAreaUP" type="Area2D" parent="SwordPivot"]
 collision_mask = 4
