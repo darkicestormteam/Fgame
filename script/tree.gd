@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var treedei: AudioStreamPlayer2D = $treedei
 
 var is_disabled: bool = false
 
@@ -15,6 +16,8 @@ func disable_tree() -> void:
 		if is_disabled:
 				return
 		is_disabled = true
+		if treedei:
+				treedei.play()
 		if animated_sprite:
 				animated_sprite.visible = false
 		if collision_shape:
