@@ -41,6 +41,8 @@ var _grass_layer: TileMapLayer = null
 @onready var attack_sound: AudioStreamPlayer2D = $Attackweapon
 @onready var def_sound: AudioStreamPlayer2D = $Def
 @onready var dash_sound: AudioStreamPlayer2D = $Dash
+@onready var walk_sound: AudioStreamPlayer2D = $Walk
+@onready var die_sound: AudioStreamPlayer2D = $die
 var is_knockedback: bool = false
 var knockback_timer: float = 0.0
 var is_attacking: bool = false
@@ -309,13 +311,18 @@ func _physics_process(delta: float) -> void:
 
 				# Анимация
 				if not is_attacking:
-								if velocity.length_squared() > 1.0:
-												if animated_sprite.animation != "walk":
-																animated_sprite.play("walk")
-								else:
-												if animated_sprite.animation != "idle":
-																animated_sprite.play("idle")
-
+							if velocity.length_squared() > 1.0:
+										if animated_sprite.animation != "walk":
+												animated_sprite.play("walk")
+										# Воспроизводим звук шагов при анимации walk
+										if walk_sound and not walk_sound.playing:
+												walk_sound.play()
+							else:
+										if animated_sprite.animation != "idle":
+												animated_sprite.play("idle")
+										# Останавливаем звук шагов, когда враг не движется
+										if walk_sound and walk_sound.playing:
+												walk_sound.stop()
 func _on_frame_changed() -> void:
 				if animated_sprite.animation == "attack":
 								var current_frame = animated_sprite.frame
