@@ -105,58 +105,58 @@ func knockback(direction: Vector2, distance: float) -> void:
 				knockback_timer = 0.15
 
 func take_damage(amount: int) -> void:
-# Если уже умираем, игнорируем урон
-if is_dying:
-return
-
-# Если защита активна, блокируем урон
-if is_defending:
-return
-
-# Проверка способности защиты - не срабатывает во время атаки и если кулдаун еще не прошел
-if has_defense_ability and not is_defending and defense_cooldown_timer <= 0.0 and not is_attacking:
-is_defending = true
-# Сбрасываем анимацию и запускаем защиту
-animated_sprite.stop()
-animated_sprite.play("def")
-if def_sound:
-def_sound.pitch_scale = randf_range(0.9, 1.2)
-def_sound.play()
-# Возвращаемся, чтобы урон не был нанесен (защита активировалась успешно)
-return
-
-# Наносим урон только если защита не сработала
-health -= amount
-if not is_flashing:
-is_flashing = true
-flash_timer = flash_duration
-if health <= 0:
-remove_from_group("Enemy")
-emit_signal("died")
-# Если включена галочка play_death_animation, проигрываем анимацию dead перед удалением
-if play_death_animation:
-is_dying = true
-# Останавливаем все текущие действия
-is_attacking = false
-is_dashing = false
-is_defending = false
-is_knockedback = false
-velocity = Vector2.ZERO
-attack_area.monitoring = false
-
-animated_sprite.stop()
-animated_sprite.play("dead")
-if die_sound:
-die_sound.pitch_scale = randf_range(0.9, 1.2)
-die_sound.play()
-# Отключаем коллизию и физику
-collision_layer = 0
-collision_mask = 0
-# Ждем окончания анимации смерти перед удалением
-await animated_sprite.animation_finished
-queue_free()
-else:
-queue_free()
+	# Если уже умираем, игнорируем урон
+	if is_dying:
+		return
+	
+	# Если защита активна, блокируем урон
+	if is_defending:
+		return
+	
+	# Проверка способности защиты - не срабатывает во время атаки и если кулдаун еще не прошел
+	if has_defense_ability and not is_defending and defense_cooldown_timer <= 0.0 and not is_attacking:
+		is_defending = true
+		# Сбрасываем анимацию и запускаем защиту
+		animated_sprite.stop()
+		animated_sprite.play("def")
+		if def_sound:
+			def_sound.pitch_scale = randf_range(0.9, 1.2)
+			def_sound.play()
+		# Возвращаемся, чтобы урон не был нанесен (защита активировалась успешно)
+		return
+	
+	# Наносим урон только если защита не сработала
+	health -= amount
+	if not is_flashing:
+		is_flashing = true
+		flash_timer = flash_duration
+	if health <= 0:
+		remove_from_group("Enemy")
+		emit_signal("died")
+		# Если включена галочка play_death_animation, проигрываем анимацию dead перед удалением
+		if play_death_animation:
+			is_dying = true
+			# Останавливаем все текущие действия
+			is_attacking = false
+			is_dashing = false
+			is_defending = false
+			is_knockedback = false
+			velocity = Vector2.ZERO
+			attack_area.monitoring = false
+			
+			animated_sprite.stop()
+			animated_sprite.play("dead")
+			if die_sound:
+				die_sound.pitch_scale = randf_range(0.9, 1.2)
+				die_sound.play()
+			# Отключаем коллизию и физику
+			collision_layer = 0
+			collision_mask = 0
+			# Ждем окончания анимации смерти перед удалением
+			await animated_sprite.animation_finished
+			queue_free()
+		else:
+			queue_free()
 
 func _physics_process(delta: float) -> void:
 				# Обработка таймера перезарядки атаки
