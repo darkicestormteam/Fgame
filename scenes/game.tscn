@@ -837,5 +837,10 @@ process_mode = 3
 
 [node name="Enemy" parent="." instance=ExtResource("41_8ool0")]
 position = Vector2(1329, 2578)
+health = 1
+attack_distance = 10.0
+attack_collision_start_frame = 0
+attack_collision_end_frame = 0
+attack_cooldown = 200.0
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

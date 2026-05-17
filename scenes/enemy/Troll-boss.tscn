@@ -1,9 +1,11 @@
-[gd_scene load_steps=67 format=4 uid="uid://lbqocvm2e6s5"]
+[gd_scene load_steps=69 format=4 uid="uid://lbqocvm2e6s5"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_r3gmo"]
 [ext_resource type="Texture2D" uid="uid://drw85lysx17s0" path="res://assets/Enemy/Troll_attack.png" id="2_nktmg"]
 [ext_resource type="Texture2D" uid="uid://h55xipden8fi" path="res://assets/Enemy/Troll_02-Sheet.png" id="3_r3gmo"]
 [ext_resource type="Texture2D" uid="uid://cxqp2st40uuif" path="res://assets/Enemy/Minotaur-Sheet.png" id="3_xi2yd"]
+[ext_resource type="AudioStream" uid="uid://droymw7pct7xx" path="res://assets/sounds/sfx/deadtroll.wav" id="5_nktmg"]
+[ext_resource type="AudioStream" uid="uid://i6cvgj130bu0" path="res://assets/sounds/sfx/Steptroll.wav" id="5_xi2yd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nw8jd"]
 atlas = ExtResource("2_nktmg")
@@ -462,7 +464,9 @@ dash_cooldown = 5.0
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -61)
 sprite_frames = SubResource("SpriteFrames_03y6r")
-animation = &"attack"
+animation = &"dead"
+frame = 9
+frame_progress = 1.0
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, -45)
@@ -488,5 +492,11 @@ shape = SubResource("CapsuleShape2D_tqgl7")
 
 [node name="Def" parent="." index="5"]
 stream = SubResource("AudioStreamWAV_00hyq")
+
+[node name="Walk" parent="." index="7"]
+stream = ExtResource("5_xi2yd")
+
+[node name="die" parent="." index="8"]
+stream = ExtResource("5_nktmg")
 
 [editable path="KillZone"]

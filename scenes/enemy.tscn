@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cbdy1btuh6yux"]
+[gd_scene load_steps=50 format=3 uid="uid://cbdy1btuh6yux"]
 
 [ext_resource type="Texture2D" uid="uid://crg8p3tcml3nm" path="res://assets/Torch_Blue.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://c36ydl8rhu8b0" path="res://script/enemy.gd" id="1_md0e3"]
@@ -8,8 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://c71hlrq4jvmv3" path="res://assets/sounds/sfx/vzmahgnom.mp3" id="5_c4w8v"]
 [ext_resource type="AudioStream" uid="uid://22187clccqt3" path="res://assets/sounds/sfx/Sword Hit  01.wav" id="6_xwavj"]
 [ext_resource type="AudioStream" uid="uid://cmso6gv3owlh6" path="res://assets/sounds/sfx/combodash.wav" id="8_md484"]
-[ext_resource type="AudioStream" uid="uid://bvqwfpf2hwffc" path="res://assets/sounds/sfx/footstep.wav" id="9_walk"]
-[ext_resource type="AudioStream" uid="uid://c5n7vpnfq8xqd" path="res://assets/sounds/sfx/takedamage.mp3" id="10_die"]
+[ext_resource type="AudioStream" uid="uid://ib12dwewfudb" path="res://assets/sounds/sfx/footstep.wav" id="9_walk"]
+[ext_resource type="AudioStream" uid="uid://dtqk7uqdveigc" path="res://assets/sounds/sfx/takedamage.mp3" id="10_die"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
 atlas = ExtResource("2_5uy6h")
