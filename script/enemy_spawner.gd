@@ -77,39 +77,42 @@ func _on_activation_timer_timeout(wave_index: int) -> void:
 		await _play_preview_and_pause("Bear")
 		# Включаем музыку босса на четвертой волне
 		_play_boss_music()
-	# Волна 4 - анимация Trolik
+	# Волна 4 - анимация Trolik (индекс 4) - переключаем на обычную музыку World
 	elif wave_index == 4:
 		await _play_preview_and_pause("Trolik")
-	# Волна 5 - анимация Orc
+		_play_world_music()
+	# Волна 5 - анимация Orc (индекс 5)
 	elif wave_index == 5:
 		await _play_preview_and_pause("Orc")
-	# Волна 6 - анимация Babka
+	# Волна 6 - анимация Babka (индекс 6)
 	elif wave_index == 6:
 		await _play_preview_and_pause("Babka")
-	# Волна 7 - анимация Babka_Orc
+	# Волна 7 - анимация Babka_Orc (индекс 7)
 	elif wave_index == 7:
 		await _play_preview_and_pause("Babka_Orc")
-	# Волна 8 - анимация MinotaurIcon
+	# Волна 8 - анимация MinotaurIcon (индекс 8) - включаем музыку босса
 	elif wave_index == 8:
 		await _play_preview_and_pause("MinotaurIcon")
-	# Волна 9 - анимация Gnoll
+		_play_boss_music()
+	# Волна 9 - анимация Gnoll (индекс 9)
 	elif wave_index == 9:
 		await _play_preview_and_pause("Gnoll")
-	# Волна 10 - анимация Skelet
+	# Волна 10 - анимация Skelet (индекс 10)
 	elif wave_index == 10:
 		await _play_preview_and_pause("Skelet")
-	# Волна 11 - анимация Thieve
+	# Волна 11 - анимация Thieve (индекс 11)
 	elif wave_index == 11:
 		await _play_preview_and_pause("Thieve")
-	# Волна 12 - анимация Gnoll_Thieve
+	# Волна 12 - анимация Gnoll_Thieve (индекс 12)
 	elif wave_index == 12:
 		await _play_preview_and_pause("Gnoll_Thieve")
-	# Волна 13 - анимация Gnom_Gnom_Gnom
+	# Волна 13 - анимация Gnom_Gnom_Gnom (индекс 13)
 	elif wave_index == 13:
 		await _play_preview_and_pause("Gnom_Gnom_Gnom")
-	# Волна 14 - анимация Troll
+	# Волна 14 - анимация Troll (индекс 14) - включаем музыку босса
 	elif wave_index == 14:
 		await _play_preview_and_pause("Troll")
+		_play_boss_music()
 	
 	_current_wave_config = config
 	activate_spawner(config.lifetime)
