@@ -34,6 +34,9 @@ extends CharacterBody2D
 @export var dash_duration: float = 0.3  # Длительность рывка в секундах
 @export var dash_cooldown: float = 3.0
 
+
+# Галочка для включения анимации dead при смерти
+@export var play_death_animation: bool = false
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -123,9 +126,22 @@ func take_damage(amount: int) -> void:
 								is_flashing = true
 								flash_timer = flash_duration
 				if health <= 0:
-								remove_from_group("Enemy")
-								emit_signal("died")
-								queue_free()
+							remove_from_group("Enemy")
+							emit_signal("died")
+							# Если включена галочка play_death_animation, проигрываем анимацию dead перед удалением
+							if play_death_animation:
+								animated_sprite.stop()
+								animated_sprite.play("dead")
+								if die_sound:
+									die_sound.pitch_scale = randf_range(0.9, 1.2)
+									die_sound.play()
+								# Отключаем коллизию и физику
+								collision_layer = 0
+								collision_mask = 0
+								velocity = Vector2.ZERO
+								# Ждем окончания анимации смерти перед удалением
+								await animated_sprite.animation_finished
+							queue_free()
 
 func _physics_process(delta: float) -> void:
 				# Обработка таймера перезарядки атаки
