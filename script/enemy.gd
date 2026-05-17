@@ -60,6 +60,7 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 var original_collision_mask: int = 0
+var is_dead: bool = false
 
 signal died
 
@@ -122,7 +123,28 @@ func take_damage(amount: int) -> void:
 				if not is_flashing:
 								is_flashing = true
 								flash_timer = flash_duration
-				if health <= 0:
+				if health <= 0 and not is_dead:
+								is_dead = true
+								# Отключаем коллизию и физику
+								set_physics_process(false)
+								# Останавливаем все звуки
+								if walk_sound and walk_sound.playing:
+												walk_sound.stop()
+								if attack_sound and attack_sound.playing:
+												attack_sound.stop()
+								if def_sound and def_sound.playing:
+												def_sound.stop()
+								if dash_sound and dash_sound.playing:
+												dash_sound.stop()
+								# Воспроизводим звук смерти
+								if die_sound:
+												die_sound.pitch_scale = randf_range(0.9, 1.2)
+												die_sound.play()
+								# Запускаем анимацию смерти
+								animated_sprite.stop()
+								animated_sprite.play("dead")
+								# Удаляем врага после завершения анимации
+								await animated_sprite.animation_finished
 								remove_from_group("Enemy")
 								emit_signal("died")
 								queue_free()
