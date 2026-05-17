@@ -284,9 +284,19 @@ func _physics_process(delta: float) -> void:
 								# Запоминаем желаемое направление для анимации и логики
 								var desired_velocity = direction * speed
 
-								# Применяем силу разделения от других врагов
+								# Применяем силу разделения от других врагов (только для предотвращения сближения, без толкания)
 								var separation_force = _calculate_separation()
-								desired_velocity += separation_force
+								# Если сила разделения направлена против движения к игроку, просто останавливаем движение
+								if separation_force.length() > 0:
+												var move_direction_dot = desired_velocity.normalized().dot(separation_force.normalized())
+												if move_direction_dot < 0:
+																# Сила разделения направлена против движения - просто не двигаемся в этом направлении
+																desired_velocity = Vector2.ZERO
+												else:
+																# Добавляем только небольшую коррекцию, без сильного отталкивания
+																desired_velocity += separation_force * 0.3
+								else:
+																desired_velocity += separation_force
 
 								if desired_velocity.x > 0:
 												animated_sprite.flip_h = false
