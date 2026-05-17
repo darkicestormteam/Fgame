@@ -35,8 +35,8 @@ extends CharacterBody2D
 @export var dash_cooldown: float = 3.0
 
 
-# Галочка для включения анимации dead при смерти
-@export var play_death_animation: bool = false
+var is_dying: bool = false
+
 var _player: Node2D = null
 var _grass_layer: TileMapLayer = null
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -63,7 +63,6 @@ var is_dashing: bool = false
 var dash_timer: float = 0.0
 var dash_direction: Vector2 = Vector2.ZERO
 var original_collision_mask: int = 0
-var is_dying: bool = false
 
 signal died
 
@@ -133,30 +132,26 @@ func take_damage(amount: int) -> void:
 	if health <= 0:
 		remove_from_group("Enemy")
 		emit_signal("died")
-		# Если включена галочка play_death_animation, проигрываем анимацию dead перед удалением
-		if play_death_animation:
-			is_dying = true
-			# Останавливаем все текущие действия
-			is_attacking = false
-			is_dashing = false
-			is_defending = false
-			is_knockedback = false
-			velocity = Vector2.ZERO
-			attack_area.monitoring = false
-			
-			animated_sprite.stop()
-			animated_sprite.play("dead")
-			if die_sound:
-				die_sound.pitch_scale = randf_range(0.9, 1.2)
-				die_sound.play()
-			# Отключаем коллизию и физику
-			collision_layer = 0
-			collision_mask = 0
-			# Ждем окончания анимации смерти перед удалением
-			await animated_sprite.animation_finished
-			queue_free()
-		else:
-			queue_free()
+		is_dying = true
+		# Останавливаем все текущие действия
+		is_attacking = false
+		is_dashing = false
+		is_defending = false
+		is_knockedback = false
+		velocity = Vector2.ZERO
+		attack_area.monitoring = false
+		
+		animated_sprite.stop()
+		animated_sprite.play("dead")
+		if die_sound:
+			die_sound.pitch_scale = randf_range(0.9, 1.2)
+			die_sound.play()
+		# Отключаем коллизию и физику
+		collision_layer = 0
+		collision_mask = 0
+		# Ждем окончания анимации смерти перед удалением
+		await animated_sprite.animation_finished
+		queue_free()
 
 func _physics_process(delta: float) -> void:
 				# Обработка таймера перезарядки атаки
