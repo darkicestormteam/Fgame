@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://cxfg8mrhm5oxy"]
+[gd_scene load_steps=78 format=4 uid="uid://cxfg8mrhm5oxy"]
 
 [ext_resource type="Texture2D" uid="uid://dtwr832fqrdvr" path="res://assets/Water.png" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bb4e8xp5dj8gh" path="res://scenes/player.tscn" id="1_yqjtg"]
@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://c2wbov3mx2xek" path="res://scenes/enemy/skelet.tscn" id="43_pf7vy"]
 [ext_resource type="PackedScene" uid="uid://ca4nxjh24dl84" path="res://scenes/enemy/rouge.tscn" id="44_o8ni1"]
 [ext_resource type="PackedScene" uid="uid://lbqocvm2e6s5" path="res://scenes/enemy/Troll-boss.tscn" id="45_3hbvx"]
+[ext_resource type="PackedScene" uid="uid://b6lfcu161mncb" path="res://scenes/sheep.tscn" id="49_8qswn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nepv3"]
 texture = ExtResource("1_lbhrr")
@@ -889,6 +890,7 @@ friction = 0.0
 y_sort_enabled = true
 position = Vector2(520, 319)
 script = ExtResource("9_game")
+spellmenu_spawn_times = Array[float]([4324.0, 4324.0])
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -943,6 +945,7 @@ grow_vertical = 1
 [node name="Mainmenu" parent="HUD" instance=ExtResource("31_7025r")]
 
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("grass_layer") instance=ExtResource("7_u5sy4")]
+process_mode = 4
 position = Vector2(6, -37)
 grass_layer = NodePath("../TileMap/Grass")
 wave_configs = Array[ExtResource("9_dinhu")]([SubResource("Resource_dinhu"), SubResource("Resource_ca42v"), SubResource("Resource_ir15t"), SubResource("Resource_05nbr"), SubResource("Resource_0sl42"), SubResource("Resource_q8j3a"), SubResource("Resource_ms3bu"), SubResource("Resource_7ixpq"), SubResource("Resource_bk1p3"), SubResource("Resource_n8ral"), SubResource("Resource_yd4ix"), SubResource("Resource_66xif"), SubResource("Resource_bnuda"), SubResource("Resource_0rmfi"), SubResource("Resource_xbak0")])
@@ -967,5 +970,11 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 
 [node name="GameOver" parent="." instance=ExtResource("40_m4url")]
 process_mode = 3
+
+[node name="Enemy" parent="." instance=ExtResource("41_i4re6")]
+position = Vector2(1014, 2601)
+
+[node name="Sheep" parent="." instance=ExtResource("49_8qswn")]
+position = Vector2(1543, 2542)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

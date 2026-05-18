@@ -9,3 +9,6 @@ res://scenes/spellmenu.tscn
 res://scenes/enemy/enemy1.tscn
 res://scenes/enemy/minotavr.tscn
 res://scenes/enemy/Troll-boss.tscn
+res://script/game.gd
+res://script/spellmenu.gd
+res://script/sheep.gd

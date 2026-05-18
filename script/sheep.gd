@@ -13,93 +13,82 @@ var _search_timer: float = 0.0 # Таймер для поиска врагов
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
 @onready var sheepsay_sound: AudioStreamPlayer2D = $Sheepsay
-@onready var explosion_sound: AudioStreamPlayer2D = $explosion
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-	add_to_group("sheep")
-	_player = get_tree().get_first_node_in_group("player")
-	damage_zone.body_entered.connect(_on_damage_zone_body_entered)
-	animated_sprite.play("walk")
+		add_to_group("sheep")
+		_player = get_tree().get_first_node_in_group("player")
+		damage_zone.body_entered.connect(_on_damage_zone_body_entered)
+		animated_sprite.play("walk")
 
 func _physics_process(delta: float) -> void:
-	# Останавливаем движение только если идет сама анимация взрыва
-	if _is_exploding:
-		velocity = Vector2.ZERO
+		# Останавливаем движение только если идет сама анимация взрыва
+		if _is_exploding:
+				velocity = Vector2.ZERO
+				move_and_slide()
+				return
+
+		if _player == null:
+				_player = get_tree().get_first_node_in_group("player")
+
+		# Кэшируем поиск цели: ищем нового врага только раз в ENEMY_SEARCH_INTERVAL секунд
+		_search_timer += delta
+		if _search_timer >= ENEMY_SEARCH_INTERVAL:
+				_search_timer = 0.0
+				_find_nearest_enemy()
+
+		if _target_enemy and is_instance_valid(_target_enemy):
+				var direction: Vector2 = (_target_enemy.global_position - global_position).normalized()
+				velocity = direction * SPEED
+
+				if velocity.x > 0:
+						animated_sprite.flip_h = false
+				elif velocity.x < 0:
+						animated_sprite.flip_h = true
+		else:
+				# Если текущая цель невалидна, сбрасываем таймер для немедленного поиска
+				_search_timer = ENEMY_SEARCH_INTERVAL
+				_target_enemy = null
+				velocity = Vector2.ZERO
+
 		move_and_slide()
-		return
-		
-	if _player == null:
-		_player = get_tree().get_first_node_in_group("player")
-	
-	# Кэшируем поиск цели: ищем нового врага только раз в ENEMY_SEARCH_INTERVAL секунд
-	_search_timer += delta
-	if _search_timer >= ENEMY_SEARCH_INTERVAL:
-		_search_timer = 0.0
-		_find_nearest_enemy()
-	
-	if _target_enemy and is_instance_valid(_target_enemy):
-		var direction: Vector2 = (_target_enemy.global_position - global_position).normalized()
-		velocity = direction * SPEED
-		
-		if velocity.x > 0:
-			animated_sprite.flip_h = false
-		elif velocity.x < 0:
-			animated_sprite.flip_h = true
-	else:
-		# Если текущая цель невалидна, сбрасываем таймер для немедленного поиска
-		_search_timer = ENEMY_SEARCH_INTERVAL
-		_target_enemy = null
-		velocity = Vector2.ZERO
-	
-	move_and_slide()
 
 func _find_nearest_enemy() -> void:
-	var enemies = get_tree().get_nodes_in_group("Enemy") # Исправлено: "Enemy" вместо "enemy"
-	if enemies.is_empty():
-		_target_enemy = null
-		return
-	
-	var nearest_distance = INF
-	for enemy in enemies:
-		if is_instance_valid(enemy):
-			var distance = global_position.distance_to(enemy.global_position)
-			if distance < nearest_distance:
-				nearest_distance = distance
-				_target_enemy = enemy
+		var enemies = get_tree().get_nodes_in_group("Enemy") # Исправлено: "Enemy" вместо "enemy"
+		if enemies.is_empty():
+				_target_enemy = null
+				return
+
+		var nearest_distance = INF
+		for enemy in enemies:
+				if is_instance_valid(enemy):
+						var distance = global_position.distance_to(enemy.global_position)
+						if distance < nearest_distance:
+								nearest_distance = distance
+								_target_enemy = enemy
 
 func _on_damage_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy") and not _explode_triggered:
-		# Воспроизводим звук Sheepsay при соприкосновении с врагом
-		sheepsay_sound.play()
-		_explode_triggered = true
-		_explode_with_delay()
+		if body.is_in_group("Enemy") and not _explode_triggered:
+				# Воспроизводим звук Sheepsay при соприкосновении с врагом
+				sheepsay_sound.play()
+				_explode_triggered = true
+				_explode_with_delay()
 
 func _explode_with_delay() -> void:
-	# Ждем 0.4 секунды, овца при этом продолжает двигаться в _physics_process
-	await get_tree().create_timer(0.4).timeout
-	
-	# Только после задержки останавливаем и взрываем
-	_is_exploding = true
-	velocity = Vector2.ZERO
-	
-	# Воспроизводим звук взрыва с разной тональностью
-	explosion_sound.pitch_scale = randf_range(0.8, 1.2)
-	explosion_sound.play()
-	
-	animated_sprite.play("explosion")
-	damage_zone.monitoring = true
-	
-	var enemies = get_tree().get_nodes_in_group("Enemy") # Исправлено: "Enemy" вместо "enemy"
-	for enemy in enemies:
-		if is_instance_valid(enemy):
-			var distance = global_position.distance_to(enemy.global_position)
-			if distance <= EXPLOSION_RADIUS:
-				# Наносим 1 единицу урона врагу
-				if enemy.has_method("take_damage"):
-					enemy.take_damage(1)
-	
-	await animated_sprite.animation_finished
-	queue_free()
+		# Ждем 0.4 секунды, овца при этом продолжает двигаться в _physics_process
+		await get_tree().create_timer(0.4).timeout
+
+		# Только после задержки останавливаем и взрываем
+		_is_exploding = true
+		velocity = Vector2.ZERO
+
+		# Запускаем анимацию взрыва через AnimationPlayer
+		# Анимация сама управляет спрайтами, звуком взрыва и коллизией
+		animation_player.play("explosion")
+
+		# Ждем окончания анимации для удаления овцы
+		await animation_player.animation_finished
+		queue_free()
 
 func set_target(player_pos: Vector2) -> void:
-	pass
+		pass
