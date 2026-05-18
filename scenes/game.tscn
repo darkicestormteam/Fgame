@@ -812,8 +812,8 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_n8ral"]
 script = ExtResource("9_dinhu")
-activation_time = 321312.0
-lifetime = 10.0
+activation_time = 333332.0
+lifetime = 20.0
 enemy_scenes = Array[PackedScene]([ExtResource("41_8ool0")])
 spawn_weights = Array[int]([])
 max_enemies = 10
@@ -824,8 +824,8 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_yd4ix"]
 script = ExtResource("9_dinhu")
-activation_time = 312231.0
-lifetime = 10.0
+activation_time = 3.33333e+07
+lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("43_pf7vy")])
 spawn_weights = Array[int]([])
 max_enemies = 10
@@ -836,8 +836,8 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_66xif"]
 script = ExtResource("9_dinhu")
-activation_time = 31231.0
-lifetime = 10.0
+activation_time = 3.33335e+06
+lifetime = 20.0
 enemy_scenes = Array[PackedScene]([ExtResource("44_o8ni1")])
 spawn_weights = Array[int]([])
 max_enemies = 10
@@ -872,11 +872,11 @@ metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_xbak0"]
 script = ExtResource("9_dinhu")
-activation_time = 31231.0
+activation_time = 3.33334e+07
 lifetime = 10.0
 enemy_scenes = Array[PackedScene]([ExtResource("45_3hbvx")])
 spawn_weights = Array[int]([])
-max_enemies = 10
+max_enemies = 1
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
 is_boss_wave = false
