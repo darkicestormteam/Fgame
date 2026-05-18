@@ -18,6 +18,11 @@ var settings_open := false
 @onready var sword_up_btn: TextureButton = $MarginContainer/HBoxContainer/SwordUP
 @onready var splash_btn: TextureButton = $MarginContainer/HBoxContainer/Splash
 
+# Ссылки на подсказки
+@onready var spell_sheep_tooltip: Label = $MarginContainer/HBoxContainer/SpellSheep/TooltipText
+@onready var sword_up_tooltip: Label = $MarginContainer/HBoxContainer/SwordUP/TooltipText
+@onready var splash_tooltip: Label = $MarginContainer/HBoxContainer/Splash/TooltipText
+
 # Ссылки на контейнеры
 @onready var margin_container2: MarginContainer = $MarginContainer2
 @onready var margin_container3: MarginContainer = $MarginContainer3
@@ -64,6 +69,14 @@ func _ready() -> void:
 		spell_sheep_btn.pressed.connect(_on_spell_sheep_pressed)
 		sword_up_btn.pressed.connect(_on_sword_up_pressed)
 		splash_btn.pressed.connect(_on_button_pressed)
+		
+		# Подключаем сигналы для подсказок
+		spell_sheep_btn.mouse_entered.connect(_on_spell_sheep_mouse_entered)
+		spell_sheep_btn.mouse_exited.connect(_on_spell_sheep_mouse_exited)
+		sword_up_btn.mouse_entered.connect(_on_sword_up_mouse_entered)
+		sword_up_btn.mouse_exited.connect(_on_sword_up_mouse_exited)
+		splash_btn.mouse_entered.connect(_on_splash_mouse_entered)
+		splash_btn.mouse_exited.connect(_on_splash_mouse_exited)
 		
 		# Подключаем кнопки MarginContainer2
 		$MarginContainer2/VBoxContainer/Start.pressed.connect(_on_start_pressed)
@@ -161,6 +174,25 @@ func _on_button_pressed() -> void:
 				player.enable_splash_attack()
 		# Скрываем меню сразу
 		_hide_and_resume()
+
+# === Обработчики подсказок ===
+func _on_spell_sheep_mouse_entered() -> void:
+		spell_sheep_tooltip.visible = true
+
+func _on_spell_sheep_mouse_exited() -> void:
+		spell_sheep_tooltip.visible = false
+
+func _on_sword_up_mouse_entered() -> void:
+		sword_up_tooltip.visible = true
+
+func _on_sword_up_mouse_exited() -> void:
+		sword_up_tooltip.visible = false
+
+func _on_splash_mouse_entered() -> void:
+		splash_tooltip.visible = true
+
+func _on_splash_mouse_exited() -> void:
+		splash_tooltip.visible = false
 
 # === Кнопки MarginContainer2 ===
 func _on_start_pressed() -> void:
