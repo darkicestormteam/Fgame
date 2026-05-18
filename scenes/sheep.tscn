@@ -431,6 +431,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"deal_explosion_damage"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_vbo3h"]
 resource_name = "explosion_2lvl"
@@ -542,7 +556,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [false, false, true]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -551,7 +565,7 @@ tracks/9/path = NodePath("../damage_zone/CollisionShape2D2:disabled")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.7),
+"times": PackedFloat32Array(0, 0.4, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -563,10 +577,30 @@ tracks/10/path = NodePath("../damage_zone/CollisionShape2D3:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.9, 1.1),
+"times": PackedFloat32Array(0, 0.8, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("..")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"deal_explosion_damage"
+}, {
+"args": [],
+"method": &"deal_explosion_damage"
+}, {
+"args": [],
+"method": &"deal_explosion_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_5g05w"]
