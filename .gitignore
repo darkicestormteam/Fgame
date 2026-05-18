@@ -1,67 +1,29 @@
 ```
-# Godot-specific ignores
+# Build artifacts
 *.import
 *.remap
 export_presets.cfg
-.user
-*.pid
-*.lock
 
-# Compiled and build artifacts
-*.so
-*.dylib
-*.dll
-*.exe
-*.o
-*.obj
-*.a
-*.lib
-*.out
-
-# Dependencies
-node_modules/
-venv/
-.venv/
-__pycache__/
-*.egg-info/
-dist/
-build/
-target/
-.gradle/
-
-# Logs and temp files
-*.log
-*.tmp
-*.swp
-*.swo
-*.bak
-*.~*
-
-# Environment variables
-.env
-.env.local
-*.env.*
-
-# Editors
+# Editor
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS specific
+# OS generated files
 .DS_Store
 Thumbs.db
-Desktop.ini
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
+# Logs
+*.log
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
+# Temporary files
+*.tmp
+*.temp
+
+# Godot specific
+.godot/
+.project
+*.godot
+*.tres
+*.tscn
+*.gd
 ```
