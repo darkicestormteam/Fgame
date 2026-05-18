@@ -145,6 +145,11 @@ func _hide_and_resume() -> void:
 		if game_menu and game_menu.has_method("on_spellmenu_closed"):
 				game_menu.on_spellmenu_closed()
 
+		# Сообщаем Game о выборе заклинания, чтобы запланировать следующее появление
+		var game_node = get_tree().get_first_node_in_group("game")
+		if game_node and game_node.has_method("schedule_next_spellmenu"):
+				game_node.schedule_next_spellmenu()
+
 		# Возобновляем игру через 0.5 секунды
 		await get_tree().create_timer(0.5).timeout
 		get_tree().paused = false
