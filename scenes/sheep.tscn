@@ -443,6 +443,19 @@ tracks/4/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/5/type = "call"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"method": "_deal_explosion_damage",
+"args": [[]]
+}
 
 [sub_resource type="Animation" id="Animation_vbo3h"]
 resource_name = "explosion_2lvl"
@@ -579,6 +592,19 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/11/type = "call"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("..")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.2, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"method": "_deal_explosion_damage",
+"args": [[], [], []]
 }
 
 [sub_resource type="Animation" id="Animation_5g05w"]

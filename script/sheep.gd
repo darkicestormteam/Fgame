@@ -75,6 +75,13 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 				_explode_triggered = true
 				_explode_with_delay()
 
+func _deal_explosion_damage() -> void:
+	# Наносим урон всем врагам в зоне урона
+	var bodies = damage_zone.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("Enemy") and body.has_method("take_damage"):
+			body.take_damage(1)
+
 func _explode_with_delay() -> void:
 		# Ждем 0.4 секунды, овца при этом продолжает двигаться в _physics_process
 		await get_tree().create_timer(0.4).timeout
