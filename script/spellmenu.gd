@@ -15,11 +15,13 @@ var settings_open := false
 
 @onready var tap_sound: AudioStreamPlayer = $Tap
 @onready var spell_sheep_btn: TextureButton = $MarginContainer/HBoxContainer/SpellSheep
+@onready var spell_sheep_2lvl_btn: TextureButton = $MarginContainer/HBoxContainer/SpellSheep2Lvl
 @onready var sword_up_btn: TextureButton = $MarginContainer/HBoxContainer/SwordUP
 @onready var splash_btn: TextureButton = $MarginContainer/HBoxContainer/Splash
 
 # Ссылки на подсказки
 @onready var spell_sheep_tooltip: Label = $MarginContainer/HBoxContainer/SpellSheep/TooltipText
+@onready var spell_sheep_2lvl_tooltip: Label = $MarginContainer/HBoxContainer/SpellSheep2Lvl/TooltipText
 @onready var sword_up_tooltip: Label = $MarginContainer/HBoxContainer/SwordUP/TooltipText
 @onready var splash_tooltip: Label = $MarginContainer/HBoxContainer/Splash/TooltipText
 
@@ -41,6 +43,8 @@ var settings_open := false
 var sheep_spawner: Node2D = null
 # Ссылка на GameMenu
 var game_menu: Control = null
+# Флаг для отслеживания уровня овцы (false = 1 lvl, true = 2 lvl)
+var sheep_explosion_level_2_unlocked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,12 +71,15 @@ func _ready() -> void:
 
 		# Подключаем сигналы нажатия кнопок к функции воспроизведения звука
 		spell_sheep_btn.pressed.connect(_on_spell_sheep_pressed)
+		spell_sheep_2lvl_btn.pressed.connect(_on_spell_sheep_2lvl_pressed)
 		sword_up_btn.pressed.connect(_on_sword_up_pressed)
 		splash_btn.pressed.connect(_on_button_pressed)
 		
 		# Подключаем сигналы для подсказок
 		spell_sheep_btn.mouse_entered.connect(_on_spell_sheep_mouse_entered)
 		spell_sheep_btn.mouse_exited.connect(_on_spell_sheep_mouse_exited)
+		spell_sheep_2lvl_btn.mouse_entered.connect(_on_spell_sheep_2lvl_mouse_entered)
+		spell_sheep_2lvl_btn.mouse_exited.connect(_on_spell_sheep_2lvl_mouse_exited)
 		sword_up_btn.mouse_entered.connect(_on_sword_up_mouse_entered)
 		sword_up_btn.mouse_exited.connect(_on_sword_up_mouse_exited)
 		splash_btn.mouse_entered.connect(_on_splash_mouse_entered)
@@ -162,6 +169,16 @@ func _on_spell_sheep_pressed() -> void:
 		# Скрываем меню сразу
 		_hide_and_resume()
 
+func _on_spell_sheep_2lvl_pressed() -> void:
+		tap_sound.play()
+		# Разблокируем вторую версию взрыва овцы
+		sheep_explosion_level_2_unlocked = true
+		# Сообщаем SheepSpawner о разблокировке второго уровня
+		if sheep_spawner and sheep_spawner.has_method("set_sheep_explosion_level_2"):
+				sheep_spawner.set_sheep_explosion_level_2()
+		# Скрываем меню сразу
+		_hide_and_resume()
+
 func _on_sword_up_pressed() -> void:
 		tap_sound.play()
 		# Находим игрока и разблокируем улучшение SwordUP
@@ -186,6 +203,12 @@ func _on_spell_sheep_mouse_entered() -> void:
 
 func _on_spell_sheep_mouse_exited() -> void:
 		spell_sheep_tooltip.visible = false
+
+func _on_spell_sheep_2lvl_mouse_entered() -> void:
+		spell_sheep_2lvl_tooltip.visible = true
+
+func _on_spell_sheep_2lvl_mouse_exited() -> void:
+		spell_sheep_2lvl_tooltip.visible = false
 
 func _on_sword_up_mouse_entered() -> void:
 		sword_up_tooltip.visible = true

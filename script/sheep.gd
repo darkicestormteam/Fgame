@@ -9,6 +9,7 @@ var _player: Node2D = null
 var _is_exploding: bool = false # Флаг: идет ли уже анимация взрыва
 var _explode_triggered: bool = false # Флаг: был ли уже запущен процесс взрыва
 var _search_timer: float = 0.0 # Таймер для поиска врагов
+var _explosion_level: int = 1 # Уровень взрыва (1 или 2)
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
@@ -90,14 +91,19 @@ func _explode_with_delay() -> void:
 		_is_exploding = true
 		velocity = Vector2.ZERO
 
-		# Запускаем анимацию взрыва через AnimationPlayer
-		# Анимация сама управляет спрайтами, звуком взрыва и коллизией
-		animation_player.play("explosion")
+		# Запускаем анимацию взрыва через AnimationPlayer в зависимости от уровня
+		if _explosion_level == 2:
+			animation_player.play("explosion_2lvl")
+		else:
+			animation_player.play("explosion")
 
 		# Ждем окончания анимации для удаления овцы
 		await animation_player.animation_finished
 		
 		queue_free()
+
+func set_explosion_level(level: int) -> void:
+	_explosion_level = level
 
 func set_target(player_pos: Vector2) -> void:
 		pass
