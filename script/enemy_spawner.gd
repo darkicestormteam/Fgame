@@ -190,7 +190,8 @@ func _find_valid_spawn_positions() -> void:
 	
 	var used_cells = grass_layer.get_used_cells()
 	for cell in used_cells:
-		var world_pos = grass_layer.map_to_local(cell)
+		# Сразу получаем глобальную позицию клетки
+		var world_pos = grass_layer.to_global(grass_layer.map_to_local(cell))
 		_valid_spawn_positions.append(world_pos)
 	
 	if _valid_spawn_positions.is_empty():
@@ -244,17 +245,17 @@ func _on_spawn_timer_timeout() -> void:
 	
 	for attempt in range(max_attempts):
 		var random_index = randi() % _valid_spawn_positions.size()
+		# Позиции уже в глобальных координатах (сохранены с to_global в _find_valid_spawn_positions)
 		var candidate_position = _valid_spawn_positions[random_index]
-		var global_candidate_position = grass_layer.to_global(candidate_position)
 		
-		if _is_position_outside_camera(global_candidate_position):
-			spawn_position = global_candidate_position
+		if _is_position_outside_camera(candidate_position):
+			spawn_position = candidate_position
 			found_valid_position = true
 			break
 	
 	if not found_valid_position:
 		var random_index = randi() % _valid_spawn_positions.size()
-		spawn_position = grass_layer.to_global(_valid_spawn_positions[random_index])
+		spawn_position = _valid_spawn_positions[random_index]
 	
 	var enemy_scene_instance = enemy_scene.instantiate()
 	enemy_scene_instance.global_position = spawn_position
