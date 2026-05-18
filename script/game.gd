@@ -4,9 +4,12 @@ extends Node2D
 @onready var timer = $SpellTimer
 @onready var objects_layer: TileMapLayer = $TileMap/Objects
 
+# Время появления spellmenu (настраивается в инспекторе)
+@export var spellmenu_spawn_time: float = 2.0
+
 func _ready() -> void:
 	# Инициализируем таймер для spellmenu
-	timer.wait_time = 2.0
+	timer.wait_time = spellmenu_spawn_time
 	timer.one_shot = true
 	timer.start()
 	
