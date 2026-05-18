@@ -163,6 +163,12 @@ func deactivate_spawner() -> void:
 	print("[EnemySpawner] Волна завершена")
 
 func _on_lifetime_expired() -> void:
+	# Если это босс-волна, не запускаем следующую волну автоматически
+	if _current_wave_config and _current_wave_config.is_boss_wave:
+		print("[EnemySpawner] Босс-волна завершена. Ждём убийства всех боссов...")
+		deactivate_spawner()
+		return
+	
 	deactivate_spawner()
 	# Автоматически запускаем следующую волну, если она есть в конфиге
 	var current_index = wave_configs.find(_current_wave_config)
@@ -178,6 +184,18 @@ func _on_enemy_died(dead_enemy: Node = null) -> void:
 	# Удаляем умершего врага из списка текущей волны
 	if dead_enemy and _current_wave_enemies.has(dead_enemy):
 		_current_wave_enemies.erase(dead_enemy)
+	
+	# Если это босс-волна и все боссы убиты, запускаем следующую волну через 5 секунд
+	if _current_wave_config and _current_wave_config.is_boss_wave:
+		if _current_wave_enemies.is_empty():
+			print("[EnemySpawner] Все боссы убиты! Следующая волна через 5 секунд...")
+			await get_tree().create_timer(5.0).timeout
+			var current_index = wave_configs.find(_current_wave_config)
+			if current_index != -1 and current_index + 1 < wave_configs.size():
+				_on_activation_timer_timeout(current_index + 1)
+			else:
+				print("[EnemySpawner] Все волны пройдены!")
+		return
 	
 	# Перезапускаем таймер спавна, если волна активна и таймер остановлен
 	if _is_active and _spawn_timer.is_stopped():
