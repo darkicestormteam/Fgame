@@ -201,12 +201,12 @@ height = 105.886
 
 [node name="Enemy" instance=ExtResource("1_v6e7w")]
 speed = 100.0
+health = 2
 attack_distance = 45.0
 attack_collision_end_frame = 7
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6c035")
-animation = &"dead"
 autoplay = "walk"
 
 [node name="Attackweapon" parent="." index="3"]

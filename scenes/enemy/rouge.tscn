@@ -186,7 +186,6 @@ attack_cooldown = 0.6
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_u0dom")
-animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 2)

@@ -213,6 +213,7 @@ height = 131.5
 
 [node name="Enemy" instance=ExtResource("1_lyswj")]
 speed = 200.0
+health = 10
 attack_distance = 80.0
 attack_collision_start_frame = 6
 attack_collision_end_frame = 7
@@ -220,7 +221,6 @@ separation_distance = 150.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fofnl")
-animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, 11)

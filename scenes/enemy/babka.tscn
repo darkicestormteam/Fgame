@@ -242,11 +242,11 @@ speed = 90.0
 health = 2
 attack_distance = 300.0
 attack_collision_start_frame = 5
+attack_cooldown = 2.0
 boom_scene = ExtResource("3_boom")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5l7r7")
-animation = &"dead"
 autoplay = "walk"
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_frame_changed"]

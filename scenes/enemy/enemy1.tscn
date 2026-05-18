@@ -186,7 +186,6 @@ attack_collision_end_frame = 5
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_5thvk")
-animation = &"dead"
 autoplay = "walk"
 
 [node name="Attackweapon" parent="." index="3"]

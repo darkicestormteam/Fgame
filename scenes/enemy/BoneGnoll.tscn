@@ -78,7 +78,7 @@ damage_zone_end_frame = 2
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6uc3q")
-animation = &"explosion"
+animation = &"walk"
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_61j4w")

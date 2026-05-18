@@ -192,7 +192,8 @@ radius = 58.0193
 height = 183.988
 
 [node name="Enemy" instance=ExtResource("1_a30td")]
-speed = 115.0
+speed = 90.0
+health = 3
 attack_distance = 55.0
 attack_collision_start_frame = 2
 attack_collision_end_frame = 4
@@ -200,7 +201,6 @@ attack_collision_end_frame = 4
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_egbn3")
-animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_vnkxk")

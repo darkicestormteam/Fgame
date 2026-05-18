@@ -177,7 +177,6 @@ attack_collision_end_frame = 5
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, 16)
 sprite_frames = SubResource("SpriteFrames_wtkul")
-animation = &"dead"
 autoplay = "walk"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
