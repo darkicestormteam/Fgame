@@ -711,6 +711,7 @@ spawn_weights = Array[int]([100])
 max_enemies = 10
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
@@ -719,9 +720,10 @@ activation_time = 22.0
 lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("12_ir15t")])
 spawn_weights = Array[int]([100])
-max_enemies = 12
+max_enemies = 10
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ir15t"]
@@ -730,9 +732,10 @@ activation_time = 52.0
 lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("10_dinhu"), ExtResource("12_ir15t")])
 spawn_weights = Array[int]([])
-max_enemies = 40
+max_enemies = 30
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_05nbr"]
@@ -744,6 +747,7 @@ spawn_weights = Array[int]([])
 max_enemies = 1
 spawn_interval = 2.0
 min_distance_from_camera = 100.0
+is_boss_wave = true
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_0sl42"]
@@ -755,6 +759,7 @@ spawn_weights = Array[int]([])
 max_enemies = 20
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_q8j3a"]
@@ -766,6 +771,7 @@ spawn_weights = Array[int]([])
 max_enemies = 20
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_ms3bu"]
@@ -777,6 +783,7 @@ spawn_weights = Array[int]([])
 max_enemies = 15
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_7ixpq"]
@@ -785,9 +792,10 @@ activation_time = 232.0
 lifetime = 30.0
 enemy_scenes = Array[PackedScene]([ExtResource("40_rm0al"), ExtResource("39_8qswn")])
 spawn_weights = Array[int]([])
-max_enemies = 26
-spawn_interval = 0.5
+max_enemies = 30
+spawn_interval = 1.0
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_bk1p3"]
@@ -799,6 +807,7 @@ spawn_weights = Array[int]([])
 max_enemies = 1
 spawn_interval = 1.0
 min_distance_from_camera = 100.0
+is_boss_wave = true
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_n8ral"]
@@ -810,6 +819,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_yd4ix"]
@@ -821,6 +831,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_66xif"]
@@ -832,6 +843,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_bnuda"]
@@ -843,6 +855,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_0rmfi"]
@@ -854,6 +867,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="Resource" id="Resource_xbak0"]
@@ -865,6 +879,7 @@ spawn_weights = Array[int]([])
 max_enemies = 10
 spawn_interval = 0.5
 min_distance_from_camera = 100.0
+is_boss_wave = false
 metadata/_custom_type_script = "uid://bi7y74mffo7cv"
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_js0lu"]

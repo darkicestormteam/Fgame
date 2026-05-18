@@ -22,3 +22,5 @@ res://scenes/enemy/rouge.tscn
 res://scenes/enemy/skelet.tscn
 res://scenes/enemy/Troll-boss.tscn
 res://script/enemy.gd
+res://script/wave_config.gd
+res://scenes/spellmenu.tscn
