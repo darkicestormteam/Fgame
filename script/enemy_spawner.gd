@@ -190,8 +190,10 @@ func _find_valid_spawn_positions() -> void:
 	
 	var used_cells = grass_layer.get_used_cells()
 	for cell in used_cells:
-		# Получаем глобальную позицию клетки напрямую через map_to_global
-		var world_pos = grass_layer.map_to_global(cell)
+		# Получаем позицию центра клетки в локальных координатах тайловой карты
+		var local_pos = grass_layer.map_to_local(cell)
+		# Преобразуем в глобальные координаты мира
+		var world_pos = grass_layer.to_global(local_pos)
 		_valid_spawn_positions.append(world_pos)
 	
 	if _valid_spawn_positions.is_empty():
