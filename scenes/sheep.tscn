@@ -366,7 +366,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -378,7 +378,7 @@ tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vrdyb"]
@@ -430,31 +430,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../damage_zone/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/5/type = "call"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("..")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"method": "_deal_explosion_damage",
-"args": [[]]
 }
 
 [sub_resource type="Animation" id="Animation_vbo3h"]
@@ -593,19 +568,6 @@ tracks/10/keys = {
 "update": 1,
 "values": [true, false, true]
 }
-tracks/11/type = "call"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("..")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0.2, 0.5, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"method": "_deal_explosion_damage",
-"args": [[], [], []]
-}
 
 [sub_resource type="Animation" id="Animation_5g05w"]
 resource_name = "walk"
@@ -695,11 +657,13 @@ debug_color = Color(0.874713, 0.308445, 0.409753, 0.42)
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="damage_zone"]
 position = Vector2(-29, -39)
 shape = SubResource("CircleShape2D_6qn06")
+disabled = true
 debug_color = Color(0.874713, 0.308445, 0.409753, 0.42)
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="damage_zone"]
 position = Vector2(35, -20)
 shape = SubResource("CircleShape2D_6qn06")
+disabled = true
 debug_color = Color(0.874713, 0.308445, 0.409753, 0.42)
 
 [node name="Sheepsay" type="AudioStreamPlayer2D" parent="."]

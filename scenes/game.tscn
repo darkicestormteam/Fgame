@@ -971,10 +971,10 @@ polygon = PackedVector2Array(2017, 2418, 1973, 2068, 1836, 1749, 1623, 1468, 134
 [node name="GameOver" parent="." instance=ExtResource("40_m4url")]
 process_mode = 3
 
-[node name="Enemy" parent="." instance=ExtResource("41_i4re6")]
-position = Vector2(1014, 2601)
-
 [node name="Sheep3" parent="." instance=ExtResource("49_8qswn")]
 position = Vector2(1226, 2368)
+
+[node name="Enemy2" parent="." instance=ExtResource("38_fedci")]
+position = Vector2(732, 2603)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]
