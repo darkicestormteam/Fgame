@@ -96,6 +96,10 @@ func _explode_with_delay() -> void:
 
 		# Ждем окончания анимации для удаления овцы
 		await animation_player.animation_finished
+		
+		# Наносим урон врагам после завершения анимации взрыва
+		_deal_explosion_damage()
+		
 		queue_free()
 
 func set_target(player_pos: Vector2) -> void:
