@@ -464,6 +464,7 @@ dash_cooldown = 5.0
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -61)
 sprite_frames = SubResource("SpriteFrames_03y6r")
+animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 position = Vector2(0, -45)

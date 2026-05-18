@@ -135,7 +135,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wtkul")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 120.0
 }, {

@@ -150,7 +150,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_41fyr")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 120.0
 }, {
@@ -201,7 +201,6 @@ height = 105.886
 
 [node name="Enemy" instance=ExtResource("1_v6e7w")]
 speed = 100.0
-health = 3
 attack_distance = 45.0
 attack_collision_end_frame = 7
 

@@ -332,6 +332,7 @@ boom_spawn_offset = 60.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_p7uwu")
+animation = &"dead"
 
 [node name="EnemyCollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_nw8xd")
