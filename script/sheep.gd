@@ -13,7 +13,7 @@ var _search_timer: float = 0.0 # Таймер для поиска врагов
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_zone: Area2D = $damage_zone
 @onready var sheepsay_sound: AudioStreamPlayer2D = $Sheepsay
-@onready var explosion_sound: AudioStreamPlayer2D = $explosion
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	add_to_group("sheep")
@@ -82,23 +82,12 @@ func _explode_with_delay() -> void:
 	_is_exploding = true
 	velocity = Vector2.ZERO
 	
-	# Воспроизводим звук взрыва с разной тональностью
-	explosion_sound.pitch_scale = randf_range(0.8, 1.2)
-	explosion_sound.play()
+	# Запускаем анимацию взрыва через AnimationPlayer
+	# Анимация сама управляет спрайтами, звуком и коллизией
+	animation_player.play("explosion_2lvl")
 	
-	animated_sprite.play("explosion")
-	damage_zone.monitoring = true
-	
-	var enemies = get_tree().get_nodes_in_group("Enemy") # Исправлено: "Enemy" вместо "enemy"
-	for enemy in enemies:
-		if is_instance_valid(enemy):
-			var distance = global_position.distance_to(enemy.global_position)
-			if distance <= EXPLOSION_RADIUS:
-				# Наносим 1 единицу урона врагу
-				if enemy.has_method("take_damage"):
-					enemy.take_damage(1)
-	
-	await animated_sprite.animation_finished
+	# Ждем окончания анимации для удаления овцы
+	await animation_player.animation_finished
 	queue_free()
 
 func set_target(player_pos: Vector2) -> void:
