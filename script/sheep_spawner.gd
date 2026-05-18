@@ -7,6 +7,7 @@ extends Node2D
 var _player: Node2D = null
 var _spawn_timer: float = 0.0
 var _is_enabled: bool = false  # Флаг активности спавнера
+var _sheep_explosion_level_2: bool = false  # Флаг уровня взрыва овцы
 
 func _ready() -> void:
 	# Если sheep_scene не назначен, загружаем его автоматически
@@ -53,8 +54,20 @@ func _spawn_sheep() -> void:
 	var spawn_position = _player.global_position + Vector2(cos(angle), sin(angle)) * distance
 
 	sheep.global_position = spawn_position
+	
+	# Устанавливаем уровень взрыва для овцы
+	if sheep.has_method("set_explosion_level"):
+		if _sheep_explosion_level_2:
+			sheep.set_explosion_level(2)
+		else:
+			sheep.set_explosion_level(1)
 
 # Метод для разблокировки способности (вызывается из spellmenu)
 func enable_sheep_spell() -> void:
 	_is_enabled = true
 	print("[SheepSpawner] Sheep spell enabled!")
+
+# Метод для установки уровня взрыва 2 (вызывается из spellmenu)
+func set_sheep_explosion_level_2() -> void:
+	_sheep_explosion_level_2 = true
+	print("[SheepSpawner] Sheep explosion level 2 enabled!")
