@@ -286,6 +286,40 @@ grow_horizontal = 2
 texture = ExtResource("2_q75c1")
 stretch_mode = 2
 
+[node name="SpellSheep2Lvl" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_rmaiu")
+texture_pressed = ExtResource("1_rmaiu")
+
+[node name="TooltipText" type="Label" parent="MarginContainer/HBoxContainer/SpellSheep2Lvl"]
+visible = false
+layout_mode = 0
+offset_top = 220.0
+offset_right = 590.0
+offset_bottom = 380.0
+theme_override_colors/font_color = Color(0.258824, 0.313726, 0.384314, 1)
+theme_override_fonts/font = ExtResource("9_5nbs4")
+theme_override_font_sizes/font_size = 14
+text = "Осторожно, бодается! 
+Каждые 5 секунд на поле боя 
+появляется овца, которая любит 
+врагов настолько сильно, 
+что готова взорваться."
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SpellSheep2Lvl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -30.0
+offset_right = 104.0
+offset_bottom = 170.0
+grow_horizontal = 2
+texture = ExtResource("2_q75c1")
+stretch_mode = 2
+
 [node name="SwordUP" type="TextureButton" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_rmaiu")
