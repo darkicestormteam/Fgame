@@ -974,7 +974,7 @@ process_mode = 3
 [node name="Enemy" parent="." instance=ExtResource("41_i4re6")]
 position = Vector2(1014, 2601)
 
-[node name="Sheep" parent="." instance=ExtResource("49_8qswn")]
-position = Vector2(1543, 2542)
+[node name="Sheep3" parent="." instance=ExtResource("49_8qswn")]
+position = Vector2(1226, 2368)
 
 [connection signal="timeout" from="SpellTimer" to="." method="_on_spell_timer_timeout"]

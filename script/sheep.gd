@@ -19,7 +19,8 @@ func _ready() -> void:
 		add_to_group("sheep")
 		_player = get_tree().get_first_node_in_group("player")
 		damage_zone.body_entered.connect(_on_damage_zone_body_entered)
-		animated_sprite.play("walk")
+		# Запускаем анимацию ходьбы через AnimationPlayer
+		animation_player.play("walk")
 
 func _physics_process(delta: float) -> void:
 		# Останавливаем движение только если идет сама анимация взрыва
