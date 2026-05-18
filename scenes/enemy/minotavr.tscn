@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b2372tlyq648r"]
+[gd_scene load_steps=51 format=3 uid="uid://b2372tlyq648r"]
 
 [ext_resource type="PackedScene" uid="uid://cbdy1btuh6yux" path="res://scenes/enemy.tscn" id="1_vt8wm"]
 [ext_resource type="Texture2D" uid="uid://cxqp2st40uuif" path="res://assets/Enemy/Minotaur-Sheet.png" id="2_3q00j"]
@@ -330,9 +330,13 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n11lt"]
-radius = 44.0
-height = 88.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cukmg"]
+radius = 28.0
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3u24d"]
+radius = 31.0
+height = 68.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rvmsq"]
 radius = 98.0043
@@ -351,8 +355,11 @@ defense_cooldown = 4.0
 sprite_frames = SubResource("SpriteFrames_gyblw")
 autoplay = "idle"
 
+[node name="EnemyCollisionShape2D" parent="." index="1"]
+shape = SubResource("CapsuleShape2D_cukmg")
+
 [node name="CollisionShape2D" parent="KillZone" index="0"]
-shape = SubResource("CapsuleShape2D_n11lt")
+shape = SubResource("CapsuleShape2D_3u24d")
 
 [node name="Attackweapon" parent="." index="3"]
 stream = ExtResource("3_3q00j")
