@@ -75,7 +75,7 @@ func _on_damage_zone_body_entered(body: Node2D) -> void:
 				_explode_triggered = true
 				_explode_with_delay()
 
-func _deal_explosion_damage() -> void:
+func deal_explosion_damage() -> void:
 	# Наносим урон всем врагам в зоне урона
 	var bodies = damage_zone.get_overlapping_bodies()
 	for body in bodies:
@@ -96,9 +96,6 @@ func _explode_with_delay() -> void:
 
 		# Ждем окончания анимации для удаления овцы
 		await animation_player.animation_finished
-		
-		# Наносим урон врагам после завершения анимации взрыва
-		_deal_explosion_damage()
 		
 		queue_free()
 
