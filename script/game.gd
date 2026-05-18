@@ -4,14 +4,19 @@ extends Node2D
 @onready var timer = $SpellTimer
 @onready var objects_layer: TileMapLayer = $TileMap/Objects
 
-# Время появления spellmenu (настраивается в инспекторе)
-@export var spellmenu_spawn_time: float = 2.0
+# Список времен появления spellmenu (настраивается в инспекторе)
+# Например: [2.0, 30.0, 60.0, 120.0] - появится на 2й, 30й, 60й и 120й секунде
+@export var spellmenu_spawn_times: Array[float] = [2.0, 30.0]
+
+# Индекс текущего появления в списке
+var current_spawn_index: int = 0
 
 func _ready() -> void:
-	# Инициализируем таймер для spellmenu
-	timer.wait_time = spellmenu_spawn_time
-	timer.one_shot = true
-	timer.start()
+	# Инициализируем таймер для первого появления spellmenu
+	if spellmenu_spawn_times.size() > 0 and current_spawn_index < spellmenu_spawn_times.size():
+		timer.wait_time = spellmenu_spawn_times[current_spawn_index]
+		timer.one_shot = true
+		timer.start()
 	
 	spellmenu.visible = false
 	
@@ -63,3 +68,20 @@ func _find_and_desync_animated_sprites(node: Node) -> int:
 
 func _on_spell_timer_timeout() -> void:
 	spellmenu.show_spellmenu()
+
+# Метод для вызова из spellmenu после выбора заклинания
+func schedule_next_spellmenu() -> void:
+	# Увеличиваем индекс для следующего появления
+	current_spawn_index += 1
+	
+	# Проверяем, есть ли еще времена в списке
+	if current_spawn_index < spellmenu_spawn_times.size():
+		# Устанавливаем время до следующего появления
+		# Вычитаем уже прошедшее время (предыдущее время появления)
+		var next_time = spellmenu_spawn_times[current_spawn_index] - spellmenu_spawn_times[current_spawn_index - 1]
+		timer.wait_time = next_time
+		timer.one_shot = true
+		timer.start()
+		print("Следующее появление spellmenu через ", next_time, " секунд (на ", spellmenu_spawn_times[current_spawn_index], " секунде игры)")
+	else:
+		print("Все появления spellmenu завершены")
